@@ -4,4 +4,25 @@
 
 .text-white{
     color: white;
+    font-size: 48px;
+    padding-bottom: 20px;
 }
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 97vh;
+}
+  
+.linha-vertical {
+    width: 2px;
+    height: 85vh;
+    background-color: white;
+}
+  
+.left-content, .right-content {
+    flex: 1;
+    text-align: center;
+}
+  
