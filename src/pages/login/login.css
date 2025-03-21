@@ -23,6 +23,25 @@
   
 .left-content, .right-content {
     flex: 1;
-    text-align: center;
 }
-  
+ 
+.formulario{
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+}
+
+.semConta{
+    color: white;
+    font-size: 18px;
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+}
+
+.link:hover{
+    color: aquamarine;
+}

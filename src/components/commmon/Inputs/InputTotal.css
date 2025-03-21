@@ -1,12 +1,15 @@
+
+
 .input-label {
     margin-bottom: 8px;
     font-size: 20px;
     color: white;
+    background-color: transparent;
 }
 
 .input-field {
-    width: 380px;
-    height: 46px;
+    width: 358px;
+    height: 24px;
     padding: 10px;
     border: 1px solid #D9D9D9;
     background-color: #D9D9D9;

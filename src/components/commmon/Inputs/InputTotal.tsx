@@ -11,7 +11,7 @@ function InputTotal(props: InputTotalProps) {
             <label className="input-label">
                 {props.label}<br/>
             </label>
-            <input className="input-field" type="text" value={props.pleaceHolder} />
+            <input className="input-field" type="text" placeholder={props.pleaceHolder} />
         </div>
     );
 }
