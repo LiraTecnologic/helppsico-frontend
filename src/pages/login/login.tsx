@@ -5,6 +5,8 @@ import Botao from '../../components/commmon/botao/botao';
 const Login = () => {
     return (
         <div className="login-container">
+            <img src="../../src/assets/marcaDagua-login.png" alt="marca d'água" className="marca-dagua" />
+            
             <div className="left-content">
                 <div className='formulario'>
                     <h1 className='text-white'>Minha Conta</h1>
@@ -18,7 +20,7 @@ const Login = () => {
             <div className="linha-vertical"></div>
 
             <div className="right-content">
-
+                <img src="../../src/assets/imageLogin-paciente.png" alt="login paciente" className='imagem'/>
             </div>
         </div>
     );

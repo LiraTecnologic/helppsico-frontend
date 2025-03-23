@@ -7,11 +7,9 @@ interface InputTotalProps {
 
 function InputTotal(props: InputTotalProps) {
     return (
-        <div className="input-container">
-            <label className="input-label">
-                {props.label}<br/>
-            </label>
-            <input className="input-field" type="text" placeholder={props.pleaceHolder} />
+        <div className='contentFullInput'>
+            <label className='textLabel'>{props.label}</label>
+            <input type="text" placeholder={props.pleaceHolder} className='inputFull'/>
         </div>
     );
 }
