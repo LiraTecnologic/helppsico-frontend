@@ -5,7 +5,7 @@
     background-color: #0D42BD;
 }
 
-.login-container {
+.loginPaciente-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,7 +13,7 @@
 
 }
 
-.left-content {
+.left-contentPaciente {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,7 +29,7 @@
     background: none;
 }
 
-.formulario {
+.formularioPaciente {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,7 +61,7 @@
     background-color: white;
 }
 
-.right-content {
+.right-contentPaciente {
     flex: 1;
     display: flex;
     align-items: center;
@@ -70,12 +70,12 @@
     height: 85vh;
 }
 
-.imagem{
+.imagePaciente {
     width: 600px;
     height: 550px;
 }
 
-.marca-dagua {
+.marca-dagua-1 {
     position: fixed;
     bottom: 1px;
     left: 10px;
