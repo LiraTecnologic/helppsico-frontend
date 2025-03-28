@@ -5,31 +5,38 @@
     background-color: #0D42BD;
 }
 
-.loginPaciente-container {
+/* Estilização do container do login */
+.login-container-paciente {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-
+    width: 100%;
+    padding: 20px;
 }
 
-.left-contentPaciente {
+/* Estilização do conteúdo esquerdo */
+.left-content-paciente {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     flex: 1;
     position: relative;
+    min-width: 300px;
 }
 
-.text-white {
+/* Estilização do título */
+.texto-titulo-paciente {
     color: white;
     font-size: 48px;
     padding-bottom: 20px;
     background: none;
+    text-align: center;
 }
 
-.formularioPaciente {
+/* Estilização do formulário */
+.formulario-paciente {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,43 +46,52 @@
     max-width: 400px;
 }
 
-.semConta {
+/* Estilização do texto "Não tem conta?" */
+.novo-texto-sem-conta {
     color: white;
     font-size: 16px;
     background: none;
     z-index: 2;
 }
 
-.link {
+/* Estilização do link "crie agora" */
+.link-paciente {
     text-decoration: none;
     color: white;
 }
 
-.link:hover {
+.link-paciente:hover {
     color: aquamarine;
 }
 
-.linha-vertical {
+/* Estilização da linha vertical */
+.nova-linha-vertical {
     width: 2px;
     height: 85vh;
     background-color: white;
 }
 
-.right-contentPaciente {
+/* Estilização do conteúdo da direita */
+.right-content-paciente {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     background: none;
     height: 85vh;
+    min-width: 300px;
 }
 
-.imagePaciente {
-    width: 600px;
-    height: 550px;
+/* Estilização da imagem do login */
+.imagem-login-paciente {
+    width: 700px;
+    height: 450px;
+    max-width: 100%;
+    height: auto;
 }
 
-.marcaDagua-loginPaciente {
+/* Estilização da marca d'água */
+.nova-marca-dagua {
     position: fixed;
     bottom: 1px;
     left: 10px;
@@ -83,4 +99,43 @@
     opacity: 0.15;
     z-index: 1;
     pointer-events: none;
+    max-width: 50%;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .login-container-paciente {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .left-content-paciente {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nova-linha-vertical, 
+    .imagem-login-paciente,
+    .nova-marca-dagua {
+        display: none;
+    }
+}
+
+/* Responsividade para mobile */
+@media (max-width: 480px) {
+    .texto-titulo-paciente {
+        font-size: 28px;
+    }
+
+    .login-container-paciente {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
 }

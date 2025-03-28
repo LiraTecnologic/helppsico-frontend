@@ -1,16 +1,36 @@
-.botao{
+.botao {
     margin-top: 20px;
     background-color: #001726;
     cursor: pointer;
-    width: 380px;
+    width: 100%;
+    max-width: 380px;
+    min-width: 180px;
     height: 46px;
     border-radius: 20px;
     color: white;
     font-size: 24px;
     z-index: 2;
+    padding: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
-.botao:hover{
+.botao:hover {
     background-color: #0d2846;
-    z-index: 2;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .botao {
+        width: 90%;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .botao {
+        width: 100%;
+        font-size: 18px;
+        height: 40px;
+    }
 }
