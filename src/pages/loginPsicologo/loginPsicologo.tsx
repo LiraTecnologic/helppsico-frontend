@@ -7,32 +7,41 @@ const Login = () => {
     const [crp, setCrp] = useState('');
     const [senha, setSenha] = useState('');
 
+    const validarSenha = (senha: string) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+        return regex.test(senha);
+    };
+
     const validarLogin = () => {
         if (!crp || !senha) {
             alert('Por favor, preencha todos os campos antes de continuar.');
             return;
         }
-        
+
+        if (!validarSenha(senha)) {
+            alert('A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
+            return;
+        }
     };
 
     return (
-        <div className="login-containerPsicologo">
-            <img src="../../src/assets/marcaDagua-login.png" alt="marca d'água" className="marcaDaguaPsicologo" />
+        <div className="novo-login-container">
+            <img src="../../src/assets/marcaDagua-login.png" alt="marca d'água" className="nova-marca-dagua" />
             
-            <div className="left-contentPsicologo">
-                <div className='formularioPsicologo'>
-                    <h1 className='text-white'>Minha Conta</h1>
+            <div className="novo-left-content">
+                <div className='novo-formulario'>
+                    <h1 className='novo-texto-titulo'>Minha Conta</h1>
                     <InputTotal label="CRP:" pleaceHolder="Digite seu crp..." tipo="text" value={crp} onChange={(e) => setCrp(e.target.value)} />
                     <InputTotal label="Senha:" pleaceHolder="Digite sua senha..." tipo="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
-                    <p className='semConta'>Não tem conta? <a href="" className='link'>crie agora</a></p>
+                    <p className='novo-texto-sem-conta'>Não tem conta? <a href="" className='novo-link'>crie agora</a></p>
                     <Botao texto='Entrar' onClick={validarLogin} />
                 </div>
             </div>
 
-            <div className="linha-vertical"></div>
+            <div className="nova-linha-vertical"></div>
 
-            <div className="right-contentPsicologo">
-                <img src="../../src/assets/image-loginPsicologo.svg" alt="login paciente" className='image-loginPsicologo'/>
+            <div className="novo-right-content">
+                <img src="../../src/assets/image-loginPsicologo.svg" alt="login paciente" className='nova-imagem-login'/>
             </div>
         </div>
     );
