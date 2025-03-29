@@ -84,3 +84,13 @@
     z-index: 1;
     pointer-events: none;
 }
+
+.input-pair {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.input-pair > div {
+    flex: 1;
+}

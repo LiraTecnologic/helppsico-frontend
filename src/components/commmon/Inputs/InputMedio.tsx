@@ -1,17 +1,21 @@
 import './InputMedio.css';
 
-interface InputTotalProps {
+interface InputMediolProps {
     pleaceHolder: string;
     label: string;
+    tipo: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    elemento: string;
 }
 
-function InputTotal(props: InputTotalProps) {
+function InputMedio({ pleaceHolder, label, tipo, value, onChange }: InputMediolProps) {
     return (
         <div className='contentMidInput'>
-            <label className='textLabel'>{props.label}</label>
-            <input type="text" placeholder={props.pleaceHolder} className='inputFull'/>
+            <label className='textLabel'>{label}</label>
+            <{elemento} type={tipo} placeholder={pleaceHolder} className='inputmid' value={value} onChange={onChange}/>
         </div>
     );
 }
 
-export default InputTotal;
+export default InputMedio;
