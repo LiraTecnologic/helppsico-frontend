@@ -3,7 +3,7 @@ import 'react';
 import imagemPaciente from '../../../assets/imagemPaciente.jpg';
 
 interface HeaderProps {
-    tela: string;
+    fluxo: string;
 }
 
 export default function Header(props: HeaderProps) {
@@ -17,13 +17,13 @@ export default function Header(props: HeaderProps) {
             <div className="nav-foto-container">
                 <nav className="nav">
                     <ul>
-                        <li className={props.tela === 'meuPainel' ? 'active' : ''}>
+                        <li className={props.fluxo === 'meuPainel' ? 'active' : ''}>
                             <a href="#meuPainel">Meu painel</a>
                         </li>
-                        <li className={props.tela === 'minhasSessoes' ? 'active' : ''}>
+                        <li className={props.fluxo === 'minhasSessoes' ? 'active' : ''}>
                             <a href="#minhasSessoes">Minhas sessões</a>
                         </li>
-                        <li className={props.tela === 'verProfissionais' ? 'active' : ''}>
+                        <li className={props.fluxo === 'verProfissionais' ? 'active' : ''}>
                             <a href="#verProfissionais">Ver profissionais</a>
                         </li>
                     </ul>
