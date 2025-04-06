@@ -8,7 +8,7 @@ export default function solicitiacaoDeVinculo () {
     return(
         <>
             <Header fluxo="minhasSessoes"/>
-            <CardSolicitacao status="Pendente" />
+            <CardSolicitacao nome="João Victor" idade={19} crp="2313-1" avaliacao={3} status="Recusado" />
         </>
     );
 }
