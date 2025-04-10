@@ -1,14 +1,23 @@
 import React from 'react';
 import './select.css';
 
-const Select = ({ label, value, onChange, options }) => {
+interface SelectProps {
+    label: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    options: string[];
+}
+
+const Select = ({ label, value, onChange, options }: SelectProps) => {
     return (
         <div className="input-wrapper">
-            <label>{label}</label>
+            <label className="textLabel">{label}</label>
             <select value={value} onChange={onChange} className="select">
                 <option value="">Selecione...</option>
                 {options.map((option, index) => (
-                    <option key={index} value={option}>{option}</option>
+                    <option key={index} value={option}>
+                        {option}
+                    </option>
                 ))}
             </select>
         </div>

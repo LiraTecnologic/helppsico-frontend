@@ -32,11 +32,11 @@
 .formulario {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     text-align: left;
     gap: 15px;
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
 }
 
 .semConta {
