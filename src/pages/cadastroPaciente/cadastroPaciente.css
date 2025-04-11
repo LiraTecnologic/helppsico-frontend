@@ -94,3 +94,7 @@
 .input-pair > div {
     flex: 1;
 }
+
+input:valid {
+    color: #474747;
+  }

@@ -24,8 +24,15 @@
     padding-left: 15px;
     z-index: 2;
     appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='10' height='5' viewBox='0 0 10 5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 5 5-5z' fill='%23666'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    transition: border 0.2s ease;
 }
 
 .select option {
+    color: #111;
+    background-color: #fff;
     padding: 10px;
-}
+  }

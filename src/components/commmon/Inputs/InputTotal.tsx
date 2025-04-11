@@ -6,9 +6,11 @@ interface InputTotalProps {
     tipo: string;
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+    disabled?: boolean;
 }
 
-function InputTotal({ pleaceHolder, label, tipo, value, onChange }: InputTotalProps) {
+function InputTotal({ pleaceHolder, label, tipo, value, onChange, onBlur, disabled = false }: InputTotalProps) {
     return (
         <div className='contentFullInput'>
             <label className='textLabel'>{label}</label>
@@ -18,6 +20,8 @@ function InputTotal({ pleaceHolder, label, tipo, value, onChange }: InputTotalPr
                 className='inputFull' 
                 value={value}
                 onChange={onChange}
+                onBlur={onBlur}
+                disabled={disabled}
             />
         </div>
     );
