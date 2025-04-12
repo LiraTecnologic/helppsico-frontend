@@ -1,6 +1,7 @@
 import './header.css';
 import 'react';
 import imagemPaciente from '../../../assets/imagemPaciente.jpg';
+import logo from '../../../assets/logo.png'
 
 interface HeaderProps {
     fluxo: string;
@@ -10,7 +11,7 @@ export default function Header(props: HeaderProps) {
     return (
         <header className="header">
             <div className="logo">
-                <img src="caminho-da-sua-logo.png" alt="Logo" />
+                <img src={logo} alt="Logo" />
             </div>
 
 

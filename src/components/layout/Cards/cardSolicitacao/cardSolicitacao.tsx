@@ -1,4 +1,5 @@
 import './CardSolicitacao.css';
+import foto from '../../../../assets/imagemPaciente.jpg';
 
 interface CardSolicitacaoProps {
   nome: string;
@@ -6,10 +7,11 @@ interface CardSolicitacaoProps {
   crp: string;
   avaliacao: number;
   status: string;
+  botao: string;
 }
 
 export default function CardSolicitacaoVinculo(props: CardSolicitacaoProps) {
-  const { nome, idade, crp, avaliacao, status } = props;
+  const { nome, idade, crp, avaliacao, status, botao } = props;
 
   const getStatusClass = () => {
     if (status === 'Pendente') return 'status status-pendente';
@@ -18,20 +20,22 @@ export default function CardSolicitacaoVinculo(props: CardSolicitacaoProps) {
 
   return (
     <div className="card-solicitacao">
-      <div className="fotoPsico" />
+      <img className="fotoPsico" src={foto} alt="Foto do Psicólogo" />
+      
       <div className="info">
-        <div className="topo">
-          <h2>{nome}</h2>
-          <span className={getStatusClass()}>{status}</span>
-        </div>
-        <p>{idade} anos</p>
-        <p>CRP: {crp}</p>
+        <h2 className="nome">{nome}</h2>
+        <p className="idade">{idade} anos</p>
+        <p className="crp">CRP: {crp}</p>
         <div className="avaliacao">
-          <span>{avaliacao}</span>
+          <span>{avaliacao.toFixed(1).replace('.', ',')}</span>
           <span className="estrela">⭐</span>
         </div>
       </div>
-      <button className="cancelar-btn">Cancelar</button>
+
+      <div className="acoes">
+        <span className={getStatusClass()}>{status}</span>
+        <button className="cancelar-btn">{botao}</button>
+      </div>
     </div>
   );
 }

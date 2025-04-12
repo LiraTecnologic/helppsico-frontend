@@ -1,38 +1,72 @@
 .card-solicitacao {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   background-color: #f9f9f9;
-  padding: 16px;
+  padding: 16px 24px;
   border-radius: 12px;
   border: 1px solid #ccc;
-  width: 600px;
-  font-family: sans-serif;
+  width: 500px;
+  font-family: 'Segoe UI', sans-serif;
+  gap: 16px;
+  justify-content: space-between;
 }
 
 .fotoPsico {
-  width: 80px;
-  height: 80px;
-  border-radius: 16px;
-  background-color: #ccc;
-  flex-shrink: 0;
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
 .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   flex-grow: 1;
-  margin-left: 16px;
+  text-align: left;
+  gap: 2px;
 }
 
-.topo {
+.nome {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.idade,
+.crp {
+  font-size: 14px;
+  margin: 0;
+  color: #333;
+}
+
+.avaliacao {
   display: flex;
   align-items: center;
+  font-weight: bold;
+  font-size: 14px;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.estrela {
+  color: gold;
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   justify-content: space-between;
+  height: 100%;
+  gap: 8px;
 }
 
 .status {
   font-weight: bold;
+  font-size: 14px;
   position: relative;
-  padding-bottom: 4px;
+  padding-bottom: 2px;
 }
 
 .status-pendente::after {
@@ -46,33 +80,21 @@
 }
 
 .status-outro::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #ff0000;
-}
-
-.avaliacao {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-weight: bold;
-  margin-top: 4px;
-}
-
-.estrela {
-  color: gold;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ff0000;
 }
 
 .cancelar-btn {
   background-color: #0d47a1;
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 13px;
 }
