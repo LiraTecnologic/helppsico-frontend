@@ -1,8 +1,20 @@
 import './solicitiacaoDeVinculo.css';
 import Header from '../../components/layout/header/header';
 import CardSolicitacao from '../../components/layout/Cards/cardSolicitacao/cardSolicitacao';
+import { useState } from 'react';
+import PopupCancelamento from '../../components/layout/PopupCancelamento/popupCancelamento';
 
 export default function SolicitacaoDeVinculo() {
+  const [ popupCancelar, setPopupCancelar ] = useState<boolean | null>(null);
+
+  const abrirCancelamento = () => {
+    setPopupCancelar(true);
+  }
+
+  const fecharCancelamento = () => {
+    setPopupCancelar(null);
+  };
+
   const textBotao = (status: string) =>{
     if(status=="Pendente"){
       return "Cancelar";
@@ -19,8 +31,8 @@ export default function SolicitacaoDeVinculo() {
         <section>
           <h2>Pendentes</h2>
           <div className="cards-grid">
-            <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Pendente" botao={textBotao("Pendente")} />
-            <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Pendente" botao={textBotao("Pendente")} />
+            <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Pendente" botao={textBotao("Pendente")} onClick={abrirCancelamento} />
+            <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Pendente" botao={textBotao("Pendente")} onClick={abrirCancelamento} />
           </div>
         </section>
 
@@ -34,6 +46,12 @@ export default function SolicitacaoDeVinculo() {
           </div>
         </section>
       </div>
+
+      {popupCancelar && (
+        <>
+          <PopupCancelamento fechar={fecharCancelamento} />
+        </>
+      )}
     </>
   );
 }

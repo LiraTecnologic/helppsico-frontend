@@ -8,10 +8,11 @@ interface CardSolicitacaoProps {
   avaliacao: number;
   status: string;
   botao: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export default function CardSolicitacaoVinculo(props: CardSolicitacaoProps) {
-  const { nome, idade, crp, avaliacao, status, botao } = props;
+  const { nome, idade, crp, avaliacao, status, botao, onClick } = props;
 
   const getStatusClass = () => {
     if (status === 'Pendente') return 'status status-pendente';
@@ -34,7 +35,7 @@ export default function CardSolicitacaoVinculo(props: CardSolicitacaoProps) {
 
       <div className="acoes">
         <span className={getStatusClass()}>{status}</span>
-        <button className="cancelar-btn">{botao}</button>
+        <button className="cancelar-btn" onClick={onClick}>{botao}</button>
       </div>
     </div>
   );

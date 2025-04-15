@@ -1,21 +1,21 @@
 .container {
-    padding: 32px;
-    text-align: center;
-  }
+  padding: 32px;
+  text-align: center;
+}
   
-  h1 {
-    font-size: 28px;
-    margin-bottom: 24px;
-  }
+h1 {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
   
-  section {
-    margin-top: 40px;
-  }
+section {
+  margin-top: 40px;
+}
   
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 600px);
-    gap: 32px;
-    justify-content: center;
-    margin-top: 16px;
-  }  
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 600px);
+  gap: 32px;
+  justify-content: center;
+  margin-top: 16px;
+}
