@@ -5,14 +5,14 @@ import { useState } from 'react';
 import PopupCancelamento from '../../components/layout/PopupCancelamento/popupCancelamento';
 
 export default function SolicitacaoDeVinculo() {
-  const [ popupCancelar, setPopupCancelar ] = useState<boolean | null>(null);
+  const [ popupCancelar, setPopupCancelar ] = useState(false);
 
   const abrirCancelamento = () => {
     setPopupCancelar(true);
   }
 
   const fecharCancelamento = () => {
-    setPopupCancelar(null);
+    setPopupCancelar(false);
   };
 
   const textBotao = (status: string) =>{

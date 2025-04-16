@@ -1,4 +1,4 @@
-.overlay{
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -20,12 +20,20 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     width: 80%;
-    height: 300px;
     max-width: 500px;
+    text-align: center;
     pointer-events: all;
 }
 
-.aceitar{
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.aceitar {
+    width: 70px;
+    margin: 10px;
     background-color: white;
     color: #0d47a1;
     border: solid #0d47a1 1px;
@@ -35,7 +43,9 @@
     font-size: 13px;
 }
 
-.recusar{
+.recusar {
+    width: 70px;
+    margin: 10px;
     background-color: #0d47a1;
     color: white;
     border: none;
@@ -43,4 +53,16 @@
     border-radius: 8px;
     cursor: pointer;
     font-size: 13px;
+}
+
+.recusar:hover{
+    background-color: #9DD6FF;
+    color: white;
+    border: none;
+}
+
+.aceitar:hover{
+    background-color: #9DD6FF;
+    color: white;
+    border: solid #9DD6FF 1px;
 }
