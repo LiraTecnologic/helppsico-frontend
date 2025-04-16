@@ -11,6 +11,7 @@ interface InputTotalProps {
 }
 
 function InputTotal({ pleaceHolder, label, tipo, value, onChange, onBlur, disabled = false }: InputTotalProps) {
+
     return (
         <div className='contentFullInput'>
             <label className='textLabel'>{label}</label>
