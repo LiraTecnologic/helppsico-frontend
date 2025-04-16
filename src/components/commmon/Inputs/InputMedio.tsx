@@ -1,6 +1,6 @@
-import './InputTotal.css';
+import './InputMedio.css';
 
-interface InputTotalProps {
+interface InputMedioProps {
     pleaceHolder: string;
     label: string;
     tipo: string;
@@ -10,16 +10,15 @@ interface InputTotalProps {
     disabled?: boolean;
 }
 
-function InputTotal({ pleaceHolder, label, tipo, value, onChange, onBlur, disabled = false }: InputTotalProps) {
-
+function InputMedio({ pleaceHolder, label, tipo, value, onChange, onBlur, disabled = false }: InputMedioProps) {
     return (
-        <div className='contentFullInput'>
+        <div className='contentMidInput'>
             <label className='textLabel'>{label}</label>
             <input 
                 type={tipo} 
                 placeholder={pleaceHolder} 
-                className='inputFull' 
-                value={value}
+                className='inputmid' 
+                value={value} 
                 onChange={onChange}
                 onBlur={onBlur}
                 disabled={disabled}
@@ -28,4 +27,4 @@ function InputTotal({ pleaceHolder, label, tipo, value, onChange, onBlur, disabl
     );
 }
 
-export default InputTotal;
+export default InputMedio;
