@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
 import CadsatroPaciente from '../src/pages/cadastroPaciente/cadastroPaciente';
 
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
