@@ -38,3 +38,24 @@
         height: 40px;
     }
 }
+
+
+.botao:hover {
+    background-color: #0d2846;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .botao {
+        width: 90%;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .botao {
+        width: 100%;
+        font-size: 18px;
+        height: 40px;
+    }
+}
