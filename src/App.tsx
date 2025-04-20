@@ -10,7 +10,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Cadsatro />} />
+        {/* FLUXO DE PACIENTE */}
+        <Route path="/" element={<LoginPaciente />} />
+        <Route path="/cadastroPaciente" element={<CadsatroPaciente />} />
+
+        {/* FLUXO DE PSICOLOGO */}
+        <Route path="/" element={<LoginPsicologo />} />
+        <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} />
       </Routes>  
     </Router>
   )

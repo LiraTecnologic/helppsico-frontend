@@ -6,6 +6,7 @@ import Select from '../../components/commmon/select/Select';
 import EtapasCadastro from '../../components/commmon/marcadores/etapasCadastro';
 import { useState, useEffect } from 'react';
 import { formatarCPF, validarCPF, buscarEnderecoPorCEP } from './cadastroPaciente.service';
+import { Link } from 'react-router-dom';
 
 export default function Cadastro() {
     const [step, setStep] = useState(1);
@@ -160,7 +161,7 @@ export default function Cadastro() {
                         </>
                     )}
                     <Botao texto={textBotao()} onClick={handleClick} />
-                    <p className='semConta'>Já tem uma conta? <br /><a href="" className='link'>Acesse</a></p>
+                    <p className='semConta'>Já tem uma conta? <br /><Link to="/" className='link'>Acesse</Link></p>
                 </div>
                 <EtapasCadastro etapaAtual={step} />
             </div>
