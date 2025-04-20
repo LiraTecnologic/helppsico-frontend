@@ -2,6 +2,7 @@ import './loginPsicologo.css';
 import InputTotal from '../../components/commmon/Inputs/InputTotal';
 import Botao from '../../components/commmon/botao/botao';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [crp, setCrp] = useState('');
@@ -33,7 +34,7 @@ const Login = () => {
                     <h1 className='novo-texto-titulo'>Minha Conta</h1>
                     <InputTotal label="CRP:" pleaceHolder="Digite seu crp..." tipo="text" value={crp} onChange={(e) => setCrp(e.target.value)} />
                     <InputTotal label="Senha:" pleaceHolder="Digite sua senha..." tipo="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
-                    <p className='novo-texto-sem-conta'>Não tem conta? <a href="" className='novo-link'>crie agora</a></p>
+                    <p className='novo-texto-sem-conta'>Não tem conta? <Link to="/cadastroPsicologo" className='novo-link'>crie agora</Link></p>
                     <Botao texto='Entrar' onClick={validarLogin} />
                 </div>
             </div>

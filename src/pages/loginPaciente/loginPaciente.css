@@ -5,7 +5,6 @@
     background-color: #0D42BD;
 }
 
-/* Estilização do container do login */
 .login-container-paciente {
     display: flex;
     align-items: center;
@@ -15,7 +14,6 @@
     padding: 20px;
 }
 
-/* Estilização do conteúdo esquerdo */
 .left-content-paciente {
     display: flex;
     flex-direction: column;
@@ -26,16 +24,15 @@
     min-width: 300px;
 }
 
-/* Estilização do título */
 .texto-titulo-paciente {
     color: white;
     font-size: 48px;
     padding-bottom: 20px;
     background: none;
     text-align: center;
+    z-index: 100;
 }
 
-/* Estilização do formulário */
 .formulario-paciente {
     display: flex;
     flex-direction: column;
@@ -46,7 +43,6 @@
     max-width: 400px;
 }
 
-/* Estilização do texto "Não tem conta?" */
 .novo-texto-sem-conta {
     color: white;
     font-size: 16px;
@@ -54,7 +50,6 @@
     z-index: 2;
 }
 
-/* Estilização do link "crie agora" */
 .link-paciente {
     text-decoration: none;
     color: white;
@@ -64,14 +59,12 @@
     color: aquamarine;
 }
 
-/* Estilização da linha vertical */
 .nova-linha-vertical {
     width: 2px;
     height: 85vh;
     background-color: white;
 }
 
-/* Estilização do conteúdo da direita */
 .right-content-paciente {
     flex: 1;
     display: flex;
@@ -82,7 +75,6 @@
     min-width: 300px;
 }
 
-/* Estilização da imagem do login */
 .imagem-login-paciente {
     width: 700px;
     height: 450px;
@@ -90,7 +82,6 @@
     height: auto;
 }
 
-/* Estilização da marca d'água */
 .nova-marca-dagua {
     position: fixed;
     bottom: 1px;
@@ -102,7 +93,6 @@
     max-width: 50%;
 }
 
-/* Responsividade para telas menores */
 @media (max-width: 768px) {
     .login-container-paciente {
         flex-direction: column;
@@ -125,7 +115,6 @@
     }
 }
 
-/* Responsividade para mobile */
 @media (max-width: 480px) {
     .texto-titulo-paciente {
         font-size: 28px;
