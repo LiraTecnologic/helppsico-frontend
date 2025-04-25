@@ -1,43 +1,47 @@
 import './prontuario.css';
+import Documento from "../../../assets/Documento.svg";
 
 interface ProntuarioProps {
     nomePaciente: string;
-    dataAdicionado: string;
-    tamanhoArquivo: string;
+    titulo: string;
     onClickAbrir?: () => void;
+    fotoPerfilUrl?: string;
 }
 
+function Prontuario({
+    nomePaciente,
+    titulo,
+    onClickAbrir,
+    fotoPerfilUrl
+}: ProntuarioProps) {
+    return (
+        <div className="prontuarioContainer">
+            <div className="prontuarioHeader">
+                <img
+                    src={fotoPerfilUrl}
+                    alt="Foto do Paciente"
+                    className="prontuarioFotoPerfil"
+                />
+                <span className="prontuarioNomePaciente">{nomePaciente}</span>
+            </div>
 
+            <div className="prontuarioCard">
+                <div className="prontuarioCardHeader">
+                    <img src={Documento} alt="" />
 
-// function Prontuario({ 
-//     nomePaciente, 
-//     dataAdicionado, 
-//     tamanhoArquivo, 
-//     onClickAbrir,
-//     className = ''
-// }: ProntuarioProps) {
-//     return (
-//         <div className={`prontuarioContainer ${className}`}>
-//             <h1 className='prontuarioNomePaciente'>{nomePaciente}</h1>
+                    <div className="prontuarioIcone" />
+                    <strong className="prontuarioTitulo">{titulo}</strong>
+                </div>
 
-//             <div className='prontuarioDetalhes'>
-//                 <p>
-//                     <strong>Nome Paciente Pront...</strong>
-//                     <br />
-//                     Adicionado em {dataAdicionado}
-//                     <br />
-//                     {tamanhoArquivo}
-//                 </p>
-//             </div>
+                <button
+                    className="prontuarioBotaoAbrir"
+                    onClick={onClickAbrir}
+                >
+                    Abrir Prontuário
+                </button>
+            </div>
+        </div>
+    );
+}
 
-//             <button 
-//                 className='prontuarioBotaoAbrir' 
-//                 onClick={onClickAbrir}
-//             >
-//                 Abrir Arquivo
-//             </button>
-//         </div>
-//     );
-// }
-
-// export default Prontuario;
+export default Prontuario;

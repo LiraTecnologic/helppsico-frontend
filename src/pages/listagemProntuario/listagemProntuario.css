@@ -1,0 +1,27 @@
+.listagemContainer {
+    padding: 24px;
+}
+
+.listagemHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.listagemHeader h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.prontuarioGrid {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    column-gap: 20px;
+    flex-wrap: wrap;
+}
+

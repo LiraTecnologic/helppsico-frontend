@@ -13,14 +13,14 @@ function App() {
     <Router>
       <Routes>
         {/* FLUXO DE PACIENTE */}
-        <Route path="/" element={<LoginPaciente />} />
-        <Route path="/cadastroPaciente" element={<CadsatroPaciente />} />
+        {/* <Route path="/" element={<LoginPaciente />} />
+        <Route path="/cadastroPaciente" element={<CadsatroPaciente />} /> */}
       
 
         {/* FLUXO DE PSICOLOGO */}
-        <Route path="/" element={<LoginPsicologo />} />
-        <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} />
-        <Route path="/prontuarios" element={<ListagemProntuario />}></Route>
+        {/* <Route path="/" element={<LoginPsicologo />} />
+        <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} /> */}
+        <Route path="/" element={<ListagemProntuario />}></Route>
         
       </Routes>  
     </Router>

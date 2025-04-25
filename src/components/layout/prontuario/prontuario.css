@@ -1,40 +1,78 @@
-/* .prontuarioContainer {
-    background: #ffffff;
+.prontuarioContainer {
+    width: 300px;
+    padding: 16px;
+    background-color: #f7f8fa;
     border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 300px;
-    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: Arial, sans-serif;
+}
+
+.prontuarioHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prontuarioFotoPerfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .prontuarioNomePaciente {
-    font-size: 1.25rem;
-    margin: 0 0 1rem 0;
-    color: #333;
+    font-weight: bold;
 }
 
-.prontuarioDetalhes {
-    margin-bottom: 1.5rem;
-    color: #666;
-    line-height: 1.5;
+.prontuarioCard {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
 }
 
-.prontuarioDetalhes strong {
-    color: #333;
+.prontuarioCardHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.prontuarioIcone {
+    width: 24px;
+    height: 24px;
+    background-color: #3973f2;
+    mask: url('https://www.svgrepo.com/show/349502/google-docs.svg') no-repeat center;
+    mask-size: contain;
+    -webkit-mask: url('https://www.svgrepo.com/show/349502/google-docs.svg') no-repeat center;
+    -webkit-mask-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.prontuarioTitulo {
+    flex: 1;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .prontuarioBotaoAbrir {
-    background: #4a6cf7;
-    color: white;
+    background-color: #eef3fc;
+    color: #3973f2;
     border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
     cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s;
-    width: 100%;
+    transition: background-color 0.3s;
 }
 
 .prontuarioBotaoAbrir:hover {
-    background: #3a5bd9;
-} */
+    background-color: #dce6f9;
+}
