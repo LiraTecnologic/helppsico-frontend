@@ -10,6 +10,7 @@ interface ProximasSessoesProps {
   horario?: string;
   valor?: string;
   statusPagamento?: 'Em aberto' | 'Pago' | 'Cancelado';
+  urlFoto? : string;
 }
 
 export default function ProximasSessoes({
@@ -21,12 +22,13 @@ export default function ProximasSessoes({
   data,
   horario,
   valor,
-  statusPagamento
+  statusPagamento,
+  urlFoto
 }: ProximasSessoesProps) {
   return (
     <div className="proxima-sessao">
       <div className="proxima-sessao__cabecalho">
-        <h3>Próxima sessão</h3>
+        <h1>Próxima sessão</h1>
         <button className="botao-ver-mais">Ver mais</button>
       </div>
 
@@ -35,7 +37,7 @@ export default function ProximasSessoes({
           <div className="sessao-info">
             <img
               className="sessao-foto"
-              src="https://via.placeholder.com/60"
+              src={urlFoto}
               alt="Foto do psicólogo"
             />
             <div className="sessao-textos">

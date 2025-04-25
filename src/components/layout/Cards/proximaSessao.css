@@ -1,112 +1,120 @@
 .proxima-sessao {
-    background-color: #f3f3f3;
-    padding: 24px;
-    border-radius: 10px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .proxima-sessao__cabecalho {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  
-  .botao-ver-mais {
-    background-color: transparent;
-    border: none;
-    color: #0044cc;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .sessao-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: white;
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .sessao-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .sessao-foto {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-  }
-  
-  .sessao-nome {
-    font-weight: bold;
-    margin-bottom: 4px;
-  }
-  
-  .sessao-detalhes {
-    text-align: left;
-    font-size: 14px;
-  }
-  
-  .sessao-pagamento {
-    text-align: right;
-    font-size: 14px;
-  }
-  
-  .sessao-status {
-    display: inline-block;
-    margin-top: 6px;
-    padding: 6px 14px;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: 500;
-    color: white;
-  }
 
-  /* Diferenciando de acordo com seu status */
-  .sessao-status.em-aberto {
-    background-color: #a9a9a9;
-  }
-  
-  .sessao-status.pago {
-    background-color: #2e7d32;
-  }
-  
-  .sessao-status.cancelado {
-    background-color: #b71c1c;
-  }
-  
-  .sessao-nao-marcada {
-    background-color: white;
-    padding: 32px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    text-align: center;
-  }
-  
-  .titulo-nao-marcada {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  .subtitulo-nao-marcada {
-    font-size: 14px;
-    margin-bottom: 16px;
-    color: #666;
-  }
-  
-  .botao-marcar {
-    background-color: #0044cc;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
+  padding: 24px;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 80%;
+  margin: 32px auto 0 auto;
+}
+
+.proxima-sessao__cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.botao-ver-mais {
+  color: white;
+  border: none;
+  background-color: #0044cc;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 5px 12px;
+  border-radius: 10px;
+}
+
+.sessao-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sessao-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sessao-foto {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sessao-nome {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.sessao-detalhes {
+  text-align: left;
+  font-size: 14px;
+}
+
+.sessao-pagamento {
+  text-align: right;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+.sessao-status {
+  display: inline-block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+}
+
+.sessao-status.em-aberto {
+  background-color: #a9a9a9;
+}
+
+.sessao-status.pago {
+  background-color: #2e7d32;
+}
+
+.sessao-status.cancelado {
+  background-color: #b71c1c;
+}
+
+/* Quando não tiver sessão marcada */
+.sessao-nao-marcada {
+  background-color: white;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.titulo-nao-marcada {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.subtitulo-nao-marcada {
+  font-size: 14px;
+  margin-bottom: 16px;
+  color: #666;
+}
+
+.botao-marcar {
+  background-color: #0044cc;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
