@@ -10,7 +10,7 @@ function Botao (props: BotaoProps){
         <>
             <button type='submit' className='botao' onClick={props.onClick}>{props.texto}</button>
         </>
-    );
+    ); 
 }
 
 export default Botao;
