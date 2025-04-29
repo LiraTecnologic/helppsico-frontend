@@ -25,6 +25,10 @@
     pointer-events: all;
 }
 
+.popup h1 {
+    font-weight: 500;
+}
+
 .botoes {
     display: flex;
     justify-content: center;
