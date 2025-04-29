@@ -1,3 +1,12 @@
+.documentosLayout{
+  width: 100%;
+  max-width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 6px auto 0 auto;
+}
+
 .prontuarioContainer {
   width: 300px;
   padding: 16px;
@@ -22,26 +31,14 @@
 .prontuarioCardHeader {
   display: flex;
   align-items: center;
-  gap: 8px;
   position: relative;
-}
-
-.prontuarioIcone {
-  width: 24px;
-  height: 24px;
-  background-color: #3973f2;
-  mask: url('https://www.svgrepo.com/show/349502/google-docs.svg') no-repeat center;
-  mask-size: contain;
-  -webkit-mask: url('https://www.svgrepo.com/show/349502/google-docs.svg') no-repeat center;
-  -webkit-mask-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .prontuarioTitulo {
   flex: 1;
-  font-weight: bold;
+  text-align: center;
   font-size: 14px;
+  padding-right: 31px;
 }
 
 .prontuarioBotaoAbrir {

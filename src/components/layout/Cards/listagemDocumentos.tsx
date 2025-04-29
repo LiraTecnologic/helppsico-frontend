@@ -1,30 +1,37 @@
 import './listagemDocumentos.css';
 import Documento from "../../../assets/Documento.svg";
 
-interface DocumentosProps {
+interface DocumentoProps {
     titulo: string;
-    onClick?: ()=> void;
+    id: string;
 }
 
-export default function ListagemDocumentos({ titulo, onClick }: DocumentosProps) {
+interface ListagemDocumentosProps {
+    documentos: DocumentoProps[];
+    onDocumentoClick?: (id: string) => void;
+}
+
+export default function ListagemDocumentos({ documentos, onDocumentoClick }: ListagemDocumentosProps) {
     return (
-        <div className="prontuarioContainer">
-            <h1>Documentos</h1>
-            <div className="prontuarioCard">
-                <div className="prontuarioCardHeader">
-                    <img src={Documento} alt="" />
+        <div className="documentosLayout">
+            {documentos.map((documento) => (
+                <div className="prontuarioContainer" key={documento.id}>
+                    <div className="prontuarioCard">
+                        <div className="prontuarioCardHeader">
+                            <img src={Documento} alt="" />
+                            <div className="prontuarioIcone" />
+                            <strong className="prontuarioTitulo">{documento.titulo}</strong>
+                        </div>
 
-                    <div className="prontuarioIcone" />
-                    <strong className="prontuarioTitulo">{titulo}</strong>
+                        <button
+                            className="prontuarioBotaoAbrir"
+                            onClick={() => onDocumentoClick && onDocumentoClick(documento.id)}
+                        >
+                            Abrir Prontuário
+                        </button>
+                    </div>
                 </div>
-
-                <button
-                    className="prontuarioBotaoAbrir"
-                    onClick={onClick}
-                >
-                    Abrir Prontuário
-                </button>
-            </div>
+            ))}
         </div>
     );
 }

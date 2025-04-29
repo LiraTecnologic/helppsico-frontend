@@ -1,3 +1,10 @@
 .fundo{
     background-color: #F3F4F6;
 }
+
+.tittleDocumentos{
+    width: 100%;
+    max-width: 80%;
+    display: flex;
+    margin: 32px auto 0 auto;
+}

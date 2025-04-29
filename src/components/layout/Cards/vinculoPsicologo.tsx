@@ -9,7 +9,7 @@ interface VinculoPsicologoProps {
 export default function VinculoPsicologo({ nome, email, fotoUrl }: VinculoPsicologoProps) {
   return (
     <div className="cartao-psicologo">
-      <h3 className="cartao-psicologo__titulo">Vinculado com:</h3>
+      <h1 className="cartao-psicologo__titulo">Vinculado com</h1>
       <div className="cartao-psicologo__conteudo">
         <img className="cartao-psicologo__imagem" src={fotoUrl} alt={`Foto de ${nome}`} />
         <p className="cartao-psicologo__nome">{nome}</p>
