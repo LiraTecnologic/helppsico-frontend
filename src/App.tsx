@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
 import CadsatroPaciente from '../src/pages/cadastroPaciente/cadastroPaciente';
+import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import SolicitacaoDeVinculo from '../src/pages/solicitacaoDeVinculo/solicitiacaoDeVinculo';
 
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
@@ -24,8 +25,10 @@ function App() {
         {/* FLUXO DE PSICOLOGO */}
         {/* <Route path="/" element={<LoginPsicologo />} />
         <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} /> */}
+        <Route path="/" element={<MeuPainelPaciente />} />
+
         <Route path="/" element={<ListagemProntuario />}></Route>
-        
+
       </Routes>  
     </Router>
   )
