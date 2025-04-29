@@ -21,6 +21,9 @@ export default function Header(props: HeaderProps) {
                         <li className={props.fluxo === 'meuPainel' ? 'active' : ''}>
                             <a href="#meuPainel">Meu painel</a>
                         </li>
+                        <li className={props.fluxo === 'meusPacientes' ? 'active': ''}>
+                            <a href="#meusPacientes">Meus pacientes</a>
+                        </li>
                         <li className={props.fluxo === 'minhasSessoes' ? 'active' : ''}>
                             <a href="#minhasSessoes">Minhas sessões</a>
                         </li>
