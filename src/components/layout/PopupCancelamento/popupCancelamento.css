@@ -1,0 +1,72 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    pointer-events: all;
+}
+  
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    pointer-events: all;
+}
+
+.popup h1 {
+    font-weight: 500;
+}
+
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.aceitar {
+    width: 70px;
+    margin: 10px;
+    background-color: white;
+    color: #0d47a1;
+    border: solid #0d47a1 1px;
+    padding: 4px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.recusar {
+    width: 70px;
+    margin: 10px;
+    background-color: #0d47a1;
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.recusar:hover{
+    background-color: #9DD6FF;
+    color: white;
+    border: none;
+}
+
+.aceitar:hover{
+    background-color: #9DD6FF;
+    color: white;
+    border: solid #9DD6FF 1px;
+}
