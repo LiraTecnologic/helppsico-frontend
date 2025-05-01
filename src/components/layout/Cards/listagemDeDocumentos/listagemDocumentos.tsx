@@ -1,5 +1,5 @@
 import './listagemDocumentos.css';
-import Documento from "../../../assets/Documento.svg";
+import Documento from "../../../../assets/Documento.svg";
 
 interface DocumentoProps {
     titulo: string;

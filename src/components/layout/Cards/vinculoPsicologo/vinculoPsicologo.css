@@ -11,11 +11,13 @@
   }
   
   .cartao-psicologo__titulo {
+    background-color: white;
     margin-bottom: 12px;
     text-align: center;
   }
   
   .cartao-psicologo__conteudo {
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,12 +32,14 @@
   }
   
   .cartao-psicologo__nome {
+    background-color: white;
     font-weight: bold;
     font-size: 22px;
     margin: 4px 0;
   }
   
   .cartao-psicologo__email {
+    background-color: white;
     font-size: 16px;
     color: #666;
   }

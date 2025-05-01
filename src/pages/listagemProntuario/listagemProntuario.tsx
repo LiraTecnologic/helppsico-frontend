@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 export default function ListagemProntuario() {
 
-    const [prontuarios, setProntuarios] = useState([
+    const [prontuarios] = useState([
         { id: 1, nomePaciente: 'João Maria', titulo: 'Prontuário bonito' },
         { id: 2, nomePaciente: 'Maria João', titulo: 'Prontuário legal' },
         { id: 3, nomePaciente: 'Ana Paula', titulo: 'Prontuário detalhado' },
@@ -21,26 +21,26 @@ export default function ListagemProntuario() {
 
     return (
         <>
-            <Header fluxo='meuPainel'/>
+                <Header fluxo='meuPainel'/>
 
-            <main className="listagemContainer">
-                <div className="listagemHeader">
-                    <h1>Prontuário ({prontuarios.length})</h1>
-                    <Link to="/cadastrar-prontuario">
-                        <BotaoPrimario texto="Cadastrar Prontuário" />
-                    </Link>
-                </div>
+                <main className="listagemContainer">
+                    <div className="listagemHeader">
+                        <h1>Prontuário ({prontuarios.length})</h1>
+                        <Link to="/cadastrar-prontuario">
+                            <BotaoPrimario texto="Cadastrar Prontuário" />
+                        </Link>
+                    </div>
 
-                <div className="prontuarioGrid">
-                    {prontuarios.map((prontuario) => (
-                    <Prontuario 
-                        key={prontuario.id}
-                        nomePaciente={prontuario.nomePaciente}
-                        titulo={prontuario.titulo}
-                    />
-                    ))}
-                </div>
-            </main>
+                    <div className="prontuarioGrid">
+                        {prontuarios.map((prontuario) => (
+                        <Prontuario 
+                            key={prontuario.id}
+                            nomePaciente={prontuario.nomePaciente}
+                            titulo={prontuario.titulo}
+                        />
+                        ))}
+                    </div>
+                </main>
         </>
     );
 }

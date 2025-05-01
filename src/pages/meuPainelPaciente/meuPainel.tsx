@@ -1,8 +1,8 @@
 import './meuPainel.css';
 import Header from '../../components/layout/header/header';
-import VinculoPsicologo from '../../components/layout/Cards/vinculoPsicologo';
-import ProximasSessoes from '../../components/layout/Cards/proximaSessao';
-import ListagemDocumentos from '../../components/layout/Cards/listagemDocumentos';
+import VinculoPsicologo from '../../components/layout/Cards/vinculoPsicologo/vinculoPsicologo';
+import ProximasSessoes from '../../components/layout/Cards/proximaSessao/proximaSessao';
+import ListagemDocumentos from '../../components/layout/Cards/listagemDeDocumentos/listagemDocumentos';
 
 export default function MeuPainelPaciente (){
     const documentos = [
