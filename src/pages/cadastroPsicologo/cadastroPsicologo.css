@@ -1,16 +1,13 @@
-* {
+.login-container {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color: #0D42BD;
-}
-
-.login-container {
+    
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-
 }
 
 .left-content {
@@ -73,6 +70,7 @@
 .imagem{
     width: 600px;
     height: 550px;
+    background-color: #0D42BD;
 }
 
 .marca-dagua {

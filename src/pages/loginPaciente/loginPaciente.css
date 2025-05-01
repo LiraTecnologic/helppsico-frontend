@@ -2,10 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #0D42BD;
 }
 
 .login-container-paciente {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #0D42BD;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -80,9 +84,11 @@
     height: 450px;
     max-width: 100%;
     height: auto;
+    background-color: #0D42BD;
 }
 
 .nova-marca-dagua {
+    background-color: #0D42BD;
     position: fixed;
     bottom: 1px;
     left: 10px;

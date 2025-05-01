@@ -11,6 +11,7 @@ interface ProximasSessoesProps {
   valor?: string;
   statusPagamento?: 'Em aberto' | 'Pago' | 'Cancelado';
   urlFoto? : string;
+  verMais: boolean;
 }
 
 export default function ProximasSessoes({
@@ -23,13 +24,16 @@ export default function ProximasSessoes({
   horario,
   valor,
   statusPagamento,
-  urlFoto
+  urlFoto,
+  verMais
 }: ProximasSessoesProps) {
   return (
     <div className="proxima-sessao">
       <div className="proxima-sessao__cabecalho">
         <h1>Próxima sessão</h1>
-        <button className="botao-ver-mais">Ver mais</button>
+        {verMais && (
+          <button className="botao-ver-mais">Ver mais</button>
+        )}
       </div>
 
       {sessaoMarcada ? (
