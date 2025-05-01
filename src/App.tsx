@@ -7,6 +7,8 @@ import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
 import LoginPaciente from '../src/pages/loginPaciente/loginPaciente';
 
+import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
+
 function App() {
   return (
     <Router>
@@ -18,7 +20,8 @@ function App() {
         {/* FLUXO DE PSICOLOGO */}
         {/* <Route path="/" element={<LoginPsicologo />} />
         <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} /> */}
-        <Route path="/" element={<MeuPainelPaciente />} />
+        <Route path="/listagemPacientes" element={<ListagemPacientes />} />
+        <Route path="/meuPainelPaciente" element={<MeuPainelPaciente />} />
       </Routes>  
     </Router>
   )

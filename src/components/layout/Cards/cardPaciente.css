@@ -1,0 +1,68 @@
+.card-paciente {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 280px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+}
+
+.card-topo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.foto-paciente {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 14px;
+}
+
+.info-paciente {
+  flex-grow: 1;
+}
+
+.nome {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.idade,
+.email,
+.telefone {
+  font-size: 15px;
+  color: #666;
+  margin: 3px 0;
+}
+
+.btn-prontuario,
+.btn-sem-prontuario {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-prontuario {
+  background-color: #e8f0ff;
+  color: #1a73e8;
+}
+
+.btn-prontuario:hover {
+  background-color: #d0e2ff;
+}
+
+.btn-sem-prontuario {
+  background-color: #ffe6e6;
+  color: #d93025;
+  cursor: not-allowed;
+}
