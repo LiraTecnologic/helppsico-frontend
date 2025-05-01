@@ -1,0 +1,17 @@
+.container-pacientes {
+  padding: 40px;
+  background-color: #f6f7fb;
+  min-height: 100vh;
+}
+  
+.container-pacientes h1 {
+  font-size: 32px;
+  margin-bottom: 24px;
+  color: #222;
+}
+  
+.grid-pacientes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 26px;
+}
