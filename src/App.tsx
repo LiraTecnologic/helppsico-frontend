@@ -6,7 +6,7 @@ import CadsatroPaciente from '../src/pages/cadastroPaciente/cadastroPaciente';
 import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
 
-// Telas do fluco de Pscicolog
+// Telas do fluco de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
 import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
