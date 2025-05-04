@@ -10,6 +10,7 @@ import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
 import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
+import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo"
 
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 
@@ -27,7 +28,7 @@ function App() {
         <Route path="/loginPsicologo" element={<LoginPsicologo />} />
         <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} />
         <Route path="/listagemDocumentos" element={<ListagemProntuario />} />
-        
+        <Route path="/" element={<InformacoesPsicologo />} />
       </Routes>  
     </Router>
   )

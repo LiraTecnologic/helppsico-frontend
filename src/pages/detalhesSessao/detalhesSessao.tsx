@@ -1,4 +1,4 @@
-import './detalhesSessao.css';
+  import './detalhesSessao.css';
 import Header from '../../components/layout/header/header';
 import ProximasSessoes from '../../components/layout/Cards/proximaSessao/proximaSessao';
 import SessoesAntigas from '../../components/layout/Cards/sessoesAntigas/sessoesAntigas';
