@@ -10,15 +10,15 @@ import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
 import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
-
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
+import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* FLUXO DE PACIENTE */}
-        <Route path="loginPaciente" element={<LoginPaciente />} />
+        <Route path="/loginPaciente" element={<LoginPaciente />} />
         <Route path="/cadastroPaciente" element={<CadsatroPaciente />} />
         <Route path="/meuPainel" element={<MeuPainelPaciente />} />
         <Route path="/detalhesSessao" element={<DetalhesSessao />} />
@@ -27,6 +27,7 @@ function App() {
         <Route path="/loginPsicologo" element={<LoginPsicologo />} />
         <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} />
         <Route path="/listagemDocumentos" element={<ListagemProntuario />} />
+        <Route path="/" element={<MeuPainelPsicologo />} />
         
       </Routes>  
     </Router>

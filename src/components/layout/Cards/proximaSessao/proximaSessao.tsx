@@ -2,7 +2,7 @@ import './proximaSessao.css';
 
 interface ProximasSessoesProps {
   sessaoMarcada: boolean;
-  nomePsicologo?: string;
+  nome?: string;
   idade?: string;
   telefone?: string;
   local?: string;
@@ -16,7 +16,7 @@ interface ProximasSessoesProps {
 
 export default function ProximasSessoes({
   sessaoMarcada,
-  nomePsicologo,
+  nome,
   idade,
   telefone,
   local,
@@ -45,7 +45,7 @@ export default function ProximasSessoes({
               alt="Foto do psicólogo"
             />
             <div className="sessao-textos">
-              <p className="sessao-nome">{nomePsicologo}</p>
+              <p className="sessao-nome">{nome}</p>
               <p>{idade}</p>
               <p>{telefone}</p>
             </div>
