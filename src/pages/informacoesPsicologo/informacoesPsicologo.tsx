@@ -2,6 +2,7 @@ import Header from "../../components/layout/header/header";
 import Estrela from "../../assets/estrela.svg"
 import FotoPsicologo from "../../assets/Foto.png"
 import Localizacao from "../../assets/localização.svg"
+import TabelaHorario from "../../components/layout/tabela/tabelaHorario"
 import './informacoesPsicologo.css';
 
 const psicologo = {
@@ -28,7 +29,7 @@ const avaliacaos = [
         id: "",
         psicologo: {
             id: ""
-        }, 
+        },
         paciente: {
             id: ""
         },
@@ -39,7 +40,7 @@ const avaliacaos = [
         id: "",
         psicologo: {
             id: ""
-        }, 
+        },
         paciente: {
             id: ""
         },
@@ -50,13 +51,13 @@ const avaliacaos = [
         id: "",
         psicologo: {
             id: ""
-        }, 
+        },
         paciente: {
             id: ""
         },
         nota: 0.0,
         comentario: "",
-    }       
+    }
 ]
 
 //Chamar metodo no service
@@ -65,11 +66,11 @@ const mediaNotaAvaliacao = 4.6;
 const quantidadeVinculados = 12;
 
 export default function InformacoesPsicologo() {
-    
+
 
     return (
         <>
-            <Header fluxo=""/>
+            <Header fluxo="" />
             <main>
                 <section className="section-psico-bio">
                     <div className="div-psicologo">
@@ -82,7 +83,7 @@ export default function InformacoesPsicologo() {
                             <p>{psicologo.email}</p>
                             <p>{psicologo.telefone}</p>
                         </div>
-                        <hr/>
+                        <hr />
                         <div>
                             <p>Local  de atendimento:</p>
                             <p><img src={Localizacao} alt="Icon localização" />{psicologo.enderecoAtendimento.rua}, {psicologo.enderecoAtendimento.numero}.</p>
@@ -93,8 +94,19 @@ export default function InformacoesPsicologo() {
                         <p>{psicologo.biografia}</p>
                     </div>
                 </section>
-                <section></section>
-                <section></section>
+                <section className="section-tabela">
+                    <h2>Horários de consulta:</h2>
+                    <TabelaHorario />
+                </section>
+                <section>
+                    <h2>Avaliações e comentários:</h2>
+                    <div>
+
+                    </div>
+                    <div>
+                        
+                    </div>
+                </section>
             </main>
         </>
     );
