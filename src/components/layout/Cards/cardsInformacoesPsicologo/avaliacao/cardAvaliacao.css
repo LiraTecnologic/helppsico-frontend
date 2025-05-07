@@ -1,0 +1,22 @@
+.card-avaliacao-listagem {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-avaliacao-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    width: 50%;
+    gap: 2rem;
+}
+
+.card-avaliacao-info img {
+    width: 5%;
+    border-radius: 50%;
+}
+
+.estrelas-card-avaliacao img {
+    
+}

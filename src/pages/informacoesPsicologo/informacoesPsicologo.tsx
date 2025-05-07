@@ -3,6 +3,10 @@ import Estrela from "../../assets/estrela.svg"
 import FotoPsicologo from "../../assets/Foto.png"
 import Localizacao from "../../assets/localização.svg"
 import TabelaHorario from "../../components/layout/tabela/tabelaHorario"
+import CardInfoAvaliacao from "../../components/layout/Cards/cardsInformacoesPsicologo/avaliacao/info/cardInfoAvaliacao"
+import BotaoAvaliarInfoPsicologo from "../../components/layout/Cards/cardsInformacoesPsicologo/botaoAvaliar/botaoAvaliarInfoPsicologo"
+import CardAvaliacao from "../../components/layout/Cards/cardsInformacoesPsicologo/avaliacao/cardAvaliacao"
+
 import './informacoesPsicologo.css';
 
 const psicologo = {
@@ -26,39 +30,49 @@ const psicologo = {
 
 const avaliacaos = [
     {
-        id: "",
+        id: "a1b2c3",
         psicologo: {
-            id: ""
+            id: "p001"
         },
         paciente: {
-            id: ""
+            id: "pac001",
+            foto: "https://randomuser.me/api/portraits/men/32.jpg",
+            nome: "Carlos Oliveira"
         },
-        nota: 0.0,
-        comentario: "",
+        nota: 4.5,
+        comentario: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo tellus, mollis ac interdum quis, aliquam lobortis risus. Ut viverra ac nunc vitae euismod. Sed molestie, purus sed efficitur mollis, arcu nibh semper massa, a malesuada eros felis morbi.",
+        data: "2025-05-01"
     },
     {
-        id: "",
+        id: "d4e5f6",
         psicologo: {
-            id: ""
+            id: "p002"
         },
         paciente: {
-            id: ""
+            id: "pac002",
+            foto: "https://randomuser.me/api/portraits/women/45.jpg",
+            nome: "Juliana Souza"
         },
-        nota: 0.0,
-        comentario: "",
+        nota: 5.0,
+        comentario: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo tellus, mollis ac interdum quis, aliquam lobortis risus. Ut viverra ac nunc vitae euismod. Sed molestie, purus sed efficitur mollis, arcu nibh semper massa, a malesuada eros felis morbi.",
+        data: "2025-04-25"
     },
     {
-        id: "",
+        id: "g7h8i9",
         psicologo: {
-            id: ""
+            id: "p001"
         },
         paciente: {
-            id: ""
+            id: "pac003",
+            foto: "https://randomuser.me/api/portraits/men/21.jpg",
+            nome: "Bruno Lima"
         },
-        nota: 0.0,
-        comentario: "",
+        nota: 3.8,
+        comentario: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo tellus, mollis ac interdum quis, aliquam lobortis risus. Ut viverra ac nunc vitae euismod. Sed molestie, purus sed efficitur mollis, arcu nibh semper massa, a malesuada eros felis morbi.",
+        data: "2025-04-15"
     }
-]
+];
+
 
 //Chamar metodo no service
 const mediaNotaAvaliacao = 4.6;
@@ -98,13 +112,25 @@ export default function InformacoesPsicologo() {
                     <h2>Horários de consulta:</h2>
                     <TabelaHorario />
                 </section>
-                <section>
+                <section className="section-avaliacao">
                     <h2>Avaliações e comentários:</h2>
-                    <div>
-
+                    <div className="cards-section-avaliacao">
+                        <CardInfoAvaliacao 
+                            nota="4.5"
+                            quantidadeAvaliacao="20"
+                        />
+                        <BotaoAvaliarInfoPsicologo/>
                     </div>
-                    <div>
-                        
+                    <div className="listagem-avaliacao">
+                        {avaliacaos.map((avaliacao, index) => (
+                            <CardAvaliacao
+                                key={index}
+                                fotoPaciente={avaliacao.paciente.foto || ""}
+                                nomePaciente={avaliacao.paciente.nome}
+                                data={avaliacao.data}
+                                conteudo={avaliacao.comentario}
+                            />
+                        ))}
                     </div>
                 </section>
             </main>
