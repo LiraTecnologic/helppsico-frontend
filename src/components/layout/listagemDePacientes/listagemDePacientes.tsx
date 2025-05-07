@@ -7,12 +7,18 @@ interface Paciente {
 
 interface ListagemDePacientesProps {
   pacientes: Paciente[];
+  verMais: boolean;
 }
 
-export default function ListagemDePacientes({ pacientes }: ListagemDePacientesProps) {
+export default function ListagemDePacientes({ pacientes, verMais }: ListagemDePacientesProps) {
   return (
     <>
-      <h1>Pacientes</h1>
+      <div className="listagem-pacientes-cabecalho">
+        <h1>Pacientes</h1>
+        {verMais && (
+            <button className="botao-ver-mais">Ver mais</button>
+        )}
+      </div>
       {pacientes.length === 0 ? (
         <p className="mensagem-vazia">O psicólogo ainda não tem nenhum paciente vinculado a ele.</p>
       ) : (

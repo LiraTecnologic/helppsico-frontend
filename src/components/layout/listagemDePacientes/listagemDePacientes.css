@@ -27,4 +27,20 @@
     font-style: italic;
     margin-top: 1rem;
 }
-  
+
+.botao-ver-mais {
+    color: white;
+    border: none;
+    background-color: #0044cc;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 10px;
+}
+
+.listagem-pacientes-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
