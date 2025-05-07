@@ -2,7 +2,7 @@ import './proximaSessao.css';
 
 interface ProximasSessoesProps {
   sessaoMarcada: boolean;
-  nomePsicologo?: string;
+  nome?: string;
   idade?: string;
   telefone?: string;
   local?: string;
@@ -12,11 +12,12 @@ interface ProximasSessoesProps {
   statusPagamento?: 'Em aberto' | 'Pago' | 'Cancelado';
   urlFoto? : string;
   verMais: boolean;
+  fluxo: string;
 }
 
 export default function ProximasSessoes({
   sessaoMarcada,
-  nomePsicologo,
+  nome,
   idade,
   telefone,
   local,
@@ -25,7 +26,8 @@ export default function ProximasSessoes({
   valor,
   statusPagamento,
   urlFoto,
-  verMais
+  verMais,
+  fluxo
 }: ProximasSessoesProps) {
   return (
     <div className="proxima-sessao">
@@ -45,7 +47,7 @@ export default function ProximasSessoes({
               alt="Foto do psicólogo"
             />
             <div className="sessao-textos">
-              <p className="sessao-nome">{nomePsicologo}</p>
+              <p className="sessao-nome">{nome}</p>
               <p>{idade}</p>
               <p>{telefone}</p>
             </div>
@@ -65,13 +67,22 @@ export default function ProximasSessoes({
           </div>
         </div>
       ) : (
-        <div className="sessao-nao-marcada">
-          <p className="titulo-nao-marcada">Ainda não marcou a próxima consulta?</p>
-          <p className="subtitulo-nao-marcada">
-            Vá até o perfil do(a) seu(sua) psicólogo(a) e marque agora mesmo!
-          </p>
-          <button className="botao-marcar">Marcar consulta</button>
-        </div>
+        fluxo === "paciente" ? (
+          <div className="sessao-nao-marcada">
+            <p className="titulo-nao-marcada">Ainda não marcou a próxima consulta?</p>
+            <p className="subtitulo-nao-marcada">
+              Vá até o perfil do(a) seu(sua) psicólogo(a) e marque agora mesmo!
+            </p>
+            <button className="botao-marcar">Marcar consulta</button>
+          </div>
+        ) : (
+          <div className="sessao-nao-marcada">
+            <p className="titulo-nao-marcada">Nenhuma consulta agendada no momento</p>
+            <p className="subtitulo-nao-marcada">
+              Assim que um paciente agendar uma nova consulta, ela aparecerá aqui automaticamente.
+            </p>
+          </div>
+        )
       )}
     </div>
   );
