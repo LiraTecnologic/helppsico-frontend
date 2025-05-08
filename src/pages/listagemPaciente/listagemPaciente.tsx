@@ -1,6 +1,6 @@
 import './listagemPaciente.css';
 import Header from '../../components/layout/header/header';
-import CardPaciente from '../../components/layout/Cards/cardPaciente';
+import CardPaciente from '../../components/layout/Cards/cardPaciente/cardPaciente';
 
 const pacientes = [
   {
