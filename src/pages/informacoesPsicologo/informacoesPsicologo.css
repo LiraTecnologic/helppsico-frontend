@@ -1,3 +1,7 @@
+body {
+    background-color: #F3F4F6;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -73,5 +77,10 @@ hr {
 .listagem-avaliacao {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 4rem;
 }
+
+img {
+    background-color: #F3F4F6;;
+}
+ 

@@ -1,6 +1,8 @@
 .card-avaliacao-listagem {
     display: flex;
     flex-direction: column;
+    height: 8rem;
+    gap: 1rem;
 }
 
 .card-avaliacao-info {
@@ -9,14 +11,32 @@
     justify-content: left;
     align-items: center;
     width: 50%;
+    height: 10rem;
     gap: 2rem;
 }
 
 .card-avaliacao-info img {
-    width: 5%;
+    width: 10%;
     border-radius: 50%;
 }
 
 .estrelas-card-avaliacao img {
-    
+    width: 1rem;
+}
+
+.nome-data-avaliacao {
+    text-align: left;
+}
+
+.data-avaliacao {
+    font-size: 13px;
+    color: #525252;
+}
+
+.nome-paciente {
+    font-size: 20px;
+}
+
+.conteudo-avaliacao {
+    color: #525252;
 }
