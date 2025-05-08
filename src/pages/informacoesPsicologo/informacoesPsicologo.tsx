@@ -85,54 +85,57 @@ export default function InformacoesPsicologo() {
     return (
         <>
             <Header fluxo="" />
-            <main>
-                <section className="section-psico-bio">
-                    <div className="div-psicologo">
-                        <img src={FotoPsicologo} alt="Foto psicólogo" />
-                        <h1>{psicologo.nome} ({mediaNotaAvaliacao} <img src={Estrela} alt="Icon estrela" />)</h1>
-                        <button>Vincular</button>
-                        <div>
-                            <p>{quantidadeVinculados} vinculados | {avaliacaos.length} avaliações</p>
-                            <p>CRP {psicologo.crp}</p>
-                            <p>{psicologo.email}</p>
-                            <p>{psicologo.telefone}</p>
+            <main className="main-info-psicologico">
+                <div className="div-psicologo">
+                    <img src={FotoPsicologo} alt="Foto psicólogo" />
+                    <h1>{psicologo.nome} ({mediaNotaAvaliacao} <img src={Estrela} alt="Icon estrela" />)</h1>
+                    <button>Vincular</button>
+                    <div>
+                        <p>{quantidadeVinculados} vinculados | {avaliacaos.length} avaliações</p>
+                        <p>CRP {psicologo.crp}</p>
+                        <p>{psicologo.email}</p>
+                        <p>{psicologo.telefone}</p>
+                    </div>
+                    <hr />
+                    <div>
+                        <p>Local  de atendimento:</p>
+                        <p><img src={Localizacao} alt="Icon localização" />{psicologo.enderecoAtendimento.rua}, {psicologo.enderecoAtendimento.numero}.</p>
+                    </div>
+                </div>
+                <div className="div-direita">
+                    <section className="section-psico-bio">
+
+                        <div className="div-bio-psico">
+                            <h2>Biografia</h2>
+                            <p>{psicologo.biografia}</p>
                         </div>
-                        <hr />
-                        <div>
-                            <p>Local  de atendimento:</p>
-                            <p><img src={Localizacao} alt="Icon localização" />{psicologo.enderecoAtendimento.rua}, {psicologo.enderecoAtendimento.numero}.</p>
-                        </div>
-                    </div>
-                    <div className="div-bio-psico">
-                        <h2>Biografia</h2>
-                        <p>{psicologo.biografia}</p>
-                    </div>
-                </section>
-                <section className="section-tabela">
-                    <h2>Horários de consulta:</h2>
-                    <TabelaHorario />
-                </section>
-                <section className="section-avaliacao">
-                    <h2>Avaliações e comentários:</h2>
-                    <div className="cards-section-avaliacao">
-                        <CardInfoAvaliacao 
-                            nota="4.5"
-                            quantidadeAvaliacao="20"
-                        />
-                        <BotaoAvaliarInfoPsicologo/>
-                    </div>
-                    <div className="listagem-avaliacao">
-                        {avaliacaos.map((avaliacao, index) => (
-                            <CardAvaliacao
-                                key={index}
-                                fotoPaciente={avaliacao.paciente.foto || ""}
-                                nomePaciente={avaliacao.paciente.nome}
-                                data={avaliacao.data}
-                                conteudo={avaliacao.comentario}
+                    </section>
+                    <section className="section-tabela">
+                        <h2>Horários de consulta:</h2>
+                        <TabelaHorario />
+                    </section>
+                    <section className="section-avaliacao">
+                        <h2>Avaliações e comentários:</h2>
+                        <div className="cards-section-avaliacao">
+                            <CardInfoAvaliacao
+                                nota="4.5"
+                                quantidadeAvaliacao="20"
                             />
-                        ))}
-                    </div>
-                </section>
+                            <BotaoAvaliarInfoPsicologo />
+                        </div>
+                        <div className="listagem-avaliacao">
+                            {avaliacaos.map((avaliacao, index) => (
+                                <CardAvaliacao
+                                    key={index}
+                                    fotoPaciente={avaliacao.paciente.foto || ""}
+                                    nomePaciente={avaliacao.paciente.nome}
+                                    data={avaliacao.data}
+                                    conteudo={avaliacao.comentario}
+                                />
+                            ))}
+                        </div>
+                    </section>
+                </div>
             </main>
         </>
     );

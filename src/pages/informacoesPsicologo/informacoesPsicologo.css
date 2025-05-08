@@ -83,4 +83,15 @@ hr {
 img {
     background-color: #F3F4F6;;
 }
- 
+
+.main-info-psicologico {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.div-direita {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
