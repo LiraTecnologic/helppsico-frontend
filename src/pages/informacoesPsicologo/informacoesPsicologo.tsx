@@ -118,7 +118,7 @@ export default function InformacoesPsicologo() {
                         <h2>Avaliações e comentários:</h2>
                         <div className="cards-section-avaliacao">
                             <CardInfoAvaliacao
-                                nota="4.5"
+                                nota={4.5}
                                 quantidadeAvaliacao="20"
                             />
                             <BotaoAvaliarInfoPsicologo />
@@ -131,6 +131,7 @@ export default function InformacoesPsicologo() {
                                     nomePaciente={avaliacao.paciente.nome}
                                     data={avaliacao.data}
                                     conteudo={avaliacao.comentario}
+                                    nota={avaliacao.nota}
                                 />
                             ))}
                         </div>

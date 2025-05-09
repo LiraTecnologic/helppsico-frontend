@@ -1,8 +1,8 @@
-import Estrela from "../../../../../../assets/estrela.svg"
 import './cardInfoAvaliacao.css';
+import Estrelas from './estrelas/estrelas';
 
 interface CardAvaliacaoProps {
-    nota: String;
+    nota: number;
     quantidadeAvaliacao: String;
 };
 
@@ -11,13 +11,9 @@ export default function CardInfoAvaliacao(props: CardAvaliacaoProps) {
         <div className="card-avaliacao">
             <p className="nota-card-avaliacao">{props.nota}</p>
             <div className="detalhes-card-avaliacao">
-                <div>
-                    <img src={Estrela} alt="Estrela" />
-                    <img src={Estrela} alt="Estrela" />
-                    <img src={Estrela} alt="Estrela" />
-                    <img src={Estrela} alt="Estrela" />
-                    <img src={Estrela} alt="Estrela" />
-                </div>
+                <Estrelas 
+                    nota={Math.floor(props.nota)}
+                />
                 <p>({props.quantidadeAvaliacao} avaliações)</p>
             </div>
         </div>

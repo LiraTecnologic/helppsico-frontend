@@ -20,10 +20,6 @@
     border-radius: 50%;
 }
 
-.estrelas-card-avaliacao img {
-    width: 1rem;
-}
-
 .nome-data-avaliacao {
     text-align: left;
 }
@@ -39,4 +35,8 @@
 
 .conteudo-avaliacao {
     color: #525252;
+}
+
+.estrelas-custom {
+    width: 10rem;
 }

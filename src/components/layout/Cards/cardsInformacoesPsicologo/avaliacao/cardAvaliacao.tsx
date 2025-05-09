@@ -1,11 +1,12 @@
-import Estrela from "../../../../../assets/estrela.svg"
 import './cardAvaliacao.css';
+import Estrelas from "./info/estrelas/estrelas";
 
 interface Avaliacao {
     fotoPaciente: string,
     nomePaciente: string,
     data: string,
-    conteudo: string
+    conteudo: string,
+    nota: number
 }
 
 export default function CardAvaliacao(avaliacao: Avaliacao) {
@@ -27,13 +28,10 @@ export default function CardAvaliacao(avaliacao: Avaliacao) {
                     <p className="nome-paciente">{avaliacao.nomePaciente}</p>
                     <p className="data-avaliacao">{formatarData(avaliacao.data)}</p>
                 </div>
-                <div className="estrelas-card-avaliacao">
-                    <img src={Estrela} alt="Estrela" />
-                    <img src={Estrela} alt="Estrela" />
-                    <img src={Estrela} alt="Estrela" />
-                    <img src={Estrela} alt="Estrela" />
-                    <img src={Estrela} alt="Estrela" />
-                </div>
+                <Estrelas 
+                    nota={avaliacao.nota}
+                    className="estrelas-custom"
+                />
             </div>
             <p className="conteudo-avaliacao">{avaliacao.conteudo}</p>
         </div>
