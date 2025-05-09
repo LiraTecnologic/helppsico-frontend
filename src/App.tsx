@@ -26,7 +26,7 @@ function App() {
         {/* FLUXO DE PSICOLOGO */}
         <Route path="/loginPsicologo" element={<LoginPsicologo />} />
         <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} />
-        <Route path="/listagemDocumentos" element={<ListagemProntuario />} />
+        <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
         <Route path="/" element={<MeuPainelPsicologo />} />
         
       </Routes>  
