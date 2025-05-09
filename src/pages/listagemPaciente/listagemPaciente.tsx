@@ -1,40 +1,76 @@
 import './listagemPaciente.css';
+import { useEffect, useState } from 'react';
+import { jwtDecode } from "jwt-decode";
+import axios from 'axios';
 import Header from '../../components/layout/header/header';
 import CardPaciente from '../../components/layout/Cards/cardPaciente';
 
-const pacientes = [
-  {
-    nome: "Nome Paciente Legal",
-    idade: "XX",
-    email: "email@simsim.com",
-    telefone: "(22) 9 9999-9999",
-    fotoUrl: "https://f.i.uol.com.br/fotografia/2023/12/19/17030128826581ea125661a_1703012882_3x4_md.jpg",
-    temProntuario: true,
-  },
-  {
-    nome: "Nome Paciente Legal",
-    idade: "XX",
-    email: "email@simsim.com",
-    telefone: "(22) 9 9999-9999",
-    fotoUrl: "https://f.i.uol.com.br/fotografia/2021/01/21/16112667646009faccd2da9_1611266764_3x4_md.jpg",
-    temProntuario: false,
-  },
-  {
-    nome: "Nome Paciente Legal",
-    idade: "XX",
-    email: "email@simsim.com",
-    telefone: "(22) 9 9999-9999",
-    fotoUrl: "https://library.sportingnews.com/styles/twitter_card_120x120/s3/2024-08/Arrascaeta%2008202024.jpg?itok=KXjK81nW",
-    temProntuario: true,
-  },
-];
+interface Page<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  number: number;
+  size: number;
+}
+
+interface JwtPayload {
+  sub: string
+}
+
+interface Paciente{
+  nome: string;
+  idade: string;
+  email: string;
+  telefone: string;
+  fotoUrl: string;
+  temProntuario: boolean;
+}
+
+interface ErroDto {
+  message: string[];
+}
+
+interface ResponseDto<T> {
+  dado: T;
+  erro?: ErroDto;
+}
 
 export default function ListagemPacientes() {
+
+  const [pacientes, setPacientes] = useState<Paciente[]>([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const decoded = jwtDecode<JwtPayload>(token);
+    const idPsicologo = decoded.sub;
+
+    axios.get<ResponseDto<Page<Paciente>>>(`http://localhost:3000/vinculos/psicologo/${idPsicologo}`)
+      .then(response => {
+
+        if (response.data.erro) {
+          console.error("Erro da API:", response.data.erro.message);
+          return;
+        }
+
+        const dado = response.data.dado;
+        setPacientes(dado.content);
+        setTotal(dado.totalElements);
+      })
+      .catch(error => {
+        console.error("Erro ao buscar pacientes: ", error);
+      });
+  }, []);
+
   return (
     <>
-    <Header fluxo='meusPacientes'/>
+    <Header fluxo='meusPacientes' headerPsicologo={true}/>
     <div className="container-pacientes">
-      <h1>Pacientes ({pacientes.length})</h1>
+
+      <h1>Pacientes ({total})</h1>
+
       <div className="grid-pacientes">
         {pacientes.map((paciente, index) => (
           <CardPaciente
@@ -47,6 +83,7 @@ export default function ListagemPacientes() {
             temProntuario={paciente.temProntuario}
           />
         ))}
+
       </div>
     </div>
     </>
