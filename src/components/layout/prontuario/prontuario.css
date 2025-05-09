@@ -47,9 +47,7 @@
     width: 24px;
     height: 24px;
     background-color: #3973f2;
-    mask: url('https://www.svgrepo.com/show/349502/google-docs.svg') no-repeat center;
     mask-size: contain;
-    -webkit-mask: url('https://www.svgrepo.com/show/349502/google-docs.svg') no-repeat center;
     -webkit-mask-size: contain;
     background-repeat: no-repeat;
     background-position: center;

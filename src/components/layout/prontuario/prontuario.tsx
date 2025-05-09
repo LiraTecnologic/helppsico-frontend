@@ -12,8 +12,7 @@ function Prontuario({
     nomePaciente,
     titulo,
     onClickAbrir,
-    fotoPerfilUrl
-}: ProntuarioProps) {
+    fotoPerfilUrl}: ProntuarioProps) {
     return (
         <div className="prontuarioContainer">
             <div className="prontuarioHeader">
