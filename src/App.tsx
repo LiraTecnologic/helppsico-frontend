@@ -5,30 +5,32 @@ import LoginPaciente from '../src/pages/loginPaciente/loginPaciente';
 import CadsatroPaciente from '../src/pages/cadastroPaciente/cadastroPaciente';
 import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
+import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 
 // Telas do fluco de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
 import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
-import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo"
-
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
+import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* FLUXO DE PACIENTE */}
-        <Route path="loginPaciente" element={<LoginPaciente />} />
+        <Route path="/loginPaciente" element={<LoginPaciente />} />
         <Route path="/cadastroPaciente" element={<CadsatroPaciente />} />
-        <Route path="/meuPainel" element={<MeuPainelPaciente />} />
+        <Route path="/meuPainelPaciente" element={<MeuPainelPaciente />} />
         <Route path="/detalhesSessao" element={<DetalhesSessao />} />
+        <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
 
         {/* FLUXO DE PSICOLOGO */}
         <Route path="/loginPsicologo" element={<LoginPsicologo />} />
         <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} />
         <Route path="/listagemDocumentos" element={<ListagemProntuario />} />
-        <Route path="/" element={<InformacoesPsicologo />} />
+        <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
+        
       </Routes>  
     </Router>
   )
