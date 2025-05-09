@@ -5,6 +5,7 @@ import logo from '../../../assets/logo.png'
 
 interface HeaderProps {
     fluxo: string;
+    headerPsicologo: boolean;
 }
 
 export default function Header(props: HeaderProps) {
@@ -21,9 +22,11 @@ export default function Header(props: HeaderProps) {
                         <li className={props.fluxo === 'meuPainel' ? 'active' : ''}>
                             <a href="#meuPainel">Meu painel</a>
                         </li>
-                        <li className={props.fluxo === 'meusPacientes' ? 'active': ''}>
-                            <a href="#meusPacientes">Meus pacientes</a>
-                        </li>
+                        {props.headerPsicologo && (
+                            <li className={props.fluxo === 'meusPacientes' ? 'active': ''}>
+                                <a href="#meusPacientes">Meus pacientes</a>
+                            </li>
+                        )}
                         <li className={props.fluxo === 'minhasSessoes' ? 'active' : ''}>
                             <a href="#minhasSessoes">Minhas sessões</a>
                         </li>
