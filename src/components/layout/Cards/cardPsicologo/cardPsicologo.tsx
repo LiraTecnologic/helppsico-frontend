@@ -41,4 +41,3 @@ export default function CardPsicologo({ profissionais }: CardPsicolog) {
       </div>
     );
 }
-  
