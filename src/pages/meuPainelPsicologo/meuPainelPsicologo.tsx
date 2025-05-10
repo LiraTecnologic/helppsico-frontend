@@ -26,7 +26,7 @@ export default function MeuPainelPsicologo(){
 
     return(
         <>
-            <Header fluxo='meuPainel' />
+            <Header fluxo='meuPainel' headerPsicologo={true} />
             <ProximasSessoes sessaoMarcada={false} verMais={true} fluxo='psicologo' />
             <div className="imagensPacientes">
                 <ListagemDePacientes pacientes={pacientes} verMais={true} />

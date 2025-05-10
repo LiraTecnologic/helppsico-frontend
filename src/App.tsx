@@ -7,6 +7,7 @@ import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
+import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
 
 // Telas do fluco de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
@@ -14,6 +15,7 @@ import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo'
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
+import CadatroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
         <Route path="/detalhesSessao" element={<DetalhesSessao />} />
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
+        <Route path="/solicitacaoVinculo" element={<SolicitacaoDeVinculo />} />
 
         {/* FLUXO DE PSICOLOGO */}
         <Route path="/loginPsicologo" element={<LoginPsicologo />} />
@@ -34,6 +37,7 @@ function App() {
         <Route path="/listagemPacientes" element={<ListagemPacientes />} />
         <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
         <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
+        <Route path="/" element={<CadatroProntuarios />} />
         
       </Routes>  
     </Router>
