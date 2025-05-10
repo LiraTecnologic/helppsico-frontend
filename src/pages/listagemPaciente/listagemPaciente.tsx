@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 import Header from '../../components/layout/header/header';
-import CardPaciente from '../../components/layout/Cards/cardPaciente';
+import CardPaciente from '../../components/layout/Cards/cardPaciente/cardPaciente';
 
 interface Page<T> {
   content: T[];
