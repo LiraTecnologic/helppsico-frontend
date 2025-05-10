@@ -2,22 +2,26 @@ import Prontuario from '../../components/layout/prontuario/prontuario.tsx';
 import Header from '../../components/layout/header/header.tsx';
 import BotaoPrimario from '../../components/commmon/botaoPrimario/botaoPrimario.tsx';
 import './listagemProntuario.css'
+import { consultaProntuarios } from "./listagemProntuario.service.ts";
 
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ProntuarioModel from '../../models/prontuario.ts';
 
 export default function ListagemProntuario() {
 
-    const [prontuarios] = useState([
-        { id: 1, nomePaciente: 'João Maria', titulo: 'Prontuário bonito' },
-        { id: 2, nomePaciente: 'Maria João', titulo: 'Prontuário legal' },
-        { id: 3, nomePaciente: 'Ana Paula', titulo: 'Prontuário detalhado' },
-        { id: 4, nomePaciente: 'Carlos Silva', titulo: 'Prontuário atualizado' },
-        { id: 5, nomePaciente: 'Beatriz Lima', titulo: 'Prontuário completo' },
-        { id: 6, nomePaciente: 'Pedro Santos', titulo: 'Prontuário breve' },
-        { id: 7, nomePaciente: 'Laura Almeida', titulo: 'Prontuário resumido' },
-        { id: 8, nomePaciente: 'Lucas Pereira', titulo: 'Prontuário revisado' }
-    ]);
+    const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
+
+    useEffect(() => {
+        async function carregarProntuarios() {
+            const prontuariosConsultados = await consultaProntuarios();
+            console.log(prontuariosConsultados);
+            setProntuarios(prontuariosConsultados);
+        }
+
+        carregarProntuarios();
+    }, []);
 
     return (
         <>
@@ -35,8 +39,9 @@ export default function ListagemProntuario() {
                         {prontuarios.map((prontuario) => (
                         <Prontuario 
                             key={prontuario.id}
-                            nomePaciente={prontuario.nomePaciente}
+                            nomePaciente={prontuario.paciente.nome}
                             titulo={prontuario.titulo}
+                            fotoPerfilUrl={prontuario.paciente.fotoUrl}
                         />
                         ))}
                     </div>

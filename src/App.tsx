@@ -6,6 +6,7 @@ import CadsatroPaciente from '../src/pages/cadastroPaciente/cadastroPaciente';
 import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
+import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 
 // Telas do fluco de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
@@ -23,13 +24,15 @@ function App() {
         <Route path="/cadastroPaciente" element={<CadsatroPaciente />} />
         <Route path="/meuPainelPaciente" element={<MeuPainelPaciente />} />
         <Route path="/detalhesSessao" element={<DetalhesSessao />} />
-        <Route path="/" element={<VerPsicologos />} />
+        <Route path="/psicologos" element={<VerPsicologos />} />
+        <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
 
         {/* FLUXO DE PSICOLOGO */}
         <Route path="/loginPsicologo" element={<LoginPsicologo />} />
         <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} />
         <Route path="/listagemDocumentos" element={<ListagemProntuario />} />
         <Route path="/listagemPacientes" element={<ListagemPacientes />} />
+        <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
         <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
         
       </Routes>  

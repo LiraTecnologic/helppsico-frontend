@@ -1,0 +1,97 @@
+body {
+    background-color: #F3F4F6;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 6rem 4rem 6rem;
+    gap: 2rem;
+}
+
+.section-psico-bio {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 4rem;
+
+}
+
+.section-psico-bio p {
+    color: #525252;
+}
+
+.div-psicologo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.div-psicologo button {
+    background-color: #0D42BD;
+    color: #F3F4F6;
+    width: 100%;
+    border-radius: 10px;
+    height: 2rem;
+}
+
+.div-psicologo button:hover {
+    background-color: #2a54b7;
+}
+
+.div-psicologo button:active {
+    background-color: #6a82ba;
+}
+
+hr {
+    border: solid 1px #525252;
+}
+
+.div-bio-psico {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.section-tabela {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.section-avaliacao {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.cards-section-avaliacao {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.listagem-avaliacao {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+img {
+    background-color: #F3F4F6;;
+}
+
+.main-info-psicologico {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.div-direita {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
