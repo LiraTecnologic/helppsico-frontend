@@ -14,6 +14,7 @@ import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo'
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
+import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 
 function App() {
   return (
@@ -34,6 +35,9 @@ function App() {
         <Route path="/listagemPacientes" element={<ListagemPacientes />} />
         <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
         <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
+
+        {/* Nenhum fluxo */}
+        <Route path="/validacaoCrp" element={<ValidacaoCrp />}/>
         
       </Routes>  
     </Router>
