@@ -1,0 +1,9 @@
+.main-validacao-crp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo-main-validacao-crp {
+    align-self: flex-start
+}

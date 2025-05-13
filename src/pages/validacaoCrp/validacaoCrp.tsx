@@ -6,8 +6,8 @@ export default function ValidacaoCrp() {
     return (
         <div>
             <Header fluxo='' headerPsicologo={false}></Header>
-            <main className=''>
-                <h1>CRPs()</h1>
+            <main className='main-validacao-crp'>
+                <h1 className='titulo-main-validacao-crp'>CRPs()</h1>
                 <CardAvaliacaoCrp/>
             </main>
         </div>

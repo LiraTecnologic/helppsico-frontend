@@ -8,12 +8,14 @@ import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 
-// Telas do fluco de Pscicologo
+// Telas do fluxo de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
 import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
+
+//Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 
 function App() {
