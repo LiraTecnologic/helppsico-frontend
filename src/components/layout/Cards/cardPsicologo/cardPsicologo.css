@@ -5,55 +5,60 @@
     gap: 24px;
     padding: 40px 16px;
 }
-  
 
 .card-psicologo {
     display: flex;
+    flex-direction: row;
     position: relative;
     border: 1px solid #ccc;
     border-radius: 12px;
     padding: 16px;
     gap: 16px;
     align-items: flex-start;
-    width: 1920px;
-    max-width: 80%;
+    width: 100%;
+    max-width: 1200px;
     background-color: #fff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     min-height: 220px;
 }
-  
+
 .foto-psicologo {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 12px;
     object-fit: cover;
+    flex-shrink: 0;
 }
-  
+
 .info-psicologo {
     flex: 1;
     display: flex;
     flex-direction: column;
+    text-align: left;
+    gap: 8px;
     padding-right: 100px;
 }
 
-  
 .info-psicologo h2 {
     margin: 0;
-    font-size: 24px;
+    font-size: 22px;
 }
-  
+
 .dados-gerais {
     font-size: 14px;
-    margin: 4px 0 12px;
+    margin: 0;
 }
-  
+
 .biografia {
     font-size: 14px;
     line-height: 1.5;
     max-height: 6em;
     overflow: hidden;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
-  
+
 .btn-ver-mais {
     position: absolute;
     bottom: 16px;
@@ -66,3 +71,60 @@
     padding: 5px 12px;
     border-radius: 10px;
 }
+
+/* =====>RESPONSIVIDADE<===== */
+/* Tablet (<= 1024px) */
+@media (max-width: 1024px) and (min-width: 601px) {
+    .foto-psicologo {
+        align-items: center; 
+    }
+}
+  
+  /* Mobile (<= 600px) */
+  @media (max-width: 600px) {
+    .card-psicologo {
+      flex-direction: row; /* foto e infos lado a lado */
+      align-items: flex-start;
+      padding: 12px;
+      gap: 12px;
+      padding-bottom: 60px;
+    }
+  
+    .foto-psicologo {
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+    }
+  
+    .info-psicologo {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 8px;
+      padding-right: 0;
+      order: 1;
+    }
+  
+    .info-psicologo h2 {
+      font-size: 18px;
+      margin: 0;
+    }
+  
+    .dados-gerais {
+      font-size: 14px;
+      margin: 0;
+    }
+  
+    .biografia {
+        font-size: 14px;
+        margin-top: 12px;
+        width: 100%;
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
+  
+    .btn-ver-mais {
+      font-size: 13px;
+    }
+  }

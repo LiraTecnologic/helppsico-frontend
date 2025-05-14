@@ -37,7 +37,7 @@ export default function VerPsicologos() {
 
   return (
     <>
-      <Header fluxo='verProfissionais' />
+      <Header fluxo='verProfissionais' headerPsicologo={false} />
       <Carrossel profissionais={Profissionais} />
       <Pesquisa onPesquisar={handlePesquisar} />
       {profissionaisFiltrados.length === 0 ? (
