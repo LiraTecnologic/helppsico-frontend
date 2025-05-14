@@ -4,8 +4,10 @@
     width: 80%;
     border: solid 2px #A1A1A1;
     background-color: #FFFF;
-    border-radius: 1rem;
-    padding: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    justify-content: space-between;
+    height: 12rem;
 }
 
 .div-info-1 {
@@ -30,7 +32,8 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 1rem;
+    gap: 3rem;
+    height: 2.5rem;
 }
 
 .div-container-crp {
@@ -80,10 +83,15 @@
     width: 15%;
     background-color: #FFDDDD;
     color: #FF1A1A;
+    font-size: 1.1rem;
+    border-radius: 0.3rem;
 }
 
 .botao-aprovar {
     width: 15%;
     background-color: #0D42BD;
     color: white;
+    font-size: 1.1rem;
+    border-radius: 0.3rem;  
 }
+
