@@ -95,3 +95,21 @@
     border-radius: 0.3rem;  
 }
 
+.botao-reprovar:hover {
+    cursor: pointer;
+}
+
+.botao-aprovar:hover {
+    cursor: pointer;  
+}
+
+.botao-reprovar:active {
+    background-color: #f8e6e6;
+}
+
+.botao-aprovar:active {
+    background-color: #3b61b8;  
+}
+
+
+

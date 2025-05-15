@@ -84,7 +84,7 @@ export default function InformacoesPsicologo() {
 
     return (
         <>
-            <Header fluxo="" />
+            <Header fluxo="" headerPsicologo={false}/>
             <main className="main-info-psicologico">
                 <div className="div-psicologo">
                     <img src={FotoPsicologo} alt="Foto psicólogo" />

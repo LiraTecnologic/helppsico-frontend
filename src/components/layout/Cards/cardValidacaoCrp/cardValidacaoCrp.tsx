@@ -3,10 +3,36 @@ import IconeCopia from '../../../../assets/icone-copia.png'
 import ValidacaoCrpModel from '../../../../models/validacaoCrp';
 import calcular from '../../../../utils/calucloData'
 
+import { toast } from 'react-toastify'
 
-export default function CardAvaliacaoCrp(validacao: ValidacaoCrpModel) {
+
+export default function CardValidacaoCrp(validacao: ValidacaoCrpModel) {
 
     const idade = calcular(validacao.psicologo.dataNascimento);
+
+    const notificar = () => {
+        navigator.clipboard.writeText(validacao.crp)
+            .then(() => {
+                toast.success('CRP copiado com sucesso!', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'colored',
+                });
+            })
+            .catch(() => {
+                toast.error('Erro ao copiar o CRP!', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    theme: 'colored',
+                });
+            });
+    }
+
 
     return (
         <div className='card-validacao-crp'>
@@ -26,7 +52,7 @@ export default function CardAvaliacaoCrp(validacao: ValidacaoCrpModel) {
                     <p>CRP</p>
                     <div className='div-container-crp'>
                         <p>{validacao.crp}</p>
-                        <button className='button-copiar'><img src={IconeCopia} alt="Icone de cópia" /></button>
+                        <button className='button-copiar' onClick={notificar}><img src={IconeCopia} alt="Icone de cópia" /></button>
                     </div>
                 </div>
             </div>
