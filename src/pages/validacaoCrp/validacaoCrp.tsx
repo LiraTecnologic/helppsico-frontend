@@ -4,10 +4,15 @@ import ValidacaoCrpModel from '../../models/validacaoCrp';
 import { useState, useEffect } from 'react';
 import './validacaoCrp.css'
 import CardValidacaoCrp from '../../components/layout/Cards/cardValidacaoCrp/cardValidacaoCrp';
+import ModalReprovar from '../../components/layout/validacaoCrp/reprovar/modalReprovar';
+import ModalAprovar from '../../components/layout/validacaoCrp/aprovar/modalAprovar';
 
 export default function ValidacaoCrp() {
 
     const [validacoes, setValidacoes] = useState<ValidacaoCrpModel[]>([]);
+    const [mostrarModalReprovar, setMostrarModalReprovar] = useState(false);
+    const [mostrarModalAprovar, setMostrarModalAprovar] = useState(false);
+    const [psicologoSelecionado, setPsicologoSelecionado] = useState<string | null>(null);
 
     useEffect(() => {
         setValidacoes([
@@ -54,7 +59,7 @@ export default function ValidacaoCrp() {
                 crp: "07/111222",
                 motivoReprova: "Documento ilegível",
                 psicologo: {
-                    id: "psic-03",  
+                    id: "psic-03",
                     nome: "Dra. Julia Mendes",
                     crp: "07/111222",
                     cpf: "111.222.333-44",
@@ -71,6 +76,29 @@ export default function ValidacaoCrp() {
         ]);
     }, []);
 
+
+    const abrirModalReprovar = (id: string) => {
+        setPsicologoSelecionado(id);
+        setMostrarModalReprovar(true);
+    };
+
+    const fecharModalReprovar = () => {
+        setMostrarModalReprovar(false);
+        setPsicologoSelecionado(null);
+    };
+
+    const abrirModalAprovar = (id: string) => {
+        setPsicologoSelecionado(id);
+        setMostrarModalAprovar(true);
+    };
+
+    const fecharModalAprovar = () => {
+        setMostrarModalAprovar(false);
+        setPsicologoSelecionado(null);
+    };
+    
+
+
     return (
         <div>
             <Header fluxo='' headerPsicologo={false}></Header>
@@ -79,14 +107,37 @@ export default function ValidacaoCrp() {
                 {validacoes.map((validacao) => (
                     <CardValidacaoCrp
                         key={validacao.id}
-                        id={validacao.id}
-                        crp={validacao.crp}
-                        psicologo={validacao.psicologo}
-                        motivoReprova={validacao.motivoReprova}
+                        validacao={validacao}
+                        onReprovar={() => abrirModalReprovar(validacao.id)}
+                        onAprovar={() => abrirModalAprovar(validacao.id)}
                     />
                 ))}
 
             </main>
+
+
+            {mostrarModalReprovar && (
+                <>
+                    <div className='modal-overlay'></div>
+                    <ModalReprovar
+                        onClose={fecharModalReprovar}
+                        idPsicologo={psicologoSelecionado}
+
+                    />
+                </>
+            )}
+
+
+            {mostrarModalAprovar && (
+                <>
+                    <div className='modal-overlay'></div>
+                    <ModalAprovar
+                        onClose={fecharModalAprovar}
+                        idPsicologo={psicologoSelecionado}
+
+                    />
+                </>
+            )}
         </div>
     );
 }

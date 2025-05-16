@@ -1,21 +1,20 @@
-interface PropsBotalModal  {
-    texto: string,
-    tipo: string
+import './botaoModal.css';
+
+interface PropsBotalModal {
+    texto: string;
+    tipo: string;
+    onClick: () => void;
 }
 
 export default function BotaoModal(props: PropsBotalModal) {
-    const acao =  () => {
-        if(props.tipo === 'CANCEL') {
 
-        } else {
-            
-        }
+    const classe = props.tipo === 'CANCEL' ? 'botao-cancel' : 'botao-confirm';
 
-    }
-    
     return (
         <>
-            <button onClick={acao}>{props.texto}</button>
+            <button className={classe} onClick={props.onClick}>
+                {props.texto}
+            </button>
         </>
     );
 }
