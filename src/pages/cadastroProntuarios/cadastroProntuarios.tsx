@@ -2,7 +2,7 @@ import './cadastroProntuarios.css';
 import Header from '../../components/layout/header/header';
 import CriarProntuario from '../../components/layout/criarProntuario/criarProntuario';
 
-export default function CadatroProntuarios (){
+export default function CadastroProntuarios (){
 
     const pacientes = [
         { paciente: 'joao vitor', id: 1 },
