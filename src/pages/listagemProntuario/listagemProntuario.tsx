@@ -2,7 +2,7 @@ import Prontuario from '../../components/layout/prontuario/prontuario.tsx';
 import Header from '../../components/layout/header/header.tsx';
 import BotaoPrimario from '../../components/commmon/botaoPrimario/botaoPrimario.tsx';
 import './listagemProntuario.css'
-import { consultaProntuarios } from "./listagemProntuario.service.ts";
+import { consultaProntuarios } from "../../services/prontuarios.service.ts";
 
 
 import { useState, useEffect } from 'react';
