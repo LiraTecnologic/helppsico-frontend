@@ -21,7 +21,7 @@ export default function ModalReprovar(props: Props) {
         <div className="modal-aprovar">
             <div className="div-motivo-reprova">
                 <h2>Qual motivo da reprova ?</h2>
-                <textarea name="" id="" cols={30} rows={10}></textarea>
+                <textarea placeholder="Digite seu motivo..." name="" id="" cols={30} rows={10}></textarea>
             </div> 
             <div className="div-botoes">
                 <BotaoModal texto="Cancelar" tipo='CANCEL' onClick={props.onClose}/>

@@ -16,6 +16,7 @@
     width: 40%;
     border: solid 1px black;
     align-items: center;
+    justify-content: center;
 }
 
 .div-motivo-reprova {
@@ -37,4 +38,6 @@
     gap: 3rem;
     width: 100%;
     padding: 3rem;
+    align-items: center;
+    justify-content: center;
 }
