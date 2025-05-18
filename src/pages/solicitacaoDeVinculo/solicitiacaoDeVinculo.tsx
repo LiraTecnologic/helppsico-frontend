@@ -24,7 +24,7 @@ export default function SolicitacaoDeVinculo() {
   
   return (
     <>
-      <Header fluxo="minhasSessoes" />
+      <Header fluxo="minhasSessoes" headerPsicologo={false} />
       <div className="container">
         <h1>Solicitações</h1>
 

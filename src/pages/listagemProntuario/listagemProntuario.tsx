@@ -25,7 +25,7 @@ export default function ListagemProntuario() {
 
     return (
         <>
-                <Header fluxo='meuPainel' headerPsicologo={true}/>
+                <Header fluxo='meuPainel' headerPsicologo={true} />
 
                 <main className="listagemContainer">
                     <div className="listagemHeader">
