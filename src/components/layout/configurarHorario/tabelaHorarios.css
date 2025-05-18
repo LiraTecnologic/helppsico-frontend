@@ -1,0 +1,106 @@
+.th-container {
+  padding: 2rem;
+}
+
+.th-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.th-header h1 {
+  font-size: 1.8rem;
+  border-bottom: 3px solid #0044d4;
+  padding-bottom: 0.2rem;
+}
+
+.th-header button {
+  background-color: #0044d4;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.th-config {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.th-config-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.th-dias {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.th-dia {
+  background-color: #0044d4;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.25rem;
+}
+
+.th-duracao,
+.th-expediente {
+  background-color: #d1d1d1;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  width: fit-content;
+}
+
+.th-tabela-scroll {
+  overflow-x: auto;
+}
+
+.th-tabela {
+  display: flex;
+  gap: 1.5rem;
+  min-width: max-content;
+}
+
+/* Coluna de cada dia */
+.th-dia-coluna {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 160px; 
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.th-dia-titulo {
+  font-size: 1rem;
+  color: #0d42bd;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+/* Scroll interno para os cards */
+.th-scroll-cards {
+  flex: 1;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.th-card {
+  background-color: #eaf1ff;
+  border-left: 4px solid #0d42bd;
+  border-radius: 0.5rem;
+  padding: 0.6rem;
+  text-align: center;
+  box-shadow: 0 1px 2px rg
+}

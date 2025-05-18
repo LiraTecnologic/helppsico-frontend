@@ -3,8 +3,14 @@ import './configurarHorario.css';
 
 interface ConfiguracaoHorarioProps {
     onClose: () => void;
-    onSave: () => void;
+    onSave: (
+        diasSelecionados: string[],
+        tempoSessao: number,
+        horaInicio: string,
+        horaFim: string
+    ) => void;
 }
+
 
 export default function ConfiguracaoHorario({ onClose, onSave }: ConfiguracaoHorarioProps) {
     const diasSemana: string[] = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
@@ -48,7 +54,7 @@ export default function ConfiguracaoHorario({ onClose, onSave }: ConfiguracaoHor
         }
 
         setErro('');
-        onSave();
+        onSave(diasSelecionados, tempoSessao, horaInicio, horaFim);
     };
 
     return (

@@ -2,10 +2,17 @@ import './gerenciamentoHorarios.css';
 import Header from '../../components/layout/header/header';
 import { useState } from 'react';
 import ConfiguracaoHorario from '../../components/layout/configurarHorario/configurarHorario';
+import TabelaHorarios from '../../components/layout/configurarHorario/tabelaHorarios';
 
 export default function GerenciamentoDeHorarios() {
     const [hasConfig, setHasConfig] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+
+    // Estados que serão preenchidos após salvar a configuração
+    const [diasSelecionados, setDiasSelecionados] = useState<string[]>([]);
+    const [tempoSessao, setTempoSessao] = useState<number>(30);
+    const [horaInicio, setHoraInicio] = useState<string>('07:00');
+    const [horaFim, setHoraFim] = useState<string>('18:00');
 
     return (
         <>
@@ -20,16 +27,24 @@ export default function GerenciamentoDeHorarios() {
                         </button>
                     </div>
                 ) : (
-                    <div>
-                        {/* Aqui entrará a tabela quando avançarmos */}
-                    </div>
+                    <TabelaHorarios
+                        dias={diasSelecionados}
+                        inicio={horaInicio}
+                        fim={horaFim}
+                        duracao={tempoSessao}
+                        onEditar={() => setOpenModal(true)}
+                    />
                 )}
             </div>
 
-             {openModal && (
+            {openModal && (
                 <ConfiguracaoHorario
                     onClose={() => setOpenModal(false)}
-                    onSave={() => {
+                    onSave={(dias, tempo, inicio, fim) => {
+                        setDiasSelecionados(dias);
+                        setTempoSessao(tempo);
+                        setHoraInicio(inicio);
+                        setHoraFim(fim);
                         setHasConfig(true);
                         setOpenModal(false);
                     }}
