@@ -1,6 +1,6 @@
 import './cadastroPaciente.css';
 import InputMedio from '../../components/commmon/Inputs/InputMedio';
-import Botao from '../../components/commmon/botao/botao';
+import Botao from '../../components/commmon/botoes/botao/botao';
 import InputTotal from '../../components/commmon/Inputs/InputTotal';
 import Select from '../../components/commmon/select/Select';
 import EtapasCadastro from '../../components/commmon/marcadores/etapasCadastro';
