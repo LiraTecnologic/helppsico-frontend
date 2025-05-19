@@ -1,6 +1,6 @@
 import Prontuario from '../../components/layout/prontuario/prontuario.tsx';
 import Header from '../../components/layout/header/header.tsx';
-import BotaoPrimario from '../../components/commmon/botaoPrimario/botaoPrimario.tsx';
+import BotaoPrimario from '../../components/commmon/botoes/botaoPrimario/botaoPrimario.tsx';
 import './listagemProntuario.css'
 import { consultaProntuariosPsicologo } from "../../services/prontuarios.service.ts";
 
@@ -25,7 +25,7 @@ export default function ListagemProntuario() {
 
     return (
         <>
-                <Header fluxo='meuPainel' headerPsicologo={true}/>
+                <Header fluxo='meuPainel' headerPsicologo={true} />
 
                 <main className="listagemContainer">
                     <div className="listagemHeader">

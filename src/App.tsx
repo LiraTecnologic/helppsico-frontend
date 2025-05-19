@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Telas do fluxo de Paciente
 import LoginPaciente from '../src/pages/loginPaciente/loginPaciente';
@@ -7,17 +9,25 @@ import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
+import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
 
-// Telas do fluco de Pscicologo
+// Telas do fluxo de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
 import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
+import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
+
+//Nenhum fluxo
+import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 
 function App() {
   return (
+    
+
     <Router>
+      <ToastContainer />
       <Routes>
         {/* FLUXO DE PACIENTE */}
         <Route path="/loginPaciente" element={<LoginPaciente />} />
@@ -26,6 +36,7 @@ function App() {
         <Route path="/detalhesSessao" element={<DetalhesSessao />} />
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
+        <Route path="/solicitacaoVinculo" element={<SolicitacaoDeVinculo />} />
 
         {/* FLUXO DE PSICOLOGO */}
         <Route path="/loginPsicologo" element={<LoginPsicologo />} />
@@ -34,6 +45,10 @@ function App() {
         <Route path="/listagemPacientes" element={<ListagemPacientes />} />
         <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
         <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
+        <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
+
+        {/* Nenhum fluxo */}
+        <Route path="/validacaoCrp" element={<ValidacaoCrp />}/>
         
       </Routes>  
     </Router>

@@ -1,6 +1,6 @@
 import './loginPaciente.css';
 import InputTotal from '../../components/commmon/Inputs/InputTotal';
-import Botao from '../../components/commmon/botao/botao';
+import Botao from '../../components/commmon/botoes/botao/botao';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 

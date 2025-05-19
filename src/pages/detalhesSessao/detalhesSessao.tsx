@@ -1,4 +1,4 @@
-  import './detalhesSessao.css';
+import './detalhesSessao.css';
 import Header from '../../components/layout/header/header';
 import ProximasSessoes from '../../components/layout/Cards/proximaSessao/proximaSessao';
 import SessoesAntigas from '../../components/layout/Cards/sessoesAntigas/sessoesAntigas';
@@ -36,7 +36,7 @@ export default function DetalhesSessao() {
 
   return (
     <>
-      <Header fluxo="minhasSessoes" />
+      <Header fluxo="minhasSessoes" headerPsicologo={false} />
       <h1 className="text-tittle">Histórico de sessões</h1>
       <ProximasSessoes sessaoMarcada={true} urlFoto='https://f.i.uol.com.br/fotografia/2023/12/19/17030128826581ea125661a_1703012882_3x4_md.jpg' verMais={false} />
       <div style={{ marginTop: '48px' }}>

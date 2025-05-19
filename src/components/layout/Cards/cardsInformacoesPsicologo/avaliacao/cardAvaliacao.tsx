@@ -9,7 +9,7 @@ interface Avaliacao {
     nota: number
 }
 
-export default function CardAvaliacao(avaliacao: Avaliacao) {
+export default function CardAvaliacaoCrp(avaliacao: Avaliacao) {
     
     function formatarData(dataISO: string): string {
         const data = new Date(dataISO);
