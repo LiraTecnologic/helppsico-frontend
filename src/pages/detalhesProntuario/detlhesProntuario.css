@@ -1,0 +1,32 @@
+.info-linhas {
+  display: flex;
+  gap: 30px;
+}
+
+.info-bloco {
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+input {
+  background-color: #ffffff;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.conteudo-box {
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
