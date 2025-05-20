@@ -7,7 +7,7 @@ import CardValidacaoCrp from '../../components/layout/Cards/cardValidacaoCrp/car
 import ModalReprovar from '../../components/layout/validacaoCrp/reprovar/modalReprovar';
 import ModalAprovar from '../../components/layout/validacaoCrp/aprovar/modalAprovar';
 import { consultaValidacoesCrp } from './validacaoCrp.service';
- 
+
 export default function ValidacaoCrp() {
 
     const [validacoes, setValidacoes] = useState<ValidacaoCrpModel[]>([]);
@@ -46,6 +46,10 @@ export default function ValidacaoCrp() {
         setPsicologoSelecionado(null);
     };
 
+    const removerValidacaoDaLista = (id: string) => {
+        setValidacoes(prev => prev.filter(v => v.id !== id));
+    };
+
 
 
     return (
@@ -71,7 +75,8 @@ export default function ValidacaoCrp() {
                     <ModalReprovar
                         onClose={fecharModalReprovar}
                         idPsicologo={psicologoSelecionado}
-
+                        validacao={validacoes.find(v => v.id === psicologoSelecionado)!}
+                        onValidado={removerValidacaoDaLista}
                     />
                 </>
             )}
@@ -83,7 +88,8 @@ export default function ValidacaoCrp() {
                     <ModalAprovar
                         onClose={fecharModalAprovar}
                         idPsicologo={psicologoSelecionado}
-
+                        validacao={validacoes.find(v => v.id === psicologoSelecionado)!}
+                        onValidado={removerValidacaoDaLista}
                     />
                 </>
             )}
