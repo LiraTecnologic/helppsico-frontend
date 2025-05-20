@@ -8,7 +8,6 @@
     align-self: flex-start
 }
 
-/* Fundo escuro atrás do modal */
 .modal-overlay {
     position: fixed;
     top: 0;

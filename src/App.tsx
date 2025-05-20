@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 // Telas do fluxo de Paciente
 import LoginPaciente from '../src/pages/loginPaciente/loginPaciente';
@@ -24,10 +25,10 @@ import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 
 function App() {
   return (
-    
+
 
     <Router>
-      <ToastContainer />
+      <ToastContainer/>
       <Routes>
         {/* FLUXO DE PACIENTE */}
         <Route path="/loginPaciente" element={<LoginPaciente />} />
@@ -48,9 +49,9 @@ function App() {
         <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
 
         {/* Nenhum fluxo */}
-        <Route path="/validacaoCrp" element={<ValidacaoCrp />}/>
-        
-      </Routes>  
+        <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
+
+      </Routes>
     </Router>
   )
 }
