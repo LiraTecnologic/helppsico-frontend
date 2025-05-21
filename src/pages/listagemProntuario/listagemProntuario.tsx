@@ -1,8 +1,8 @@
 import Prontuario from '../../components/layout/prontuario/prontuario.tsx';
 import Header from '../../components/layout/header/header.tsx';
-import BotaoPrimario from '../../components/commmon/botaoPrimario/botaoPrimario.tsx';
+import BotaoPrimario from '../../components/commmon/botoes/botaoPrimario/botaoPrimario.tsx';
 import './listagemProntuario.css'
-import { consultaProntuarios } from "./listagemProntuario.service.ts";
+import { consultaProntuariosPsicologo } from "../../services/prontuarios.service.ts";
 
 
 import { useState, useEffect } from 'react';
@@ -15,9 +15,9 @@ export default function ListagemProntuario() {
 
     useEffect(() => {
         async function carregarProntuarios() {
-            const prontuariosConsultados = await consultaProntuarios();
+            const prontuariosConsultados = await consultaProntuariosPsicologo('', 1);
             console.log(prontuariosConsultados);
-            setProntuarios(prontuariosConsultados);
+            setProntuarios(prontuariosConsultados.content);
         }
 
         carregarProntuarios();

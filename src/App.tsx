@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Telas do fluxo de Paciente
 import LoginPaciente from '../src/pages/loginPaciente/loginPaciente';
@@ -9,7 +11,7 @@ import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
 
-// Telas do fluco de Pscicologo
+// Telas do fluxo de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
 import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
@@ -18,9 +20,15 @@ import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
 import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 
+//Nenhum fluxo
+import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+
 function App() {
   return (
+    
+
     <Router>
+      <ToastContainer />
       <Routes>
         {/* FLUXO DE PACIENTE */}
         <Route path="/loginPaciente" element={<LoginPaciente />} />
@@ -40,6 +48,9 @@ function App() {
         <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
         <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
         <Route path="/detalhesProntuario" element={<DetalhesProntuario />} />
+
+        {/* Nenhum fluxo */}
+        <Route path="/validacaoCrp" element={<ValidacaoCrp />}/>
         
       </Routes>  
     </Router>

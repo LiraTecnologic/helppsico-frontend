@@ -1,73 +1,59 @@
+import ConsultaModel from '../../../../models/consulta';
+import calcular from '../../../../utils/calculoData'
+import formatarDataHora from '../../../../utils/formataData'
+
 import './proximaSessao.css';
 
-interface ProximasSessoesProps {
-  sessaoMarcada: boolean;
-  nome?: string;
-  idade?: string;
-  telefone?: string;
-  local?: string;
-  data?: string;
-  horario?: string;
-  valor?: string;
-  statusPagamento?: 'Em aberto' | 'Pago' | 'Cancelado';
-  urlFoto? : string;
-  verMais: boolean;
-  fluxo: string;
+interface ProximaSessaoProps {
+  consulta: ConsultaModel,
+  verMais: boolean,
+  fluxo: string,
+  sessaoMarcada: boolean
 }
 
-export default function ProximasSessoes({
-  sessaoMarcada,
-  nome,
-  idade,
-  telefone,
-  local,
-  data,
-  horario,
-  valor,
-  statusPagamento,
-  urlFoto,
-  verMais,
-  fluxo
-}: ProximasSessoesProps) {
+export default function ProximasSessoes(props: ProximaSessaoProps) {
+  const idade = calcular(props.consulta.paciente.dataNascimento);
+  const dataFormatada = formatarDataHora(props.consulta.dataHora);
+
   return (
     <div className="proxima-sessao">
       <div className="proxima-sessao__cabecalho">
         <h1>Próxima sessão</h1>
-        {verMais && (
+        {props.verMais && (
           <button className="botao-ver-mais">Ver mais</button>
         )}
       </div>
 
-      {sessaoMarcada ? (
+      {props.sessaoMarcada ? (
         <div className="sessao-card">
           <div className="sessao-info">
             <img
               className="sessao-foto"
-              src={urlFoto}
+              src={props.consulta.paciente.fotoUrl}
               alt="Foto do psicólogo"
             />
             <div className="sessao-textos">
-              <p className="sessao-nome">{nome}</p>
-              <p>{idade}</p>
-              <p>{telefone}</p>
+              <p className="sessao-nome">{props.consulta.paciente.nome}</p>
+              <p>{idade} anos</p>
+              <p>{props.consulta.paciente.telefone}</p>
             </div>
           </div>
 
           <div className="sessao-detalhes">
-            <p>Local: {local}</p>
-            <p>Data: {data}</p>
-            <p>Horário: {horario}</p>
+            <p>Local: {props.consulta.paciente.endereco.rua}</p>
+            <p>Data: {dataFormatada.data}</p>
+            <p>Horário: {dataFormatada.hora}</p>
           </div>
 
           <div className="sessao-pagamento">
-            <p><strong>Valor:</strong> {valor}</p>
-            <span className={`sessao-status ${statusPagamento?.toLowerCase().replace(' ', '-')}`}>
+            <p><strong>Valor:</strong> {props.consulta.valor}</p>
+            {/* <span className={`sessao-status ${statusPagamento?.toLowerCase().replace(' ', '-')}`}>
                 {statusPagamento}
-            </span>
+            </span> */}
           </div>
         </div>
       ) : (
-        fluxo === "paciente" ? (
+        props.fluxo === "paciente" ? (
           <div className="sessao-nao-marcada">
             <p className="titulo-nao-marcada">Ainda não marcou a próxima consulta?</p>
             <p className="subtitulo-nao-marcada">
