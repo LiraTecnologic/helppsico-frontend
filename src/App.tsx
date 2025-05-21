@@ -23,6 +23,7 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
         <Route path="/solicitacaoVinculo" element={<SolicitacaoDeVinculo />} />
+        <Route path="/agendamentoConsulta" element={<AgendamentoConsulta />} />
 
         {/* FLUXO DE PSICOLOGO */}
         <Route path="/loginPsicologo" element={<LoginPsicologo />} />
