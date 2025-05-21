@@ -25,8 +25,7 @@ export default function DetalhesProntuario() {
     };
 
     const handleCancelar = () => {
-        // Você pode adicionar aqui uma lógica para restaurar os valores originais se necessário
-        setIsEditing(false);    
+        setIsEditing(false);
     };
 
     const handleSalvar = () => {
@@ -42,36 +41,45 @@ export default function DetalhesProntuario() {
                 <div className="info-linhas">
                     <div className="info-bloco">
                         {isEditing ? (
-                            <input
-                                className="conteudoDoInput"
-                                type="text"
-                                value={formData.titulo}
-                                onChange={(e) => handleChange("titulo", e.target.value)}
-                            />
+                            <>
+                                <h2 className="label-edicao">Título</h2>
+                                <input
+                                    className="conteudoDoInput"
+                                    type="text"
+                                    value={formData.titulo}
+                                    onChange={(e) => handleChange("titulo", e.target.value)}
+                                />
+                            </>
                         ) : (
                             <InputLeitura titulo="Título" value={formData.titulo} isContent={false} />
                         )}
                     </div>
                     <div className="info-bloco">
                         {isEditing ? (
-                            <input
-                                className="conteudoDoInput"
-                                type="text"
-                                value={formData.paciente}
-                                onChange={(e) => handleChange("paciente", e.target.value)}
-                            />
+                            <>
+                                <h2 className="label-edicao">Paciente</h2>
+                                <input
+                                    className="conteudoDoInput"
+                                    type="text"
+                                    value={formData.paciente}
+                                    onChange={(e) => handleChange("paciente", e.target.value)}
+                                />
+                            </>
                         ) : (
                             <InputLeitura titulo="Paciente" value={formData.paciente} isContent={false} />
                         )}
                     </div>
                     <div className="info-bloco">
                         {isEditing ? (
-                            <input
-                                className="conteudoDoInput"
-                                type="text"
-                                value={formData.consulta}
-                                onChange={(e) => handleChange("consulta", e.target.value)}
-                            />
+                            <>
+                                <h2 className="label-edicao">Consulta</h2>
+                                <input
+                                    className="conteudoDoInput"
+                                    type="text"
+                                    value={formData.consulta}
+                                    onChange={(e) => handleChange("consulta", e.target.value)}
+                                />
+                            </>
                         ) : (
                             <InputLeitura titulo="Consulta" value={formData.consulta} isContent={false} />
                         )}
@@ -80,12 +88,15 @@ export default function DetalhesProntuario() {
 
                 <div className="info-bloco">
                     {isEditing ? (
-                        <input
-                            className="conteudoDoInput"
-                            type="text"
-                            value={formData.psicologo}
-                            onChange={(e) => handleChange("psicologo", e.target.value)}
-                        />
+                        <>
+                            <h2 className="label-edicao">Psicólogo</h2>
+                            <input
+                                className="conteudoDoInput"
+                                type="text"
+                                value={formData.psicologo}
+                                onChange={(e) => handleChange("psicologo", e.target.value)}
+                            />
+                        </>
                     ) : (
                         <InputLeitura titulo="Psicólogo" value={formData.psicologo} isContent={false} />
                     )}
@@ -94,11 +105,14 @@ export default function DetalhesProntuario() {
                 <h2>Conteúdo</h2>
                 <div className="conteudo-box">
                     {isEditing ? (
-                        <textarea
-                            className="conteudo-textarea"
-                            value={formData.conteudo}
-                            onChange={(e) => handleChange("conteudo", e.target.value)}
-                        />
+                        <>
+                            <label className="label-edicao">Conteúdo</label>
+                            <textarea
+                                className="conteudo-textarea"
+                                value={formData.conteudo}
+                                onChange={(e) => handleChange("conteudo", e.target.value)}
+                            />
+                        </>
                     ) : (
                         <p>
                             <InputLeitura titulo="" value={formData.conteudo} isContent={true} />
