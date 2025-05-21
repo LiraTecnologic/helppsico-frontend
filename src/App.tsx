@@ -28,7 +28,6 @@ function App() {
 
 
     <Router>
-      <ToastContainer/>
       <Routes>
         {/* FLUXO DE PACIENTE */}
         <Route path="/loginPaciente" element={<LoginPaciente />} />
@@ -52,6 +51,7 @@ function App() {
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
 
       </Routes>
+      <ToastContainer/>
     </Router>
   )
 }
