@@ -18,21 +18,30 @@ export default function SolicitacaoDeVinculo() {
   const idPaciente = "1"; 
 
   const carregarVinculos = useCallback(async () => {
+
     if (!idPaciente) {
       setErro("ID do paciente não encontrado.");
       setCarregando(false);
       return;
     }
+
     setCarregando(true);
     setErro(null);
+
     try {
+
       const dadosVinculos = await solicitarVinculosPaciente(idPaciente);
       setVinculos(dadosVinculos);
+
     } catch (error) {
+
       console.error(`Erro ao carregar os vinculos :(  Erro:`, error);
       setErro('Erro ao carregar os vinculos. Tente novamente mais tarde.');
+
     } finally {
+
       setCarregando(false);
+
     }
   }, [idPaciente]);
 
@@ -51,15 +60,18 @@ export default function SolicitacaoDeVinculo() {
   };
 
   const handleConfirmarCancelamento = async () => {
+
     if (!vinculoSelecionadoId) return;
     try {
+
       await cancelarSolicitacao(vinculoSelecionadoId);
       fecharPopupCancelamento();
       carregarVinculos(); 
+
     } catch (error) {
+
       console.error("Erro ao cancelar solicitação:", error);
       setErro("Falha ao cancelar a solicitação. Tente novamente.");
-     
      
     }
   };

@@ -44,55 +44,55 @@
       "id": "v001",
       "pacienteId": "1",
       "psicologoId": "ps101",
-      "status": "INATIVO"
+      "status": "PENDENTE"
     },
     {
       "id": "v002",
       "pacienteId": "1",
       "psicologoId": "ps102",
-      "status": "INATIVO"
+      "status": "PENDENTE"
     },
     {
       "id": "v003",
       "pacienteId": "1",
       "psicologoId": "ps103",
-      "status": "INATIVO"
+      "status": "PENDENTE"
     },
     {
       "id": "v004",
       "pacienteId": "1",
       "psicologoId": "ps104",
-      "status": "INATIVO"
+      "status": "PENDENTE"
     },
     {
       "id": "v005",
       "pacienteId": "1",
       "psicologoId": "ps101",
-      "status": "INATIVO"
+      "status": "PENDENTE"
     },
     {
       "id": "v006",
       "pacienteId": "1",
       "psicologoId": "ps102",
-      "status": "INATIVO"
+      "status": "PENDENTE"
     },
     {
       "id": "v007",
       "pacienteId": "1",
       "psicologoId": "ps103",
-      "status": "INATIVO"
+      "status": "PENDENTE"
     },
     {
       "id": "v008",
       "pacienteId": "1",
       "psicologoId": "ps104",
-      "status": "INATIVO"
+      "status": "PENDENTE"
     },
     {
       "id": "v009",
       "pacienteId": "1",
       "psicologoId": "ps101",
-      "status": "INATIVO"
+      "status": "PENDENTE"
     },
     {
       "id": "v010",
@@ -176,7 +176,7 @@
       "id": "v023",
       "pacienteId": "1",
       "psicologoId": "ps103",
-      "status": "INATIVO"
+      "status": "PENDENTE"
     },
     {
       "id": "v024",
