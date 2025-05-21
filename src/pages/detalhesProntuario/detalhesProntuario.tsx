@@ -110,7 +110,6 @@ export default function DetalhesProntuario() {
                 <div className="conteudo-box">
                     {isEditing ? (
                         <>
-                            <label className="label-edicao">Conteúdo</label>
                             <textarea
                                 className="conteudo-textarea"
                                 value={formData.conteudo}
