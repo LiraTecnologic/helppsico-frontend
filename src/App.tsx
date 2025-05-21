@@ -18,6 +18,7 @@ import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
+import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
@@ -46,6 +47,7 @@ function App() {
         <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
         <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
         <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
+        <Route path="/detalhesProntuario" element={<DetalhesProntuario />} />
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />}/>
