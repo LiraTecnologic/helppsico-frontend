@@ -1,21 +1,30 @@
+
+
+
 .container {
   padding: 32px;
   text-align: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
 }
   
 h1 {
-  font-size: 28px;
+  font-size: clamp(20px, 4vw, 28px);
   margin-bottom: 24px;
 }
   
 section {
   margin-top: 40px;
+  width: 100%;
 }
   
 .cards-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 600px);
-  gap: 32px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: clamp(24px, 4vw, 40px);
   justify-content: center;
   margin-top: 16px;
+  width: 100%;
 }

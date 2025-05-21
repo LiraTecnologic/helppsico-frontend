@@ -1,97 +1,154 @@
 import './solicitiacaoDeVinculo.css';
 import Header from '../../components/layout/header/header';
 import CardSolicitacao from '../../components/layout/Cards/cardSolicitacao/cardSolicitacao';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import PopupCancelamento from '../../components/layout/PopupCancelamento/popupCancelamento';
-import VinculoModel from '../../models/vinculo';
-import { solicitarVinculosPaciente,cancelarSolicitacao } from './solicitiacaoDeVinculoService';
+import { StatusVinculo } from '../../models/vinculo'; 
+import { VinculoModel } from '../../models/vinculo'; 
+import { solicitarVinculosPaciente, cancelarSolicitacao } from './solicitiacaoDeVinculoService';
+
 export default function SolicitacaoDeVinculo() {
-  const [ popupCancelar, setPopupCancelar ] = useState(false);
-  const [vinculoSelecionado, setVinculoSelecionado] = useState<string>('');
-  const [vinculos,  setVinculos] = useState<VinculoModel[]>([]);
+  const [popupCancelar, setPopupCancelar] = useState(false);
+  const [vinculoSelecionadoId, setVinculoSelecionadoId] = useState<string | null>(null);
+  const [vinculos, setVinculos] = useState<VinculoModel[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
 
   // const idPaciente = localStorage.getItem('idPaciente');
-  const idPaciente = "1";
+  const idPaciente = "1"; 
+
+  const carregarVinculos = useCallback(async () => {
+    if (!idPaciente) {
+      setErro("ID do paciente não encontrado.");
+      setCarregando(false);
+      return;
+    }
+    setCarregando(true);
+    setErro(null);
+    try {
+      const dadosVinculos = await solicitarVinculosPaciente(idPaciente);
+      setVinculos(dadosVinculos);
+    } catch (error) {
+      console.error(`Erro ao carregar os vinculos :(  Erro:`, error);
+      setErro('Erro ao carregar os vinculos. Tente novamente mais tarde.');
+    } finally {
+      setCarregando(false);
+    }
+  }, [idPaciente]);
 
   useEffect(() => {
-    const carregarvinculos = async () => {
-      try{
-        atualizarCarregando(true);
-        const vinculos =  await solicitarVinculosPaciente(idPaciente);
-        if (vinculos){
-          atualizarVinculos(vinculos);
-          atualizarErro(null);
-        }
+    carregarVinculos();
+  }, [carregarVinculos]);
 
-
-      }catch(error){
-        console.error(`Erro ao carregar os vinculos :(  Erro:${error}`);
-        atualizarErro('Erro ao carregar os vinculos');
-      }finally {
-        atualizarCarregando(false);
-      }
-    }
-  })
-
-  const atualizarVinculos = (vinculos: VinculoModel[]) => {
-    setVinculos(vinculos);
-  }
-  const atualizarCarregando = (value: boolean) => {
-    setCarregando(value);
-  }
-  const atualizarErro = (message: string | null) => {
-    setErro(message);
-  }
-
-  const abrirCancelamento = (vinculoid: string) => {
-    setVinculoSelecionado(vinculoid); 
+  const abrirPopupCancelamento = (idVinculo: string) => {
+    setVinculoSelecionadoId(idVinculo);
     setPopupCancelar(true);
-  }
-
-  
-
-  const fecharCancelamento = () => {
-    setPopupCancelar(false);
   };
 
-  const textBotao = (status: string) =>{
-    if(status=="PENDENTE"){
-      return "Cancelar";
+  const fecharPopupCancelamento = () => {
+    setPopupCancelar(false);
+    setVinculoSelecionadoId(null);
+  };
+
+  const handleConfirmarCancelamento = async () => {
+    if (!vinculoSelecionadoId) return;
+    try {
+      await cancelarSolicitacao(vinculoSelecionadoId);
+      fecharPopupCancelamento();
+      carregarVinculos(); 
+    } catch (error) {
+      console.error("Erro ao cancelar solicitação:", error);
+      setErro("Falha ao cancelar a solicitação. Tente novamente.");
+     
+     
     }
-    return "Ver mais";
+  };
+
+  const vinculosPendentes = vinculos.filter(v => v.status === StatusVinculo.PENDENTE);
+  const vinculosRecusados = vinculos.filter(v => v.status === StatusVinculo.INATIVO);
+
+  if (carregando) {
+    return (
+      <>
+        <Header fluxo="minhasSessoes" headerPsicologo={false} />
+        <div className="container">
+          <h1>Solicitações</h1>
+          <p>Carregando...</p>
+        </div>
+      </>
+    );
   }
-  
+
+  if (erro) {
+    return (
+      <>
+        <Header fluxo="minhasSessoes" headerPsicologo={false} />
+        <div className="container">
+          <h1>Solicitações</h1>
+          <p style={{ color: 'red' }}>{erro}</p>
+          <button onClick={carregarVinculos}>Tentar Novamente</button>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <Header fluxo="minhasSessoes" headerPsicologo={false} />
       <div className="container">
         <h1>Solicitações</h1>
 
-        <section>
-          <h2>Pendentes</h2>
-          <div className="cards-grid">
-            <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Pendente" botao={textBotao("Pendente")} onClick={abrirCancelamento(idPaciente)} />
-            <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Pendente" botao={textBotao("Pendente")} onClick={abrirCancelamento(idPaciente)} />
-          </div>
-        </section>
+        {vinculosPendentes.length > 0 && (
+          <section>
+            <h2>Pendentes</h2>
+            <div className="cards-grid">
+              {vinculosPendentes.map((vinculo) => (
+                <CardSolicitacao
+                  key={vinculo.id}
+                  nome={vinculo.psicologo.nome} 
+                  idade={vinculo.psicologo.idade} 
+                  crp={vinculo.psicologo.crp} 
+                  avaliacao={vinculo.psicologo.avaliacao} 
+                  status="Pendente"
+                  botao="Cancelar"
+                  onClick={() => abrirPopupCancelamento(vinculo.id)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
 
-        <section>
-          <h2>Recusados</h2>
-          <div className="cards-grid">
-            <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Recusado" botao={textBotao("Recusado")} />
-            <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Recusado" botao={textBotao("Recusado")} />
-            <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Recusado" botao={textBotao("Recusado")} />
-            <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Recusado" botao={textBotao("Recusado")} />
-          </div>
-        </section>
+        {vinculosRecusados.length > 0 && (
+          <section>
+            <h2>Recusados</h2>
+            <div className="cards-grid">
+              {vinculosRecusados.map((vinculo) => (
+                <CardSolicitacao
+                  key={vinculo.id}
+                  nome={vinculo.psicologo.nome}
+                  idade={vinculo.psicologo.idade}
+                  crp={vinculo.psicologo.crp}
+                  avaliacao={vinculo.psicologo.avaliacao}
+                  status="Recusado"
+                  botao="Ver mais" 
+                  
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {(vinculosPendentes.length === 0 && vinculosRecusados.length === 0 && !carregando) && (
+            <p>Nenhuma solicitação encontrada.</p>
+        )}
+
       </div>
 
-      {popupCancelar && (
-        <>
-          <PopupCancelamento fechar={fecharCancelamento} />
-        </>
+      {popupCancelar && vinculoSelecionadoId && (
+        <PopupCancelamento
+          fechar={fecharPopupCancelamento}
+          onConfirm={handleConfirmarCancelamento} 
+        />
       )}
     </>
   );
