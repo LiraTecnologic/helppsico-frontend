@@ -16,15 +16,19 @@ export default function DetalhesProntuario() {
         dataEdicao: "21/02/2020"
     });
 
+    const [originalData, setOriginalData] = useState(formData);
+
     const handleChange = (field: string, value: string) => {
         setFormData({ ...formData, [field]: value });
     };
 
     const handleEditar = () => {
+        setOriginalData(formData);
         setIsEditing(true);
     };
 
     const handleCancelar = () => {
+        setFormData(originalData);
         setIsEditing(false);
     };
 
