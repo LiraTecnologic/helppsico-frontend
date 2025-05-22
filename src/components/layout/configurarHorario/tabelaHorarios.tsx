@@ -1,61 +1,69 @@
-import './tabelaHorarios.css';
-import { useEffect, useState } from 'react';
+import "./tabelaHorarios.css";
+import { useEffect, useState } from "react";
 
 interface TabelaHorariosProps {
   dias: string[];
   inicio: string;
   fim: string;
   duracao: number;
+  intervalo: number;
   onEditar: () => void;
 }
 
 const nomesDias: Record<string, string> = {
-  SEG: 'Segunda-Feira',
-  TER: 'Terça-Feira',
-  QUA: 'Quarta-Feira',
-  QUI: 'Quinta-Feira',
-  SEX: 'Sexta-Feira',
-  SAB: 'Sábado',
-  DOM: 'Domingo',
+  SEG: "Segunda-Feira",
+  TER: "Terça-Feira",
+  QUA: "Quarta-Feira",
+  QUI: "Quinta-Feira",
+  SEX: "Sexta-Feira",
+  SAB: "Sábado",
+  DOM: "Domingo",
 };
 
-function gerarIntervalos(inicio: string, fim: string, duracao: number): string[] {
-  const [startH, startM] = inicio.split(':').map(Number);
-  const [endH, endM] = fim.split(':').map(Number);
+function gerarIntervalos(
+  inicio: string,
+  fim: string,
+  duracao: number,
+  intervalo: number
+): string[] {
+  const [startH, startM] = inicio.split(":").map(Number);
+  const [endH, endM] = fim.split(":").map(Number);
   const intervalos: string[] = [];
 
   let start = startH * 60 + startM;
   const end = endH * 60 + endM;
 
   while (start + duracao <= end) {
-    const hIni = String(Math.floor(start / 60)).padStart(2, '0');
-    const mIni = String(start % 60).padStart(2, '0');
-    const hFim = String(Math.floor((start + duracao) / 60)).padStart(2, '0');
-    const mFim = String((start + duracao) % 60).padStart(2, '0');
+    const hIni = String(Math.floor(start / 60)).padStart(2, "0");
+    const mIni = String(start % 60).padStart(2, "0");
+    const hFim = String(Math.floor((start + duracao) / 60)).padStart(2, "0");
+    const mFim = String((start + duracao) % 60).padStart(2, "0");
 
     intervalos.push(`${hIni}:${mIni} - ${hFim}:${mFim}`);
-    start += duracao;
+    start += duracao + intervalo;
   }
 
   return intervalos;
 }
 
-type StatusCard = 'Disponibilizar Agendamento' | 'Disponivel para Agendamento';
-type AcaoSelecionada = 'para_disponibilizar' | 'para_remover';
+type StatusCard = "Disponibilizar Agendamento" | "Disponivel para Agendamento";
+type AcaoSelecionada = "para_disponibilizar" | "para_remover";
 
 export default function TabelaHorarios({
   dias,
   inicio,
   fim,
   duracao,
+  intervalo,
   onEditar,
 }: TabelaHorariosProps) {
-  const intervalos = gerarIntervalos(inicio, fim, duracao);
+  const intervalos = gerarIntervalos(inicio, fim, duracao, intervalo);
 
   const [cards, setCards] = useState<Record<string, StatusCard>>({});
-  const [selecionados, setSelecionados] = useState<Map<string, AcaoSelecionada>>(new Map());
+  const [selecionados, setSelecionados] = useState<
+    Map<string, AcaoSelecionada>
+  >(new Map());
 
-  // Atualiza os cards com novos dias e horários, sem perder os existentes
   useEffect(() => {
     setCards((prevCards) => {
       const novosCards = { ...prevCards };
@@ -64,14 +72,14 @@ export default function TabelaHorarios({
         intervalos.forEach((faixa) => {
           const id = `${dia}-${faixa}`;
           if (!(id in novosCards)) {
-            novosCards[id] = 'Disponibilizar Agendamento';
+            novosCards[id] = "Disponibilizar Agendamento";
           }
         });
       });
 
       return novosCards;
     });
-  }, [dias, inicio, fim, duracao]);
+  }, [dias, inicio, fim, duracao, intervalo]);
 
   const toggleSelecionado = (id: string) => {
     const novoMap = new Map(selecionados);
@@ -80,10 +88,10 @@ export default function TabelaHorarios({
     if (novoMap.has(id)) {
       novoMap.delete(id);
     } else {
-      if (statusAtual === 'Disponibilizar Agendamento') {
-        novoMap.set(id, 'para_disponibilizar');
-      } else if (statusAtual === 'Disponivel para Agendamento') {
-        novoMap.set(id, 'para_remover');
+      if (statusAtual === "Disponibilizar Agendamento") {
+        novoMap.set(id, "para_disponibilizar");
+      } else if (statusAtual === "Disponivel para Agendamento") {
+        novoMap.set(id, "para_remover");
       }
     }
 
@@ -94,10 +102,10 @@ export default function TabelaHorarios({
     const novosCards = { ...cards };
 
     selecionados.forEach((acao, id) => {
-      if (acao === 'para_disponibilizar') {
-        novosCards[id] = 'Disponivel para Agendamento';
-      } else if (acao === 'para_remover') {
-        novosCards[id] = 'Disponibilizar Agendamento';
+      if (acao === "para_disponibilizar") {
+        novosCards[id] = "Disponivel para Agendamento";
+      } else if (acao === "para_remover") {
+        novosCards[id] = "Disponibilizar Agendamento";
       }
     });
 
@@ -128,6 +136,10 @@ export default function TabelaHorarios({
           <div className="th-duracao">{duracao} m</div>
         </div>
         <div className="th-config-item">
+          <p>Intervalo entre sessões:</p>
+          <div className="th-duracao">{intervalo} m</div>
+        </div>
+        <div className="th-config-item">
           <p>Começo e fim do expediente:</p>
           <div className="th-expediente">
             {inicio} h às {fim} h
@@ -151,18 +163,18 @@ export default function TabelaHorarios({
                     key={id}
                     className={`th-card ${
                       selecionado
-                        ? acao === 'para_disponibilizar'
-                          ? 'th-card-disponibilizar'
-                          : 'th-card-remover'
-                        : ''
+                        ? acao === "para_disponibilizar"
+                          ? "th-card-disponibilizar"
+                          : "th-card-remover"
+                        : ""
                     }`}
                     onClick={() => toggleSelecionado(id)}
                   >
                     <div
                       className={`th-status ${
-                        status === 'Disponibilizar Agendamento'
-                          ? 'th-status-livre para trabalhar'
-                          : 'th-status-disponivel'
+                        status === "Disponibilizar Agendamento"
+                          ? "th-status-livre para trabalhar"
+                          : "th-status-disponivel"
                       }`}
                     >
                       {status}
@@ -176,11 +188,15 @@ export default function TabelaHorarios({
         </div>
       </div>
 
-      {selecionados.size > 0 && (
-        <div className="th-salvar">
-          <button onClick={salvarSelecionados}>Salvar horários selecionados</button>
-        </div>
-      )}
+      <div className="th-botao-area">
+        {selecionados.size > 0 && (
+          <div className="th-salvar">
+            <button onClick={salvarSelecionados}>
+              Salvar horários selecionados
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
