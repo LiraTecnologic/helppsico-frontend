@@ -9,15 +9,19 @@ interface ConfiguracaoHorarioProps {
         horaInicio: string,
         horaFim: string
     ) => void;
+    dias?: string[];
+    tempo?: number;
+    inicio?: string;
+    fim?: string;
 }
 
 
-export default function ConfiguracaoHorario({ onClose, onSave }: ConfiguracaoHorarioProps) {
+export default function ConfiguracaoHorario({ onClose, onSave, dias, tempo, inicio, fim }: ConfiguracaoHorarioProps) {
     const diasSemana: string[] = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
-    const [diasSelecionados, setDiasSelecionados] = useState<string[]>([]);
-    const [tempoSessao, setTempoSessao] = useState<number>(30);
-    const [horaInicio, setHoraInicio] = useState<string>('07:00');
-    const [horaFim, setHoraFim] = useState<string>('18:00');
+    const [diasSelecionados, setDiasSelecionados] = useState<string[]>(dias ?? []);
+    const [tempoSessao, setTempoSessao] = useState<number>(tempo ?? 30);
+    const [horaInicio, setHoraInicio] = useState<string>(inicio ?? '07:00');
+    const [horaFim, setHoraFim] = useState<string>(fim ?? '18:00');
     const [erro, setErro] = useState<string>('');
 
     const toggleDia = (dia: string) => {

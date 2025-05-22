@@ -48,6 +48,10 @@ export default function GerenciamentoDeHorarios() {
                         setHasConfig(true);
                         setOpenModal(false);
                     }}
+                    dias={diasSelecionados}
+                    tempo={tempoSessao}
+                    inicio={horaInicio}
+                    fim={horaFim}
                 />
             )}
         </>

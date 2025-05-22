@@ -1,5 +1,5 @@
 import './tabelaHorarios.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface TabelaHorariosProps {
   dias: string[];
@@ -40,7 +40,7 @@ function gerarIntervalos(inicio: string, fim: string, duracao: number): string[]
   return intervalos;
 }
 
-type StatusCard = 'Escolher para trabalhar' | 'Agendado';
+type StatusCard = 'Disponibilizar Agendamento' | 'Disponivel para Agendamento';
 type AcaoSelecionada = 'para_disponibilizar' | 'para_remover';
 
 export default function TabelaHorarios({
@@ -52,19 +52,26 @@ export default function TabelaHorarios({
 }: TabelaHorariosProps) {
   const intervalos = gerarIntervalos(inicio, fim, duracao);
 
-  // Inicializa todos os cards como "Escolher para trabalhar"
-  const [cards, setCards] = useState<Record<string, StatusCard>>(() => {
-    const estadoInicial: Record<string, StatusCard> = {};
-    dias.forEach((dia) => {
-      intervalos.forEach((faixa) => {
-        const id = `${dia}-${faixa}`;
-        estadoInicial[id] = 'Escolher para trabalhar';
-      });
-    });
-    return estadoInicial;
-  });
-
+  const [cards, setCards] = useState<Record<string, StatusCard>>({});
   const [selecionados, setSelecionados] = useState<Map<string, AcaoSelecionada>>(new Map());
+
+  // Atualiza os cards com novos dias e horários, sem perder os existentes
+  useEffect(() => {
+    setCards((prevCards) => {
+      const novosCards = { ...prevCards };
+
+      dias.forEach((dia) => {
+        intervalos.forEach((faixa) => {
+          const id = `${dia}-${faixa}`;
+          if (!(id in novosCards)) {
+            novosCards[id] = 'Disponibilizar Agendamento';
+          }
+        });
+      });
+
+      return novosCards;
+    });
+  }, [dias, inicio, fim, duracao]);
 
   const toggleSelecionado = (id: string) => {
     const novoMap = new Map(selecionados);
@@ -73,9 +80,9 @@ export default function TabelaHorarios({
     if (novoMap.has(id)) {
       novoMap.delete(id);
     } else {
-      if (statusAtual === 'Escolher para trabalhar') {
+      if (statusAtual === 'Disponibilizar Agendamento') {
         novoMap.set(id, 'para_disponibilizar');
-      } else if (statusAtual === 'Agendado') {
+      } else if (statusAtual === 'Disponivel para Agendamento') {
         novoMap.set(id, 'para_remover');
       }
     }
@@ -88,9 +95,9 @@ export default function TabelaHorarios({
 
     selecionados.forEach((acao, id) => {
       if (acao === 'para_disponibilizar') {
-        novosCards[id] = 'Agendado';
+        novosCards[id] = 'Disponivel para Agendamento';
       } else if (acao === 'para_remover') {
-        novosCards[id] = 'Escolher para trabalhar';
+        novosCards[id] = 'Disponibilizar Agendamento';
       }
     });
 
@@ -153,7 +160,9 @@ export default function TabelaHorarios({
                   >
                     <div
                       className={`th-status ${
-                        status === 'Escolher para trabalhar' ? 'th-status-livre para trabalhar' : 'th-status-disponivel'
+                        status === 'Disponibilizar Agendamento'
+                          ? 'th-status-livre para trabalhar'
+                          : 'th-status-disponivel'
                       }`}
                     >
                       {status}
