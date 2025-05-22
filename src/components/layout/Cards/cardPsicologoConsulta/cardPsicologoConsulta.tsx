@@ -1,0 +1,28 @@
+import './cardPsicologoConsulta.css';
+
+interface CardPsicologoConsultaProps {
+  urlFoto: string;
+  nome: string;
+  biografia: string;
+  tempoSessao: string;
+}
+
+export default function CardPsicologoConsulta(props: CardPsicologoConsultaProps) {
+    return (
+        <div className="cards-psicologo-consulta">
+            <img
+                src={props.urlFoto}
+                alt={`Foto de ${props.nome}`}
+                className="foto-psicologo"
+            />
+            <div className="info-psicologo">
+                <h2 className='nome'>{props.nome}</h2>
+                <p className="biografia">{props.biografia}</p>
+                <div>
+                    <span className='label'>Tempo de sessão: </span>
+                    <span className='tempo'>{props.tempoSessao}</span>
+                </div>
+            </div>
+        </div>
+    );
+}

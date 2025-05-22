@@ -1,0 +1,19 @@
+.botao-agendar-consulta {
+    background-color: #1A56DB;
+    border-radius: 30px;
+    padding: 10px 30px;
+    color: white;
+    cursor: pointer;
+}
+
+.container-botao-contulta{
+    display: flex;
+    justify-content: center;
+}
+
+.container-psicologo {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    justify-content: center;
+}
