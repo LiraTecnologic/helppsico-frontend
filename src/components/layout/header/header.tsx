@@ -2,6 +2,8 @@ import './header.css';
 import 'react';
 import imagemPaciente from '../../../assets/imagemPaciente.jpg';
 import logo from '../../../assets/logo.png'
+import { FaBars, FaXmark } from "react-icons/fa6";
+import { useState } from 'react';
 
 interface HeaderProps {
     fluxo: string;
@@ -9,6 +11,9 @@ interface HeaderProps {
 }
 
 export default function Header(props: HeaderProps) {
+
+    const [openMenu, setOpenMenu] = useState<Boolean>(false);
+
     return (
         <header className="header">
             <div className="logo">
@@ -17,7 +22,7 @@ export default function Header(props: HeaderProps) {
 
 
             <div className="nav-foto-container">
-                <nav className="nav">
+                <nav className={`nav ${openMenu ? 'open' : ''}`}>
                     <ul>
                         <li className={props.fluxo === 'meuPainel' ? 'active' : ''}>
                             <a href="#meuPainel">Meu painel</a>
@@ -39,6 +44,10 @@ export default function Header(props: HeaderProps) {
                 <div className="foto">
                     <img src={imagemPaciente} alt="Foto do usuário" />
                 </div>
+
+                <button className="btn-mobile" onClick={() => setOpenMenu(!openMenu)}>
+                    {openMenu ? <FaXmark/> : <FaBars/>}
+                </button>
             </div>
         </header>
     );

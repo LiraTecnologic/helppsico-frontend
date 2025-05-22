@@ -21,6 +21,7 @@ import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios
 
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+import Teste from "./pages/teste/teste";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
         <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
         <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
+        <Route path="/teste" element={<Teste />} />
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />}/>
