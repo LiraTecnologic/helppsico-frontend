@@ -2,20 +2,57 @@
   display: flex;
   align-items: center;
   background-color: #f9f9f9;
-  padding: 16px 24px;
-  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
   border: 1px solid #ccc;
-  width: 500px;
+  width: 100%;
+  max-width: 31.25rem;
   font-family: 'Segoe UI', sans-serif;
-  gap: 16px;
+  gap: 1rem;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .fotoPsico {
-  width: 70px;
-  height: 70px;
-  border-radius: 12px;
+  width: 4.375rem;
+  height: 4.375rem;
+  border-radius: 0.75rem;
   object-fit: cover;
+}
+
+@media (max-width: 480px) {
+  .card-solicitacao {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .fotoPsico {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .info {
+    flex: 1;
+    min-width: calc(100% - 5rem);
+  }
+
+  .nome {
+    font-size: 0.875rem;
+  }
+
+  .idade,
+  .crp,
+  .avaliacao {
+    font-size: 0.75rem;
+  }
+
+  .acoes {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
 }
 
 .info {
@@ -24,18 +61,18 @@
   justify-content: center;
   flex-grow: 1;
   text-align: left;
-  gap: 2px;
+  gap: 0.125rem;
 }
 
 .nome {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
   margin: 0;
 }
 
 .idade,
 .crp {
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: 0;
   color: #333;
 }
@@ -44,9 +81,9 @@
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: 14px;
-  gap: 4px;
-  margin-top: 2px;
+  font-size: 0.875rem;
+  gap: 0.25rem;
+  margin-top: 0.125rem;
 }
 
 .estrela {
@@ -59,14 +96,14 @@
   align-items: flex-end;
   justify-content: space-between;
   height: 100%;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .status {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 0.875rem;
   position: relative;
-  padding-bottom: 2px;
+  padding-bottom: 0.125rem;
 }
 
 .status-pendente::after {
@@ -75,7 +112,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 3px;
+  height: 0.1875rem;
   background-color: #ffe600;
 }
 
@@ -85,7 +122,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 3px;
+  height: 0.1875rem;
   background-color: #ff0000;
 }
 
@@ -93,8 +130,64 @@
   background-color: #0d47a1;
   color: white;
   border: none;
-  padding: 4px 12px;
-  border-radius: 8px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 768px) {
+  .card-solicitacao {
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .fotoPsico {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .nome {
+    font-size: 0.9375rem;
+  }
+
+  .idade,
+  .crp,
+  .avaliacao,
+  .status {
+    font-size: 0.8125rem;
+  }
+
+  .cancelar-btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-solicitacao {
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .fotoPsico {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .nome {
+    font-size: 0.875rem;
+  }
+
+  .idade,
+  .crp,
+  .avaliacao,
+  .status {
+    font-size: 0.75rem;
+  }
+
+  .cancelar-btn {
+    font-size: 0.6875rem;
+    padding: 0.1875rem 0.4375rem;
+  }
 }
