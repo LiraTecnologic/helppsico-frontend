@@ -1,21 +1,64 @@
 .container {
-  padding: 32px;
-  text-align: center;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-  
+
 h1 {
-  font-size: 28px;
-  margin-bottom: 24px;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
 }
-  
+
 section {
-  margin-top: 40px;
+  margin-bottom: 2rem;
 }
-  
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #666;
+}
+
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(2, 600px);
-  gap: 32px;
-  justify-content: center;
-  margin-top: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.75rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 1.125rem;
+  }
 }
