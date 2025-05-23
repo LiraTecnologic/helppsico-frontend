@@ -166,6 +166,8 @@ export default function TabelaHorarios({
                         ? acao === "para_disponibilizar"
                           ? "th-card-disponibilizar"
                           : "th-card-remover"
+                        : status === "Disponivel para Agendamento"
+                        ? "th-card-disponivel"
                         : ""
                     }`}
                     onClick={() => toggleSelecionado(id)}
@@ -173,7 +175,7 @@ export default function TabelaHorarios({
                     <div
                       className={`th-status ${
                         status === "Disponibilizar Agendamento"
-                          ? "th-status-livre para trabalhar"
+                          ? "th-status-livre"
                           : "th-status-disponivel"
                       }`}
                     >

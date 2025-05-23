@@ -43,7 +43,7 @@
 }
 
 .th-config-item p{
-  font-size: 14px;
+  font-size: 1.3rem;
 }
 
 .th-dias {
@@ -92,7 +92,7 @@
 }
 
 .th-dia-titulo {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #0d42bd;
   margin-bottom: 0.5rem;
   text-align: center;
@@ -116,7 +116,7 @@
 
 .th-horario {
   font-size: 1rem;
-  color: #333;
+  color: #111111;
 }
 
 .th-card {
@@ -143,7 +143,7 @@
 }
 
 .th-status-disponivel {
-  color: green;
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -187,4 +187,18 @@
 
 .th-botao-area{
   margin-top: 20px;
+}
+
+.th-card-disponivel {
+  background-color: #2563EB;
+  border-left: 4px solid #042b5f;
+}
+
+.th-card-disponivel .th-horario {
+  color: white;
+}
+
+.th-card-remover .th-status {
+  color: black !important;
+  font-weight: 500;
 }
