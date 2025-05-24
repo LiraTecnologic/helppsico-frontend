@@ -1,0 +1,18 @@
+.div-card-info-psico {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: 40%;
+    height: 10rem;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0.3rem 0.3rem 0.5rem rgb(181, 181, 181);
+}
+
+.div-card-info-psico img {
+    width: 14%;
+    height: 7rem;
+    border-radius: 50%;    
+}

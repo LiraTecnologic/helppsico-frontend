@@ -1,0 +1,68 @@
+.div-card-documento {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    width: 20rem;
+}
+
+.div-img-info-doc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+.custom-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.3s;
+  margin-bottom: 15px;
+}
+
+.custom-radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-radio .checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #1E40AF; /* azul */
+  border-radius: 50%;
+  position: relative;
+  transition: 0.3s;
+}
+
+.custom-radio input:checked + .checkmark {
+  background-color: #1E40AF;
+  border-color: #1E40AF;
+}
+
+.custom-radio input:checked + .checkmark::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.custom-radio .text {
+  font-weight: bold;
+  font-size: 16px;
+}
+
