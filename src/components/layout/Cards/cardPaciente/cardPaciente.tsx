@@ -25,7 +25,7 @@ export default function CardPaciente(props: CardPacienteProps) {
           <p className="telefone">{props.telefone}</p>
         </div>
       </div>
-
+      
       <button
         className={props.temProntuario ? "btn-prontuario" : "btn-sem-prontuario"}
         disabled={!props.temProntuario}

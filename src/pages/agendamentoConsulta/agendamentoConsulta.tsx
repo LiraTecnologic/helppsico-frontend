@@ -11,13 +11,12 @@ export default function AgendamentoConsulta(){
         urlFoto: FotoPsicoloco,
         nome: "Dra. Mariana Silva",
         biografia: "Psicóloga clínica especializada em terapia cognitivo-comportamental com mais de 5 anos de experiência.",
-        tempoSessao: "50 minutos"
+        tempoSessao: "50 minutos",
+        valor: 100
     };  
 
     const dadosConsultaPsicologo = {
-        selecionado: 2,
-        valor: 100,
-        valorTotal: 200
+        selecionado: 7
     }
 
     return(
@@ -37,8 +36,8 @@ export default function AgendamentoConsulta(){
                     <div>
                         <DadosConsultaPsicologo
                             selecionado={dadosConsultaPsicologo.selecionado}
-                            valor={dadosConsultaPsicologo.valor}
-                            valorTotal={dadosConsultaPsicologo.valorTotal}
+                            valor={dadosPsicologo.valor}
+                            valorTotal={dadosConsultaPsicologo.selecionado * dadosPsicologo.valor}
                         />
                     </div>
                 </div>
