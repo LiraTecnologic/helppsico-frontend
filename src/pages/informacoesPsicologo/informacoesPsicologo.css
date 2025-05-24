@@ -9,6 +9,10 @@ main {
     gap: 2rem;
 }
 
+.estrela-fundo-cinza {
+    background-color: #F3F4F6;
+}
+
 .section-psico-bio {
     display: flex;
     flex-direction: row;
@@ -78,10 +82,6 @@ hr {
     display: flex;
     flex-direction: column;
     gap: 4rem;
-}
-
-img {
-    background-color: #F3F4F6;;
 }
 
 .main-info-psicologico {
