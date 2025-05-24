@@ -1,19 +1,26 @@
 import ConsultaModel from '../../../../models/consulta';
-import calcular from '../../../../utils/calculoData'
-import formatarDataHora from '../../../../utils/formataData'
-
+import calcular from '../../../../utils/calculoData';
+import formatarDataHora from '../../../../utils/formataData';
 import './proximaSessao.css';
 
 interface ProximaSessaoProps {
-  consulta: ConsultaModel,
-  verMais: boolean,
-  fluxo: string,
-  sessaoMarcada: boolean
+  consulta: ConsultaModel;
+  verMais: boolean;
+  fluxo: string;
+  sessaoMarcada: boolean;
 }
 
 export default function ProximasSessoes(props: ProximaSessaoProps) {
-  const idade = calcular(props.consulta.paciente.dataNascimento);
-  const dataFormatada = formatarDataHora(props.consulta.dataHora);
+  const paciente = props.consulta?.paciente;
+  const dataNascimento = paciente?.dataNascimento;
+  const dataHora = props.consulta?.dataHora;
+
+  if (!paciente || !dataNascimento || !dataHora) {
+    return null; 
+  }
+
+  const idade = calcular(dataNascimento);
+  const dataFormatada = formatarDataHora(dataHora);
 
   return (
     <div className="proxima-sessao">
@@ -29,27 +36,24 @@ export default function ProximasSessoes(props: ProximaSessaoProps) {
           <div className="sessao-info">
             <img
               className="sessao-foto"
-              src={props.consulta.paciente.fotoUrl}
-              alt="Foto do psicólogo"
+              src={paciente.fotoUrl}
+              alt="Foto do paciente"
             />
             <div className="sessao-textos">
-              <p className="sessao-nome">{props.consulta.paciente.nome}</p>
+              <p className="sessao-nome">{paciente.nome}</p>
               <p>{idade} anos</p>
-              <p>{props.consulta.paciente.telefone}</p>
+              <p>{paciente.telefone}</p>
             </div>
           </div>
 
           <div className="sessao-detalhes">
-            <p>Local: {props.consulta.paciente.endereco.rua}</p>
+            <p>Local: {paciente.endereco.rua}</p>
             <p>Data: {dataFormatada.data}</p>
             <p>Horário: {dataFormatada.hora}</p>
           </div>
 
           <div className="sessao-pagamento">
-            <p><strong>Valor:</strong> {props.consulta.valor}</p>
-            {/* <span className={`sessao-status ${statusPagamento?.toLowerCase().replace(' ', '-')}`}>
-                {statusPagamento}
-            </span> */}
+            <p><strong>Valor:</strong> R$ {props.consulta.valor}</p>
           </div>
         </div>
       ) : (
