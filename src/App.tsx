@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 // Telas do fluxo de Paciente
 import LoginPaciente from '../src/pages/loginPaciente/loginPaciente';
@@ -7,18 +10,29 @@ import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
+import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
 
-// Telas do fluco de Pscicologo
+// Telas do fluxo de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
 import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
-import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
+
+
+import GerenciamentoDeHorarios from "./pages/gereciamentoHorarios/gerenciamentoHorarios";
+import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
+import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
+
+//Nenhum fluxo
+import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+
 
 
 function App() {
   return (
+
+
     <Router>
       <Routes>
         {/* FLUXO DE PACIENTE */}
@@ -37,8 +51,15 @@ function App() {
         <Route path="/listagemPacientes" element={<ListagemPacientes />} />
         <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
         <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
-        
-      </Routes>  
+        <Route path="/gerenciamentoHorarios" element={<GerenciamentoDeHorarios />} /> 
+        <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
+        <Route path="/detalhesProntuario" element={<DetalhesProntuario />} />
+
+        {/* Nenhum fluxo */}
+        <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
+
+      </Routes>
+      <ToastContainer/>
     </Router>
   )
 }

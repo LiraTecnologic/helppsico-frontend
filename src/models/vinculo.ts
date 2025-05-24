@@ -15,3 +15,4 @@ enum StatusVinculo {
 }
 
 export {StatusVinculo, };
+

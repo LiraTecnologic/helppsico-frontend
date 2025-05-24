@@ -9,7 +9,7 @@ interface Avaliacao {
     nota: number
 }
 
-export default function CardAvaliacao(avaliacao: Avaliacao) {
+export default function CardAvaliacaoCrp(avaliacao: Avaliacao) {
     
     function formatarData(dataISO: string): string {
         const data = new Date(dataISO);
@@ -23,15 +23,21 @@ export default function CardAvaliacao(avaliacao: Avaliacao) {
     return (
         <div className="card-avaliacao-listagem">
             <div className="card-avaliacao-info">
-                <img src={avaliacao.fotoPaciente} alt="Foto psicologo" />
+                <img 
+                    src={avaliacao.fotoPaciente} 
+                    alt={`Foto de ${avaliacao.nomePaciente}`}
+                    className="foto-paciente-avaliacao"
+                />
                 <div className="nome-data-avaliacao">
                     <p className="nome-paciente">{avaliacao.nomePaciente}</p>
                     <p className="data-avaliacao">{formatarData(avaliacao.data)}</p>
                 </div>
-                <Estrelas 
-                    nota={avaliacao.nota}
-                    className="estrelas-custom"
-                />
+                <div className="estrelas-container">
+                    <Estrelas 
+                        nota={avaliacao.nota}
+                        className="estrelas-custom"
+                    />
+                </div>
             </div>
             <p className="conteudo-avaliacao">{avaliacao.conteudo}</p>
         </div>

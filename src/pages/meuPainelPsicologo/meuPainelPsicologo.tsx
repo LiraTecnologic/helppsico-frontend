@@ -3,38 +3,96 @@ import Header from '../../components/layout/header/header';
 import ProximasSessoes from '../../components/layout/Cards/proximaSessao/proximaSessao';
 import ListagemDocumentos from '../../components/layout/Cards/listagemDeDocumentos/listagemDocumentos';
 import ListagemDePacientes from '../../components/layout/listagemDePacientes/listagemDePacientes';
+import { useState, useEffect } from 'react';
+import ConsultaModel from '../../models/consulta';
+import VinculoModel from '../../models/vinculo';
+import ProntuarioModel from '../../models/prontuario';
+import { consultaProntuariosPsicologo } from "../../services/prontuarios.service";
+import { consultaSessoesFuturas } from '../../services/consultas.service';
+import { consultaVinculosPsicologo } from '../../services/vinculos.service'
+import PsicologoModel from '../../models/psicologo';
 
-export default function MeuPainelPsicologo(){
-    const documentos = [
-        { id: '1', titulo: 'Documento bonito' },
-        { id: '2', titulo: 'Relatório de Sessão' },
-        { id: '3', titulo: 'Plano de Tratamento' },
-        { id: '4', titulo: 'Andre feioso' },
-        { id: '5', titulo: 'Andre feioso' }
-    ];
+export default function MeuPainelPsicologo() {
 
-    const pacientes = [
-        { fotoUrl: 'https://forbes.com.br/wp-content/uploads/2021/06/ForbesTech_Lucas-Carrilho-Pessoa-group-project-manager-do-iFood_Divulgacao.png', nome: 'João Victor' },
-        { fotoUrl: 'https://forbes.com.br/wp-content/uploads/2021/06/ForbesTech_Lucas-Carrilho-Pessoa-group-project-manager-do-iFood_Divulgacao.png', nome: 'Maria Souza' },
-        { fotoUrl: 'https://forbes.com.br/wp-content/uploads/2021/06/ForbesTech_Lucas-Carrilho-Pessoa-group-project-manager-do-iFood_Divulgacao.png', nome: 'Carlos Lima' }
-      ];
+    const [consultas, setConsutas] = useState<ConsultaModel[]>([]);
+    const [vinculos, setVinculos] = useState<VinculoModel[]>([]);
+    const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
+
+    useEffect(() => {
+        async function carregarProntuarios(id: string) {
+            const prontuariosConsultados = await consultaProntuariosPsicologo(id, 1);
+            console.log('Prontuarios: ', prontuariosConsultados);
+            setProntuarios(prontuariosConsultados.content);
+        }
+
+        async function carregarConsultas(id: string) {
+            const consultasConsultadas = await consultaSessoesFuturas(id, 1);
+            console.log('Consultas: ', consultasConsultadas);
+
+            const consultasOrdenadas = consultasConsultadas.content.sort((a, b) => {
+                const dataA = new Date(a.dataHora).getTime();
+                const dataB = new Date(b.dataHora).getTime();
+                const agora = Date.now();
+
+                const diffA = Math.abs(dataA - agora);
+                const diffB = Math.abs(dataB - agora);
+
+                return diffA - diffB;
+            });
+
+            setConsutas(consultasOrdenadas);
+        }
+
+        async function carregarVinculos(id: string) {
+            const vinculosConsultados = await consultaVinculosPsicologo(id, 1);
+            console.log('Vinculos: ', vinculosConsultados);
+            setVinculos(vinculosConsultados.content);
+        }
+
+
+        // // Apenas nessa task para funcionar integração
+        // const idRandomPsico = '71ff60f6-0272-41db-89fb-621c488b8642';
+        // localStorage.setItem('psicologoLogado', idRandomPsico);
+
+        // const psicologoString: string = localStorage.getItem('psicologoLogado');
+
+        // const psicologoId: string = JSON.parse(psicologoString);
+
+        const psicologoId = '71ff60f6-0272-41db-89fb-621c488b8642';
+
+        carregarConsultas(psicologoId);
+        carregarProntuarios(psicologoId);
+        carregarVinculos(psicologoId);
+
+    }, []);
+
+
+
+    const sessaoMarcada = consultas.length > 0;;
 
     const handleDocumentoClick = (id: string) => {
         console.log(`Documento com ID ${id} foi clicado`);
         alert("clicou no documento");
     };
 
-    return(
+    return (
         <>
-            <Header fluxo='meuPainel' />
-            <ProximasSessoes sessaoMarcada={false} verMais={true} fluxo='psicologo' />
+            <Header fluxo='meuPainel' headerPsicologo={true} />
+            {consultas.length > 0 && (
+                <ProximasSessoes
+                    sessaoMarcada={true}
+                    verMais={true}
+                    fluxo='psicologo'
+                    consulta={consultas[0]}
+                />
+            )}
             <div className="imagensPacientes">
-                <ListagemDePacientes pacientes={pacientes} verMais={true} />
+                <ListagemDePacientes vinculos={vinculos} verMais={true} />
             </div>
             <h1 className='prontuarioTittle'>Prontuário</h1>
-            <ListagemDocumentos 
-                documentos={documentos} 
-                onDocumentoClick={handleDocumentoClick} 
+            <ListagemDocumentos
+                documentos={prontuarios}
+                onDocumentoClick={handleDocumentoClick}
             />
         </>
     )

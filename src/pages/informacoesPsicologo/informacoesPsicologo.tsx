@@ -84,11 +84,11 @@ export default function InformacoesPsicologo() {
 
     return (
         <>
-            <Header fluxo="" />
+            <Header fluxo="" headerPsicologo={false} />
             <main className="main-info-psicologico">
                 <div className="div-psicologo">
-                    <img src={FotoPsicologo} alt="Foto psicólogo" />
-                    <h1>{psicologo.nome} ({mediaNotaAvaliacao} <img src={Estrela} alt="Icon estrela" />)</h1>
+                    <img className="estrela-fundo-cinza" src={FotoPsicologo} alt="Foto psicólogo" />
+                    <h1>{psicologo.nome} ({mediaNotaAvaliacao} <img className="estrela-fundo-cinza" src={Estrela} alt="Icon estrela" />)</h1>
                     <button>Vincular</button>
                     <div>
                         <p>{quantidadeVinculados} vinculados | {avaliacaos.length} avaliações</p>
