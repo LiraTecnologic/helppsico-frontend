@@ -1,9 +1,9 @@
 import "./agendamentoConsulta.css"
 import Header from "../../components/layout/header/header"
-import TabelaHorario from "../../components/layout/tabela/tabelaHorario";
 import CardPsicologoConsulta from "../../components/layout/Cards/cardPsicologoConsulta/cardPsicologoConsulta";
 import FotoPsicoloco from "../../assets/Foto.png"
 import DadosConsultaPsicologo from "../../components/layout/Cards/dadosConsulta/dadosConsulta";
+import TabelaHorarios from "../../components/layout/configurarHorario/tabelaHorarios";
 
 export default function AgendamentoConsulta(){
 
@@ -11,8 +11,12 @@ export default function AgendamentoConsulta(){
         urlFoto: FotoPsicoloco,
         nome: "Dra. Mariana Silva",
         biografia: "Psicóloga clínica especializada em terapia cognitivo-comportamental com mais de 5 anos de experiência.",
-        tempoSessao: "50 minutos",
-        valor: 100
+        tempoSessao: 50,
+        valor: 100,
+        diasSelecionados: ["SEG", "TER", "QUA", "QUI", "SEX"],
+        inicio: "08:00",
+        fim: "18:00",
+        intervalo: 10
     };  
 
     const dadosConsultaPsicologo = {
@@ -43,8 +47,15 @@ export default function AgendamentoConsulta(){
                 </div>
 
                 <h2>Dias de Atendimento</h2>
-                <div>    
-                    <TabelaHorario/>
+                <div className="container-gerenciamento">
+                    <TabelaHorarios
+                        dias={dadosPsicologo.diasSelecionados}
+                        inicio={dadosPsicologo.inicio}
+                        fim={dadosPsicologo.fim}
+                        duracao={dadosPsicologo.tempoSessao}
+                        intervalo={dadosPsicologo.intervalo}
+                        agendamento={true}
+                    />
                 </div>
                 
                 <div className="container-botao-contulta">

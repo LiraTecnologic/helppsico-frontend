@@ -4,7 +4,7 @@ interface CardPsicologoConsultaProps {
   urlFoto: string;
   nome: string;
   biografia: string;
-  tempoSessao: string;
+  tempoSessao: number;
 }
 
 export default function CardPsicologoConsulta(props: CardPsicologoConsultaProps) {
@@ -20,7 +20,7 @@ export default function CardPsicologoConsulta(props: CardPsicologoConsultaProps)
                 <p className="biografia">{props.biografia}</p>
                 <div>
                     <span className='label'>Tempo de sessão: </span>
-                    <span className='tempo'>{props.tempoSessao}</span>
+                    <span className='tempo'>{props.tempoSessao} minutos</span>
                 </div>
             </div>
         </div>
