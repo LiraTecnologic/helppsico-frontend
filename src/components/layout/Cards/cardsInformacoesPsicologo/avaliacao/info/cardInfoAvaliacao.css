@@ -20,3 +20,7 @@
     justify-content: center;
     align-items: center;
 }
+
+.detalhes-card-avaliacao img {
+    background-color: #F3F4F6;
+}
