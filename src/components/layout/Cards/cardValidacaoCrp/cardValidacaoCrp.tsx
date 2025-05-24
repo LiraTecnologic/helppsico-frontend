@@ -19,7 +19,7 @@ export default function CardValidacaoCrp(props: Props) {
         <div className='card-validacao-crp'>
             <div className='div-info-1'>
                 <div className='div-img-info-1'>
-                    <img className='img-psicologo-card-crp' src="https://randomuser.me/api/portraits/women/45.jpg" alt="Foto psicologo" />
+                    <img className='img-psicologo-card-crp' src={props.validacao.psicologo.fotoUrl} alt="Foto psicologo" />
 
                     <div className='div-info-psico'>
                         <h2>{props.validacao.psicologo.nome}</h2>

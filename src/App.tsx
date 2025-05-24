@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 // Telas do fluxo de Paciente
 import LoginPaciente from '../src/pages/loginPaciente/loginPaciente';
@@ -18,16 +19,16 @@ import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
+import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 
 function App() {
   return (
-    
+
 
     <Router>
-      
       <Routes>
         {/* FLUXO DE PACIENTE */}
         <Route path="/loginPaciente" element={<LoginPaciente />} />
@@ -46,11 +47,13 @@ function App() {
         <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
         <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
         <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
+        <Route path="/detalhesProntuario" element={<DetalhesProntuario />} />
 
         {/* Nenhum fluxo */}
-        <Route path="/validacaoCrp" element={<ValidacaoCrp />}/>
-        
-      </Routes>  
+        <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
+
+      </Routes>
+      <ToastContainer/>
     </Router>
   )
 }
