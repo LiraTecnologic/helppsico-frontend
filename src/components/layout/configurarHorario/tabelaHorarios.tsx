@@ -1,3 +1,4 @@
+import HorairoModel from "../../../models/horario";
 import "./tabelaHorarios.css";
 import { useEffect, useState } from "react";
 
@@ -8,6 +9,7 @@ interface TabelaHorariosProps {
   duracao: number;
   intervalo: number;
   onEditar: () => void;
+  horarios: HorairoModel[];
 }
 
 const nomesDias: Record<string, string> = {
@@ -46,7 +48,7 @@ function gerarIntervalos(
   return intervalos;
 }
 
-type StatusCard = "Disponibilizar Agendamento" | "Disponivel para Agendamento";
+type StatusCard = "Disponibilizar Agendamento" | "Disponivel para Agendamento" | "Reseservado" ;
 type AcaoSelecionada = "para_disponibilizar" | "para_remover";
 
 export default function TabelaHorarios({
