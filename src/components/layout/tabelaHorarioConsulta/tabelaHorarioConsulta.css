@@ -66,7 +66,6 @@
   width: fit-content;
 }
 
-/* SCROLL GERAL */
 .th-tabela-scroll {
   overflow: auto;
   max-height: 500px;
@@ -81,7 +80,6 @@
   align-items: flex-start;
 }
 
-/* Coluna de cada dia */
 .th-dia-coluna {
   flex: 0 0 auto;
   display: flex;
@@ -99,7 +97,6 @@
   font-weight: bold;
 }
 
-/* Card */
 .th-card {
   background-color: #eaf1ff;
   border-left: 4px solid #0d42bd;
@@ -147,7 +144,6 @@
   font-weight: 600;
 }
 
-/* Botão fixo */
 .th-salvar-container {
   position: fixed;
   bottom: 20px;
@@ -173,13 +169,11 @@
   font-size: 12px;
 }
 
-/* Quando o horário será disponibilizado */
 .th-card-disponibilizar {
   background-color: #2564eb67;
   border-left: 4px solid #2563EB;
 }
 
-/* Quando o horário será removido */
 .th-card-remover {
   background-color: #fed7d7;
   border-left: 4px solid #e53e3e;
