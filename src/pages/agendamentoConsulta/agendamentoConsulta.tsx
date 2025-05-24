@@ -3,15 +3,16 @@ import Header from "../../components/layout/header/header"
 import CardPsicologoConsulta from "../../components/layout/Cards/cardPsicologoConsulta/cardPsicologoConsulta";
 import FotoPsicoloco from "../../assets/Foto.png"
 import DadosConsultaPsicologo from "../../components/layout/Cards/dadosConsulta/dadosConsulta";
-import TabelaHorarios from "../../components/layout/configurarHorario/tabelaHorarios";
+import TabelaHorarioConsulta from "../../components/layout/tabelaHorarioConsulta/tabelaHorarioConsulta";
+import { useEffect, useState } from "react";
 
 export default function AgendamentoConsulta(){
 
     const dadosPsicologo = {
         urlFoto: FotoPsicoloco,
-        nome: "Dra. Mariana Silva",
-        biografia: "Psicóloga clínica especializada em terapia cognitivo-comportamental com mais de 5 anos de experiência.",
-        tempoSessao: 50,
+        nome: "Dra. Pinchola",
+        biografia: "Trabalha com programas nas horas vagas",
+        tempoSessao: 30,
         valor: 100,
         diasSelecionados: ["SEG", "TER", "QUA", "QUI", "SEX"],
         inicio: "08:00",
@@ -19,9 +20,7 @@ export default function AgendamentoConsulta(){
         intervalo: 10
     };  
 
-    const dadosConsultaPsicologo = {
-        selecionado: 7
-    }
+    const [quantidadeSelecionada, setQuantidadeSelecionada] = useState(0);
 
     return(
         <>
@@ -39,22 +38,23 @@ export default function AgendamentoConsulta(){
                     </div>
                     <div>
                         <DadosConsultaPsicologo
-                            selecionado={dadosConsultaPsicologo.selecionado}
+                            selecionado={quantidadeSelecionada}
                             valor={dadosPsicologo.valor}
-                            valorTotal={dadosConsultaPsicologo.selecionado * dadosPsicologo.valor}
+                            valorTotal={quantidadeSelecionada * dadosPsicologo.valor}
                         />
                     </div>
                 </div>
 
                 <h2>Dias de Atendimento</h2>
                 <div className="container-gerenciamento">
-                    <TabelaHorarios
+                    <TabelaHorarioConsulta
                         dias={dadosPsicologo.diasSelecionados}
                         inicio={dadosPsicologo.inicio}
                         fim={dadosPsicologo.fim}
                         duracao={dadosPsicologo.tempoSessao}
                         intervalo={dadosPsicologo.intervalo}
                         agendamento={true}
+                        onSelecionado={(qtd) => setQuantidadeSelecionada(qtd)}
                     />
                 </div>
                 
