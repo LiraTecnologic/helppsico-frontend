@@ -28,6 +28,10 @@ main {
     gap: 1rem;
 }
 
+.div-psicologo img{
+    border-radius: 50%;
+}
+
 .div-psicologo button {
     background-color: #0D42BD;
     color: #F3F4F6;

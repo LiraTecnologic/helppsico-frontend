@@ -1,68 +1,39 @@
-import './tabelaHorario.css'
+import './tabelaHorario.css';
 
-export default function TabelaHorario() {
-    return (
-        <>
-            <table>
-                <thead>
-                    <tr>
-                        <th>segunda</th>
-                        <th>terça</th>
-                        <th>quarta</th>
-                        <th>quinta</th>
-                        <th>sexta</th>
-                        <th>sábado</th>
-                        <th>domingo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                    </tr>
-                    <tr>
-                        <td>08:00</td>
-                        <td>08:00</td>
-                        <td>08:00</td>
-                        <td>08:00</td>
-                        <td>08:00</td>
-                        <td>08:00</td>
-                        <td>08:00</td>
-                    </tr>
-                    <tr>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                    </tr>
-                    <tr>
-                        <td>09:00</td>
-                        <td>09:00</td>
-                        <td>09:00</td>
-                        <td>09:00</td>
-                        <td>09:00</td>
-                        <td>09:00</td>
-                        <td>09:00</td>
-                    </tr>
-                    <tr>
-                        <td>10:00</td>
-                        <td>10:00</td>
-                        <td>10:00</td>
-                        <td>10:00</td>
-                        <td>10:00</td>
-                        <td>10:00</td>
-                        <td>10:00</td>
-                    </tr>
-                </tbody>
-            </table>
-        </>
-    );
+type TabelaHorarioProps = {
+  diasSelecionados: string[];
+  horariosInicio: string[];
+};
+
+const nomeDiaMap: Record<string, string> = {
+  seg: 'Segunda',
+  ter: 'Terça',
+  qua: 'Quarta',
+  qui: 'Quinta',
+  sex: 'Sexta',
+  sab: 'Sábado',
+  dom: 'Domingo',
+};
+
+export default function TabelaHorario({ diasSelecionados, horariosInicio }: TabelaHorarioProps) {
+  return (
+    <table>
+      <thead>
+        <tr>
+          {diasSelecionados.map((dia) => (
+            <th key={dia}>{nomeDiaMap[dia] || dia}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {horariosInicio.map((hora, i) => (
+          <tr key={i}>
+            {diasSelecionados.map((dia) => (
+              <td key={dia + i}>{hora}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 }
