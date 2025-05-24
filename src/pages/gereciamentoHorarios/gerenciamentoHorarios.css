@@ -1,0 +1,25 @@
+.container-gerenciamento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px);
+}
+
+.sem-config {
+    text-align: center;
+}
+
+.sem-config button {
+    margin-top: 10px;
+    color: white;
+    border: none;
+    background-color: #0044cc;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 10px;
+}
+
+.sem-config button:hover {
+    background-color: #003f99;
+}

@@ -18,12 +18,14 @@ import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo'
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
+import GerenciamentoDeHorarios from "./pages/gereciamentoHorarios/gerenciamentoHorarios";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
 import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
+
 
 function App() {
   return (
@@ -48,6 +50,7 @@ function App() {
         <Route path="/listagemPacientes" element={<ListagemPacientes />} />
         <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
         <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
+        <Route path="/gerenciamentoHorarios" element={<GerenciamentoDeHorarios />} /> 
         <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
         <Route path="/detalhesProntuario" element={<DetalhesProntuario />} />
 
