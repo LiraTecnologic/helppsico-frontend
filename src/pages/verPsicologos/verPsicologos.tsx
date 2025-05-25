@@ -5,9 +5,13 @@ import CardPsicologo from '../../components/layout/Cards/cardPsicologo/cardPsico
 import Pesquisa from '../../components/layout/pesquisa/pesquisa';
 import Carrossel from '../../components/layout/carrossel/carrossel';
 import { listarPsicologos } from '../../services/listarPsicologos.service';
+import { listarAvaliacoesPorPsicologo } from '../../services/listarAvaliacoesPorPsicologo';
 import PsicologoModel from '../../models/psicologo';
+import calcular from '../../utils/calculoData';
+import calcularMedia from '../../utils/mediaAvaliacao';
+import qtdeAvaliacao from '../../utils/qtdeAvaliacao';
 
-interface CardPsicologoProps {
+type ProfissionalCard = {
   urlFoto: string;
   nome: string;
   idade: number;
@@ -15,44 +19,41 @@ interface CardPsicologoProps {
   mediaAvaliacoes: number;
   quantidadeAvaliacoes: number;
   biografia: string;
-}
-
-const calcularIdade = (dataNascimento: string) => {
-  const hoje = new Date();
-  const nascimento = new Date(dataNascimento);
-  let idade = hoje.getFullYear() - nascimento.getFullYear();
-  const mes = hoje.getMonth() - nascimento.getMonth();
-  if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
-    idade--;
-  }
-  return idade;
 };
-
-function mapParaCardPsicologo(psicologo: PsicologoModel): CardPsicologoProps {
-  return {
-    urlFoto: psicologo.fotoUrl,
-    nome: psicologo.nome,
-    idade: calcularIdade(psicologo.dataNascimento),
-    crp: psicologo.crp,
-    mediaAvaliacoes: 4.5,
-    quantidadeAvaliacoes: 10,
-    biografia: psicologo.biografia,
-  };
-}
 
 export default function VerPsicologos() {
   const [pesquisaTermo, setPesquisaTermo] = useState('');
-  const [profissionais, setProfissionais] = useState<PsicologoModel[]>([]);
+  const [profissionais, setProfissionais] = useState<ProfissionalCard[]>([]);
 
   useEffect(() => {
-    listarPsicologos().then(setProfissionais);
+    const carregarDados = async () => {
+      const psicologos = await listarPsicologos();
+
+      const profissionaisComDados = await Promise.all(
+        psicologos.map(async (psicologo: PsicologoModel) => {
+          const avaliacoes = await listarAvaliacoesPorPsicologo(psicologo.id);
+
+          return {
+            urlFoto: psicologo.fotoUrl,
+            nome: psicologo.nome,
+            idade: calcular(psicologo.dataNascimento),
+            crp: psicologo.crp,
+            mediaAvaliacoes: calcularMedia(avaliacoes),
+            quantidadeAvaliacoes: qtdeAvaliacao(avaliacoes),
+            biografia: psicologo.biografia
+          };
+        })
+      );
+
+      setProfissionais(profissionaisComDados);
+    };
+
+    carregarDados();
   }, []);
 
   const profissionaisFiltrados = profissionais.filter((psicologo) =>
     psicologo.nome.toLowerCase().includes(pesquisaTermo.toLowerCase())
   );
-
-  const profissionaisParaCard = profissionaisFiltrados.map(mapParaCardPsicologo);
 
   const handlePesquisar = (termo: string) => {
     setPesquisaTermo(termo);
@@ -60,15 +61,15 @@ export default function VerPsicologos() {
 
   return (
     <>
-      <Header fluxo="verProfissionais" headerPsicologo={false}/>
-      <Carrossel profissionais={profissionais} />
+      <Header fluxo="verProfissionais" headerPsicologo={false} />
+      <Carrossel profissionais={profissionaisFiltrados} />
       <Pesquisa onPesquisar={handlePesquisar} />
-      {profissionaisParaCard.length === 0 ? (
+      {profissionaisFiltrados.length === 0 ? (
         <p className="mensagem-nenhum-psicologo">
           Nenhum psicólogo com esse nome foi encontrado.
         </p>
       ) : (
-        <CardPsicologo profissionais={profissionaisParaCard} />
+        <CardPsicologo profissionais={profissionaisFiltrados} />
       )}
     </>
   );
