@@ -1,7 +1,7 @@
 import './cardValidacaoCrp.css'
 import IconeCopia from '../../../../assets/icone-copia.png'
 import ValidacaoCrpModel from '../../../../models/validacaoCrp';
-import calcular from '../../../../utils/calucloData'
+import calcular from '../../../../utils/calculoData'
 import { copiarParaAreaDeTransferencia } from '../../../../utils/notificacoes';
 
 interface Props {

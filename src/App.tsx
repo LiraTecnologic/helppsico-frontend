@@ -7,7 +7,7 @@ import './App.css';
 import LoginPaciente from '../src/pages/loginPaciente/loginPaciente';
 import CadsatroPaciente from '../src/pages/cadastroPaciente/cadastroPaciente';
 import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
-import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
+import DetalhesSessao from "./pages/detalhesSessaoPaciente/detalhesSessaoPaciente";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";

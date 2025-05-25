@@ -5,7 +5,7 @@ import formatarDataHora from '../../../../utils/formataData'
 import './proximaSessao.css';
 
 interface ProximaSessaoProps {
-  consulta: ConsultaModel,
+  consulta  : ConsultaModel,
   verMais: boolean,
   fluxo: string,
   sessaoMarcada: boolean
