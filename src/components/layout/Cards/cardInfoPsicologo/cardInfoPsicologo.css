@@ -13,6 +13,9 @@
 
 .div-card-info-psico img {
     width: 14%;
-    height: 7rem;
     border-radius: 50%;    
+}
+
+.div-card-info-psico p {
+    color: #6B7280;
 }

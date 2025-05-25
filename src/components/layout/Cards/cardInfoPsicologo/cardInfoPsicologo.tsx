@@ -1,12 +1,18 @@
 import './cardInfoPsicologo.css';
 
-export default function CardInfoPsicologo() {
+interface CardInfoPsicologoProps {
+    nome: string,
+    crp: string,
+    urlFoto: string
+};
+
+export default function CardInfoPsicologo(props: CardInfoPsicologoProps) {
     return (
         <div className="div-card-info-psico">
-            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Imagem psicólogo" />
+            <img src={props.urlFoto} alt="Imagem psicólogo" />
             <div>
-                <h2>Dr. Marco Aurélio</h2>
-                <p>CRP: XXX-XXX-XX</p>
+                <h2>{props.nome}</h2>
+                <p>CRP: {props.crp}</p>
             </div>
         </div>
     );
