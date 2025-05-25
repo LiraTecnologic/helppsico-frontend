@@ -50,19 +50,13 @@
   border-color: #1E40AF;
 }
 
-.custom-radio input:checked + .checkmark::after {
-  content: "";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: white;
-}
-
 .custom-radio .text {
   font-weight: bold;
   font-size: 16px;
+}
+
+.div-card-documento.selected {
+  border: 2px solid #1E40AF;
+  background-color: #E0E7FF;
 }
 

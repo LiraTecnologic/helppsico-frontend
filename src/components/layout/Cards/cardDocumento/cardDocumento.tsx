@@ -1,18 +1,31 @@
 import DocPdf from '../../../../assets/doc-pdf.png'
 import './cardDocumento.css';
 
-export default function CardDocumento() {
-    return (
-        <div className='div-card-documento'>
-            <div className='div-img-info-doc'>
-                <img src={DocPdf} alt="Imagem documento pdf" />
-                <p>ATESTADO</p>
-            </div>
+interface CardDocumentoProps {
+    isSelected: boolean,
+    onSelect: () => void;
+}
 
-            <label className="custom-radio">
-                <input type="radio" name="documento" />
-                <span className="checkmark"></span>
-            </label>
-        </div>
-    );
+export default function CardDocumento({ isSelected, onSelect } : CardDocumentoProps) {
+    return (
+    <div
+      className={`div-card-documento ${isSelected ? 'selected' : ''}`}
+      onClick={onSelect}
+    >
+      <div className='div-img-info-doc'>
+        <img src={DocPdf} alt="Imagem documento pdf" />
+        <p>ATESTADO</p>
+      </div>
+
+      <label className="custom-radio">
+        <input
+          type="radio"
+          name="documento"
+          checked={isSelected}
+          onChange={() => {}} 
+        />
+        <span className="checkmark"></span>
+      </label>
+    </div>
+  );
 }

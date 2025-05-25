@@ -2,7 +2,7 @@ body {
     background-color: #F3F4F6;
 }
 
-main {
+.main-info-psicologico {
     display: flex;
     flex-direction: column;
     margin: 4rem 6rem 4rem 6rem;
