@@ -1,5 +1,5 @@
-import './CardSolicitacao.css';
-import foto from '../../../../assets/imagemPaciente.jpg';
+import "./CardSolicitacao.css";
+import foto from "../../../../assets/imagemPaciente.jpg";
 
 interface CardSolicitacaoProps {
   nome: string;
@@ -11,31 +11,39 @@ interface CardSolicitacaoProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export default function CardSolicitacaoVinculo(props: CardSolicitacaoProps) {
-  const { nome, idade, crp, avaliacao, status, botao, onClick } = props;
-
+export default function CardSolicitacaoVinculo({
+  nome,
+  idade,
+  crp,
+  avaliacao,
+  status,
+  onClick,
+  botao,
+}: CardSolicitacaoProps) {
   const getStatusClass = () => {
-    if (status === 'Pendente') return 'status status-pendente';
-    return 'status status-outro';
+    if (status === "Pendente") return "status status-pendente";
+    return "status status-outro";
   };
 
   return (
     <div className="card-solicitacao">
       <img className="fotoPsico" src={foto} alt="Foto do Psicólogo" />
-      
+
       <div className="info">
         <h2 className="nome">{nome}</h2>
         <p className="idade">{idade} anos</p>
         <p className="crp">CRP: {crp}</p>
         <div className="avaliacao">
-          <span>{avaliacao.toFixed(1).replace('.', ',')}</span>
+          <span>{avaliacao.toFixed(1).replace(".", ",")}</span>
           <span className="estrela">⭐</span>
         </div>
       </div>
 
       <div className="acoes">
         <span className={getStatusClass()}>{status}</span>
-        <button className="cancelar-btn" onClick={onClick}>{botao}</button>
+        <button className="cancelar-btn" onClick={onClick}>
+          {botao}
+        </button>
       </div>
     </div>
   );

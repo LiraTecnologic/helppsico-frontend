@@ -1,75 +1,75 @@
 .prontuarioContainer {
-    width: 300px;
-    padding: 16px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    font-family: Arial, sans-serif;
+  width: 300px;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: Arial, sans-serif;
 }
 
 .prontuarioHeader {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .prontuarioFotoPerfil {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .prontuarioNomePaciente {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .prontuarioCard {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    position: relative;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
 }
 
 .prontuarioCardHeader {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
 }
 
 .prontuarioIcone {
-    width: 24px;
-    height: 24px;
-    background-color: #3973f2;
-    mask-size: contain;
-    -webkit-mask-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+  width: 24px;
+  height: 24px;
+  background-color: #3973f2;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .prontuarioTitulo {
-    flex: 1;
-    font-weight: bold;
-    font-size: 14px;
+  flex: 1;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .prontuarioBotaoAbrir {
-    background-color: #eef3fc;
-    color: #3973f2;
-    border: none;
-    padding: 8px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #eef3fc;
+  color: #3973f2;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .prontuarioBotaoAbrir:hover {
-    background-color: #dce6f9;
+  background-color: #dce6f9;
 }

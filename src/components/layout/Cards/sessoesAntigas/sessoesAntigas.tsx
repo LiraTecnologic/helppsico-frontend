@@ -1,4 +1,4 @@
-import './sessoesAntigas.css';
+import "./sessoesAntigas.css";
 
 interface SessoesAntigasProps {
   sessaoFeita: boolean;
@@ -6,7 +6,7 @@ interface SessoesAntigasProps {
   data?: string;
   horario?: string;
   valor?: string;
-  statusPagamento?: 'Em aberto' | 'Pago' | 'Cancelado';
+  statusPagamento?: "Em aberto" | "Pago" | "Cancelado";
   urlFoto?: string;
 }
 
@@ -14,8 +14,10 @@ interface ListagemSessoesAntigasProps {
   sessoesAntigas: SessoesAntigasProps[];
 }
 
-export default function SessoesAntigas({ sessoesAntigas }: ListagemSessoesAntigasProps) {
-  const sessoesFeitas = sessoesAntigas.filter(s => s.sessaoFeita);
+export default function SessoesAntigas({
+  sessoesAntigas,
+}: ListagemSessoesAntigasProps) {
+  const sessoesFeitas = sessoesAntigas.filter((s) => s.sessaoFeita);
 
   return (
     <div className="sessao-antiga">
@@ -41,8 +43,14 @@ export default function SessoesAntigas({ sessoesAntigas }: ListagemSessoesAntiga
               </div>
 
               <div className="sessao-antiga-pagamento">
-                <p><strong>Valor:</strong> {sessao.valor}</p>
-                <span className={`sessao-antiga-status ${sessao.statusPagamento?.toLowerCase().replace(' ', '-')}`}>
+                <p>
+                  <strong>Valor:</strong> {sessao.valor}
+                </p>
+                <span
+                  className={`sessao-antiga-status ${sessao.statusPagamento
+                    ?.toLowerCase()
+                    .replace(" ", "-")}`}
+                >
                   {sessao.statusPagamento}
                 </span>
               </div>
@@ -51,7 +59,9 @@ export default function SessoesAntigas({ sessoesAntigas }: ListagemSessoesAntiga
         </div>
       ) : (
         <div className="sessao-antiga-nao-marcada">
-          <p className="titulo-nao-marcada">Ainda não marcou a próxima consulta?</p>
+          <p className="titulo-nao-marcada">
+            Ainda não marcou a próxima consulta?
+          </p>
           <p className="subtitulo-nao-marcada">
             Vá até o perfil do(a) seu(sua) psicólogo(a) e marque agora mesmo!
           </p>

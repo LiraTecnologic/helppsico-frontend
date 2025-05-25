@@ -82,14 +82,14 @@
 }
 
 .hp-card-rating {
-  color: #FFD700;
+  color: #ffd700;
   font-size: 18px;
   margin-top: 5px;
   margin-bottom: 10px;
 }
 
 .hp-card-rating .half {
-  background: linear-gradient(90deg, #FFD700 50%, #ccc 50%);
+  background: linear-gradient(90deg, #ffd700 50%, #ccc 50%);
 }
 
 .hp-rating-number {
@@ -108,12 +108,10 @@
   border-radius: 10px;
 }
 
-
-
 /* Setas Swiper */
 .swiper-button-prev,
 .swiper-button-next {
-  background: #E8E8E8;
+  background: #e8e8e8;
   border-radius: 50%;
   width: 40px;
   height: 40px;

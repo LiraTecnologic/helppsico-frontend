@@ -1,5 +1,5 @@
-import { useState, ChangeEvent } from 'react';
-import './criarProntuario.css';
+import { useState, ChangeEvent } from "react";
+import "./criarProntuario.css";
 
 interface Paciente {
   paciente: string;
@@ -17,15 +17,18 @@ interface CriarProntuarioProps {
   consultas: Consulta[];
 }
 
-export default function CriarProntuario({ pacientes, consultas }: CriarProntuarioProps) {
-  const [titulo, setTitulo] = useState('');
-  const [pacienteSelecionado, setPacienteSelecionado] = useState('');
-  const [consultaSelecionada, setConsultaSelecionada] = useState('');
-  const [conteudo, setConteudo] = useState('');
+export default function CriarProntuario({
+  pacientes,
+  consultas,
+}: CriarProntuarioProps) {
+  const [titulo, setTitulo] = useState("");
+  const [pacienteSelecionado, setPacienteSelecionado] = useState("");
+  const [consultaSelecionada, setConsultaSelecionada] = useState("");
+  const [conteudo, setConteudo] = useState("");
 
   const handlePacienteChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setPacienteSelecionado(e.target.value);
-    setConsultaSelecionada('');
+    setConsultaSelecionada("");
   };
 
   const consultasFiltradas = consultas.filter(
@@ -42,7 +45,9 @@ export default function CriarProntuario({ pacientes, consultas }: CriarProntuari
       <div className="form-prontuario">
         <div className="linha-campos">
           <div className="campo">
-            <label htmlFor="titulo" className="tittle-label">Título</label>
+            <label htmlFor="titulo" className="tittle-label">
+              Título
+            </label>
             <input
               type="text"
               id="titulo"
@@ -53,7 +58,9 @@ export default function CriarProntuario({ pacientes, consultas }: CriarProntuari
           </div>
 
           <div className="campo">
-            <label htmlFor="paciente" className="tittle-label">Paciente</label>
+            <label htmlFor="paciente" className="tittle-label">
+              Paciente
+            </label>
             <select
               id="paciente"
               value={pacienteSelecionado}
@@ -69,7 +76,9 @@ export default function CriarProntuario({ pacientes, consultas }: CriarProntuari
           </div>
 
           <div className="campo">
-            <label htmlFor="consulta" className="tittle-label">Consulta</label>
+            <label htmlFor="consulta" className="tittle-label">
+              Consulta
+            </label>
             <select
               id="consulta"
               value={consultaSelecionada}
@@ -87,17 +96,22 @@ export default function CriarProntuario({ pacientes, consultas }: CriarProntuari
         </div>
 
         <div className="campo-textarea">
-          <label htmlFor="conteudo" className="tittle-label">Conteúdo</label>
+          <label htmlFor="conteudo" className="tittle-label">
+            Conteúdo
+          </label>
           <textarea
             id="conteudo"
             value={conteudo}
             onChange={(e) => setConteudo(e.target.value)}
-            rows = "10"
+            rows="10"
           />
         </div>
 
         <div className="botoes">
-          <button className="btn-cancelar" onClick={() => window.location.reload()}>
+          <button
+            className="btn-cancelar"
+            onClick={() => window.location.reload()}
+          >
             Cancelar
           </button>
           <button
@@ -107,9 +121,9 @@ export default function CriarProntuario({ pacientes, consultas }: CriarProntuari
                 titulo,
                 pacienteSelecionado,
                 consultaSelecionada,
-                conteudo
+                conteudo,
               });
-              alert('Prontuário salvo!');
+              alert("Prontuário salvo!");
             }}
           >
             Salvar

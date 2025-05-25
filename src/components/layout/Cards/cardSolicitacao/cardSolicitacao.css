@@ -6,7 +6,7 @@
   border-radius: 12px;
   border: 1px solid #ccc;
   width: 500px;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   gap: 16px;
   justify-content: space-between;
 }
@@ -70,7 +70,7 @@
 }
 
 .status-pendente::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -80,7 +80,7 @@
 }
 
 .status-outro::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
