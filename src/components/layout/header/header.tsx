@@ -1,9 +1,9 @@
 import "./header.css";
-import "react";
 import imagemPaciente from "../../../assets/imagemPaciente.jpg";
 import logo from "../../../assets/logo.png";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface HeaderProps {
   fluxo: string;
@@ -11,9 +11,10 @@ interface HeaderProps {
 }
 
 export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
-  const [openMenu, setOpenMenu] = useState<Boolean>(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const closeMenu = () => setOpenMenu(false);
+  const usuario = headerPsicologo ? "psicologo" : "paciente";
 
   return (
     <>
@@ -30,18 +31,18 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
           <nav className="nav">
             <ul>
               <li className={fluxo === "meuPainel" ? "active" : ""}>
-                <a href="#meuPainel">Meu painel</a>
+                <Link to={`/${usuario}/painel`}>Meu painel</Link>
               </li>
               {headerPsicologo && (
                 <li className={fluxo === "meusPacientes" ? "active" : ""}>
-                  <a href="#meusPacientes">Meus pacientes</a>
+                  <Link to={`/${usuario}/pacientes`}>Meus pacientes</Link>
                 </li>
               )}
               <li className={fluxo === "minhasSessoes" ? "active" : ""}>
-                <a href="#minhasSessoes">Minhas sessões</a>
+                <Link to={`/${usuario}/sessao`}>Minhas sessões</Link>
               </li>
               <li className={fluxo === "verProfissionais" ? "active" : ""}>
-                <a href="#verProfissionais">Ver profissionais</a>
+                <Link to={`/psicologos`} state={{ headerPsicologo }}>Ver profissionais</Link>
               </li>
             </ul>
           </nav>
@@ -55,26 +56,26 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
       <nav className={`nav-mobile ${openMenu ? "open" : ""}`}>
         <ul>
           <li className={fluxo === "meuPainel" ? "active" : ""}>
-            <a href="#meuPainel" onClick={closeMenu}>
+            <Link to={`/${usuario}/painel`} onClick={closeMenu}>
               Meu painel
-            </a>
+            </Link>
           </li>
           {headerPsicologo && (
             <li className={fluxo === "meusPacientes" ? "active" : ""}>
-              <a href="#meusPacientes" onClick={closeMenu}>
+              <Link to={`/${usuario}/pacientes`} onClick={closeMenu}>
                 Meus pacientes
-              </a>
+              </Link>
             </li>
           )}
           <li className={fluxo === "minhasSessoes" ? "active" : ""}>
-            <a href="#minhasSessoes" onClick={closeMenu}>
+             <Link to={`/${usuario}/psicologo`} onClick={closeMenu}>  {/* ainda n feito */}
               Minhas sessões
-            </a>
+            </Link>
           </li>
           <li className={fluxo === "verProfissionais" ? "active" : ""}>
-            <a href="#verProfissionais" onClick={closeMenu}>
+            <Link to={`/psicologos`} onClick={closeMenu} state={{ headerPsicologo }}>
               Ver profissionais
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

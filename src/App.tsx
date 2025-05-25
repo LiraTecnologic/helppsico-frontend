@@ -34,7 +34,6 @@ function App() {
         <Route path="/paciente/cadastro" element={<CadastroPaciente />} />
         <Route path="/paciente/painel" element={<MeuPainelPaciente />} />
         <Route path="/paciente/sessao" element={<DetalhesSessao />} />
-        <Route path="/paciente/psicologos" element={<VerPsicologos />} />
         <Route path="/paciente/psicologo/perfil" element={<InformacoesPsicologo />} />
         <Route path="/paciente/solicitacao-vinculo" element={<SolicitacaoDeVinculo />} />
 
@@ -48,8 +47,12 @@ function App() {
         <Route path="/psicologo/prontuario/detalhes" element={<DetalhesProntuario />} />
         <Route path="/psicologo/horarios" element={<GerenciamentoDeHorarios />} />
 
+        {/* AMBOS OS FLUXOS */}
+        <Route path="/psicologos" element={<VerPsicologos />} />
+
         {/* NENHUM FLUXO */}
         <Route path="/validacao-crp" element={<ValidacaoCrp />} />
+        
       </Routes>
       <ToastContainer />
     </Router>
