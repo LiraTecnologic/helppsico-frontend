@@ -4,4 +4,4 @@ export default function formatarDataHora(dataAtendimento: string) {
     data: data.split("-").reverse().join("/"), 
     hora: hora.slice(0, 5), 
   };
-}
+} 

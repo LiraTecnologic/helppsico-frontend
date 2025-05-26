@@ -1,0 +1,46 @@
+import './minhasConsultasPaciente.css';
+import Header from '../../components/layout/header/header';
+import ProximasSessoes from '../../components/layout/Cards/proximaSessao/proximaSessao';
+import SessoesAntigas from '../../components/layout/Cards/sessoesAntigas/sessoesAntigas';
+import { useState, useEffect } from 'react';
+import ConsultaModel from '../../models/consulta';
+import { consultaSessoesFuturasPaciente, consultarSessoesAntigasPaciente } from '../../services/consultas.service'
+import consultaMaisRecente from '../../utils/consultaMaisRecente'
+
+export default function DetalhesSessao() {
+  const [consultaFutura, setConsultaFutura] = useState<ConsultaModel | null>(null);
+  const [consultasAntigas, setConsultasAntigas] = useState<ConsultaModel[] | []>([]);
+
+  useEffect(() => {
+    async function consultarConsultaFutura(idPaciente: string) {
+      const consultasFuturas = await consultaSessoesFuturasPaciente(idPaciente, 1);
+      setConsultaFutura(consultaMaisRecente(consultasFuturas.content));
+    }
+
+    async function consultarConsultasAntigas(idPaciente: string) {
+      const consultasAntigas = await consultarSessoesAntigasPaciente(idPaciente, 1);
+      setConsultasAntigas(consultasAntigas.content);
+    }
+
+    consultarConsultaFutura("teste");
+    consultarConsultasAntigas("teste");
+  }, []);
+
+  return (
+    <>
+      <Header fluxo="minhasSessoes" headerPsicologo={false} />
+      <h1 className="text-tittle">Minhas Consultas</h1>
+      {consultaFutura && (
+        <ProximasSessoes
+          consulta={consultaFutura}
+          verMais={true}
+          fluxo='paciente'
+          sessaoMarcada={true}
+        />
+      )}
+      <div style={{ marginTop: '48px' }}>
+        <SessoesAntigas sessoesAntigas={consultasAntigas} />
+      </div>
+    </>
+  );
+}
