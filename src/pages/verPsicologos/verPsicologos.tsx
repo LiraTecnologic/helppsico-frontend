@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
-import './verPsicologos.css';
-import Header from '../../components/layout/header/header';
-import CardPsicologo from '../../components/layout/Cards/cardPsicologo/cardPsicologo';
-import Pesquisa from '../../components/layout/pesquisa/pesquisa';
-import Carrossel from '../../components/layout/carrossel/carrossel';
-import { listarPsicologos } from '../../services/listarPsicologos.service';
-import { listarAvaliacoesPorPsicologo } from '../../services/listarAvaliacoesPorPsicologo';
-import PsicologoModel from '../../models/psicologo';
-import calcular from '../../utils/calculoData';
-import calcularMedia from '../../utils/mediaAvaliacao';
-import qtdeAvaliacao from '../../utils/qtdeAvaliacao';
+import { useEffect, useState } from "react";
+import "./verPsicologos.css";
+import Header from "../../components/layout/header/header";
+import CardPsicologo from "../../components/layout/Cards/cardPsicologo/cardPsicologo";
+import Pesquisa from "../../components/layout/pesquisa/pesquisa";
+import Carrossel from "../../components/layout/carrossel/carrossel";
+import { listarPsicologos } from "../../services/listarPsicologos.service";
+import { listarAvaliacoesPorPsicologo } from "../../services/listarAvaliacoesPorPsicologo";
+import PsicologoModel from "../../models/psicologo";
+import calcular from "../../utils/calculoData";
+import calcularMedia from "../../utils/mediaAvaliacao";
+import qtdeAvaliacao from "../../utils/qtdeAvaliacao";
+import { AvaliacaoModel } from "../../models/avaliacoes";
 
 type ProfissionalCard = {
   urlFoto: string;
@@ -21,34 +22,33 @@ type ProfissionalCard = {
   biografia: string;
 };
 
+interface PsicologoCompilado {
+  psicologo: PsicologoModel;
+  avaliacao: AvaliacaoModel[];
+}
+
 export default function VerPsicologos() {
-  const [pesquisaTermo, setPesquisaTermo] = useState('');
+  const [pesquisaTermo, setPesquisaTermo] = useState("");
   const [profissionais, setProfissionais] = useState<ProfissionalCard[]>([]);
+  const [psicologos, setPsicologos] = useState<PsicologoCompilado[]>([]);
 
   useEffect(() => {
-    const carregarDados = async () => {
-      const psicologos = await listarPsicologos();
+    async function carregarPsicologos(): Promise<PsicologoCompilado[]> {
+      const listaPsicologos = await listarPsicologos();
+      const compiladoPromises = listaPsicologos.map(async (psicologo) => {
+        const avaliacoes = await listarAvaliacoesPorPsicologo(psicologo.id);
+        return {
+          psicologo,
+          avaliacao: avaliacoes,
+        } as PsicologoCompilado;
+      });
 
-      const profissionaisComDados = await Promise.all(
-        psicologos.map(async (psicologo: PsicologoModel) => {
-          const avaliacoes = await listarAvaliacoesPorPsicologo(psicologo.id);
+      return await Promise.all(compiladoPromises);
+    }
 
-          return {
-            urlFoto: psicologo.fotoUrl,
-            nome: psicologo.nome,
-            idade: calcular(psicologo.dataNascimento),
-            crp: psicologo.crp,
-            mediaAvaliacoes: calcularMedia(avaliacoes),
-            quantidadeAvaliacoes: qtdeAvaliacao(avaliacoes),
-            biografia: psicologo.biografia
-          };
-        })
-      );
+    const propsCompilados =  await carregarPsicologos();
+    setPsicologos(propsCompilados)
 
-      setProfissionais(profissionaisComDados);
-    };
-
-    carregarDados();
   }, []);
 
   const profissionaisFiltrados = profissionais.filter((psicologo) =>
