@@ -1,5 +1,6 @@
 import "./prontuario.css";
 import Documento from "../../../assets/Documento.svg";
+import { Link } from "react-router-dom";
 
 interface ProntuarioProps {
   nomePaciente: string;
@@ -34,7 +35,7 @@ export default function Prontuario({
         </div>
 
         <button className="prontuarioBotaoAbrir" onClick={onClickAbrir}>
-          Abrir Prontuário
+          <Link to="/psicologo/prontuario/detalhes" className="botao-abrir">Abrir Prontuário</Link>
         </button>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import "./cardPsicologo.css";
+import { Link } from "react-router-dom";
 
 interface CardPsicologoProps {
   urlFoto: string;
@@ -12,9 +13,10 @@ interface CardPsicologoProps {
 
 interface CardPsicolog {
   profissionais: CardPsicologoProps[];
+  headerPsicologo: boolean;
 }
 
-export default function CardPsicologo({ profissionais }: CardPsicolog) {
+export default function CardPsicologo({ profissionais, headerPsicologo }: CardPsicolog) {
   return (
     <div className="cards-container">
       {profissionais.map((psicologo, index) => (
@@ -34,7 +36,7 @@ export default function CardPsicologo({ profissionais }: CardPsicolog) {
               ({psicologo.quantidadeAvaliacoes} avaliações)
             </p>
             <p className="biografia">{psicologo.biografia}</p>
-            <button className="btn-ver-mais">Ver mais</button>
+            <button className="btn-ver-mais"><Link to="/psicologos/perfil" className="botao-link" state={{ headerPsicologo }}>Ver mais</Link></button>
           </div>
         </div>
       ))}

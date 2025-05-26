@@ -34,7 +34,6 @@ function App() {
         <Route path="/paciente/cadastro" element={<CadastroPaciente />} />
         <Route path="/paciente/painel" element={<MeuPainelPaciente />} />
         <Route path="/paciente/sessao" element={<DetalhesSessao />} />
-        <Route path="/paciente/psicologo/perfil" element={<InformacoesPsicologo />} />
         <Route path="/paciente/solicitacao-vinculo" element={<SolicitacaoDeVinculo />} />
 
         {/* FLUXO DE PSICÓLOGO */}
@@ -49,6 +48,7 @@ function App() {
 
         {/* AMBOS OS FLUXOS */}
         <Route path="/psicologos" element={<VerPsicologos />} />
+        <Route path="/psicologos/perfil" element={<InformacoesPsicologo />} />
 
         {/* NENHUM FLUXO */}
         <Route path="/validacao-crp" element={<ValidacaoCrp />} />

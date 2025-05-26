@@ -30,7 +30,7 @@ export default function ListagemProntuario() {
                 <main className="listagemContainer">
                     <div className="listagemHeader">
                         <h1>Prontuário ({prontuarios.length})</h1>
-                        <Link to="/cadastrar-prontuario">
+                        <Link to="/psicologo/prontuario/novo">
                             <BotaoPrimario texto="Cadastrar Prontuário" />
                         </Link>
                     </div>

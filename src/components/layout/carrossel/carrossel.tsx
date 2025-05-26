@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Link } from "react-router-dom";
 import "./carrossel.css";
 
 interface Psicologo {
@@ -14,10 +15,11 @@ interface Psicologo {
 
 interface CarrosselPsicologosProps {
   profissionais: Psicologo[];
+  headerPsicologo: boolean;
 }
 
 export default function CarrosselPsicologos({
-  profissionais,
+  profissionais, headerPsicologo
 }: CarrosselPsicologosProps) {
   const topPsicologos = [...profissionais]
     .sort((a, b) => b.mediaAvaliacoes - a.mediaAvaliacoes)
@@ -56,7 +58,7 @@ export default function CarrosselPsicologos({
                   </span>
                 </div>
                 <div className="hp-card-button">
-                  <button>Ver mais</button>
+                  <button><Link to="/psicologos/perfil" className="botao-link" state={{ headerPsicologo }}>Ver mais</Link></button>
                 </div>
               </div>
             )}

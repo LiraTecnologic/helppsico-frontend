@@ -6,6 +6,7 @@ import PopupCancelamento from '../../components/layout/PopupCancelamento/popupCa
 import { StatusVinculo } from '../../models/vinculo'; 
 import { VinculoModel } from '../../models/vinculo'; 
 import { solicitarVinculosPaciente, cancelarSolicitacao } from './solicitiacaoDeVinculoService';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function SolicitacaoDeVinculo() {
   const [popupCancelar, setPopupCancelar] = useState(false);
@@ -13,6 +14,7 @@ export default function SolicitacaoDeVinculo() {
   const [vinculos, setVinculos] = useState<VinculoModel[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
+  const { pathname } = useLocation();
 
   // const idPaciente = localStorage.getItem('idPaciente');
   const idPaciente = "1"; 
@@ -46,6 +48,7 @@ export default function SolicitacaoDeVinculo() {
   }, [idPaciente]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     carregarVinculos();
   }, [carregarVinculos]);
 

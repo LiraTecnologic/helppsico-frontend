@@ -1,5 +1,6 @@
 import VinculoModel from "../../../models/vinculo";
 import "./listagemDePacientes.css";
+import { Link } from "react-router-dom";
 
 interface ListagemDePacientesProps {
   vinculos: VinculoModel[];
@@ -14,7 +15,7 @@ export default function ListagemDePacientes({
     <>
       <div className="listagem-pacientes-cabecalho">
         <h1>Pacientes</h1>
-        {verMais && <button className="botao-ver-mais">Ver mais</button>}
+        {verMais && <button className="botao-ver-mais"><Link to="/psicologo/pacientes" className="botao-link">Ver mais</Link></button>}
       </div>
       {vinculos.length === 0 ? (
         <p className="mensagem-vazia">

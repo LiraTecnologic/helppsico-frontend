@@ -2,11 +2,12 @@ import './loginPsicologo.css';
 import InputTotal from '../../components/commmon/Inputs/InputTotal';
 import Botao from '../../components/commmon/botoes/botao/botao';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [crp, setCrp] = useState('');
     const [senha, setSenha] = useState('');
+    const navigate = useNavigate();
 
     const validarSenha = (senha: string) => {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
@@ -23,6 +24,8 @@ const Login = () => {
             alert('A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
             return;
         }
+
+        return(navigate("/psicologo/painel"))
     };
 
     return (

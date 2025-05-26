@@ -145,6 +145,11 @@
   background-color: #cecece;
 }
 
+.botao-link{
+  text-decoration: none;
+  color: white;
+}
+
 /* Responsivo */
 @media (max-width: 768px) {
   .hp-carousel {

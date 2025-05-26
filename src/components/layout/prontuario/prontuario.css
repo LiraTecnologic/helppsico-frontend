@@ -70,6 +70,8 @@
   transition: background-color 0.3s;
 }
 
-.prontuarioBotaoAbrir:hover {
-  background-color: #dce6f9;
+.botao-abrir{
+  background-color: #eef3fc;
+  color: #3973f2;
+  text-decoration: none;
 }
