@@ -7,7 +7,6 @@ export function listarPsicologos(): Promise<PsicologoModel[]> {
     )
     .then(response => response.data)
     .catch(err => {
-        console.error("Erro ao carregar psicólogos:", err);
         return [];
     });
 }

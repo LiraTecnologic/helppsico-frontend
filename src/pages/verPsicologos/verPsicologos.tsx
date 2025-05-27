@@ -6,11 +6,11 @@ import Pesquisa from "../../components/layout/pesquisa/pesquisa";
 import Carrossel from "../../components/layout/carrossel/carrossel";
 import { listarPsicologos } from "../../services/listarPsicologos.service";
 import { listarAvaliacoesPorPsicologo } from "../../services/listarAvaliacoesPorPsicologo";
-import PsicologoModel from "../../models/psicologo";
+import { PsicologoCompilado } from "../../models/psicologo.compilado";
+
 import calcular from "../../utils/calculoData";
 import calcularMedia from "../../utils/mediaAvaliacao";
 import qtdeAvaliacao from "../../utils/qtdeAvaliacao";
-import { AvaliacaoModel } from "../../models/avaliacoes";
 
 type ProfissionalCard = {
   urlFoto: string;
@@ -22,19 +22,14 @@ type ProfissionalCard = {
   biografia: string;
 };
 
-interface PsicologoCompilado {
-  psicologo: PsicologoModel;
-  avaliacao: AvaliacaoModel[];
-}
-
 export default function VerPsicologos() {
   const [pesquisaTermo, setPesquisaTermo] = useState("");
   const [profissionais, setProfissionais] = useState<ProfissionalCard[]>([]);
-  const [psicologos, setPsicologos] = useState<PsicologoCompilado[]>([]);
 
   useEffect(() => {
-    async function carregarPsicologos(): Promise<PsicologoCompilado[]> {
+    async function carregarPsicologos() {
       const listaPsicologos = await listarPsicologos();
+
       const compiladoPromises = listaPsicologos.map(async (psicologo) => {
         const avaliacoes = await listarAvaliacoesPorPsicologo(psicologo.id);
         return {
@@ -43,16 +38,29 @@ export default function VerPsicologos() {
         } as PsicologoCompilado;
       });
 
-      return await Promise.all(compiladoPromises);
+      const compilado = await Promise.all(compiladoPromises);
+
+      // 👉 Mapear para o formato que os componentes precisam
+      const profissionaisMapeados: ProfissionalCard[] = compilado.map(
+        (item) => ({
+          urlFoto: item.psicologo.fotoUrl,
+          nome: item.psicologo.nome,
+          idade: calcular(item.psicologo.dataNascimento),
+          crp: item.psicologo.crp,
+          mediaAvaliacoes: calcularMedia(item.avaliacao),
+          quantidadeAvaliacoes: qtdeAvaliacao(item.avaliacao),
+          biografia: item.psicologo.biografia,
+        })
+      );
+
+      setProfissionais(profissionaisMapeados);
     }
 
-    const propsCompilados =  await carregarPsicologos();
-    setPsicologos(propsCompilados)
-
+    carregarPsicologos();
   }, []);
 
-  const profissionaisFiltrados = profissionais.filter((psicologo) =>
-    psicologo.nome.toLowerCase().includes(pesquisaTermo.toLowerCase())
+  const profissionaisFiltrados = profissionais.filter((profissional) =>
+    profissional.nome.toLowerCase().includes(pesquisaTermo.toLowerCase())
   );
 
   const handlePesquisar = (termo: string) => {
