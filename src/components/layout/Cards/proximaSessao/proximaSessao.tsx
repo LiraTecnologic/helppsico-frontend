@@ -1,6 +1,7 @@
 import ConsultaModel from "../../../../models/consulta";
 import calcular from "../../../../utils/calculoData";
 import formatarDataHora from "../../../../utils/formataData";
+import { Link } from "react-router-dom";
 
 import "./proximaSessao.css";
 
@@ -9,6 +10,7 @@ interface ProximaSessaoProps {
   verMais: boolean;
   fluxo: string;
   sessaoMarcada: boolean;
+
 }
 
 export default function ProximasSessoes({
@@ -24,7 +26,8 @@ export default function ProximasSessoes({
     <div className="proxima-sessao">
       <div className="proxima-sessao__cabecalho">
         <h1>Próxima sessão</h1>
-        {verMais && <button className="botao-ver-mais">Ver mais</button>}
+        {verMais && fluxo === "paciente" && <button className="botao-ver-mais"><Link to="/paciente/sessao">Ver mais</Link></button>}
+        {verMais && fluxo === "psicologo" && <button className="botao-ver-mais"><Link to="/paciente/sessao">Ver mais</Link></button>}{/*  falta tela */}
       </div>
 
       {sessaoMarcada ? (
@@ -63,9 +66,9 @@ export default function ProximasSessoes({
             Ainda não marcou a próxima consulta?
           </p>
           <p className="subtitulo-nao-marcada">
-            Vá até o perfil do(a) seu(sua) psicólogo(a) e marque agora mesmo!
+            Clique no botão abaixo e marque agora mesmo!
           </p>
-          <button className="botao-marcar">Marcar consulta</button>
+          <button className="botao-marcar"><Link to="">Marcar consulta</Link></button>{/* Falta tela  */}
         </div>
       ) : (
         <div className="sessao-nao-marcada">
