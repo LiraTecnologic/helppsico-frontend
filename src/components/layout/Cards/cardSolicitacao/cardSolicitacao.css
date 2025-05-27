@@ -1,58 +1,33 @@
 .card-solicitacao-vinculo {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  min-width: 350px;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-solicitacao-vinculo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-solicitacao-vinculo__content {
   display: flex;
   align-items: center;
-  background-color: #f9f9f9;
-  padding: 1rem 1.5rem;
-  border-radius: 0.75rem;
-  border: 1px solid #ccc;
-  width: 100%;
-  max-width: 31.25rem;
-  font-family: 'Segoe UI', sans-serif;
+  padding: 1.5rem;
   gap: 1rem;
-  justify-content: space-between;
-  flex-wrap: wrap;
 }
 
 .card-solicitacao-vinculo__foto {
-  width: 4.375rem;
-  height: 4.375rem;
-  border-radius: 0.75rem;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
   object-fit: cover;
-}
-
-@media (max-width: 480px) {
-  .card-solicitacao-vinculo {
-    padding: 0.75rem;
-    gap: 0.75rem;
-  }
-
-  .card-solicitacao-vinculo__foto {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-
-  .card-solicitacao-vinculo__info {
-    flex: 1;
-    min-width: calc(100% - 5rem);
-  }
-
-  .card-solicitacao-vinculo__nome {
-    font-size: 0.875rem;
-  }
-
-  .card-solicitacao-vinculo__idade,
-  .card-solicitacao-vinculo__crp,
-  .card-solicitacao-vinculo__avaliacao {
-    font-size: 0.75rem;
-  }
-
-  .card-solicitacao-vinculo__acoes {
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0.5rem;
-  }
+  flex-shrink: 0;
 }
 
 .card-solicitacao-vinculo__info {
@@ -61,133 +36,179 @@
   justify-content: center;
   flex-grow: 1;
   text-align: left;
-  gap: 0.125rem;
+  gap: 0.25rem;
 }
 
 .card-solicitacao-vinculo__nome {
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 1.1rem;
+  font-weight: 600;
   margin: 0;
+  color: #333;
+  line-height: 1.3;
 }
 
 .card-solicitacao-vinculo__idade,
 .card-solicitacao-vinculo__crp {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   margin: 0;
-  color: #333;
+  color: #666;
+  line-height: 1.2;
 }
 
 .card-solicitacao-vinculo__avaliacao {
   display: flex;
   align-items: center;
-  font-weight: bold;
-  font-size: 0.875rem;
+  font-weight: 600;
+  font-size: 0.9rem;
   gap: 0.25rem;
-  margin-top: 0.125rem;
+  margin-top: 0.25rem;
+  color: #333;
 }
 
 .card-solicitacao-vinculo__estrela {
-  color: gold;
+  color: #ffc107;
+  font-size: 1rem;
 }
 
 .card-solicitacao-vinculo__acoes {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-between;
-  height: 100%;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 1rem;
+  flex-shrink: 0;
 }
 
 .card-solicitacao-vinculo__status {
-  font-weight: bold;
-  font-size: 0.875rem;
-  position: relative;
-  padding-bottom: 0.125rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  text-align: center;
+  min-width: 80px;
 }
 
-.card-solicitacao-vinculo__status--pendente::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0.1875rem;
-  background-color: #ffe600;
+.card-solicitacao-vinculo__status--pendente {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
 }
 
-.card-solicitacao-vinculo__status--outro::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0.1875rem;
-  background-color: #ff0000;
+.card-solicitacao-vinculo__status--recusado {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
 
 .card-solicitacao-vinculo__botao {
-  background-color: #0d47a1;
-  color: white;
   border: none;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.card-solicitacao-vinculo__botao--cancelar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.card-solicitacao-vinculo__botao--cancelar:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+.card-solicitacao-vinculo__botao--ver-mais {
+  background-color: #007bff;
+  color: white;
+}
+
+.card-solicitacao-vinculo__botao--ver-mais:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 768px) {
   .card-solicitacao-vinculo {
-    padding: 0.75rem 1rem;
+    max-width: 100%;
+    min-width: auto;
+  }
+
+  .card-solicitacao-vinculo__content {
+    padding: 1.25rem;
     gap: 0.75rem;
   }
 
   .card-solicitacao-vinculo__foto {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 70px;
+    height: 70px;
   }
 
   .card-solicitacao-vinculo__nome {
-    font-size: 0.9375rem;
+    font-size: 1rem;
   }
 
   .card-solicitacao-vinculo__idade,
   .card-solicitacao-vinculo__crp,
   .card-solicitacao-vinculo__avaliacao,
   .card-solicitacao-vinculo__status {
-    font-size: 0.8125rem;
+    font-size: 0.85rem;
   }
 
   .card-solicitacao-vinculo__botao {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .card-solicitacao-vinculo {
-    padding: 0.5rem 0.75rem;
+  .card-solicitacao-vinculo__content {
+    padding: 1rem;
     gap: 0.5rem;
+    flex-direction: column;
+    text-align: center;
   }
 
   .card-solicitacao-vinculo__foto {
-    width: 3rem;
-    height: 3rem;
+    width: 60px;
+    height: 60px;
+    align-self: center;
+  }
+
+  .card-solicitacao-vinculo__info {
+    text-align: center;
+    width: 100%;
+  }
+
+  .card-solicitacao-vinculo__acoes {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
   }
 
   .card-solicitacao-vinculo__nome {
-    font-size: 0.875rem;
+    font-size: 0.95rem;
   }
 
   .card-solicitacao-vinculo__idade,
   .card-solicitacao-vinculo__crp,
   .card-solicitacao-vinculo__avaliacao,
   .card-solicitacao-vinculo__status {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 
   .card-solicitacao-vinculo__botao {
-    font-size: 0.6875rem;
-    padding: 0.1875rem 0.4375rem;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+    min-width: 70px;
+  }
+
+  .card-solicitacao-vinculo__avaliacao {
+    justify-content: center;
   }
 }
