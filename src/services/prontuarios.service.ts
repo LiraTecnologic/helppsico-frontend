@@ -34,6 +34,14 @@ export function consultarProntuarioPorId(idProntuario: string): Promise<Response
         });
 }
 
-export function editarProntuario() {
-    
+export function editarProntuario(idPsicologo: string, dados: ProntuarioModel): Promise<Response<ProntuarioModel>> {
+    return axios.put<Response<ProntuarioModel>>(`http://localhost:8081/prontuarios/${idPsicologo}`, dados)
+      .then(response => response.data)
+      .catch(error => {
+        console.error('Erro na requisição:', error);
+        return {
+            dado: {}  as ProntuarioModel,
+            erro: error
+        };
+      });
 }

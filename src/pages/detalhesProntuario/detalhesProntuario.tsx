@@ -31,9 +31,17 @@ export default function DetalhesProntuario() {
         setIsEditing(false);
     };
 
-    const handleSalvar = () => {
+    const handleSalvar = async () => {
+        if (!prontuario) return;
+    
         setIsEditing(false);
-        editarProntuario();
+    
+        try {
+            await editarProntuario(prontuario.id, prontuario);
+            console.log("Prontuário salvo com sucesso!");
+        } catch (error) {
+            console.error("Erro ao salvar prontuário:", error);
+        }
     };
 
     function formataIdentificacao(id: string) { 
