@@ -1,3 +1,7 @@
+.container-principal {
+  padding: 1rem;
+}
+
 .info-linhas {
   display: flex;
   gap: 30px;

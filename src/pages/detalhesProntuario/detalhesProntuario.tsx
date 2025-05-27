@@ -1,62 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./detlhesProntuario.css";
 import Header from "../../components/layout/header/header";
 import InputLeitura from "../../components/commmon/Inputs/InputLeitura";
+import ProntuarioModel from "../../models/prontuario";
+import { consultarProntuarioPorId } from "../../services/prontuarios.service";
 
 export default function DetalhesProntuario() {
     const [isEditing, setIsEditing] = useState(false);
 
-    const [formData, setFormData] = useState({
-        titulo: "Titulo teste",
-        paciente: "Eu mesmo",
-        consulta: "sessão #79 - 18/11/2005 ",
-        psicologo: "André Olivira - CRP xx/xxxxx",
-        conteudo: "O paciente compareceu à sessão relatando melhora significativa no quadro de ansiedade. Mencionou que as técnicas de respiração e mindfulness têm ajudado nos momentos de maior estresse, especialmente no ambiente de trabalho. Durante a sessão, trabalhamos na identificação de pensamentos automáticos negativos e suas origens. O paciente demonstrou boa capacidade de insight e conseguiu estabelecer conexões entre situações atuais e experiências passadas. Para a próxima semana, foi recomendado que continuasse com os exercícios de respiração diariamente e começasse a registrar seus pensamentos em um diário, especialmente quando sentir ansiedade. Próximos passos: aprofundar questões relacionadas à autoestima e reforçar estratégias de enfrentamento.",
-        dataCriacao: "20/02/2020",
-        dataEdicao: "21/02/2020"
-    });
+    const [prontuario, setProntuario] = useState<ProntuarioModel | null>(null);
 
-    const [originalData, setOriginalData] = useState(formData);
+    const [prontuarioOriginal, setProntuarioOriginal] = useState<ProntuarioModel | null>(null);
 
     const handleChange = (field: string, value: string) => {
-        setFormData({ ...formData, [field]: value });
+        setProntuario({ ...prontuario, [field]: value });
     };
 
     const handleEditar = () => {
-        setOriginalData(formData);
+        setProntuarioOriginal(prontuario);
         setIsEditing(true);
     };
 
     const handleCancelar = () => {
-        setFormData(originalData);
+        setProntuario(prontuarioOriginal);
         setIsEditing(false);
     };
 
     const handleSalvar = () => {
-        console.log("Salvando os dados:", formData);
         setIsEditing(false);
     };
 
+    useEffect(() => {
+        async function carregarProntuario(idPronturio: string) {
+            const prontuario = await consultarProntuarioPorId(idPronturio);
+            setProntuario(prontuario.dado);
+        }
+
+        carregarProntuario("teste");
+    }, []);
+
     return (
-        <>
+        <div>
             <Header fluxo="" headerPsicologo={true} />
-            <main>
+            <main className="container-principal">
                 <h1>Detalhes Do Prontuário</h1>
                 <div className="info-linhas">
                     <div className="info-bloco">
-                        {isEditing ? (
+                        {isEditing && prontuario && (
                             <>
                                 <h2 className="label-edicao">Título</h2>
                                 <input
                                     className="conteudoDoInput"
                                     type="text"
-                                    value={formData.titulo}
+                                    value={prontuario.titulo}
                                     onChange={(e) => handleChange("titulo", e.target.value)}
                                 />
                             </>
-                        ) : (
-                            <InputLeitura titulo="Título" value={formData.titulo} isContent={false} />
                         )}
+
+                        {!isEditing && prontuario && (
+                            <InputLeitura titulo="Título" value={prontuario.titulo} isContent={false} />
+                        )}
+
                     </div>
                     <div className="info-bloco">
                         {isEditing ? (
@@ -144,6 +149,6 @@ export default function DetalhesProntuario() {
                     </div>
                 </div>
             </main>
-        </>
+        </div>
     );
 }
