@@ -25,20 +25,20 @@ export default function SolicitacaoDeVinculo() {
   return (
     <>
       <Header fluxo="minhasSessoes" headerPsicologo={false} />
-      <div className="container">
-        <h1>Solicitações</h1>
+      <div className="solicitacao-vinculo__container">
+        <h1 className="solicitacao-vinculo__titulo">Solicitações</h1>
 
-        <section>
-          <h2>Pendentes</h2>
-          <div className="cards-grid">
+        <section className="solicitacao-vinculo__section">
+          <h2 className="solicitacao-vinculo__subtitulo">Pendentes</h2>
+          <div className="solicitacao-vinculo__cards-grid">
             <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Pendente" botao={textBotao("Pendente")} onClick={abrirCancelamento} />
             <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Pendente" botao={textBotao("Pendente")} onClick={abrirCancelamento} />
           </div>
         </section>
 
-        <section>
-          <h2>Recusados</h2>
-          <div className="cards-grid">
+        <section className="solicitacao-vinculo__section">
+          <h2 className="solicitacao-vinculo__subtitulo">Recusados</h2>
+          <div className="solicitacao-vinculo__cards-grid">
             <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Recusado" botao={textBotao("Recusado")} />
             <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Recusado" botao={textBotao("Recusado")} />
             <CardSolicitacao nome="João Victor Nascimento" idade={19} crp="xxxxxx" avaliacao={4.6} status="Recusado" botao={textBotao("Recusado")} />
