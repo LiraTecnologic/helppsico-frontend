@@ -40,7 +40,6 @@ export default function VerPsicologos() {
 
       const compilado = await Promise.all(compiladoPromises);
 
-      // 👉 Mapear para o formato que os componentes precisam
       const profissionaisMapeados: ProfissionalCard[] = compilado.map(
         (item) => ({
           urlFoto: item.psicologo.fotoUrl,
