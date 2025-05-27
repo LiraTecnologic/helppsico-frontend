@@ -27,7 +27,7 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
-
+import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
 
 
 function App() {
@@ -59,6 +59,7 @@ function App() {
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
+        <Route path="/requisicaoDocumento" element={<RequisicaoDocumento />} />
 
       </Routes>
       <ToastContainer/>
