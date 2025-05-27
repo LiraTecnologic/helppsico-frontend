@@ -12,8 +12,12 @@ export default function DetalhesProntuario() {
 
     const [prontuarioOriginal, setProntuarioOriginal] = useState<ProntuarioModel | null>(null);
 
-    const handleChange = (field: string, value: string) => {
-        setProntuario({ ...prontuario, [field]: value });
+    const handleChange = (field: keyof ProntuarioModel, value: string) => {
+        if (!prontuario) return;
+        setProntuario({
+            ...prontuario,
+            [field]: value
+        });
     };
 
     const handleEditar = () => {
@@ -64,90 +68,104 @@ export default function DetalhesProntuario() {
 
                     </div>
                     <div className="info-bloco">
-                        {isEditing ? (
+                        {isEditing && prontuario && (
                             <>
                                 <h2 className="label-edicao">Paciente</h2>
                                 <input
                                     className="conteudoDoInput"
                                     type="text"
-                                    value={formData.paciente}
+                                    value={prontuario.paciente.nome}
                                     onChange={(e) => handleChange("paciente", e.target.value)}
                                 />
                             </>
-                        ) : (
-                            <InputLeitura titulo="Paciente" value={formData.paciente} isContent={false} />
                         )}
+
+                        {!isEditing && prontuario && (
+                            <InputLeitura titulo="Paciente" value={prontuario.paciente.nome} isContent={false} />
+                        )}
+
                     </div>
                     <div className="info-bloco">
-                        {isEditing ? (
+                        {isEditing && prontuario && (
                             <>
                                 <h2 className="label-edicao">Consulta</h2>
                                 <input
                                     className="conteudoDoInput"
                                     type="text"
-                                    value={formData.consulta}
+                                    value={prontuario.consulta.id}
                                     onChange={(e) => handleChange("consulta", e.target.value)}
                                 />
                             </>
-                        ) : (
-                            <InputLeitura titulo="Consulta" value={formData.consulta} isContent={false} />
                         )}
+
+                        {!isEditing && prontuario && (
+                            <InputLeitura titulo="Consulta" value={prontuario.consulta.id} isContent={false} />
+                        )}
+
                     </div>
                 </div>
 
                 <div className="info-bloco">
-                    {isEditing ? (
+                    {isEditing && prontuario && (
                         <>
                             <h2 className="label-edicao">Psicólogo</h2>
                             <input
                                 className="conteudoDoInput"
                                 type="text"
-                                value={formData.psicologo}
+                                value={prontuario.psicologo.nome}
                                 onChange={(e) => handleChange("psicologo", e.target.value)}
                             />
                         </>
-                    ) : (
-                        <InputLeitura titulo="Psicólogo" value={formData.psicologo} isContent={false} />
+                    )}
+
+                    {!isEditing && prontuario && (
+                        <InputLeitura titulo="Psicólogo" value={prontuario.psicologo.nome} isContent={false} />
                     )}
                 </div>
 
                 <h2>Conteúdo</h2>
                 <div className="conteudo-box">
-                    {isEditing ? (
+                    {isEditing && prontuario && (
                         <>
                             <textarea
                                 className="conteudo-textarea"
-                                value={formData.conteudo}
+                                value={prontuario.conteudo}
                                 onChange={(e) => handleChange("conteudo", e.target.value)}
                             />
                         </>
-                    ) : (
+                    )}
+
+                    {!isEditing && prontuario && (
                         <p>
-                            <InputLeitura titulo="" value={formData.conteudo} isContent={true} />
+                            <InputLeitura titulo="" value={prontuario.conteudo} isContent={true} />
                         </p>
                     )}
+
                 </div>
 
-                <div className="dados-adicionais">
-                    <div className="dados-data">
-                        <p>Criado em: {formData.dataCriacao}</p>
-                        <p>Editado em: {formData.dataEdicao}</p>
-                    </div>
+                {prontuario && (
+                    <div className="dados-adicionais">
+                        <div className="dados-data">
+                            <p>Criado em: {prontuario.dataCriacao}</p>
+                            <p>Editado em: {prontuario.dataEdicao}</p>
+                        </div>
 
-                    <div className="botoes-prontuario">
-                        {isEditing ? (
-                            <>
-                                <button onClick={handleSalvar} className="botao-editar">Salvar</button>
-                                <button onClick={handleCancelar} className="botao-voltar">Cancelar</button>
-                            </>
-                        ) : (
-                            <>
-                                <button onClick={handleEditar} className="botao-editar">Editar</button>
-                                <button onClick={() => console.log("Voltar clicado")} className="botao-voltar">Voltar</button>
-                            </>
-                        )}
+                        <div className="botoes-prontuario">
+                            {isEditing ? (
+                                <>
+                                    <button onClick={handleSalvar} className="botao-editar">Salvar</button>
+                                    <button onClick={handleCancelar} className="botao-voltar">Cancelar</button>
+                                </>
+                            ) : (
+                                <>
+                                    <button onClick={handleEditar} className="botao-editar">Editar</button>
+                                    <button onClick={() => console.log("Voltar clicado")} className="botao-voltar">Voltar</button>
+                                </>
+                            )}
+                        </div>
                     </div>
-                </div>
+                )}
+
             </main>
         </div>
     );

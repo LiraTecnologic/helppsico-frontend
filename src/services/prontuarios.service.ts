@@ -22,7 +22,7 @@ export function consultaProntuariosPsicologo(idPsicologo: string, page: number):
 
 export function consultarProntuarioPorId(idProntuario: string): Promise<Response<ProntuarioModel>> {
     return axios.get<Response<ProntuarioModel>>(
-        `http://localhost:8080/prontuarios/${idProntuario}`
+        `http://localhost:8081/prontuarios/${idProntuario}`
     )
         .then(response => response.data)
         .catch(err => {
