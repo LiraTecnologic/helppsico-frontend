@@ -1,4 +1,4 @@
-.card-solicitacao {
+.card-solicitacao-vinculo {
   display: flex;
   align-items: center;
   background-color: #f9f9f9;
@@ -13,7 +13,7 @@
   flex-wrap: wrap;
 }
 
-.fotoPsico {
+.card-solicitacao-vinculo__foto {
   width: 4.375rem;
   height: 4.375rem;
   border-radius: 0.75rem;
@@ -21,32 +21,32 @@
 }
 
 @media (max-width: 480px) {
-  .card-solicitacao {
+  .card-solicitacao-vinculo {
     padding: 0.75rem;
     gap: 0.75rem;
   }
 
-  .fotoPsico {
+  .card-solicitacao-vinculo__foto {
     width: 3.5rem;
     height: 3.5rem;
   }
 
-  .info {
+  .card-solicitacao-vinculo__info {
     flex: 1;
     min-width: calc(100% - 5rem);
   }
 
-  .nome {
+  .card-solicitacao-vinculo__nome {
     font-size: 0.875rem;
   }
 
-  .idade,
-  .crp,
-  .avaliacao {
+  .card-solicitacao-vinculo__idade,
+  .card-solicitacao-vinculo__crp,
+  .card-solicitacao-vinculo__avaliacao {
     font-size: 0.75rem;
   }
 
-  .acoes {
+  .card-solicitacao-vinculo__acoes {
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
@@ -55,7 +55,7 @@
   }
 }
 
-.info {
+.card-solicitacao-vinculo__info {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,20 +64,20 @@
   gap: 0.125rem;
 }
 
-.nome {
+.card-solicitacao-vinculo__nome {
   font-size: 1rem;
   font-weight: bold;
   margin: 0;
 }
 
-.idade,
-.crp {
+.card-solicitacao-vinculo__idade,
+.card-solicitacao-vinculo__crp {
   font-size: 0.875rem;
   margin: 0;
   color: #333;
 }
 
-.avaliacao {
+.card-solicitacao-vinculo__avaliacao {
   display: flex;
   align-items: center;
   font-weight: bold;
@@ -86,11 +86,11 @@
   margin-top: 0.125rem;
 }
 
-.estrela {
+.card-solicitacao-vinculo__estrela {
   color: gold;
 }
 
-.acoes {
+.card-solicitacao-vinculo__acoes {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -99,14 +99,14 @@
   gap: 0.5rem;
 }
 
-.status {
+.card-solicitacao-vinculo__status {
   font-weight: bold;
   font-size: 0.875rem;
   position: relative;
   padding-bottom: 0.125rem;
 }
 
-.status-pendente::after {
+.card-solicitacao-vinculo__status--pendente::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -116,7 +116,7 @@
   background-color: #ffe600;
 }
 
-.status-outro::after {
+.card-solicitacao-vinculo__status--outro::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -126,7 +126,7 @@
   background-color: #ff0000;
 }
 
-.cancelar-btn {
+.card-solicitacao-vinculo__botao {
   background-color: #0d47a1;
   color: white;
   border: none;
@@ -137,56 +137,56 @@
 }
 
 @media (max-width: 768px) {
-  .card-solicitacao {
+  .card-solicitacao-vinculo {
     padding: 0.75rem 1rem;
     gap: 0.75rem;
   }
 
-  .fotoPsico {
+  .card-solicitacao-vinculo__foto {
     width: 3.5rem;
     height: 3.5rem;
   }
 
-  .nome {
+  .card-solicitacao-vinculo__nome {
     font-size: 0.9375rem;
   }
 
-  .idade,
-  .crp,
-  .avaliacao,
-  .status {
+  .card-solicitacao-vinculo__idade,
+  .card-solicitacao-vinculo__crp,
+  .card-solicitacao-vinculo__avaliacao,
+  .card-solicitacao-vinculo__status {
     font-size: 0.8125rem;
   }
 
-  .cancelar-btn {
+  .card-solicitacao-vinculo__botao {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .card-solicitacao {
+  .card-solicitacao-vinculo {
     padding: 0.5rem 0.75rem;
     gap: 0.5rem;
   }
 
-  .fotoPsico {
+  .card-solicitacao-vinculo__foto {
     width: 3rem;
     height: 3rem;
   }
 
-  .nome {
+  .card-solicitacao-vinculo__nome {
     font-size: 0.875rem;
   }
 
-  .idade,
-  .crp,
-  .avaliacao,
-  .status {
+  .card-solicitacao-vinculo__idade,
+  .card-solicitacao-vinculo__crp,
+  .card-solicitacao-vinculo__avaliacao,
+  .card-solicitacao-vinculo__status {
     font-size: 0.75rem;
   }
 
-  .cancelar-btn {
+  .card-solicitacao-vinculo__botao {
     font-size: 0.6875rem;
     padding: 0.1875rem 0.4375rem;
   }
