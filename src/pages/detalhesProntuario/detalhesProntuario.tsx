@@ -3,7 +3,8 @@ import "./detlhesProntuario.css";
 import Header from "../../components/layout/header/header";
 import InputLeitura from "../../components/commmon/Inputs/InputLeitura";
 import ProntuarioModel from "../../models/prontuario";
-import { consultarProntuarioPorId } from "../../services/prontuarios.service";
+import { consultarProntuarioPorId, editarProntuario } from "../../services/prontuarios.service";
+import {formatarData} from "../../utils/formataData";
 
 export default function DetalhesProntuario() {
     const [isEditing, setIsEditing] = useState(false);
@@ -32,7 +33,12 @@ export default function DetalhesProntuario() {
 
     const handleSalvar = () => {
         setIsEditing(false);
+        editarProntuario();
     };
+
+    function formataIdentificacao(id: string) { 
+        return "CONS-" + id.substring(0, 8).toUpperCase(); 
+    }
 
     useEffect(() => {
         async function carregarProntuario(idPronturio: string) {
@@ -44,7 +50,7 @@ export default function DetalhesProntuario() {
     }, []);
 
     return (
-        <div>
+        <div className="container-main">
             <Header fluxo="" headerPsicologo={true} />
             <main className="container-principal">
                 <h1>Detalhes Do Prontuário</h1>
@@ -68,57 +74,21 @@ export default function DetalhesProntuario() {
 
                     </div>
                     <div className="info-bloco">
-                        {isEditing && prontuario && (
-                            <>
-                                <h2 className="label-edicao">Paciente</h2>
-                                <input
-                                    className="conteudoDoInput"
-                                    type="text"
-                                    value={prontuario.paciente.nome}
-                                    onChange={(e) => handleChange("paciente", e.target.value)}
-                                />
-                            </>
-                        )}
-
-                        {!isEditing && prontuario && (
+                        {prontuario && (
                             <InputLeitura titulo="Paciente" value={prontuario.paciente.nome} isContent={false} />
                         )}
 
                     </div>
                     <div className="info-bloco">
-                        {isEditing && prontuario && (
-                            <>
-                                <h2 className="label-edicao">Consulta</h2>
-                                <input
-                                    className="conteudoDoInput"
-                                    type="text"
-                                    value={prontuario.consulta.id}
-                                    onChange={(e) => handleChange("consulta", e.target.value)}
-                                />
-                            </>
-                        )}
-
-                        {!isEditing && prontuario && (
-                            <InputLeitura titulo="Consulta" value={prontuario.consulta.id} isContent={false} />
+                        {prontuario && (
+                            <InputLeitura titulo="Consulta" value={formataIdentificacao(prontuario.consulta.id)} isContent={false} />
                         )}
 
                     </div>
                 </div>
 
                 <div className="info-bloco">
-                    {isEditing && prontuario && (
-                        <>
-                            <h2 className="label-edicao">Psicólogo</h2>
-                            <input
-                                className="conteudoDoInput"
-                                type="text"
-                                value={prontuario.psicologo.nome}
-                                onChange={(e) => handleChange("psicologo", e.target.value)}
-                            />
-                        </>
-                    )}
-
-                    {!isEditing && prontuario && (
+                    {prontuario && (
                         <InputLeitura titulo="Psicólogo" value={prontuario.psicologo.nome} isContent={false} />
                     )}
                 </div>
@@ -136,9 +106,9 @@ export default function DetalhesProntuario() {
                     )}
 
                     {!isEditing && prontuario && (
-                        <p>
+                        <div>
                             <InputLeitura titulo="" value={prontuario.conteudo} isContent={true} />
-                        </p>
+                        </div>
                     )}
 
                 </div>
@@ -146,8 +116,8 @@ export default function DetalhesProntuario() {
                 {prontuario && (
                     <div className="dados-adicionais">
                         <div className="dados-data">
-                            <p>Criado em: {prontuario.dataCriacao}</p>
-                            <p>Editado em: {prontuario.dataEdicao}</p>
+                            <p>Criado em: {formatarData(prontuario.dataCriacao)}</p>
+                            <p>Editado em: {formatarData(prontuario.dataEdicao)}</p>
                         </div>
 
                         <div className="botoes-prontuario">

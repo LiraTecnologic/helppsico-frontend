@@ -33,3 +33,7 @@ export function consultarProntuarioPorId(idProntuario: string): Promise<Response
             };
         });
 }
+
+export function editarProntuario() {
+    
+}

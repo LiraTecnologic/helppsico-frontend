@@ -1,5 +1,5 @@
 import ConsultaModel from '../../../../models/consulta';
-import formatarDataHora from '../../../../utils/formataData';
+import {formatarDataHora} from '../../../../utils/formataData';
 import './sessoesAntigas.css';
 
 interface ListagemSessoesAntigasProps {
