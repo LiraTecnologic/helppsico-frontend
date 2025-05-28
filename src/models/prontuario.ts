@@ -8,5 +8,7 @@ export default interface ProntuarioModel {
     paciente: PacienteModel,
     consulta: ConsultaModel,
     titulo: string,
-    conteudo: string
+    conteudo: string,
+    dataCriacao: string,
+    dataEdicao: string
 }

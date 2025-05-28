@@ -1,6 +1,6 @@
 import ConsultaModel from '../../../../models/consulta';
 import calcular from '../../../../utils/calculoData'
-import formatarDataHora from '../../../../utils/formataData'
+import {formatarDataHora} from '../../../../utils/formataData'
 
 import './proximaSessao.css';
 
