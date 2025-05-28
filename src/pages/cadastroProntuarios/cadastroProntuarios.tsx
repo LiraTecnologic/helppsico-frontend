@@ -1,23 +1,25 @@
 import './cadastroProntuarios.css';
 import Header from '../../components/layout/header/header';
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import PacienteModel from '../../models/paciente';
 import ConsultaModel from '../../models/consulta';
 import { formataIdentificacao } from '../../utils/formataIdentificacaoConsulta'
 import ProntuarioModel from '../../models/prontuario';
+import { consultaVinculosPsicologo } from '../../services/vinculos.service';
+import { consultarSessoesAntigasPsicologo } from '../../services/consultas.service';
+import { cadastar } from '../../services/prontuarios.service';
 
 export default function CadastroProntuarios() {
 
-    const [pacientes, setPacientes] = useState<PacienteModel[]>([]); 
+    const [pacientes, setPacientes] = useState<PacienteModel[]>([]);
     const [consultas, setConsultas] = useState<ConsultaModel[]>([]);
     const [titulo, setTitulo] = useState('');
-    const [prontuario, setProntuario] = useState<ProntuarioModel | null>(null)
     const [pacienteSelecionado, setPacienteSelecionado] = useState('');
     const [consultaSelecionada, setConsultaSelecionada] = useState('');
     const [conteudo, setConteudo] = useState('');
 
     const handlePacienteChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        setPacienteSelecionado();
+        setPacienteSelecionado(e.target.value);
         setConsultaSelecionada('');
     };
 
@@ -25,9 +27,62 @@ export default function CadastroProntuarios() {
         (c) => c.paciente.id.toString() === pacienteSelecionado
     );
 
-    function salvar() {
-        
+    async function salvar() {
+        if (!pacienteSelecionado || !consultaSelecionada || !conteudo || !titulo) {
+            alert('Preencha todos os campos!');
+            return;
+        }
+
+        const pacienteCompleto = pacientes.find(p => p.id.toString() === pacienteSelecionado);
+        const consultaCompleta = consultas.find(c => c.id.toString() === consultaSelecionada);
+
+        if (!pacienteCompleto) {
+            alert('Paciente inválido!');
+            return;
+        }
+
+        if (!consultaCompleta) {
+            alert('Paciente inválido!');
+            return;
+        }
+
+        const novoProntuario: ProntuarioModel = {
+            id: "",
+            titulo,
+            conteudo,
+            consulta: consultaCompleta,
+            psicologo: consultaCompleta.psicologo,
+            paciente: pacienteCompleto
+        };
+
+        try {
+            const prontuarioSalvo = await cadastar(novoProntuario);
+            console.log('Prontuario salvo com sucesso.', prontuarioSalvo);
+            alert('Prontuário salvo com sucesso!');
+            window.location.reload(); 
+        } catch (error) {
+            console.error('Erro ao salvar prontuário:', error);
+            alert('Erro ao salvar prontuário!');
+        }
     }
+
+
+    useEffect(() => {
+        async function carregarPacientes(idPsicologo: string) {
+            const vinculos = await consultaVinculosPsicologo(idPsicologo, 1);
+            const pacientes = vinculos.dado.content.map(vinculo => vinculo.paciente);
+            setPacientes(pacientes);
+        }
+
+        async function carregarConsultas(idPsicologo: string) {
+            const consultas = await consultarSessoesAntigasPsicologo(idPsicologo, 1);
+            console.log('Consultas ', consultas);
+            setConsultas(consultas.dado.content);
+        }
+
+        carregarPacientes('teste');
+        carregarConsultas('teste')
+    }, []);
 
     return (
         <>
@@ -76,8 +131,8 @@ export default function CadastroProntuarios() {
                                 disabled={!pacienteSelecionado}
                             >
                                 <option value="">Escolha sua consulta</option>
-                                {consultasFiltradas.map((c, index) => (
-                                    <option key={index} value={formataIdentificacao(c.id)}>
+                                {consultasFiltradas.map((c) => (
+                                    <option key={c.id} value={c.id}>
                                         {formataIdentificacao(c.id)}
                                     </option>
                                 ))}
