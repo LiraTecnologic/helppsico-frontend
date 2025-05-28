@@ -9,16 +9,19 @@ interface CardDadosConsultaProps {
 export default function DadosConsultaPsicologo(props: CardDadosConsultaProps) {
     return (
         <div className="calculo-consulta">
-            <p className="total-selecionado">
-                <span>Total Selecionado: {props.selecionado}</span>
-            </p>
-            <p className="valor-consulta">
-                <span>Valor por consulta: R$ {props.valor}</span>
-            </p>
+            <div className="total-selecionado">
+                <span>Total Selecionado:</span>
+                <span>{props.selecionado}</span>
+            </div>
+            <div className="valor-consulta">
+                <span>Valor por consulta:</span>
+                <span>R$ {props.valor}</span>
+            </div>
             <hr className="linha-divisoria" />
-            <p className="valor-total">
-                <span>Valor Total: R$ {props.valorTotal}</span>
-            </p>
+            <div className="valor-total">
+                <span>Valor Total:</span>
+                <span>R$ {props.valorTotal}</span>
+            </div>
         </div>
     );
 }

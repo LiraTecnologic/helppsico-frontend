@@ -1,23 +1,127 @@
+.container-psicologo {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 24px;
+}
+
+.tabela-horario-consulta {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: white;
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    width: 835px;
+    border-radius: 12px;
+}
+
+
+.agenda-tabela-scroll {
+    overflow-y: auto;
+    max-height: 350px;
+    padding: 4px;
+    width: 100%;
+}
+
+.agenda-tabela {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: fit-content;
+    margin: 0 auto;
+}
+
+.agenda-dia-coluna {
+    display: flex;
+    flex-direction: column;
+    width: 125px;
+    min-width: 125px;
+}
+
+.agenda-dia-titulo {
+    color: #3b82f6;
+    margin-bottom: 8px;
+    text-align: center;
+    padding: 6px;
+    background-color: #eff6ff;
+    border-radius: 6px;
+}
+
+.agenda-card {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.agenda-card-selecionado {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    color: white;
+}
+
+.agenda-status {
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.agenda-status-disponivel {
+    color: #3b82f6;
+}
+
+.agenda-status-selecionado {
+    color: white;
+}
+
+.agenda-horario {
+    color: #1e293b;
+}
+
+.agenda-card-selecionado .agenda-horario {
+    color: white;
+}
+
+.container-botao-contulta {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 16px;
+}
+
 .botao-agendar-consulta {
-    background-color: #1A56DB;
-    border-radius: 30px;
-    padding: 10px 30px;
+    background: #1d4ed8;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 36px;
     color: white;
     cursor: pointer;
 }
 
-.container-botao-contulta{
-    display: flex;
-    justify-content: center;
+.botao-agendar-consulta:hover {
+    transform: translateY(-2px);
 }
 
-.container-psicologo {
+.botao-agendar-consulta:active {
+    transform: translateY(0);
+}
+
+.botao-agendar-consulta:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.campo-atendimento {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 20px;
-    align-items: stretch;
-    justify-content: center;
-}
-
-.container-gerenciamento {
-    
 }

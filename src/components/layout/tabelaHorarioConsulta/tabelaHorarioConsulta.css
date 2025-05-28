@@ -1,198 +1,296 @@
 .th-container {
-  padding: 2rem;
-  width: 70%;
+    width: 100%;
+    padding: 0;
 }
 
 .th-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 .th-header h1 {
-  font-size: 1.8rem;
-  border-bottom: 3px solid #0044d4;
-  padding-bottom: 0.2rem;
+    font-size: 1.8rem;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.2rem;
+    color: #1e293b;
 }
 
 .th-header button {
-  background-color: #0044d4;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 12px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
 }
 
 .th-config {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .th-config-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
 }
 
-.th-config-item p{
-  font-size: 1.3rem;
+.th-config-item p {
+    color: #475569;
+    margin: 0;
+    font-weight: 500;
 }
 
 .th-dias {
-  display: flex;
-  gap: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
 }
 
 .th-dia {
-  background-color: #0044d4;
-  color: white;
-  padding: 0.3rem 0.6rem;
-  border-radius: 0.25rem;
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.25rem;
 }
 
 .th-duracao,
 .th-expediente {
-  background-color: #d1d1d1;
-  padding: 0.3rem 0.6rem;
-  border-radius: 0.4rem;
-  width: fit-content;
+    background-color: #f1f5f9;
+    color: #475569;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.4rem;
+    width: fit-content;
 }
 
 .th-tabela-scroll {
-  overflow: auto;
-  max-height: 500px;
+    overflow-x: auto;
+    max-height: 400px;
+    padding: 4px;
 }
 
 .th-tabela {
-  display: flex;
-  gap: 1.5rem;
-  min-width: max-content;
-  justify-content: center;
-  margin: 0 auto;
-  align-items: flex-start;
+    display: flex;
+    gap: 16px;
+    min-width: max-content;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .th-dia-coluna {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  width: 160px;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+    min-width: 140px;
 }
 
 .th-dia-titulo {
-  font-size: 1.2rem;
-  color: #0d42bd;
-  margin-bottom: 0.5rem;
-  text-align: center;
-  font-weight: bold;
+    color: #3b82f6;
+    margin-bottom: 12px;
+    text-align: center;
+    padding: 8px;
+    background-color: #eff6ff;
+    border-radius: 8px;
 }
 
 .th-card {
-  background-color: #eaf1ff;
-  border-left: 4px solid #0d42bd;
-  border-radius: 0.5rem;
-  padding: 0.6rem;
-  text-align: center;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  margin-bottom: 0.5rem;
-}
-
-.th-status-livre {
-  font-size: 0.9rem;
-}
-
-.th-horario {
-  font-size: 1rem;
-  color: #111111;
-}
-
-.th-card {
-  cursor: pointer;
-  transition: 0.2s ease;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
 }
 
 .th-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 6px rgba(0, 68, 212, 0.3);
-}
-
-.th-card-selecionado {
-  background-color: #7eb0fa;
-  border-left: 4px solid #0044d4;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .th-status {
-  font-size: 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .th-status-livre {
-  color: #0d42bd;
+    color: #3b82f6;
 }
 
 .th-status-disponivel {
-  color: #ffffff;
-  font-weight: 600;
+    color: white;
+}
+
+.th-horario {
+    font-size: 0.9rem;
+    color: #1e293b;
+}
+
+/* Estados dos cards */
+.th-card-disponibilizar {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    border-color: #1d4ed8;
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.th-card-disponibilizar .th-horario {
+    color: white;
 }
 
 .th-salvar-container {
-  position: fixed;
-  bottom: 20px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  z-index: 100;
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
 }
 
 .th-salvar button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: #0044d4;
-  color: white;
-  padding: 0.7rem 1.4rem;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  margin: 0 auto 0 auto;
-  font-size: 12px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
 }
 
-.th-card-disponibilizar {
-  background-color: #2564eb67;
-  border-left: 4px solid #2563EB;
+.th-salvar button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
 }
 
-.th-card-remover {
-  background-color: #fed7d7;
-  border-left: 4px solid #e53e3e;
+.th-botao-area {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
 }
 
-.th-botao-area{
-  margin-top: 20px;
+.agenda-container {
+    width: 100%;
+    padding: 0;
 }
 
-.th-card-disponivel {
-  background-color: #2563EB;
-  border-left: 4px solid #042b5f;
+.agenda-tabela-scroll {
+    overflow-x: auto;
+    max-height: 600px;
+    padding: 4px;
 }
 
-.th-card-disponivel .th-horario {
-  color: white;
+.agenda-tabela {
+    display: flex;
+    gap: 16px;
+    min-width: max-content;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
-.th-card-remover .th-status {
-  color: black !important;
-  font-weight: 500;
+.agenda-dia-coluna {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+    min-width: 140px;
+}
+
+.agenda-dia-titulo {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 12px;
+    text-align: center;
+    padding: 8px;
+    background-color: #3b82f6;
+    border-radius: 8px;
+}
+
+.agenda-card {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.agenda-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.agenda-card-selecionado {
+    background: #bfdbfe   ;
+    color: white;
+}
+
+.agenda-status {
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.agenda-status-disponivel {
+    color: #3b82f6;
+}
+
+.agenda-status-selecionado {
+    color: black;
+}
+
+.agenda-horario {
+    font-size: 0.9rem;
+    color: #1e293b;
+}
+
+.agenda-card-selecionado .agenda-horario {
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .th-tabela,
+    .agenda-tabela {
+        gap: 12px;
+    }
+    
+    .th-dia-coluna,
+    .agenda-dia-coluna {
+        width: 120px;
+        min-width: 120px;
+    }
+    
+    .th-dia-titulo,
+    .agenda-dia-titulo {
+        font-size: 0.9rem;
+    }
+    
+    .th-card,
+    .agenda-card {
+        padding: 10px;
+    }
+    
+    .th-config {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }

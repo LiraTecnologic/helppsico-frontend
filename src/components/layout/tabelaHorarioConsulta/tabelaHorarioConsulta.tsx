@@ -59,7 +59,6 @@ export default function TabelaHorarioConsulta({
   onSelecionado
 }: TabelaHorariosProps) {
   const intervalos = gerarIntervalos(inicio, fim, duracao, intervalo);
-
   const [selecionados, setSelecionados] = useState<Set<string>>(new Set());
 
   const toggleSelecionado = (id: string) => {
@@ -70,95 +69,95 @@ export default function TabelaHorarioConsulta({
       novoSet.add(id);
     }
     setSelecionados(novoSet);
-    onSelecionado?.(novoSet.size);
   };
 
   useEffect(() => {
-  if (onSelecionado) {
-    onSelecionado(selecionados.size);
+    if (onSelecionado) {
+      onSelecionado(selecionados.size);
+    }
+  }, [selecionados, onSelecionado]);
+
+  if (agendamento) {
+    return (
+      <div className="agenda-container">
+        <div className="agenda-tabela-scroll">
+          <div className="agenda-tabela">
+            {dias.map((dia) => (
+              <div key={dia} className="agenda-dia-coluna">
+                <h3 className="agenda-dia-titulo">{nomesDias[dia]}</h3>
+                {intervalos.map((faixa) => {
+                  const id = `${dia}-${faixa}`;
+                  const selecionado = selecionados.has(id);
+
+                  return (
+                    <div
+                      key={id}
+                      className={`agenda-card ${
+                        selecionado ? "agenda-card-selecionado" : ""
+                      }`}
+                      onClick={() => toggleSelecionado(id)}
+                    >
+                      <div
+                        className={`agenda-status ${
+                          selecionado
+                            ? "agenda-status-selecionado"
+                            : "agenda-status-disponivel"
+                        }`}
+                      >
+                        {selecionado ? "Selecionado" : "Disponível"}
+                      </div>
+                      <div className="agenda-horario">{faixa}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
   }
-}, [selecionados, onSelecionado]);
 
   return (
     <div className="th-container">
-      {!agendamento && (
-        <>
-          <div className="th-header">
-            <h1>Horários</h1>
-            <button onClick={onEditar}>Editar configurações</button>
-          </div>
+      <div className="th-tabela">
+        {dias.map((dia) => (
+          <div key={dia} className="th-dia-coluna">
+            <h3 className="th-dia-titulo">{nomesDias[dia]}</h3>
+            {intervalos.map((faixa) => {
+              const id = `${dia}-${faixa}`;
+              const selecionado = selecionados.has(id);
 
-          <div className="th-config">
-            <div className="th-config-item">
-              <p>Dias de atendimento:</p>
-              <div className="th-dias">
-                {dias.map((dia) => (
-                  <span key={dia} className="th-dia">
-                    {dia}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="th-config-item">
-              <p>Tempo de sessão:</p>
-              <div className="th-duracao">{duracao} m</div>
-            </div>
-            <div className="th-config-item">
-              <p>Intervalo entre sessões:</p>
-              <div className="th-duracao">{intervalo} m</div>
-            </div>
-            <div className="th-config-item">
-              <p>Começo e fim do expediente:</p>
-              <div className="th-expediente">
-                {inicio} h às {fim} h
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-
-      <div className="th-tabela-scroll">
-        <div className="th-tabela">
-          {dias.map((dia) => (
-            <div key={dia} className="th-dia-coluna">
-              <h3 className="th-dia-titulo">{nomesDias[dia]}</h3>
-              {intervalos.map((faixa) => {
-                const id = `${dia}-${faixa}`;
-                const selecionado = selecionados.has(id);
-
-                return (
+              return (
+                <div
+                  key={id}
+                  className={`th-card ${
+                    selecionado ? "th-card-disponibilizar" : ""
+                  }`}
+                  onClick={() => toggleSelecionado(id)}
+                >
                   <div
-                    key={id}
-                    className={`th-card ${
-                      selecionado ? "th-card-disponibilizar" : ""
+                    className={`th-status ${
+                      selecionado ? "th-status-disponivel" : "th-status-livre"
                     }`}
-                    onClick={() => toggleSelecionado(id)}
                   >
-                    <div
-                      className={`th-status ${
-                        selecionado ? "th-status-disponivel" : "th-status-livre"
-                      }`}
-                    >
-                      {selecionado ? "Selecionado" : "Disponível"}
-                    </div>
-                    <div className="th-horario">{faixa}</div>
+                    {selecionado ? "Selecionado" : "Disponível"}
                   </div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
+                  <div className="th-horario">{faixa}</div>
+                </div>
+              );
+            })}
+          </div>
+        ))}
       </div>
 
-      {!agendamento && (
+      {selecionados.size > 0 && (
         <div className="th-botao-area">
-          {selecionados.size > 0 && (
-            <div className="th-salvar">
-              <button onClick={() => alert("Horários salvos!")}>
-                Salvar horários selecionados
-              </button>
-            </div>
-          )}
+          <div className="th-salvar">
+            <button onClick={() => alert("Horários salvos!")}>
+              Salvar horários selecionados
+            </button>
+          </div>
         </div>
       )}
     </div>
