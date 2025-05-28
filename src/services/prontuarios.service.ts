@@ -43,5 +43,20 @@ export function editarProntuario(idPsicologo: string, dados: ProntuarioModel): P
             dado: {}  as ProntuarioModel,
             erro: error
         };
-      });
+    });
+}
+
+export function cadastar(novoProntuario:ProntuarioModel): Promise<Response<ProntuarioModel>> {
+    return axios.post<Response<ProntuarioModel>>(
+        'http://localhost:8080/prontuarios',
+        novoProntuario
+    )
+    .then(response => response.data)
+    .catch(err => {
+        console.error("Erro ao carregar prontuarios:", err);
+        return {
+            dado: {} as ProntuarioModel,
+            erro: ""
+        };
+    });
 }
