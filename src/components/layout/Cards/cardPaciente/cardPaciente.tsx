@@ -2,11 +2,11 @@ import "./cardPaciente.css";
 
 interface CardPacienteProps {
   nome: string;
-  idade: string;
+  idade: number;
   email: string;
   telefone: string;
   fotoUrl: string;
-  temProntuario: boolean;
+  prontuarioId: string;
 }
 
 export default function CardPaciente(props: CardPacienteProps) {
@@ -27,10 +27,10 @@ export default function CardPaciente(props: CardPacienteProps) {
       </div>
       
       <button
-        className={props.temProntuario ? "btn-prontuario" : "btn-sem-prontuario"}
-        disabled={!props.temProntuario}
+        className={props.prontuarioId ? "btn-prontuario" : "btn-sem-prontuario"}
+        disabled={!props.prontuarioId}
       >
-        {props.temProntuario ? "Abrir Prontuário" : "Sem prontuário"}
+        {props.prontuarioId ? "Abrir Prontuário" : "Sem prontuário"}
       </button>
     </div>
   );

@@ -6,6 +6,7 @@ export default interface VinculoModel {
     paciente: PacienteModel;
     psicologo: PsicologoModel;
     status: StatusVinculo;
+    temProntuario: boolean;
 }
 
 enum StatusVinculo {
