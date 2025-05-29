@@ -16,7 +16,7 @@ export default function CardPsicologoConsulta(props: CardPsicologoConsultaProps)
                 className="foto-psicologo"
             />
             <div className="info-psicologo">
-                <h2 className='nome'>{props.nome}</h2>
+                <h2>{props.nome}</h2>
                 <p className="biografia">{props.biografia}</p>
                 <div>
                     <span className='label'>Tempo de sessão: </span>
