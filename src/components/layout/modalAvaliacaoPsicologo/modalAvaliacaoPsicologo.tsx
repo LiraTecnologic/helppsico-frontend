@@ -51,8 +51,8 @@ export default function ModalAvaliacaoPsicologo({
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="modal-overlay-avaliacao">
+      <div className="modal-content-avaliacao">
         <button className="close-button" onClick={onClose}>
           ×
         </button>
