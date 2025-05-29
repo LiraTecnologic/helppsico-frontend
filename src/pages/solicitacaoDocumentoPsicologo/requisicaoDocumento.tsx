@@ -1,123 +1,82 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import CardRequisicaoDocumento from '../../components/layout/Cards/cardRequisicaoDocumento/requisicaoDocumentoCard';
-import { SolicitacaoDocumento, TipoDocumento } from '../../models/documento';
 import Header from '../../components/layout/header/header';
 import './requisicaoDocumento.css';
 
-export default function RequisicaoDocumento() {
-  const [solicitacoes, setSolicitacoes] = useState<SolicitacaoDocumento[]>([]);
+
+enum TipoDocumento {
+  ATESTADO = 'ATESTADO',
+  DECLARACAO = 'DECLARACAO',
+  RELATORIO_PSICOLOGICO = 'RELATORIO_PSICOLOGICO',
+  RELATORIO_MULTIPROFISSIONAL = 'RELATORIO_MULTIPROFISSIONAL',
+  LAUDO_PSICOLOGICO = 'LAUDO_PSICOLOGICO',
+  PARECER_PSICOLOGICO = 'PARECER_PSICOLOGICO'
+}
+
+
+type Solicitacao = {
+  id: string;
+  documento: {
+    id: string;
+    paciente: {
+      id: string;
+      nome: string;
+      email: string;
+      telefone: string;
+    };
+    psicologo: {
+      id: string;
+      nome: string;
+      crp: string;
+      email: string;
+    };
+    tipoDocumento: TipoDocumento; 
+    dataEmissao: string;
+    dataValidade: string;
+    assinaturaPsicologo: string;
+    status: string;
+    dataSolicitacao: string;
+  };
+  status: string;
+  dataSolicitacao: string;
+};
+
+
+const mockData: Solicitacao[] = [
+  {
+    id: '1',
+    documento: {
+      id: '1',
+      paciente: {
+        id: '1',
+        nome: 'Nome do Paciente',
+        email: 'paciente@email.com',
+        telefone: '(00) 00000-0000',
+      },
+      psicologo: {
+        id: '1',
+        nome: 'Nome do Psicólogo',
+        crp: '12345',
+        email: 'psicologo@email.com',
+      },
+      tipoDocumento: TipoDocumento.ATESTADO,
+      dataEmissao: '2024-01-01',
+      dataValidade: '2024-12-31',
+      assinaturaPsicologo: 'Assinatura Digital',
+      status: 'PENDENTE',
+      dataSolicitacao: '2024-01-01',
+    },
+    status: 'PENDENTE',
+    dataSolicitacao: '2024-01-01'
+  }
+];
+
+const RequisicaoDocumento: React.FC = () => {
+  const [solicitacoes, setSolicitacoes] = useState<Solicitacao[]>([]);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
-    const mockData: SolicitacaoDocumento[] = [
-      {
-        id: '1',
-        documento: {
-          id: '1',
-          paciente: {
-            id: '1',
-            nome: 'Pedro Silva',
-            email: 'pedro@email.com',
-            telefone: '(11) 99999-9999'
-          },
-          psicologo: {
-            id: '1',
-            nome: 'Dr. Maria Santos',
-            crp: 'CRP 06/123456',
-            email: 'maria@psi.com'
-          },
-          tipoDocumento: TipoDocumento.ATESTADO,
-          dataEmissao: '2025-05-13',
-          dataValidade: '2025-06-13',
-          assinaturaPsicologo: 'Dr. Maria Santos - CRP 06/123456',
-          status: 'PENDENTE',
-          dataSolicitacao: '2025-05-13'
-        },
-        status: 'PENDENTE',
-        dataSolicitacao: '2025-05-13'
-      },
-      {
-        id: '2',
-        documento: {
-          id: '2',
-          paciente: {
-            id: '1',
-            nome: 'Pedro Silva',
-            email: 'pedro@email.com',
-            telefone: '(11) 99999-9999'
-          },
-          psicologo: {
-            id: '1',
-            nome: 'Dr. Maria Santos',
-            crp: 'CRP 06/123456',
-            email: 'maria@psi.com'
-          },
-          tipoDocumento: TipoDocumento.ATESTADO,
-          dataEmissao: '2025-05-13',
-          dataValidade: '2025-06-13',
-          assinaturaPsicologo: 'Dr. Maria Santos - CRP 06/123456',
-          status: 'PENDENTE',
-          dataSolicitacao: '2025-05-13'
-        },
-        status: 'PENDENTE',
-        dataSolicitacao: '2025-05-13'
-      },
-      {
-        id: '3',
-        documento: {
-          id: '3',
-          paciente: {
-            id: '1',
-            nome: 'Pedro Silva',
-            email: 'pedro@email.com',
-            telefone: '(11) 99999-9999'
-          },
-          psicologo: {
-            id: '1',
-            nome: 'Dr. Maria Santos',
-            crp: 'CRP 06/123456',
-            email: 'maria@psi.com'
-          },
-          tipoDocumento: TipoDocumento.ATESTADO,
-          dataEmissao: '2025-05-13',
-          dataValidade: '2025-06-13',
-          assinaturaPsicologo: 'Dr. Maria Santos - CRP 06/123456',
-          status: 'PENDENTE',
-          dataSolicitacao: '2025-05-13'
-        },
-        status: 'PENDENTE',
-        dataSolicitacao: '2025-05-13'
-      },
-      {
-        id: '4',
-        documento: {
-          id: '4',
-          paciente: {
-            id: '1',
-            nome: 'Pedro Silva',
-            email: 'pedro@email.com',
-            telefone: '(11) 99999-9999'
-          },
-          psicologo: {
-            id: '1',
-            nome: 'Dr. Maria Santos',
-            crp: 'CRP 06/123456',
-            email: 'maria@psi.com'
-          },
-          tipoDocumento: TipoDocumento.LAUDO_PSICOLOGICO,
-          dataEmissao: '2025-05-13',
-          dataValidade: '2025-06-13',
-          assinaturaPsicologo: 'Dr. Maria Santos - CRP 06/123456',
-          status: 'PENDENTE',
-          dataSolicitacao: '2025-05-13'
-        },
-        status: 'PENDENTE',
-        dataSolicitacao: '2025-05-13'
-      }
-    ];
-
-    
     setTimeout(() => {
       setSolicitacoes(mockData);
       setLoading(false);
@@ -128,7 +87,7 @@ export default function RequisicaoDocumento() {
     setSolicitacoes(prev => 
       prev.map(sol => 
         sol.id === solicitacaoId 
-          ? { ...sol, status: 'APROVADO' as const }
+          ? { ...sol, status: 'APROVADO' }
           : sol
       )
     );
@@ -139,7 +98,7 @@ export default function RequisicaoDocumento() {
     setSolicitacoes(prev => 
       prev.map(sol => 
         sol.id === solicitacaoId 
-          ? { ...sol, status: 'REJEITADO' as const }
+          ? { ...sol, status: 'REJEITADO' }
           : sol
       )
     );
@@ -152,7 +111,7 @@ export default function RequisicaoDocumento() {
         <Header fluxo="" headerPsicologo={true} />
         <div className="page-content">
           <div className="page-header">
-            <h1>Pedido de documentos</h1>
+            <h1>Solicitações de Documentos</h1>
             <hr />
           </div>
           <div className="loading-container">
@@ -169,7 +128,7 @@ export default function RequisicaoDocumento() {
       <Header fluxo="" headerPsicologo={true} />
       <div className="page-content">
         <div className="page-header">
-          <h1>Pedido de documentos</h1>
+          <h1>Solicitações de Documentos</h1>
           <hr />
         </div>
         
@@ -193,3 +152,5 @@ export default function RequisicaoDocumento() {
     </div>
   );
 }
+
+export default RequisicaoDocumento;
