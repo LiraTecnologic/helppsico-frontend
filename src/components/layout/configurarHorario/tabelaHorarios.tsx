@@ -7,9 +7,7 @@ interface TabelaHorariosProps {
   fim: string;
   duracao: number;
   intervalo: number;
-  onEditar?: () => void;
-  agendamento?: boolean; 
-  onSelecionado?: (quantidade: number) => void;
+  onEditar: () => void;
 }
 
 const nomesDias: Record<string, string> = {
@@ -58,7 +56,6 @@ export default function TabelaHorarios({
   duracao,
   intervalo,
   onEditar,
-  agendamento
 }: TabelaHorariosProps) {
   const intervalos = gerarIntervalos(inicio, fim, duracao, intervalo);
 
@@ -118,41 +115,37 @@ export default function TabelaHorarios({
 
   return (
     <div className="th-container">
-    {!agendamento && (
-      <>
-        <div className="th-header">
-          <h1>Horários</h1>
-          <button onClick={onEditar}>Editar configurações</button>
-        </div>
+      <div className="th-header">
+        <h1>Horários</h1>
+        <button onClick={onEditar}>Editar configurações</button>
+      </div>
 
-        <div className="th-config">
-          <div className="th-config-item">
-            <p>Dias de atendimento:</p>
-            <div className="th-dias">
-              {dias.map((dia) => (
-                <span key={dia} className="th-dia">
-                  {dia}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="th-config-item">
-            <p>Tempo de sessão:</p>
-            <div className="th-duracao">{duracao} m</div>
-          </div>
-          <div className="th-config-item">
-            <p>Intervalo entre sessões:</p>
-            <div className="th-duracao">{intervalo} m</div>
-          </div>
-          <div className="th-config-item">
-            <p>Começo e fim do expediente:</p>
-            <div className="th-expediente">
-              {inicio} h às {fim} h
-            </div>
+      <div className="th-config">
+        <div className="th-config-item">
+          <p>Dias de atendimento:</p>
+          <div className="th-dias">
+            {dias.map((dia) => (
+              <span key={dia} className="th-dia">
+                {dia}
+              </span>
+            ))}
           </div>
         </div>
-      </>
-    )}
+        <div className="th-config-item">
+          <p>Tempo de sessão:</p>
+          <div className="th-duracao">{duracao} m</div>
+        </div>
+        <div className="th-config-item">
+          <p>Intervalo entre sessões:</p>
+          <div className="th-duracao">{intervalo} m</div>
+        </div>
+        <div className="th-config-item">
+          <p>Começo e fim do expediente:</p>
+          <div className="th-expediente">
+            {inicio} h às {fim} h
+          </div>
+        </div>
+      </div>
 
       <div className="th-tabela-scroll">
         <div className="th-tabela">
@@ -197,8 +190,7 @@ export default function TabelaHorarios({
         </div>
       </div>
 
-      {!agendamento && (
-        <div className="th-botao-area">
+      <div className="th-botao-area">
         {selecionados.size > 0 && (
           <div className="th-salvar">
             <button onClick={salvarSelecionados}>
@@ -206,8 +198,7 @@ export default function TabelaHorarios({
             </button>
           </div>
         )}
-        </div>
-      )}
+      </div>
     </div>
   );
 }
