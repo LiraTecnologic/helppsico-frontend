@@ -3,6 +3,7 @@ import InputTotal from '../../components/commmon/Inputs/InputTotal';
 import Botao from '../../components/commmon/botoes/botao/botao';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PacienteModel from '../../models/paciente';
 
 const Login = () => {
     const [crp, setCrp] = useState('');
@@ -23,6 +24,10 @@ const Login = () => {
             alert('A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
             return;
         }
+
+        // colocar o retorno da requisição
+        const paciente : PacienteModel = {} as PacienteModel;
+        localStorage.setItem('id-paciente', paciente.id);
     };
 
     return (
