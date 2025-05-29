@@ -5,11 +5,29 @@ import ModalAvaliacaoPsicologo from '../../../modalAvaliacaoPsicologo/modalAvali
 
 import './botaoAvaliarInfoPsicologo.css';
 
-export default function BotaoAvaliarInfoPsicologo() {
+interface BotaoAvaliarProps {
+    psicologo: {
+        id: string;
+        nome: string;
+        foto: string;
+    };
+    onAvaliacaoSubmit?: (rating: number, comment: string) => void;
+}
+
+export default function BotaoAvaliarInfoPsicologo({ 
+    psicologo,
+    onAvaliacaoSubmit 
+}: BotaoAvaliarProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const abrirModal = () => setIsModalOpen(true);
     const fecharModal = () => setIsModalOpen(false);
+
+    const handleAvaliacaoSubmit = (rating: number, comment: string) => {
+        if (onAvaliacaoSubmit) {
+            onAvaliacaoSubmit(rating, comment);
+        }
+    };
 
     return (
         <>
@@ -26,7 +44,12 @@ export default function BotaoAvaliarInfoPsicologo() {
                 </div>
             </div>
 
-            <ModalAvaliacaoPsicologo isOpen={isModalOpen} onClose={fecharModal} />
+            <ModalAvaliacaoPsicologo 
+                isOpen={isModalOpen} 
+                onClose={fecharModal}
+                psicologo={psicologo}
+                onSubmitAvaliacao={handleAvaliacaoSubmit}
+            />
         </>
     );
 }

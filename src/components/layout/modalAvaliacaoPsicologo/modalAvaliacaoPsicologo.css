@@ -13,18 +13,152 @@
 
 .modal-content {
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
+    padding: 15px;
+    border-radius: 15px;
+    width: 420px;
+    gap: 10px;
+    max-width: 90vw;
     position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .close-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     background: transparent;
     border: none;
-    font-size: 18px;
+    font-size: 45px;
     cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.psicologo-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+
+.psicologo-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.psicologo-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.psicologo-nome {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.rating-section {
+    margin-bottom: 18px;
+}
+
+.stars-container {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.star {
+    background: none;
+    border: none;
+    font-size: 52px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.star.filled {
+    color: #4285f4;
+    text-shadow: 0 0 10px rgba(66, 133, 244, 0.3);
+}
+
+.star.empty {
+    color: #ddd;
+}
+
+.star:hover {
+    transform: scale(1.1);
+}
+
+.comment-section {
+    margin-bottom: 20px;
+}
+
+.comment-label {
+    display: block;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    resize: vertical;
+    min-height: 70px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.comment-input:focus {
+    outline: none;
+    border-color: #4285f4;
+}
+
+.comment-input::placeholder {
+    color: #999;
+}
+
+.button-section {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.cancel-button,
+.submit-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 100px;
+}
+
+.cancel-button {
+    background-color: #f8f9fa;
+    color: #666;
+    border: 1px solid #e0e0e0;
+}
+
+.cancel-button:hover {
+    background-color: #e8e9ea;
+}
+
+.submit-button {
+    background-color: #4285f4;
+    color: white;
+}
+
+.submit-button:hover {
+    background-color: #3367d6;
 }
