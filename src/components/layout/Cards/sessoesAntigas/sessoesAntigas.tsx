@@ -1,21 +1,13 @@
+import ConsultaModel from '../../../../models/consulta';
+import {formatarDataHora} from '../../../../utils/formataData';
 import './sessoesAntigas.css';
 
-interface SessoesAntigasProps {
-  sessaoFeita: boolean;
-  nomePsicologo?: string;
-  data?: string;
-  horario?: string;
-  valor?: string;
-  statusPagamento?: 'Em aberto' | 'Pago' | 'Cancelado';
-  urlFoto?: string;
-}
-
 interface ListagemSessoesAntigasProps {
-  sessoesAntigas: SessoesAntigasProps[];
+  sessoesAntigas: ConsultaModel[];
 }
 
 export default function SessoesAntigas({ sessoesAntigas }: ListagemSessoesAntigasProps) {
-  const sessoesFeitas = sessoesAntigas.filter(s => s.sessaoFeita);
+  const sessoesFeitas = sessoesAntigas.filter(s => s.finalizada);
 
   return (
     <div className="sessao-antiga">
@@ -30,21 +22,14 @@ export default function SessoesAntigas({ sessoesAntigas }: ListagemSessoesAntiga
               <div className="sessao-antiga-info">
                 <img
                   className="sessao-antiga-foto"
-                  src={sessao.urlFoto || "/imagens/foto-padrao.png"}
+                  src={sessao.psicologo.fotoUrl || "/imagens/foto-padrao.png"}
                   alt="Foto do psicólogo"
                 />
                 <div className="sessao-antiga-textos">
-                  <p className="sessao-antiga-nome">{sessao.nomePsicologo}</p>
-                  <p>Data: {sessao.data}</p>
-                  <p>Horário: {sessao.horario}</p>
+                  <p className="sessao-antiga-nome">{sessao.psicologo.nome}</p>
+                  <p>Data: {formatarDataHora(sessao.dataHora).data}</p>
+                  <p>Horário: {formatarDataHora(sessao.dataHora).hora}</p>
                 </div>
-              </div>
-
-              <div className="sessao-antiga-pagamento">
-                <p><strong>Valor:</strong> {sessao.valor}</p>
-                <span className={`sessao-antiga-status ${sessao.statusPagamento?.toLowerCase().replace(' ', '-')}`}>
-                  {sessao.statusPagamento}
-                </span>
               </div>
             </div>
           ))}

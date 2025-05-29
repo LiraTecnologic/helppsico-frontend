@@ -7,10 +7,12 @@ import './App.css';
 import LoginPaciente from '../src/pages/loginPaciente/loginPaciente';
 import CadsatroPaciente from '../src/pages/cadastroPaciente/cadastroPaciente';
 import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
-import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
+import DetalhesSessao from "./pages/minhasConsultasPaciente/minhasConsultasPaciente";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
+import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
+import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
 
 // Telas do fluxo de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
@@ -24,8 +26,6 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
-import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
-
 
 function App() {
   return (
@@ -42,6 +42,7 @@ function App() {
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
         <Route path="/solicitacaoVinculo" element={<SolicitacaoDeVinculo />} />
         <Route path="/agendamentoConsulta" element={<AgendamentoConsulta />} />
+        <Route path="/solicitacaoDocumento" element={<SolicitacaoDocumento />}/>
 
         {/* FLUXO DE PSICOLOGO */}
         <Route path="/loginPsicologo" element={<LoginPsicologo />} />
