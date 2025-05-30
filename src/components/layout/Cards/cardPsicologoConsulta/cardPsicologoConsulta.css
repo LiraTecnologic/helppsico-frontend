@@ -42,10 +42,14 @@
     border-radius: 20px;
 }
 
+.container-psicologo{
+    padding: 15px;
+}
+
 /* Responsividade */
 @media (max-width: 720px) {
     .cards-psicologo-consulta {
-        margin: 5px;
+        margin: 12px;
         text-align: center;
         padding: 20px;
         font-size: 12px;
@@ -59,4 +63,13 @@
     .info-psicologo .nome {
         font-size: 6px;
     }
+
+    .container-psicologo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    
 }
