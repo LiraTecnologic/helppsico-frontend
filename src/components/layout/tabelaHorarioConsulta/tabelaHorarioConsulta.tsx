@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 interface TabelaHorariosProps {
   horarios: HorarioModel[];
   onSelecionado?: (quantidade: number) => void;
+  onSelecionadosChange?: (ids: string[]) => void;
 }
 
 const nomesDias: Record<string, string> = {
@@ -19,7 +20,8 @@ const nomesDias: Record<string, string> = {
 
 export default function TabelaHorarioConsulta({
   horarios,
-  onSelecionado
+  onSelecionado,
+  onSelecionadosChange
 }: TabelaHorariosProps) {
   const [selecionados, setSelecionados] = useState<Set<string>>(new Set());
   const horariosPorDia = horarios.reduce((acc, horario) => {
@@ -44,6 +46,7 @@ export default function TabelaHorarioConsulta({
   useEffect(() => {
     if (onSelecionado) {
       onSelecionado(selecionados.size);
+      onSelecionadosChange?.(Array.from(selecionados));
     }
   }, [selecionados, onSelecionado]);
 
