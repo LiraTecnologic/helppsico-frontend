@@ -5,22 +5,19 @@ import FotoPsicoloco from "../../assets/Foto.png";
 import DadosConsultaPsicologo from "../../components/layout/Cards/dadosConsulta/dadosConsulta";
 import TabelaHorarioConsulta from "../../components/layout/tabelaHorarioConsulta/tabelaHorarioConsulta";
 import { useEffect, useState } from "react";
+import PsicologoModel from "../../models/psicologo";
+import { HorarioPsicologoModel } from "../../models/horarioPsicologo";
 
 export default function AgendamentoConsulta() {
-  const dadosPsicologo = {
-    urlFoto: FotoPsicoloco,
-    nome: "Dra. Pinchola",
-    biografia:
-      "Trabalha com programas nas horas vagas Trabalha com programas nas horas vagas Trabalha com programas nas horas vagas Trabalha com programas nas horas vagasLorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI.",
-    tempoSessao: 40,
-    valor: 100,
-    diasSelecionados: ["SEG", "TER", "QUA", "QUI", "SEX"],
-    inicio: "08:00",
-    fim: "18:00",
-    intervalo: 10,
-  };
-
   const [quantidadeSelecionada, setQuantidadeSelecionada] = useState(0);
+  const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
+  const [horarioPsicologo, setHorarioPsicologo] = useState<HorarioPsicologoModel | null>(null);
+
+
+  const dadosAgendamentoConsulta = {
+    diasSelecionados: ["SEG", "TER", "QUA", "QUI", "SEX"]
+  }
+
 
   return (
     <>
@@ -29,31 +26,34 @@ export default function AgendamentoConsulta() {
         <h1>Consulta</h1>
         <div className="container-psicologo">
           <div className="dados-psicologo-consulta">
-            <CardPsicologoConsulta
-              urlFoto={dadosPsicologo.urlFoto}
-              nome={dadosPsicologo.nome}
-              biografia={dadosPsicologo.biografia}
-              tempoSessao={dadosPsicologo.tempoSessao}
-            />
+            {psicologo && horarioPsicologo &&
+              <CardPsicologoConsulta
+                urlFoto={psicologo.fotoUrl}
+                nome={psicologo.nome}
+                biografia={psicologo.biografia}
+                tempoSessao={horarioPsicologo.tempoSessao}
+              />
+            }
           </div>
           <div>
-            <DadosConsultaPsicologo
-              selecionado={quantidadeSelecionada}
-              valor={dadosPsicologo.valor}
-              valorTotal={quantidadeSelecionada * dadosPsicologo.valor}
-            />
+            {psicologo &&
+              <DadosConsultaPsicologo
+                selecionado={quantidadeSelecionada}
+                valor={psicologo.valorSessao}
+                valorTotal={quantidadeSelecionada * psicologo.valorSessao}
+              />
+            }
           </div>
         </div>
         <div className="campo-atendimento">
           <h2>Dias de Atendimento</h2>
           <div className="tabela-horario-consulta">
             <TabelaHorarioConsulta
-              dias={dadosPsicologo.diasSelecionados}
+              dias={dadosAgendamentoConsulta.diasSelecionados}
               inicio={dadosPsicologo.inicio}
               fim={dadosPsicologo.fim}
               duracao={dadosPsicologo.tempoSessao}
               intervalo={dadosPsicologo.intervalo}
-              agendamento={true}
               onSelecionado={(qtd) => setQuantidadeSelecionada(qtd)}
             />
           </div>
