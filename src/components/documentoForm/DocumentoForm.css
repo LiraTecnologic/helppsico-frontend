@@ -1,92 +1,44 @@
 .documento-form-container {
-    max-width: 700px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
-  }
-  
-  .documento-label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 6px;
-    font-weight: 600;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .documento-select,
-  .documento-input,
-  .documento-textarea {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 14px;
-    border: 1.5px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-    font-family: inherit;
-  }
-  
-  .documento-select:focus,
-  .documento-input:focus,
-  .documento-textarea:focus {
-    border-color: #0d42bd;
-    outline: none;
-  }
-  
-  .documento-textarea {
-    min-height: 90px;
-    resize: vertical;
-    font-family: inherit;
-  }
-  
-  .botoes {
-    margin-top: 25px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-  }
-  
-  .btn-cancelar,
-  .btn-salvar {
-    padding: 10px 22px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 15px;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-cancelar {
-    background-color: #ccc;
-    color: #333;
-  }
-  
-  .btn-cancelar:hover {
-    background-color: #b3b3b3;
-  }
-  
-  .btn-salvar {
-    background-color: #0d42bd;
-    color: white;
-  }
-  
-  .btn-salvar:hover {
-    background-color: #0a3490;
-  }
-  
-  .tipo-nao-suportado {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #ffe6e6;
-    color: #a00;
-    border-radius: 5px;
-    font-weight: 600;
-    text-align: center;
-  }
-  
+  max-width: 80%;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.botoes-documento {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-cancelar,
+.btn-salvar {
+  padding: 10px 22px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-cancelar {
+  background-color: #ccc;
+  color: #333;
+}
+
+.btn-cancelar:hover {
+  background-color: #b3b3b3;
+}
+
+.btn-salvar {
+  background-color: #0d42bd;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background-color: #0a3490;
+}

@@ -21,7 +21,7 @@ import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
 import GerenciamentoDeHorarios from "./pages/gereciamentoHorarios/gerenciamentoHorarios";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
 import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
-import CadastroDocumento from "./pages/cadstroDocumento/cadastroDocumento";
+import CadastroDocumento from "./pages/cadastroDocumento/cadastroDocumento";
 
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";

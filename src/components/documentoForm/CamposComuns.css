@@ -1,0 +1,40 @@
+.documento-label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-size: 18px;
+}
+
+.documento-select,
+.documento-input,
+.documento-textarea {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+    color: #333;
+}
+
+.documento-select:focus,
+.documento-input:focus,
+.documento-textarea:focus {
+    border-color: #0d42bd;
+    outline: none;
+}
+
+.documento-textarea {
+    resize: none;
+}
+
+.tipo-nao-suportado {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffe6e6;
+    color: #a00;
+    border-radius: 5px;
+    text-align: center;
+}

@@ -47,7 +47,7 @@ export default function DocumentoForm({ tipoDocumento, pacientes }: DocumentoFor
 
       {renderFormularioEspecifico()}
 
-      <div className="botoes">
+      <div className="botoes-documento">
         <button className="btn-cancelar" onClick={() => window.location.reload()}>
           Cancelar
         </button>
