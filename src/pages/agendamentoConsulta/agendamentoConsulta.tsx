@@ -1,22 +1,30 @@
 import "./agendamentoConsulta.css";
 import Header from "../../components/layout/header/header";
 import CardPsicologoConsulta from "../../components/layout/Cards/cardPsicologoConsulta/cardPsicologoConsulta";
-import FotoPsicoloco from "../../assets/Foto.png";
 import DadosConsultaPsicologo from "../../components/layout/Cards/dadosConsulta/dadosConsulta";
 import TabelaHorarioConsulta from "../../components/layout/tabelaHorarioConsulta/tabelaHorarioConsulta";
 import { useEffect, useState } from "react";
 import PsicologoModel from "../../models/psicologo";
 import { HorarioPsicologoModel } from "../../models/horarioPsicologo";
+import { consultarPsicologoPeloId } from './agendamentoConsulta.service';
+import { listarHorariosPsicologo } from '../../services/horarioPsicologo.service'
 
 export default function AgendamentoConsulta() {
   const [quantidadeSelecionada, setQuantidadeSelecionada] = useState(0);
   const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
   const [horarioPsicologo, setHorarioPsicologo] = useState<HorarioPsicologoModel | null>(null);
 
+  useEffect(() => {
+    async function carregarPsicologo(idPsicologo:string) {
+      const psicologo = await consultarPsicologoPeloId(idPsicologo);
+      setPsicologo(psicologo.dado);
+    }
 
-  const dadosAgendamentoConsulta = {
-    diasSelecionados: ["SEG", "TER", "QUA", "QUI", "SEX"]
-  }
+    async function carregarHorarios(idPsicolgo:string) {
+      const horarios = await listarHorariosPsicologo(idPsicolgo, 1);
+      setHorarioPsicologo(horarios.dado.content)
+    }
+  }, []);
 
 
   return (
@@ -48,14 +56,12 @@ export default function AgendamentoConsulta() {
         <div className="campo-atendimento">
           <h2>Dias de Atendimento</h2>
           <div className="tabela-horario-consulta">
-            <TabelaHorarioConsulta
-              dias={dadosAgendamentoConsulta.diasSelecionados}
-              inicio={dadosPsicologo.inicio}
-              fim={dadosPsicologo.fim}
-              duracao={dadosPsicologo.tempoSessao}
-              intervalo={dadosPsicologo.intervalo}
-              onSelecionado={(qtd) => setQuantidadeSelecionada(qtd)}
-            />
+            {horarioPsicologo && horarioPsicologo.horarios &&
+              <TabelaHorarioConsulta
+                horarios={horarioPsicologo.horarios}
+                onSelecionado={(qtd) => setQuantidadeSelecionada(qtd)}
+              />
+            }
           </div>
         </div>
 
