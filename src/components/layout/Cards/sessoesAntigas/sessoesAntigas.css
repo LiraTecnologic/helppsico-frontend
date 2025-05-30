@@ -110,3 +110,119 @@
     display: flex;
     gap: 24px;
 }
+
+@media (max-width: 1024px) {
+    .Card-Container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
+    .sessao-antiga {
+        max-width: 90%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 720px) {
+    .sessao-antiga {
+        max-width: 95%;
+        padding: 16px;
+    }
+    
+    .Card-Container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .sessao-antiga-card {
+        padding: 12px;
+    }
+    
+    .sessao-antiga-foto {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .sessao-antiga-info {
+        gap: 8px;
+    }
+    
+    .sessao-antiga-nome {
+        font-size: 14px;
+    }
+    
+    .sessao-antiga-detalhes p {
+        font-size: 12px;
+    }
+    
+    .sessao-antiga-pagamento {
+        font-size: 12px;
+        min-width: 100px;
+    }
+}
+
+/* 
+    Para caso precisar
+    @media (max-width: 480px) {
+    .sessao-antiga {
+        max-width: 100%;
+        padding: 12px;
+        margin: 0;
+    }
+    
+    .sessao-antiga-cabecalho {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+    
+    .sessao-antiga-cabecalho h1 {
+        font-size: 18px;
+        margin: 0;
+    }
+    
+    .Card-Container {
+        gap: 12px;
+    }
+    
+    .sessao-antiga-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px;
+    }
+    
+    .sessao-antiga-info {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .sessao-antiga-foto {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .sessao-antiga-textos {
+        flex: 1;
+    }
+    
+    .sessao-antiga-nome {
+        font-size: 14px;
+    }
+    
+    .sessao-antiga-detalhes p {
+        font-size: 11px;
+    }
+    
+    .sessao-antiga-pagamento {
+        width: 100%;
+        text-align: left;
+        font-size: 11px;
+        min-width: auto;
+    }
+    
+    .botao-ver-mais {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+} */
