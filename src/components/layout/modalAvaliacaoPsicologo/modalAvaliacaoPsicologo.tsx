@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import "./modalAvaliacaoPsicologo.css";
+import { cadastrarAvaliacao } from './modalAvaliacaoPsicologo.service';
+import { AvaliacaoModel } from "../../../models/avaliacoes";
+import PacienteModel from "../../../models/paciente";
+import EnderecoModel from "../../../models/endereco";
+import PsicologoModel from "../../../models/psicologo";
 
 interface ModalProps {
   isOpen: boolean;
@@ -7,6 +12,7 @@ interface ModalProps {
   psicologo: {
     nome: string;
     foto: string;
+    id: string;
   };
   onSubmitAvaliacao?: (rating: number, comment: string) => void;
 }
@@ -39,9 +45,61 @@ export default function ModalAvaliacaoPsicologo({
     if (onSubmitAvaliacao) {
       onSubmitAvaliacao(rating, comment);
     }
+
+    // const idPaciente = localStorage.getItem('id-paciente');
+    const idPaciente = '952ec8e8-8a64-414b-8422-83a753aa0d9b';
+    const idPsicologo = 'deec458b-a6b7-4a70-b308-97dcc1a16ec6';
+
+    let novaAvaliacao: AvaliacaoModel = {} as AvaliacaoModel;
+
+    if (idPaciente) {
+      const paciente: PacienteModel = {
+        id: idPaciente,
+        nome: '',
+        cpf: '',
+        email: '',
+        telefone: '',
+        dataNascimento: '',
+        genero: 'MASCULINO',
+        fotoUrl: '',
+        endereco: {} as EnderecoModel
+      }
+
+
+      const psicologoAvaliacao: PsicologoModel = {
+        id: idPsicologo,
+        nome: '',
+        cpf: '',
+        email: '',
+        telefone: '',
+        dataNascimento: '',
+        genero: 'MASCULINO',
+        fotoUrl: '',
+        crp: '',
+        enderecoAtendimento: {} as EnderecoModel,
+        biografia: '',
+        status: ''
+      }
+
+      novaAvaliacao = {
+        id: "",
+        psicologo: psicologoAvaliacao,
+        paciente: paciente,
+        nota: rating,
+        comentario: comment,
+        data: ''
+      };
+    }
+
+
+    if(novaAvaliacao) {
+      cadastrarAvaliacao(novaAvaliacao);
+    }
+
     setRating(0);
     setComment("");
     onClose();
+
   };
 
   const handleCancel = () => {
@@ -68,9 +126,8 @@ export default function ModalAvaliacaoPsicologo({
             {[1, 2, 3, 4, 5].map((star) => (
               <button
                 key={star}
-                className={`star ${
-                  star <= (hoverRating || rating) ? "filled" : "empty"
-                }`}
+                className={`star ${star <= (hoverRating || rating) ? "filled" : "empty"
+                  }`}
                 onClick={() => handleStarClick(star)}
                 onMouseEnter={() => handleStarHover(star)}
                 onMouseLeave={handleStarLeave}

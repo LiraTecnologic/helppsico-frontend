@@ -53,7 +53,6 @@ export default function AgendamentoConsulta() {
               fim={dadosPsicologo.fim}
               duracao={dadosPsicologo.tempoSessao}
               intervalo={dadosPsicologo.intervalo}
-              agendamento={true}
               onSelecionado={(qtd) => setQuantidadeSelecionada(qtd)}
             />
           </div>

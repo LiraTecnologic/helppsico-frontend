@@ -123,9 +123,9 @@ export default function InformacoesPsicologo() {
                             />
                             <BotaoAvaliarInfoPsicologo
                                 psicologo={{
-                                id: psicologo.id,
-                                nome: psicologo.nome,
-                                foto: FotoPsicologo
+                                    id: psicologo.id,
+                                    nome: psicologo.nome,
+                                    foto: FotoPsicologo
                                 }}
                             />
 

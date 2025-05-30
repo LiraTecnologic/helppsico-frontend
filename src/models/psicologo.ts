@@ -1,3 +1,5 @@
+import EnderecoModel from "./endereco";
+
 export default interface PsicologoModel {
     id:string,
     nome:string,
@@ -7,7 +9,7 @@ export default interface PsicologoModel {
     telefone:string,
     dataNascimento:string,
     genero:string,
-    enderecoAtendimento:string,
+    enderecoAtendimento:EnderecoModel,
     biografia:string,
     status:string,
     fotoUrl:string
