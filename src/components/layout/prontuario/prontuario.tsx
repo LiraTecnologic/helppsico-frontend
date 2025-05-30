@@ -1,18 +1,27 @@
 import './prontuario.css';
 import Documento from "../../../assets/Documento.svg";
+import { useNavigate } from 'react-router-dom';
 
 interface ProntuarioProps {
     nomePaciente: string;
     titulo: string;
-    onClickAbrir?: () => void;
     fotoPerfilUrl?: string;
+    idProntuario: string;
 }
 
 function Prontuario({
     nomePaciente,
     titulo,
-    onClickAbrir,
-    fotoPerfilUrl}: ProntuarioProps) {
+    idProntuario,
+    fotoPerfilUrl }: ProntuarioProps
+) {
+
+    const navigate = useNavigate();
+
+    function abrirProntuario() {
+        navigate(`/detalhesProntuario/${idProntuario}`);
+    }
+
     return (
         <div className="prontuarioContainer">
             <div className="prontuarioHeader">
@@ -34,7 +43,7 @@ function Prontuario({
 
                 <button
                     className="prontuarioBotaoAbrir"
-                    onClick={onClickAbrir}
+                    onClick={abrirProntuario}
                 >
                     Abrir Prontuário
                 </button>

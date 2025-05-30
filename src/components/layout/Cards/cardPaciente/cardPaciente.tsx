@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import "./cardPaciente.css";
 
 interface CardPacienteProps {
@@ -6,10 +7,16 @@ interface CardPacienteProps {
   email: string;
   telefone: string;
   fotoUrl: string;
-  prontuarioId: string;
+  prontuarioId?: string;
 }
 
 export default function CardPaciente(props: CardPacienteProps) {
+  const navigate = useNavigate();
+  
+  function abrirProntuario() {
+    navigate(`/detalhesProntuario/${props.prontuarioId}`);
+  }
+
   return (
     <div className="card-paciente">
       <div className="card-topo">
@@ -25,13 +32,25 @@ export default function CardPaciente(props: CardPacienteProps) {
           <p className="telefone">{props.telefone}</p>
         </div>
       </div>
-      
-      <button
-        className={props.prontuarioId ? "btn-prontuario" : "btn-sem-prontuario"}
-        disabled={!props.prontuarioId}
-      >
-        {props.prontuarioId ? "Abrir Prontuário" : "Sem prontuário"}
-      </button>
+
+
+      {props.prontuarioId ? (
+        <button
+          className="btn-prontuario"
+          disabled={!props.prontuarioId}
+          onClick={abrirProntuario}
+        >
+          Abrir Prontuário
+        </button>
+      ) : (
+        <button
+          className="btn-sem-prontuario"
+          disabled={!props.prontuarioId}
+        >
+          Sem prontuário
+        </button>
+      )
+      }
     </div>
   );
 }
