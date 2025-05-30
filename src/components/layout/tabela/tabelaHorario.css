@@ -55,3 +55,32 @@ td {
 tbody tr {
     background-color: white;
 }
+
+@media (max-width: 1024px) {
+    th {
+        padding: 8px 4px;
+        font-size: 16px;
+    }
+    
+    td {
+        padding: 6px 3px;
+    }
+}
+
+@media (max-width: 720px) {
+    table {
+        font-size: 10px;
+        border-radius: 20px 20px 0 0;
+    }
+    
+    th {
+        padding: 6px 4px;
+        font-size: 14px;
+    }
+    
+    td {
+        padding: 4px 2px;
+        font-size: 12px;
+        letter-spacing: 0;
+    }
+}
