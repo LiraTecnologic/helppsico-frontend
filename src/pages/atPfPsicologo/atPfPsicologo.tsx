@@ -36,9 +36,19 @@ const AtPfPsicologo: React.FC = () => {
     }, []);
 
     const handleValorSessaoChange = (valor: string) => {
+        // Remove tudo que não é número
+        const numeroLimpo = valor.replace(/\D/g, '');
         
-        const valorNumerico = valor.replace(/[^\d,.-]/g, '');
-        setValorSessao(valorNumerico);
+        // Converte para centavos
+        const valorEmCentavos = parseInt(numeroLimpo) / 100;
+        
+        // Formata o valor
+        const valorFormatado = valorEmCentavos.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+        
+        setValorSessao(valorFormatado);
     };
 
     const handleBiografiaChange = (novaBiografia: string) => {
@@ -65,6 +75,10 @@ const AtPfPsicologo: React.FC = () => {
         return <div className="loading">Carregando...</div>;
     }
 
+    const getBotaoTexto = () => {
+        return (!valorSessao && !biografia) ? 'Salvar' : 'Editar';
+    };
+
     return (
         <>
             <Header fluxo="atualizacaoPerfil" headerPsicologo={true} />
@@ -78,6 +92,7 @@ const AtPfPsicologo: React.FC = () => {
                     onBiografiaChange={handleBiografiaChange}
                     onEditar={handleEditar}
                     onVoltar={handleVoltar}
+                    botaoTexto={getBotaoTexto()}
                 />
             </main>
         </>

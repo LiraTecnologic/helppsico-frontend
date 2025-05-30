@@ -10,6 +10,7 @@ interface CardPfPsicologoProps {
     onBiografiaChange: (biografia: string) => void;
     onEditar: () => void;
     onVoltar: () => void;
+    botaoTexto: string;
 }
 
 const CardPfPsicologo: React.FC<CardPfPsicologoProps> = ({
@@ -19,7 +20,8 @@ const CardPfPsicologo: React.FC<CardPfPsicologoProps> = ({
     onValorSessaoChange,
     onBiografiaChange,
     onEditar,
-    onVoltar
+    onVoltar,
+    botaoTexto
 }) => {
     return (
         <div className="card-pf-psicologo">
@@ -46,7 +48,7 @@ const CardPfPsicologo: React.FC<CardPfPsicologoProps> = ({
 
             <div className="card-pf-psicologo-actions">
                 <button className="card-pf-psicologo-btn-editar" onClick={onEditar}>
-                    Editar
+                    {botaoTexto}
                 </button>
                 <button className="card-pf-psicologo-btn-voltar" onClick={onVoltar}>
                     Voltar
