@@ -15,27 +15,34 @@ export default function CardSolicitacaoVinculo(props: CardSolicitacaoProps) {
   const { nome, idade, crp, avaliacao, status, botao, onClick } = props;
 
   const getStatusClass = () => {
-    if (status === 'Pendente') return 'status status-pendente';
-    return 'status status-outro';
+    if (status === 'Pendente') return 'card-solicitacao-vinculo__status card-solicitacao-vinculo__status--pendente';
+    return 'card-solicitacao-vinculo__status card-solicitacao-vinculo__status--recusado';
+  };
+
+  const getBotaoClass = () => {
+    if (status === 'Pendente') return 'card-solicitacao-vinculo__botao card-solicitacao-vinculo__botao--cancelar';
+    return 'card-solicitacao-vinculo__botao card-solicitacao-vinculo__botao--ver-mais';
   };
 
   return (
-    <div className="card-solicitacao">
-      <img className="fotoPsico" src={foto} alt="Foto do Psicólogo" />
-      
-      <div className="info">
-        <h2 className="nome">{nome}</h2>
-        <p className="idade">{idade} anos</p>
-        <p className="crp">CRP: {crp}</p>
-        <div className="avaliacao">
-          <span>{avaliacao.toFixed(1).replace('.', ',')}</span>
-          <span className="estrela">⭐</span>
+    <div className="card-solicitacao-vinculo">
+      <div className="card-solicitacao-vinculo__content">
+        <img className="card-solicitacao-vinculo__foto" src={foto} alt="Foto do Psicólogo" />
+        
+        <div className="card-solicitacao-vinculo__info">
+          <h2 className="card-solicitacao-vinculo__nome">{nome}</h2>
+          <p className="card-solicitacao-vinculo__idade">{idade} anos</p>
+          <p className="card-solicitacao-vinculo__crp">CRP: {crp}</p>
+          <div className="card-solicitacao-vinculo__avaliacao">
+            <span>{avaliacao.toFixed(1).replace('.', ',')}</span>
+            <span className="card-solicitacao-vinculo__estrela">⭐</span>
+          </div>
         </div>
-      </div>
 
-      <div className="acoes">
-        <span className={getStatusClass()}>{status}</span>
-        <button className="cancelar-btn" onClick={onClick}>{botao}</button>
+        <div className="card-solicitacao-vinculo__acoes">
+          <span className={getStatusClass()}>{status}</span>
+          <button className={getBotaoClass()} onClick={onClick}>{botao}</button>
+        </div>
       </div>
     </div>
   );
