@@ -12,7 +12,6 @@ import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
 import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
-import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
 
 // Telas do fluxo de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';

@@ -1,9 +1,9 @@
 import { Check, X } from 'lucide-react';
-import { SolicitacaoDocumento } from '../../../../models/documento';
+import SolicitacaoDocumentoModel from '../../../../models/solicitacaoDocumento';
 import './requisicaoDocumentoCard.css';
 
 interface CardRequisicaoDocumentoProps {
-  solicitacao: SolicitacaoDocumento;
+  solicitacao: SolicitacaoDocumentoModel;
   onApprove: (id: string) => void;
   onReject: (id: string) => void;
 }
@@ -34,18 +34,18 @@ export default function CardRequisicaoDocumento({
         <div className="paciente-info">
           <div className="paciente-avatar">
             <img 
-              src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${solicitacao.documento.paciente.nome}`}
-              alt={solicitacao.documento.paciente.nome}
+              src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${solicitacao.paciente.nome}`}
+              alt={solicitacao.paciente.nome}
             />
           </div>
           <div className="paciente-detalhes">
-            <h3 className="paciente-nome">{solicitacao.documento.paciente.nome}</h3>
+            <h3 className="paciente-nome">{solicitacao.paciente.nome}</h3>
             <div className="documento-info">
               <span className="documento-tipo">
-                <strong>Documento solicitado:</strong> {solicitacao.documento.tipoDocumento}
+                <strong>Documento solicitado:</strong> {solicitacao.tipoDocumento}
               </span>
               <span className="data-solicitacao">
-                <strong>Data da solicitação:</strong> {formatDate(solicitacao.dataSolicitacao)}
+                <strong>Data da solicitação:</strong> {formatDate(solicitacao.data)}
               </span>
             </div>
           </div>
