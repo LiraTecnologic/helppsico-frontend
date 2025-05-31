@@ -84,7 +84,7 @@ export default function SolicitacaoDeVinculo() {
   if (carregando) {
     return (
       <>
-        <Header fluxo="minhasSessoes" headerPsicologo={false} />
+        <Header fluxo="solicitacoesVinculo" headerPsicologo={false} />
         <div className="container">
           <h1>Solicitações</h1>
           <p>Carregando...</p>

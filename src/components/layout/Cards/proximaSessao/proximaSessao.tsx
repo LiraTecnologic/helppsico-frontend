@@ -71,7 +71,7 @@ export default function ProximasSessoes({
           <p className="subtitulo-nao-marcada">
             Clique no botão abaixo e marque agora mesmo!
           </p>
-          <button className="botao-marcar"><Link to="">Marcar consulta</Link></button>{/* Falta tela  */}
+          <button className="botao-marcar"><Link to="/paciente/agendamento">Marcar consulta</Link></button>
         </div>
       ) : (
         <div className="sessao-nao-marcada">

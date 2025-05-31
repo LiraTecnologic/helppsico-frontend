@@ -28,7 +28,7 @@ export default function MeuPainelPaciente() {
                 <div className="listagemDocumentos">
                     <h1 className='documentoTittle'>Prontuário</h1>
                     <button className="botaoVerMais">
-                        <Link to="/psicologo/prontuarios" className="botao-link">Solicitar Documento</Link> {/* Falta tela */}
+                        <Link to="/paciente/solicitacao-documento" className="botao-link">Solicitar Documento</Link>
                     </button>
                 </div>
                 <ListagemDocumentos

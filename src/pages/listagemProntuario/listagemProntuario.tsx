@@ -36,7 +36,7 @@ export default function ListagemProntuario() {
                     <Link to="/psicologo/prontuario/novo">
                         <BotaoPrimario texto="Cadastrar Prontuário" />
                     </Link>
-                    <Link to="/psicologo/prontuario/novo">
+                    <Link to="/psicologo/documentos-pendentes">
                         <BotaoPrimario texto={`(${solicitacoesPendentes}) Solicitações pendentes`} />
                     </Link>
 
