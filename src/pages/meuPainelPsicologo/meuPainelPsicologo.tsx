@@ -22,7 +22,7 @@ export default function MeuPainelPsicologo() {
         async function carregarProntuarios(id: string) {
             const prontuariosConsultados = await consultaProntuariosPsicologo(id, 1);
             console.log('Prontuarios: ', prontuariosConsultados);
-            setProntuarios(prontuariosConsultados.content);
+            setProntuarios(prontuariosConsultados.dado.content);
         }
 
         async function carregarConsultas(id: string) {
@@ -30,8 +30,8 @@ export default function MeuPainelPsicologo() {
             console.log('Consultas: ', consultasConsultadas);
 
             const consultasOrdenadas = consultasConsultadas.content.sort((a, b) => {
-                const dataA = new Date(a.dataHora).getTime();
-                const dataB = new Date(b.dataHora).getTime();
+                const dataA = new Date(a.data).getTime();
+                const dataB = new Date(b.data).getTime();
                 const agora = Date.now();
 
                 const diffA = Math.abs(dataA - agora);
@@ -65,10 +65,6 @@ export default function MeuPainelPsicologo() {
         carregarVinculos(psicologoId);
 
     }, []);
-
-
-
-    const sessaoMarcada = consultas.length > 0;;
 
     const handleDocumentoClick = (id: string) => {
         console.log(`Documento com ID ${id} foi clicado`);

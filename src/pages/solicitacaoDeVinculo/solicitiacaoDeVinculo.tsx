@@ -34,7 +34,7 @@ export default function SolicitacaoDeVinculo() {
 
     } catch (error) {
 
-      console.error(`Erro ao carregar os vinculos :(  Erro:`, error);
+      console.error(`Erro ao carregar os vinculos Erro:`, error);
       setErro('Erro ao carregar os vinculos. Tente novamente mais tarde.');
 
     } finally {

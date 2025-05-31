@@ -54,7 +54,7 @@ export default function DetalhesProntuario() {
             setProntuario(prontuario.dado);
         }
 
-        carregarProntuario("teste");
+        carregarProntuario("798d323e-faa2-4932-aa93-07a98c1c260b");
     }, []);
 
     return (

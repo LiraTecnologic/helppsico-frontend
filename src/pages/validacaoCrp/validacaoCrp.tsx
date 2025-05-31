@@ -17,7 +17,7 @@ export default function ValidacaoCrp() {
 
     useEffect(() => {
         async function carregarValidacoes() {
-            const validacoes = await consultaValidacoesCrp(1);
+            const validacoes = await consultaValidacoesCrp(0);
             setValidacoes(validacoes.dado.content);
         }
 

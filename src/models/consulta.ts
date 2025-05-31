@@ -8,7 +8,8 @@ export default interface ConsultaModel {
     psicologo:PsicologoModel,
     paciente:PacienteModel,
     valor:number,
-    dataHora:HorarioModel,
+    hora:HorarioModel,
+    data:string,
     endereco:EnderecoModel,
     finalizada:Boolean
 }

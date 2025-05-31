@@ -15,9 +15,9 @@ export default function ListagemProntuario() {
 
     useEffect(() => {
         async function carregarProntuarios() {
-            const prontuariosConsultados = await consultaProntuariosPsicologo('', 1);
+            const prontuariosConsultados = await consultaProntuariosPsicologo('deec458b-a6b7-4a70-b308-97dcc1a16ec6', 0);
             console.log(prontuariosConsultados);
-            setProntuarios(prontuariosConsultados.content);
+            setProntuarios(prontuariosConsultados.dado.content);
         }
 
         carregarProntuarios();

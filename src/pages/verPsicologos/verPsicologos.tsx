@@ -30,11 +30,11 @@ export default function VerPsicologos() {
     async function carregarPsicologos() {
       const listaPsicologos = await listarPsicologos();
 
-      const compiladoPromises = listaPsicologos.map(async (psicologo) => {
-        const avaliacoes = await listarAvaliacoesPorPsicologo(psicologo.id);
+      const compiladoPromises = listaPsicologos.dado.content.map(async (psicologo) => {
+        const avaliacoes = await listarAvaliacoesPorPsicologo(psicologo.id, 0);
         return {
           psicologo,
-          avaliacao: avaliacoes,
+          avaliacao: avaliacoes.dado.content,
         } as PsicologoCompilado;
       });
 
