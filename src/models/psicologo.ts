@@ -12,5 +12,7 @@ export default interface PsicologoModel {
     enderecoAtendimento:EnderecoModel,
     biografia:string,
     status:string,
-    fotoUrl:string
+    fotoUrl:string,
+    valorSessao: number,
+    tempoSessao: number
 }

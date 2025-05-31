@@ -12,7 +12,6 @@ import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
 import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
-import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
 
 // Telas do fluxo de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
@@ -26,6 +25,8 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
+import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
+        <Route path="/requisicaoDocumento" element={<RequisicaoDocumento />} />
 
       </Routes>
       <ToastContainer/>

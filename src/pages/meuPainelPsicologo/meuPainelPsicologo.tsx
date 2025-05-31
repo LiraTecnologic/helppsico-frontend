@@ -46,7 +46,7 @@ export default function MeuPainelPsicologo() {
         async function carregarVinculos(id: string) {
             const vinculosConsultados = await consultaVinculosPsicologo(id, 1);
             console.log('Vinculos: ', vinculosConsultados);
-            setVinculos(vinculosConsultados.content);
+            setVinculos(vinculosConsultados.dado.content);
         }
 
 
