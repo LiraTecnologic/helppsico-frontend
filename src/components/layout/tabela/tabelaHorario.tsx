@@ -2,17 +2,17 @@ import './tabelaHorario.css'
 
 export default function TabelaHorario() {
     return (
-        <>
+        <div className="tabela-container">
             <table>
                 <thead>
                     <tr>
-                        <th>segunda</th>
-                        <th>terça</th>
-                        <th>quarta</th>
-                        <th>quinta</th>
-                        <th>sexta</th>
-                        <th>sábado</th>
-                        <th>domingo</th>
+                        <th>Segunda</th>
+                        <th>Terça</th>
+                        <th>Quarta</th>
+                        <th>Quinta</th>
+                        <th>Sexta</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,15 +35,6 @@ export default function TabelaHorario() {
                         <td>08:00</td>
                     </tr>
                     <tr>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                        <td>07:00</td>
-                    </tr>
-                    <tr>
                         <td>09:00</td>
                         <td>09:00</td>
                         <td>09:00</td>
@@ -60,9 +51,18 @@ export default function TabelaHorario() {
                         <td>10:00</td>
                         <td>10:00</td>
                         <td>10:00</td>
+                    </tr>
+                    <tr>
+                        <td>11:00</td>
+                        <td>11:00</td>
+                        <td>11:00</td>
+                        <td>11:00</td>
+                        <td>11:00</td>
+                        <td>11:00</td>
+                        <td>11:00</td>
                     </tr>
                 </tbody>
             </table>
-        </>
+        </div>
     );
 }

@@ -4,6 +4,7 @@
     gap: 2rem;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-start;
 }
   
 .paciente-card {
@@ -13,6 +14,7 @@
     width: 100px;
     font-size: 14px;
     text-align: center;
+    margin-bottom: 1rem;
 }
   
 .foto-paciente {
@@ -20,12 +22,15 @@
     height: 90px;
     border-radius: 50%;
     object-fit: cover;
+    margin-bottom: 8px;
 }
   
 .mensagem-vazia {
     color: gray;
     font-style: italic;
     margin-top: 1rem;
+    text-align: center;
+    padding: 2rem;
 }
 
 .botao-ver-mais {
@@ -36,6 +41,12 @@
     cursor: pointer;
     padding: 5px 12px;
     border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.botao-ver-mais:hover {
+    background-color: #0033aa;
 }
 
 .listagem-pacientes-cabecalho {
@@ -43,4 +54,110 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.listagem-pacientes-cabecalho h1 {
+    margin: 0;
+    flex-grow: 1;
+}
+
+
+@media (max-width: 768px) {
+    .lista-pacientes {
+        gap: 1.5rem;
+        justify-content: center;
+    }
+    
+    .paciente-card {
+        width: 90px;
+        font-size: 13px;
+    }
+    
+    .foto-paciente {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .listagem-pacientes-cabecalho {
+        margin-bottom: 12px;
+    }
+    
+    .listagem-pacientes-cabecalho h1 {
+        font-size: 1.5rem;
+    }
+    
+    .botao-ver-mais {
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .lista-pacientes {
+        gap: 1rem;
+        justify-content: center;
+        padding-top: 15px;
+    }
+    
+    .paciente-card {
+        width: 80px;
+        font-size: 12px;
+    }
+    
+    .foto-paciente {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 6px;
+    }
+    
+    .listagem-pacientes-cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .listagem-pacientes-cabecalho h1 {
+        font-size: 1.3rem;
+        width: 100%;
+    }
+    
+    .botao-ver-mais {
+        align-self: flex-end;
+        width: auto;
+    }
+    
+    .mensagem-vazia {
+        font-size: 14px;
+        padding: 1.5rem;
+    }
+}
+
+
+@media (max-width: 360px) {
+    .lista-pacientes {
+        gap: 0.8rem;
+    }
+    
+    .paciente-card {
+        width: 70px;
+        font-size: 11px;
+    }
+    
+    .foto-paciente {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .listagem-pacientes-cabecalho h1 {
+        font-size: 1.2rem;
+    }
+    
+    .botao-ver-mais {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
 }

@@ -1,5 +1,32 @@
+
 .estrelas {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 2px;
+    justify-content: center;
+}
+
+.estrelas img {
+    width: clamp(16px, 2vw, 20px);
+    height: auto;
+    flex-shrink: 0;
+}
+
+
+@media (max-width: 768px) {
+    .estrelas img {
+        width: 16px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .estrelas {
+        gap: 1px;
+    }
+    
+    .estrelas img {
+        width: 14px;
+    }
 }
