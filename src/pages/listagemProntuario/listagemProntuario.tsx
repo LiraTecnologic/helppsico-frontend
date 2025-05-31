@@ -23,29 +23,36 @@ export default function ListagemProntuario() {
         carregarProntuarios();
     }, []);
 
+    const solicitacoesPendentes = 18;
+
     return (
         <>
-                <Header fluxo='meuPainel' headerPsicologo={true} />
+            <Header fluxo='meuPainel' headerPsicologo={true} />
 
-                <main className="listagemContainer">
-                    <div className="listagemHeader">
-                        <h1>Prontuário ({prontuarios.length})</h1>
-                        <Link to="/psicologo/prontuario/novo">
-                            <BotaoPrimario texto="Cadastrar Prontuário" />
-                        </Link>
-                    </div>
+            <main className="listagemContainer">
+                <div className="listagemHeader">
+                    <h1>Prontuário ({prontuarios.length})</h1>
 
-                    <div className="prontuarioGrid">
-                        {prontuarios.map((prontuario) => (
-                        <Prontuario 
+                    <Link to="/psicologo/prontuario/novo">
+                        <BotaoPrimario texto="Cadastrar Prontuário" />
+                    </Link>
+                    <Link to="/psicologo/prontuario/novo">
+                        <BotaoPrimario texto={`(${solicitacoesPendentes}) Solicitações pendentes`} />
+                    </Link>
+
+                </div>
+
+                <div className="prontuarioGrid">
+                    {prontuarios.map((prontuario) => (
+                        <Prontuario
                             key={prontuario.id}
                             nomePaciente={prontuario.paciente.nome}
                             titulo={prontuario.titulo}
                             fotoPerfilUrl={prontuario.paciente.fotoUrl}
                         />
-                        ))}
-                    </div>
-                </main>
+                    ))}
+                </div>
+            </main>
         </>
     );
 }
