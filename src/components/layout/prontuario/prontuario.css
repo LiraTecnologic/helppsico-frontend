@@ -73,3 +73,53 @@
 .prontuarioBotaoAbrir:hover {
     background-color: #dce6f9;
 }
+
+
+@media (min-width: 1200px) {
+  .documentosLayout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    max-width: 90%;
+  }
+  
+  .prontuarioContainer {
+    width: 100%;
+    padding: 18px;
+  }
+  
+  .prontuarioTitulo {
+    font-size: 15px;
+  }
+  
+  .prontuarioBotaoAbrir {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 720px) {
+  .documentosLayout {
+    max-width: 95%;
+    gap: 12px;
+    justify-content: center;
+  }
+  
+  .prontuarioContainer {
+    width: 100%;
+    min-width: 250px;
+    max-width: 350px;
+    padding: 12px;
+  }
+  
+  .prontuarioTitulo {
+    font-size: 13px;
+    padding-right: 15px;
+  }
+  
+  .prontuarioBotaoAbrir {
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+  }
+}
