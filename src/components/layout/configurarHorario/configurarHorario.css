@@ -129,3 +129,110 @@
     margin-top: -10px;
     font-size: 14px;
 }
+
+@media (max-width: 768px) {
+    .modal-overlay {
+        padding: 15px;
+    }
+    
+    .modal-content {
+        width: 80%;
+        padding: 25px 30px;
+        gap: 18px;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    .dias-botoes {
+        gap: 6px;
+    }
+    
+    .dias-botoes button {
+        padding: 8px 10px;
+        min-width: 40px;
+        font-size: 0.85rem;
+    }
+    
+    .tempo-sessao input,
+    .horarios input {
+        width: 90px;
+    }
+    
+    .botoes-acao {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-overlay {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 30px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+        gap: 15px;
+        max-height: 85vh;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.2rem;
+        padding-bottom: 6px;
+    }
+    
+    .dias-botoes {
+        gap: 4px;
+        justify-content: space-around;
+    }
+    
+    .dias-botoes button {
+        padding: 10px 8px;
+        min-width: 35px;
+        font-size: 0.8rem;
+        flex: 1;
+        max-width: 45px;
+    }
+    
+    .tempo-sessao label,
+    .horario-expediente label {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    
+    .tempo-sessao input,
+    .horarios input {
+        width: 80px;
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+    
+    .horarios {
+        gap: 6px;
+    }
+    
+    .horarios span {
+        font-size: 0.9rem;
+    }
+    
+    .botoes-acao {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .botoes-acao .cancelar,
+    .botoes-acao .salvar {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+    
+    .erro {
+        font-size: 13px;
+        padding: 0 5px;
+    }
+}
