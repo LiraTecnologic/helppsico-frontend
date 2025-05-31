@@ -1,15 +1,18 @@
 .container-prontuario {
     background-color: #f5f5f5;
-    padding: 5rem;
+    padding: 2rem;
     border-radius: 8px;
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .titulo-principal {
     text-align: center;
-    font-size: 36px;
+    font-size: clamp(24px, 4vw, 36px);
     position: relative;
+    margin-bottom: 2rem;
 }
 
 .linha-azul {
@@ -22,21 +25,25 @@
 
 .form-prontuario {
     background: #f9f9f9;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 8px;
     border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .linha-campos {
     display: flex;
     gap: 16px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .campo {
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-width: 250px;
 }
 
 .campo label {
@@ -49,6 +56,8 @@
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .campo-textarea {
@@ -68,12 +77,15 @@ textarea {
     border: 1px solid #ccc;
     resize: vertical;
     font-size: 16px;
+    box-sizing: border-box;
+    min-height: 120px;
 }
 
 .botoes {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
 .btn-cancelar,
@@ -83,6 +95,7 @@ textarea {
     cursor: pointer;
     border: none;
     font-size: 16px;
+    min-width: 100px;
 }
 
 .btn-cancelar {
@@ -96,6 +109,121 @@ textarea {
     color: white;
 }
 
-.tittle-label{
-    font-size: 30px;
+.tittle-label {
+    font-size: clamp(18px, 3vw, 30px);
+    font-weight: 500;
+}
+
+
+
+
+@media (max-width: 1024px) {
+    .container-prontuario {
+        max-width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .form-prontuario {
+        padding: 1.25rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .container-prontuario {
+        max-width: 98%;
+        padding: 1rem;
+        margin: 1rem auto;
+    }
+    
+    .linha-campos {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .campo {
+        min-width: unset;
+        width: 100%;
+    }
+    
+    .linha-azul {
+        width: 50%;
+    }
+    
+    .botoes {
+        justify-content: center;
+        margin-top: 1.5rem;
+    }
+    
+    .btn-cancelar,
+    .btn-salvar {
+        flex: 1;
+        max-width: 150px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .container-prontuario {
+        padding: 0.75rem;
+        margin: 0.5rem auto;
+        max-width: 100%;
+        border-radius: 4px;
+    }
+    
+    .form-prontuario {
+        padding: 1rem;
+        border-radius: 4px;
+    }
+    
+    .titulo-principal {
+        margin-bottom: 1.5rem;
+    }
+    
+    .linha-azul {
+        width: 60%;
+    }
+    
+    .campo input,
+    .campo select {
+        padding: 12px;
+        font-size: 16px; 
+    }
+    
+    textarea {
+        padding: 12px;
+        font-size: 16px; 
+        min-height: 100px;
+    }
+    
+    .botoes {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
+        max-width: none;
+        padding: 12px;
+    }
+    
+    .tittle-label {
+        margin-bottom: 8px;
+    }
+}
+
+
+@media (max-width: 320px) {
+    .container-prontuario {
+        padding: 0.5rem;
+    }
+    
+    .form-prontuario {
+        padding: 0.75rem;
+    }
+    
+    .linha-campos {
+        gap: 8px;
+    }
 }
