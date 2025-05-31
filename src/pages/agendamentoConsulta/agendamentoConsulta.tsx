@@ -145,6 +145,7 @@ export default function AgendamentoConsulta() {
               <TabelaHorarioConsulta
                 horarios={horariosPsicologo}
                 onSelecionado={(qtd) => setQuantidadeSelecionada(qtd)}
+                onSelecionadosChange={(ids) => setIdsHorariosSelecionados(ids)} 
               />
             }
           </div>
