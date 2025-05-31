@@ -3,7 +3,7 @@ import Header from '../../components/layout/header/header';
 import DocumentoForm from '../../components/documentoForm/DocumentoForm';
 
 export default function CadastroDocumento() {
-    const tipoDocumento = "parecer";
+    const tipoDocumento = "declaracao";
 
     const pacientes = [
         {

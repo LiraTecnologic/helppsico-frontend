@@ -16,44 +16,42 @@ interface CamposComunsProps {
 
 export default function CamposComuns({ campos, setCampos, pacientes }: CamposComunsProps) {
   return (
-    <>
-      <label className="documento-label" htmlFor="paciente">
-        Paciente
-      </label>
-      <select
-        id="paciente"
-        className="documento-select"
-        value={campos.paciente}
-        onChange={(e) => setCampos({ ...campos, paciente: e.target.value })}
-      >
-        <option value="">Selecione o paciente</option>
-        {pacientes.map((p) => (
-          <option key={p.id} value={p.id}>
-            {p.nome}
-          </option>
-        ))}
-      </select>
+    <div className="campos-comuns-grid">
+      <div className="campo-grid-item">
+        <label className="documento-label" htmlFor="paciente">Paciente</label>
+        <select
+          id="paciente"
+          className="documento-select"
+          value={campos.paciente}
+          onChange={(e) => setCampos({ ...campos, paciente: e.target.value })}
+        >
+          <option value="">Selecione o paciente</option>
+          {pacientes.map((p) => (
+            <option key={p.id} value={p.id}>{p.nome}</option>
+          ))}
+        </select>
+      </div>
 
-      <label className="documento-label" htmlFor="dataEmissao">
-        Data de Emissão
-      </label>
-      <input
-        id="dataEmissao"
-        className="documento-input"
-        type="date"
-        value={campos.dataEmissao}
-        onChange={(e) => setCampos({ ...campos, dataEmissao: e.target.value })}
-      />
+      <div className="campo-grid-item">
+        <label className="documento-label" htmlFor="dataEmissao">Data de Emissão</label>
+        <input
+          id="dataEmissao"
+          className="documento-input"
+          type="date"
+          value={campos.dataEmissao}
+          onChange={(e) => setCampos({ ...campos, dataEmissao: e.target.value })}
+        />
+      </div>
 
-      <label className="documento-label" htmlFor="assinaturaPsicologo">
-        Assinatura do Psicólogo
-      </label>
-      <input
-        id="assinaturaPsicologo"
-        className="documento-input"
-        value={campos.assinaturaPsicologo}
-        onChange={(e) => setCampos({ ...campos, assinaturaPsicologo: e.target.value })}
-      />
-    </>
+      <div className="campo-grid-item">
+        <label className="documento-label" htmlFor="assinaturaPsicologo">Assinatura do Psicólogo</label>
+        <input
+          id="assinaturaPsicologo"
+          className="documento-input"
+          value={campos.assinaturaPsicologo}
+          onChange={(e) => setCampos({ ...campos, assinaturaPsicologo: e.target.value })}
+        />
+      </div>
+    </div>
   );
 }

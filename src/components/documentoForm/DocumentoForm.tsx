@@ -53,6 +53,7 @@ export default function DocumentoForm({ tipoDocumento, pacientes }: DocumentoFor
         </button>
         <button className="btn-salvar">Salvar</button>
       </div>
+      
     </div>
   );
 }
