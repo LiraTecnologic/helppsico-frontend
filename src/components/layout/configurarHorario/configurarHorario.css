@@ -130,19 +130,21 @@
     font-size: 14px;
 }
 
-@media (max-width: 768px) {
+
+
+ @media (max-width: 1080px) {
     .modal-overlay {
         padding: 15px;
     }
     
     .modal-content {
-        width: 80%;
-        padding: 25px 30px;
-        gap: 18px;
+        width: 50%;
+        padding: 25px 35px;
+        max-width: 550px;
     }
     
     .modal-content h2 {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
     
     .dias-botoes {
@@ -151,17 +153,70 @@
     
     .dias-botoes button {
         padding: 8px 10px;
-        min-width: 40px;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
     
     .tempo-sessao input,
     .horarios input {
         width: 90px;
+        padding: 8px 10px;
     }
     
     .botoes-acao {
         gap: 12px;
+    }
+    
+    .botoes-acao .cancelar,
+    .botoes-acao .salvar {
+        padding: 10px 18px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 830px) {
+    .modal-overlay {
+        padding: 12px;
+    }
+    
+    .modal-content {
+        width: 65%;
+        padding: 20px 30px;
+        max-width: 480px;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    .dias-botoes {
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+    
+    .dias-botoes button {
+        padding: 8px 8px;
+        font-size: 0.85rem;
+        min-width: 38px;
+    }
+    
+    .tempo-sessao input,
+    .horarios input {
+        width: 85px;
+        padding: 8px;
+    }
+    
+    .horarios {
+        gap: 6px;
+    }
+    
+    .botoes-acao {
+        gap: 10px;
+    }
+    
+    .botoes-acao .cancelar,
+    .botoes-acao .salvar {
+        padding: 10px 16px;
+        font-size: 0.9rem;
     }
 }
 
@@ -173,49 +228,20 @@
     }
     
     .modal-content {
-        width: 95%;
-        padding: 20px;
+        max-width: none;
+        width: 100%;
+        padding: 5px;
         gap: 15px;
-        max-height: 85vh;
-    }
-    
-    .modal-content h2 {
-        font-size: 1.2rem;
-        padding-bottom: 6px;
+        max-height: 95vh;
     }
     
     .dias-botoes {
-        gap: 4px;
-        justify-content: space-around;
+        gap: 3px;
     }
     
     .dias-botoes button {
-        padding: 10px 8px;
-        min-width: 35px;
-        font-size: 0.8rem;
-        flex: 1;
         max-width: 45px;
-    }
-    
-    .tempo-sessao label,
-    .horario-expediente label {
-        font-size: 0.9rem;
-        text-align: center;
-    }
-    
-    .tempo-sessao input,
-    .horarios input {
-        width: 80px;
-        padding: 8px;
-        font-size: 0.9rem;
-    }
-    
-    .horarios {
-        gap: 6px;
-    }
-    
-    .horarios span {
-        font-size: 0.9rem;
+        min-width: 32px;
     }
     
     .botoes-acao {
@@ -227,12 +253,7 @@
     .botoes-acao .cancelar,
     .botoes-acao .salvar {
         width: 100%;
+        max-width: none;
         padding: 12px;
-        font-size: 1rem;
     }
-    
-    .erro {
-        font-size: 13px;
-        padding: 0 5px;
-    }
-}
+} 
