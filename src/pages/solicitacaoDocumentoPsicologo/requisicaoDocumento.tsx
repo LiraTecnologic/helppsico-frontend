@@ -3,90 +3,40 @@ import { useState, useEffect } from 'react';
 import CardRequisicaoDocumento from '../../components/layout/Cards/cardRequisicaoDocumento/requisicaoDocumentoCard';
 import Header from '../../components/layout/header/header';
 import './requisicaoDocumento.css';
+import SolicitacaoDocumentoModel from '../../models/solicitacaoDocumento';
+import { listarSolicitacoesDocumento, rejeitarSolicitacaoDocumento } from './solicitacaoDocumento.service';
 
-
-enum TipoDocumento {
-  ATESTADO = 'ATESTADO',
-  DECLARACAO = 'DECLARACAO',
-  RELATORIO_PSICOLOGICO = 'RELATORIO_PSICOLOGICO',
-  RELATORIO_MULTIPROFISSIONAL = 'RELATORIO_MULTIPROFISSIONAL',
-  LAUDO_PSICOLOGICO = 'LAUDO_PSICOLOGICO',
-  PARECER_PSICOLOGICO = 'PARECER_PSICOLOGICO'
-}
-
-
-type Solicitacao = {
-  id: string;
-  documento: {
-    id: string;
-    paciente: {
-      id: string;
-      nome: string;
-      email: string;
-      telefone: string;
-    };
-    psicologo: {
-      id: string;
-      nome: string;
-      crp: string;
-      email: string;
-    };
-    tipoDocumento: TipoDocumento; 
-    dataEmissao: string;
-    dataValidade: string;
-    assinaturaPsicologo: string;
-    status: string;
-    dataSolicitacao: string;
-  };
-  status: string;
-  dataSolicitacao: string;
-};
-
-
-const mockData: Solicitacao[] = [
-  {
-    id: '1',
-    documento: {
-      id: '1',
-      paciente: {
-        id: '1',
-        nome: 'Nome do Paciente',
-        email: 'paciente@email.com',
-        telefone: '(00) 00000-0000',
-      },
-      psicologo: {
-        id: '1',
-        nome: 'Nome do Psicólogo',
-        crp: '12345',
-        email: 'psicologo@email.com',
-      },
-      tipoDocumento: TipoDocumento.ATESTADO,
-      dataEmissao: '2024-01-01',
-      dataValidade: '2024-12-31',
-      assinaturaPsicologo: 'Assinatura Digital',
-      status: 'PENDENTE',
-      dataSolicitacao: '2024-01-01',
-    },
-    status: 'PENDENTE',
-    dataSolicitacao: '2024-01-01'
-  }
-];
-
-const RequisicaoDocumento: React.FC = () => {
-  const [solicitacoes, setSolicitacoes] = useState<Solicitacao[]>([]);
+export default function RequisicaoDocumento() {
+  const [solicitacoes, setSolicitacoes] = useState<SolicitacaoDocumentoModel[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setSolicitacoes(mockData);
-      setLoading(false);
-    }, 1000);
+    const idPsicologo = 'deec458b-a6b7-4a70-b308-97dcc1a16ec6';
+
+    async function carregarSolicitacoes(id: string) {
+      try {
+        const solicitacoes = await listarSolicitacoesDocumento(id, 0);
+        const solicitacoesAjustadas = solicitacoes.dado.content.map(s => {
+          s.status = 'PENDENTE'
+          return s;
+        });
+        setSolicitacoes(solicitacoesAjustadas || []);
+      } catch (error) {
+        console.error('Erro ao carregar solicitações:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    carregarSolicitacoes(idPsicologo);
+
+    
   }, []);
 
   const handleApprove = (solicitacaoId: string) => {
-    setSolicitacoes(prev => 
-      prev.map(sol => 
-        sol.id === solicitacaoId 
+    setSolicitacoes(prev =>
+      prev.map(sol =>
+        sol.id === solicitacaoId
           ? { ...sol, status: 'APROVADO' }
           : sol
       )
@@ -95,9 +45,11 @@ const RequisicaoDocumento: React.FC = () => {
   };
 
   const handleReject = (solicitacaoId: string) => {
-    setSolicitacoes(prev => 
-      prev.map(sol => 
-        sol.id === solicitacaoId 
+    rejeitarSolicitacaoDocumento(solicitacaoId);
+
+    setSolicitacoes(prev =>
+      prev.map(sol =>
+        sol.id === solicitacaoId
           ? { ...sol, status: 'REJEITADO' }
           : sol
       )
@@ -131,26 +83,24 @@ const RequisicaoDocumento: React.FC = () => {
           <h1>Solicitações de Documentos</h1>
           <hr />
         </div>
-        
+
         <div className="requisicoes-container">
-        {solicitacoes.length === 0 ? (
-          <div className="empty-state">
-            <p>Nenhuma solicitação de documento encontrada.</p>
-          </div>
-        ) : (
-          solicitacoes.map(solicitacao => (
-            <CardRequisicaoDocumento
-              key={solicitacao.id}
-              solicitacao={solicitacao}
-              onApprove={handleApprove}
-              onReject={handleReject}
-            />
-          ))
-        )}
+          {solicitacoes.length === 0 ? (
+            <div className="empty-state">
+              <p>Nenhuma solicitação de documento encontrada.</p>
+            </div>
+          ) : (
+            solicitacoes.map(solicitacao => (
+              <CardRequisicaoDocumento
+                key={solicitacao.id}
+                solicitacao={solicitacao}
+                onApprove={handleApprove}
+                onReject={handleReject}
+              />
+            ))
+          )}
+        </div>
       </div>
     </div>
-    </div>
   );
-}
-
-export default RequisicaoDocumento;
+};
