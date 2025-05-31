@@ -5,3 +5,13 @@
   border: 0;
   font-weight: 500;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; 
+  width: 100%; 
+}

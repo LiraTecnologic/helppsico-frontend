@@ -7,10 +7,12 @@ import "./App.css";
 import LoginPaciente from "../src/pages/loginPaciente/loginPaciente";
 import CadastroPaciente from "../src/pages/cadastroPaciente/cadastroPaciente";
 import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
-import DetalhesSessao from "./pages/detalhesSessao/detalhesSessao";
+import DetalhesSessao from "./pages/minhasConsultasPaciente/minhasConsultasPaciente";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
+import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
+import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
 
 // Telas do fluxo de Psicologo
 import LoginPsicologo from "../src/pages/loginPsicologo/loginPsicologo";
@@ -25,6 +27,8 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 // Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 
+
+
 function App() {
   return (
     <Router>
@@ -35,6 +39,8 @@ function App() {
         <Route path="/paciente/painel" element={<MeuPainelPaciente />} />
         <Route path="/paciente/sessao" element={<DetalhesSessao />} />
         <Route path="/paciente/solicitacao-vinculo" element={<SolicitacaoDeVinculo />} />
+        <Route path="/paciente/agendamento" element={<AgendamentoConsulta />} />
+        <Route path="/paciente/solicitacao-documento" element={<SolicitacaoDocumento />}/>
 
         {/* FLUXO DE PSICÓLOGO */}
         <Route path="/psicologo/login" element={<LoginPsicologo />} />
@@ -48,11 +54,12 @@ function App() {
 
         {/* AMBOS OS FLUXOS */}
         <Route path="/psicologos" element={<VerPsicologos />} />
-        <Route path="/psicologos/perfil" element={<InformacoesPsicologo />} />
+        <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
+        <Route path="/solicitacaoVinculo" element={<SolicitacaoDeVinculo />} />
 
-        {/* NENHUM FLUXO */}
-        <Route path="/validacao-crp" element={<ValidacaoCrp />} />
-        
+        {/* Nenhum fluxo */}
+        <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
+
       </Routes>
       <ToastContainer />
     </Router>

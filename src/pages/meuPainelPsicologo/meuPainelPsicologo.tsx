@@ -8,7 +8,7 @@ import ConsultaModel from '../../models/consulta';
 import VinculoModel from '../../models/vinculo';
 import ProntuarioModel from '../../models/prontuario';
 import { consultaProntuariosPsicologo } from "../../services/prontuarios.service";
-import { consultaSessoesFuturas } from '../../services/consultas.service';
+import { consultaSessoesFuturasPsicologo } from '../../services/consultas.service';
 import { consultaVinculosPsicologo } from '../../services/vinculos.service'
 import PsicologoModel from '../../models/psicologo';
 
@@ -26,7 +26,7 @@ export default function MeuPainelPsicologo() {
         }
 
         async function carregarConsultas(id: string) {
-            const consultasConsultadas = await consultaSessoesFuturas(id, 1);
+            const consultasConsultadas = await consultaSessoesFuturasPsicologo(id, 1);
             console.log('Consultas: ', consultasConsultadas);
 
             const consultasOrdenadas = consultasConsultadas.content.sort((a, b) => {
@@ -46,7 +46,7 @@ export default function MeuPainelPsicologo() {
         async function carregarVinculos(id: string) {
             const vinculosConsultados = await consultaVinculosPsicologo(id, 1);
             console.log('Vinculos: ', vinculosConsultados);
-            setVinculos(vinculosConsultados.content);
+            setVinculos(vinculosConsultados.dado.content);
         }
 
 

@@ -1,0 +1,158 @@
+
+
+.card-requisicao-documento {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .card-requisicao-documento:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  .card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .paciente-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .paciente-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 16px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .paciente-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .paciente-detalhes {
+    flex: 1;
+  }
+  
+  .paciente-nome {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 8px 0;
+  }
+  
+  .documento-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .documento-tipo,
+  .data-solicitacao {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .documento-tipo strong,
+  .data-solicitacao strong {
+    color: #495057;
+    font-weight: 500;
+  }
+  
+  .card-acoes {
+    display: flex;
+    gap: 12px;
+    margin-left: 20px;
+  }
+  
+  .acao-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .acao-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .aprovar-btn {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .aprovar-btn:hover:not(:disabled) {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+  
+  .rejeitar-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .rejeitar-btn:hover:not(:disabled) {
+    background-color: #c82333;
+    transform: scale(1.05);
+  }
+  
+  .indicador-status {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: #28a745;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 0 12px 0 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-content {
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .paciente-info {
+      width: 100%;
+    }
+    
+    .card-acoes {
+      margin-left: 0;
+      justify-content: center;
+    }
+    
+    .paciente-nome {
+      font-size: 16px;
+    }
+    
+    .documento-info {
+      font-size: 13px;
+    }
+  }
