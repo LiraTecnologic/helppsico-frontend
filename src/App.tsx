@@ -11,6 +11,7 @@ import DetalhesSessao from "./pages/minhasConsultasPaciente/minhasConsultasPacie
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
+import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
 
 // Telas do fluxo de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
@@ -25,8 +26,7 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
-
-
+import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
 
 function App() {
   return (
@@ -42,6 +42,7 @@ function App() {
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
         <Route path="/solicitacaoVinculo" element={<SolicitacaoDeVinculo />} />
+        <Route path="/agendamentoConsulta" element={<AgendamentoConsulta />} />
         <Route path="/solicitacaoDocumento" element={<SolicitacaoDocumento />}/>
 
         {/* FLUXO DE PSICOLOGO */}
@@ -57,6 +58,7 @@ function App() {
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
+        <Route path="/requisicaoDocumento" element={<RequisicaoDocumento />} />
 
       </Routes>
       <ToastContainer/>

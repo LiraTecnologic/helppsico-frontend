@@ -121,7 +121,14 @@ export default function InformacoesPsicologo() {
                                 nota={4.5}
                                 quantidadeAvaliacao="20"
                             />
-                            <BotaoAvaliarInfoPsicologo />
+                            <BotaoAvaliarInfoPsicologo
+                                psicologo={{
+                                    id: psicologo.id,
+                                    nome: psicologo.nome,
+                                    foto: FotoPsicologo
+                                }}
+                            />
+
                         </div>
                         <div className="listagem-avaliacao">
                             {avaliacaos.map((avaliacao, index) => (
