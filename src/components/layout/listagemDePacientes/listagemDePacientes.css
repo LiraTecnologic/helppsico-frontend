@@ -44,3 +44,65 @@
     align-items: center;
     margin-bottom: 16px;
 }
+
+@media (min-width: 1200px) {
+    .lista-pacientes {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 2rem;
+        justify-items: center;
+    }
+    
+    .paciente-card {
+        width: 110px;
+        font-size: 15px;
+    }
+    
+    .foto-paciente {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .lista-pacientes {
+        gap: 1.5rem;
+        justify-content: center;
+        padding-top: 15px;
+    }
+    
+    .paciente-card {
+        width: 90px;
+        font-size: 13px;
+    }
+    
+    .foto-paciente {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 6px;
+    }
+    
+    .listagem-pacientes-cabecalho {
+        margin-bottom: 20px;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .listagem-pacientes-cabecalho h1 {
+        font-size: 1.4rem;
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    
+    .botao-ver-mais {
+        font-size: 13px;
+        padding: 6px 14px;
+    }
+    
+    .mensagem-vazia {
+        margin-top: 2rem;
+        padding: 0 20px;
+        font-size: 16px;
+    }
+}
