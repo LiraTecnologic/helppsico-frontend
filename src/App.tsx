@@ -11,6 +11,8 @@ import DetalhesSessao from "./pages/minhasConsultasPaciente/minhasConsultasPacie
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
+import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
+import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
 
 // Telas do fluxo de Pscicologo
 import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
@@ -18,8 +20,6 @@ import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo'
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
-
-
 import GerenciamentoDeHorarios from "./pages/gereciamentoHorarios/gerenciamentoHorarios";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
 import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
@@ -28,7 +28,6 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
 import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
-
 
 function App() {
   return (
@@ -44,6 +43,7 @@ function App() {
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
         <Route path="/solicitacaoVinculo" element={<SolicitacaoDeVinculo />} />
+        <Route path="/agendamentoConsulta" element={<AgendamentoConsulta />} />
         <Route path="/solicitacaoDocumento" element={<SolicitacaoDocumento />}/>
 
         {/* FLUXO DE PSICOLOGO */}

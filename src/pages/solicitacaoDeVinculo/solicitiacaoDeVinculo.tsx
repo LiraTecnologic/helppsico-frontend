@@ -3,8 +3,7 @@ import Header from '../../components/layout/header/header';
 import CardSolicitacao from '../../components/layout/Cards/cardSolicitacao/cardSolicitacao';
 import { useEffect, useState, useCallback } from 'react';
 import PopupCancelamento from '../../components/layout/PopupCancelamento/popupCancelamento';
-import { StatusVinculo } from '../../models/vinculo'; 
-import { VinculoModel } from '../../models/vinculo'; 
+import VinculoModel, { StatusVinculo } from '../../models/vinculo'; 
 import { solicitarVinculosPaciente, cancelarSolicitacao } from './solicitiacaoDeVinculoService';
 
 export default function SolicitacaoDeVinculo() {
@@ -107,12 +106,11 @@ export default function SolicitacaoDeVinculo() {
   return (
     <>
       <Header fluxo="minhasSessoes" headerPsicologo={false} />
-      <div className="container">
-        <h1>Solicitações</h1>
-
+      <div className="solicitacao-vinculo__container">
+        <h1 className="solicitacao-vinculo__titulo">Solicitações</h1>
         {vinculosPendentes.length > 0 && (
-          <section>
-            <h2>Pendentes</h2>
+          <section className='solicitacao-vinculo__section'>
+            <h2 className='solicitacao-vinculo__subtitulo'>Pendentes</h2>
             <div className="cards-grid">
               {vinculosPendentes.map((vinculo) => (
                 <CardSolicitacao
@@ -131,9 +129,9 @@ export default function SolicitacaoDeVinculo() {
         )}
 
         {vinculosRecusados.length > 0 && (
-          <section>
-            <h2>Recusados</h2>
-            <div className="cards-grid">
+          <section className='solicitacao-vinculo__section'>
+            <h2 className='solicitacao-vinculo__subtitulo'>Recusados</h2>
+            <div className="solicitacao-vinculo__cards-grid">
               {vinculosRecusados.map((vinculo) => (
                 <CardSolicitacao
                   key={vinculo.id}
@@ -153,7 +151,6 @@ export default function SolicitacaoDeVinculo() {
         {(vinculosPendentes.length === 0 && vinculosRecusados.length === 0 && !carregando) && (
             <p>Nenhuma solicitação encontrada.</p>
         )}
-
       </div>
 
       {popupCancelar && vinculoSelecionadoId && (
