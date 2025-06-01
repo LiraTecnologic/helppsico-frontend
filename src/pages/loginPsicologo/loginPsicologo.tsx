@@ -3,17 +3,25 @@ import InputTotal from '../../components/commmon/Inputs/InputTotal';
 import Botao from '../../components/commmon/botoes/botao/botao';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { login } from '../../services/auth.service';
+import { useNavigate } from 'react-router-dom';
+import { getUserCRP, getUserEmail, getUserId, getUserType } from '../../services/auth.service';
 const Login = () => {
     const [crp, setCrp] = useState('');
     const [senha, setSenha] = useState('');
+    const navigate = useNavigate();
 
     const validarSenha = (senha: string) => {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
         return regex.test(senha);
     };
 
-    const validarLogin = () => {
+    const redirecionarTeste = () => {
+      
+        navigate("/meuPainelPsicologo");
+    };
+
+    const validarLogin = async () => {
         if (!crp || !senha) {
             alert('Por favor, preencha todos os campos antes de continuar.');
             return;
@@ -22,6 +30,22 @@ const Login = () => {
         if (!validarSenha(senha)) {
             alert('A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
             return;
+        }
+
+        const response = await login(crp, senha, 'PSICOLOGO');
+        if (response.dado) {
+            console.log('Login realizado com sucesso!, dados do usuário:', response.dado);
+            
+           console.log(`LocalStorage: \n 
+            id: ${getUserId()}
+            crp: ${getUserCRP()}
+            email: ${getUserEmail()}
+            userType: ${getUserType()}
+            ` )
+
+            redirecionarTeste();
+        } else {
+            alert(response.erro || 'Erro ao fazer login.');
         }
     };
 
