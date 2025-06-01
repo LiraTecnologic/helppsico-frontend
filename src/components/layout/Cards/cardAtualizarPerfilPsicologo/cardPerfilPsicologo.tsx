@@ -1,8 +1,8 @@
 import React from 'react';
-import './cardPfPsicologo.css';
+import './cardPerfilPsicologo.css';
 import PsicologoModel from '../../../../models/psicologo';
 
-interface CardPfPsicologoProps {
+interface CardPerfilPsicologoProps {
     psicologo: PsicologoModel;
     valorSessao: string;
     biografia: string;
@@ -13,7 +13,7 @@ interface CardPfPsicologoProps {
     botaoTexto: string;
 }
 
-const CardPfPsicologo: React.FC<CardPfPsicologoProps> = ({
+const CardPerfilPsicologo: React.FC<CardPerfilPsicologoProps> = ({
     psicologo,
     valorSessao,
     biografia,
@@ -58,4 +58,4 @@ const CardPfPsicologo: React.FC<CardPfPsicologoProps> = ({
     );
 };
 
-export default CardPfPsicologo;
+export default CardPerfilPsicologo;

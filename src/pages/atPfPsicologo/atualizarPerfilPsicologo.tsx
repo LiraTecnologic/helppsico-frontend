@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './atPfPsicologo.css';
-import CardPfPsicologo from '../../components/layout/Cards/cardAtPfPsicologo/cardPfPsicologo';
+import './atualizarPerfilPsicologo.css';
+import CardPerfilPsicologo from '../../components/layout/Cards/cardAtualizarPerfilPsicologo/cardPerfilPsicologo';
 import PsicologoModel from '../../models/psicologo';
 import Header from '../../components/layout/header/header';
 
-const AtPfPsicologo: React.FC = () => {
+const AtualizarPerfilPsicologo: React.FC = () => {
     const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
     const [valorSessao, setValorSessao] = useState<string>('');
     const [biografia, setBiografia] = useState<string>('');
@@ -36,13 +36,13 @@ const AtPfPsicologo: React.FC = () => {
     }, []);
 
     const handleValorSessaoChange = (valor: string) => {
-        // Remove tudo que não é número
+        
         const numeroLimpo = valor.replace(/\D/g, '');
         
-        // Converte para centavos
+        
         const valorEmCentavos = parseInt(numeroLimpo) / 100;
         
-        // Formata o valor
+        
         const valorFormatado = valorEmCentavos.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL'
@@ -84,7 +84,7 @@ const AtPfPsicologo: React.FC = () => {
             <Header fluxo="atualizacaoPerfil" headerPsicologo={true} />
             
             <main className="main-content">
-                <CardPfPsicologo
+                <CardPerfilPsicologo
                     psicologo={psicologo}
                     valorSessao={valorSessao}
                     biografia={biografia}
@@ -99,4 +99,4 @@ const AtPfPsicologo: React.FC = () => {
     );
 };
 
-export default AtPfPsicologo;
+export default AtualizarPerfilPsicologo;
