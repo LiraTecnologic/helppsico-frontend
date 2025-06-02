@@ -1,14 +1,26 @@
+
 .botao-avaliar-card-avaliacao {
     display: flex;
     flex-direction: column;
-    width: 18%;
-    height: 8rem;
+    width: 100%;
+    max-width: 280px;
+    min-width: 200px;
+    height: auto;
+    min-height: 8rem;
     border: solid 2px #A1A1A1;
     border-radius: 1rem;
     justify-content: center;
     align-items: center;
     gap: 1rem;
     text-align: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.botao-avaliar-card-avaliacao:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .link-sem-estilo {
@@ -16,10 +28,10 @@
     text-decoration: none;
 }
 
-.text-avalia {
-    color: #0D42BD;
-    margin: 1rem;
-    font-size: 18px;
+.titulo-botao {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin: 0;
+    line-height: 1.2;
 }
 
 .div-avlie-ja {
@@ -28,12 +40,68 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .div-avlie-ja img {
-    width: 5%;
+    width: clamp(12px, 3vw, 16px);
+    height: auto;
+    flex-shrink: 0;
 }
 
-.titulo-botao {
-    font-size: 20px;
+.text-avalia {
+    color: #0D42BD;
+    margin: 0;
+    font-size: clamp(0.9rem, 1.8vw, 1.125rem);
+    font-weight: 500;
+}
+
+
+@media (max-width: 768px) {
+    .botao-avaliar-card-avaliacao {
+        min-height: 6rem;
+        max-width: 200px;
+        gap: 0.5rem;
+        padding: 0.8rem;
+    }
+    
+    .titulo-botao {
+        font-size: 1rem;
+    }
+    
+    .text-avalia {
+        font-size: 0.9rem;
+    }
+    
+    .div-avlie-ja img {
+        width: 14px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .botao-avaliar-card-avaliacao {
+        min-width: 150px;
+        max-width: 180px;
+        min-height: 5rem;
+        padding: 0.6rem;
+        gap: 0.4rem;
+    }
+    
+    .titulo-botao {
+        font-size: 0.85rem;
+        line-height: 1.1;
+    }
+    
+    .text-avalia {
+        font-size: 0.8rem;
+    }
+    
+    .div-avlie-ja {
+        gap: 0.3rem;
+    }
+    
+    .div-avlie-ja img {
+        width: 12px;
+    }
 }

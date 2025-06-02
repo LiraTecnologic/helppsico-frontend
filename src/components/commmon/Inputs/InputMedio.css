@@ -10,6 +10,7 @@
     font-size: 18px;
     background: none;
     z-index: 2;
+    margin-bottom: 5px;
 }
 
 .inputmid {
@@ -23,4 +24,77 @@
     width: 100%;
     padding-left: 15px;
     z-index: 2;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.inputmid:focus {
+    background-color: #fff;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.inputmid:disabled {
+    background-color: #f0f0f0;
+    color: #999;
+}
+
+/* Responsividade para Tablets */
+@media (max-width: 1024px) {
+    .contentMidInput {
+        max-width: 170px;
+    }
+    
+    .textLabel {
+        font-size: 17px;
+    }
+    
+    .inputmid {
+        font-size: 15px;
+        height: 44px;
+    }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    .contentMidInput {
+        max-width: 100%;
+        min-width: 0;
+    }
+    
+    .textLabel {
+        font-size: 16px;
+    }
+    
+    .inputmid {
+        font-size: 14px;
+        height: 42px;
+        padding-left: 12px;
+    }
+}
+
+/* Responsividade para dispositivos pequenos */
+@media (max-width: 480px) {
+    .textLabel {
+        font-size: 15px;
+        margin-bottom: 3px;
+    }
+    
+    .inputmid {
+        font-size: 14px;
+        height: 40px;
+        padding-left: 10px;
+        border-radius: 8px;
+    }
+}
+
+/* Responsividade para telas muito pequenas */
+@media (max-width: 360px) {
+    .textLabel {
+        font-size: 14px;
+    }
+    
+    .inputmid {
+        font-size: 13px;
+        height: 38px;
+    }
 }

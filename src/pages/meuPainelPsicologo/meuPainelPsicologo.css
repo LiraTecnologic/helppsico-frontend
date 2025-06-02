@@ -4,8 +4,36 @@
     padding: 0 2rem;
 }
 
-.prontuarioTittle{
+.prontuarioTittle {
     max-width: 80%;
     margin: 0 auto;
     padding: 24px 2rem 0 2rem;
+}
+
+
+@media (max-width: 768px) {
+    .imagensPacientes {
+        max-width: 95%;
+        padding: 0 1rem;
+    }
+    
+    .prontuarioTittle {
+        max-width: 95%;
+        padding: 24px 1rem 0 1rem;
+        font-size: 1.5rem;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .imagensPacientes {
+        max-width: 100%;
+        padding: 0 0.5rem;
+    }
+    
+    .prontuarioTittle {
+        max-width: 100%;
+        padding: 20px 0.5rem 0 0.5rem;
+        font-size: 1.3rem;
+    }
 }

@@ -39,7 +39,7 @@ export default function Cadastro() {
     const validandoSenha = () => {
         if (senha !== senhaC) {
             alert("Senhas não são iguais!");
-            return;
+            return false;
         }
 
         const senhaValida = senha.length >= 6 &&
@@ -50,16 +50,17 @@ export default function Cadastro() {
 
         if (!senhaValida) {
             alert("Senha fraca! A senha precisa ter pelo menos 6 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.");
-            return;
+            return false;
         }
 
-        setStep(2);
+        return true;
     };
 
     const textBotao = () => step === 1 ? "Continuar" : "Criar Conta";
 
     const handleClick = () => {
         if (step === 1) {
+            // Validação campos obrigatórios etapa 1
             if (!nome || !email || !cpfValue || !senha || !senhaC) {
                 alert('Por favor, preencha todos os campos antes de continuar.');
                 return;
@@ -75,9 +76,16 @@ export default function Cadastro() {
                 return;
             }
 
-            validandoSenha();
+            if (validandoSenha()) {
+                setStep(2);
+            }
         } else {
-            alert('Cadastro finalizado!');
+            // Validação campos obrigatórios etapa 2
+            if (!cep || !endereco || !numero || !cidade || !estado || !pais || !genero || !dataNascimento) {
+                alert('Por favor, preencha todos os campos obrigatórios antes de continuar.');
+                return;
+            }
+            alert('Cadastro finalizado com sucesso!');
         }
     };
 
@@ -99,71 +107,161 @@ export default function Cadastro() {
     return (
         <div className="login-container">
             <div className="left-content">
-                <img src="../../src/assets/CadastroPaciente.svg" alt="login psicologo" className='imagem'/>
+                <img src="../../src/assets/CadastroPaciente.svg" alt="Ilustração cadastro paciente" className='imagem'/>
             </div>
             <div className="linha-vertical"></div>
             <div className="right-content">
-            
-                <div className='formulario' style={{ position: 'relative' }}>
-                    <h1 className='text-white'>Crie sua <br />Conta Agora</h1>
-                    {step === 1 ? (
-                        <>
-                            <InputTotal label="Nome" pleaceHolder="Digite seu nome..." tipo='text' value={nome} onChange={(e) => setNome(e.target.value)} />
-                            <InputTotal label="E-mail" pleaceHolder="Digite seu email..." tipo='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                            <InputTotal 
-                                label="CPF" 
-                                pleaceHolder="Digite seu cpf..." 
-                                tipo='text' 
-                                value={cpfValue} 
-                                onChange={(e) => {
-                                    const valor = e.target.value.replace(/\D/g, '');
-                                    if (valor.length <= 11) setCpfValue(valor);
-                                }}
-                                onBlur={() => {
-                                    if (cpfValue.length === 11) {
-                                        setCpfValue(formatarCPF(cpfValue));
-                                    }
-                                }}
-                            />
-                            <div className="input-pair">
-                                <InputMedio label="Senha:" pleaceHolder="Digite sua senha..." value={senha} onChange={(e) => setSenha(e.target.value)} tipo='password' />
-                                <InputMedio label="Confirmar Senha:" pleaceHolder="Confirme sua senha..." value={senhaC} onChange={(e) => setSenhaC(e.target.value)} tipo='password' />
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <InputTotal
-                                label="Cep"
-                                pleaceHolder="Digite seu cep..."
-                                tipo='text'
-                                value={cep}
-                                onChange={(e) => {
-                                    const valor = e.target.value.replace(/\D/g, '');
-                                    if (valor.length <= 8) setCep(valor);
-                                }}
-                            />
-                            <InputTotal label="Endereço" pleaceHolder="Endereço" tipo='text' value={endereco} onChange={(e) => setEndereco(e.target.value)} />
-                            <div className="input-pair">
-                                <InputMedio label="Numero:" pleaceHolder="Digite o numero..." value={numero} onChange={(e) => setNumero(e.target.value)} tipo='number' />
-                                <InputMedio label="Complemento:" pleaceHolder="Digite complemento..." value={complemento} onChange={(e) => setComplemento(e.target.value)} tipo='text' />
-                            </div>
-                            <div className="input-pair">
-                                <InputMedio label="Cidade:" pleaceHolder="Cidade" value={cidade} onChange={(e) => setCidade(e.target.value)} tipo='text' disabled />
-                                <InputMedio label="Estado:" pleaceHolder="Estado" value={estado} onChange={(e) => setEstado(e.target.value)} tipo='text' disabled />
-                            </div>
-                            <div className="input-pair">
-                                <InputMedio label="País:" pleaceHolder="País" value={pais} onChange={(e) => setPais(e.target.value)} tipo='text' disabled />
-                                <div className="input-wrapper">
-                                    <Select label='Gênero: ' value={genero} options={generos} onChange={handleSelectChange} />
+                <div className="form-container">
+                    <div className='formulario'>
+                        <h1 className='text-white text-aligned'>Crie sua <br />Conta Agora</h1>
+                        
+                        {step === 1 ? (
+                            <>
+                                <InputTotal 
+                                    label="Nome" 
+                                    pleaceHolder="Digite seu nome..." 
+                                    tipo='text' 
+                                    value={nome} 
+                                    onChange={(e) => setNome(e.target.value)} 
+                                />
+                                
+                                <InputTotal 
+                                    label="E-mail" 
+                                    pleaceHolder="Digite seu email..." 
+                                    tipo='email' 
+                                    value={email} 
+                                    onChange={(e) => setEmail(e.target.value)} 
+                                />
+                                
+                                <InputTotal 
+                                    label="CPF" 
+                                    pleaceHolder="Digite seu cpf..." 
+                                    tipo='text' 
+                                    value={cpfValue} 
+                                    onChange={(e) => {
+                                        const valor = e.target.value.replace(/\D/g, '');
+                                        if (valor.length <= 11) setCpfValue(valor);
+                                    }}
+                                    onBlur={() => {
+                                        if (cpfValue.length === 11) {
+                                            setCpfValue(formatarCPF(cpfValue));
+                                        }
+                                    }}
+                                />
+                                
+                                <div className="input-pair">
+                                    <InputMedio 
+                                        label="Senha:" 
+                                        pleaceHolder="Digite sua senha..." 
+                                        value={senha} 
+                                        onChange={(e) => setSenha(e.target.value)} 
+                                        tipo='password' 
+                                    />
+                                    <InputMedio 
+                                        label="Confirmar Senha:" 
+                                        pleaceHolder="Confirme sua senha..." 
+                                        value={senhaC} 
+                                        onChange={(e) => setSenhaC(e.target.value)} 
+                                        tipo='password' 
+                                    />
                                 </div>
-                            </div>
-                            <InputTotal label="Data de Nascimento" pleaceHolder="Digite sua data de nascimento..." tipo='date' value={dataNascimento} onChange={(e) => setDataNascimento(e.target.value)} />
-                        </>
-                    )}
-                    <Botao texto={textBotao()} onClick={handleClick} />
-                    <p className='semConta'>Já tem uma conta? <br /><Link to="/" className='link'>Acesse</Link></p>
+                            </>
+                        ) : (
+                            <>
+                                <InputTotal
+                                    label="CEP"
+                                    pleaceHolder="Digite seu cep..."
+                                    tipo='text'
+                                    value={cep}
+                                    onChange={(e) => {
+                                        const valor = e.target.value.replace(/\D/g, '');
+                                        if (valor.length <= 8) setCep(valor);
+                                    }}
+                                />
+                                
+                                <InputTotal 
+                                    label="Endereço" 
+                                    pleaceHolder="Endereço" 
+                                    tipo='text' 
+                                    value={endereco} 
+                                    onChange={(e) => setEndereco(e.target.value)} 
+                                />
+                                
+                                <div className="input-pair">
+                                    <InputMedio 
+                                        label="Número:" 
+                                        pleaceHolder="Digite o número..." 
+                                        value={numero} 
+                                        onChange={(e) => setNumero(e.target.value)} 
+                                        tipo='text' 
+                                    />
+                                    <InputMedio 
+                                        label="Complemento:" 
+                                        pleaceHolder="Digite complemento..." 
+                                        value={complemento} 
+                                        onChange={(e) => setComplemento(e.target.value)} 
+                                        tipo='text' 
+                                    />
+                                </div>
+                                
+                                <div className="input-pair">
+                                    <InputMedio 
+                                        label="Cidade:" 
+                                        pleaceHolder="Cidade" 
+                                        value={cidade} 
+                                        onChange={(e) => setCidade(e.target.value)} 
+                                        tipo='text' 
+                                        disabled 
+                                    />
+                                    <InputMedio 
+                                        label="Estado:" 
+                                        pleaceHolder="Estado" 
+                                        value={estado} 
+                                        onChange={(e) => setEstado(e.target.value)} 
+                                        tipo='text' 
+                                        disabled 
+                                    />
+                                </div>
+                                
+                                <div className="input-pair">
+                                    <InputMedio 
+                                        label="País:" 
+                                        pleaceHolder="País" 
+                                        value={pais} 
+                                        onChange={(e) => setPais(e.target.value)} 
+                                        tipo='text' 
+                                        disabled 
+                                    />
+                                    <div className="input-wrapper">
+                                        <Select 
+                                            label='Gênero:' 
+                                            value={genero} 
+                                            options={generos} 
+                                            onChange={handleSelectChange} 
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <InputTotal 
+                                    label="Data de Nascimento" 
+                                    pleaceHolder="Digite sua data de nascimento..." 
+                                    tipo='date' 
+                                    value={dataNascimento} 
+                                    onChange={(e) => setDataNascimento(e.target.value)} 
+                                />
+                            </>
+                        )}
+                        
+                        <Botao texto={textBotao()} onClick={handleClick} />
+                        
+                        <p className='semConta'>
+                            Já tem uma conta? <br />
+                            <Link to="/" className='link'>Acesse</Link>
+                        </p>
+                    </div>
+                    
+                    <EtapasCadastro etapaAtual={step} />
                 </div>
-                <EtapasCadastro etapaAtual={step} />
             </div>
         </div>
     );

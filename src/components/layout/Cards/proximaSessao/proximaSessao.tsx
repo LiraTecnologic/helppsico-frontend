@@ -29,24 +29,25 @@ export default function ProximasSessoes(props: ProximaSessaoProps) {
           <div className="sessao-info">
             <img
               className="sessao-foto"
-              src={props.consulta.paciente.fotoUrl}
+              src={props.consulta.psicologo.fotoUrl || "/imagens/foto-padrao.png"}
               alt="Foto do psicólogo"
             />
             <div className="sessao-textos">
-              <p className="sessao-nome">{props.consulta.paciente.nome}</p>
-              <p>{idade} anos</p>
-              <p>{props.consulta.paciente.telefone}</p>
+              <p className="sessao-nome">{props.consulta.psicologo.nome}</p>
+              <p>{props.consulta.psicologo.crp}</p>
+              <p>{props.consulta.psicologo.telefone}</p>
             </div>
           </div>
 
           <div className="sessao-detalhes">
-            <p>Local: {props.consulta.paciente.endereco.rua}</p>
+            <p>Local: {props.consulta.endereco.rua}, {props.consulta.endereco.numero}</p>
+            <p>Cidade: {props.consulta.endereco.cidade} - {props.consulta.endereco.estado}</p>
             <p>Data: {dataFormatada.data}</p>
             <p>Horário: {dataFormatada.hora}</p>
           </div>
 
           <div className="sessao-pagamento">
-            <p><strong>Valor:</strong> {props.consulta.valor}</p>
+            <p><strong>Valor:</strong> R$ {props.consulta.valor.toFixed(2).replace('.', ',')}</p>
             {/* <span className={`sessao-status ${statusPagamento?.toLowerCase().replace(' ', '-')}`}>
                 {statusPagamento}
             </span> */}

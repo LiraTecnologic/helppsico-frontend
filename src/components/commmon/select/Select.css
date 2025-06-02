@@ -10,6 +10,7 @@
     font-size: 18px;
     background: none;
     z-index: 2;
+    margin-bottom: 5px;
 }
 
 .select {
@@ -22,17 +23,112 @@
     height: 46px;
     width: 100%;
     padding-left: 15px;
+    padding-right: 35px;
     z-index: 2;
     appearance: none;
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='10' height='5' viewBox='0 0 10 5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 5 5-5z' fill='%23666'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 12px;
-    transition: border 0.2s ease;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.select:focus {
+    background-color: #fff;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.select:hover {
+    background-color: #e9e9e9;
 }
 
 .select option {
     color: #111;
     background-color: #fff;
     padding: 10px;
+    font-size: 14px;
+}
+
+/* Responsividade para Tablets */
+@media (max-width: 1024px) {
+    .input-wrapper {
+        max-width: 170px;
+    }
+    
+    .textLabel {
+        font-size: 17px;
+    }
+    
+    .select {
+        font-size: 15px;
+        height: 44px;
+        background-size: 11px;
+    }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    .input-wrapper {
+        max-width: 100%;
+        min-width: 0;
+    }
+    
+    .textLabel {
+        font-size: 16px;
+    }
+    
+    .select {
+        font-size: 14px;
+        height: 42px;
+        padding-left: 12px;
+        padding-right: 30px;
+        background-position: right 10px center;
+        background-size: 10px;
+    }
+    
+    .select option {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* Responsividade para dispositivos pequenos */
+@media (max-width: 480px) {
+    .textLabel {
+        font-size: 15px;
+        margin-bottom: 3px;
+    }
+    
+    .select {
+        font-size: 14px;
+        height: 40px;
+        padding-left: 10px;
+        padding-right: 28px;
+        border-radius: 8px;
+        background-position: right 8px center;
+        background-size: 9px;
+    }
+    
+    .select option {
+        font-size: 13px;
+    }
+}
+
+/* Responsividade para telas muito pequenas */
+@media (max-width: 360px) {
+    .textLabel {
+        font-size: 14px;
+    }
+    
+    .select {
+        font-size: 13px;
+        height: 38px;
+        background-size: 8px;
+    }
+    
+    .select option {
+        font-size: 12px;
+    }
 }

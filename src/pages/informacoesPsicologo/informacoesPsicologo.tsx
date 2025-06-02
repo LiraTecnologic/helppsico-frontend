@@ -11,7 +11,7 @@ import './informacoesPsicologo.css';
 
 const psicologo = {
     id: "",
-    nome: "Nome Psicologo Legal ",
+    nome: "Nome Psicologo Legal",
     crp: "01000-000",
     cpf: "789456123-84",
     email: "emailteste@gmail.com",
@@ -87,8 +87,14 @@ export default function InformacoesPsicologo() {
             <Header fluxo="" headerPsicologo={false} />
             <main className="main-info-psicologico">
                 <div className="div-psicologo">
-                    <img className="estrela-fundo-cinza" src={FotoPsicologo} alt="Foto psicólogo" />
-                    <h1>{psicologo.nome} ({mediaNotaAvaliacao} <img className="estrela-fundo-cinza" src={Estrela} alt="Icon estrela" />)</h1>
+                    <img src={FotoPsicologo} alt="Foto psicólogo" />
+                    <h1>
+                        {psicologo.nome} 
+                        <span className="rating-container">
+                            ({mediaNotaAvaliacao} <img src={Estrela} alt="Icon estrela" />)
+                        </span>
+                    </h1>
+                    
                     <button>Vincular</button>
                     <div>
                         <p>{quantidadeVinculados} vinculados | {avaliacaos.length} avaliações</p>

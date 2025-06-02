@@ -18,11 +18,14 @@
     font-weight: bold;
     position: relative;
     z-index: 1;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
   
 .circle.active {
     background-color: white;
     color: #0031b0; 
+    transform: scale(1.1);
 }
   
 .line {
@@ -32,4 +35,97 @@
     position: relative;
     z-index: 0;
 }
-  
+
+/* Responsividade para Tablets */
+@media (max-width: 1024px) {
+    .step-indicator {
+        margin-left: 15px;
+    }
+    
+    .circle {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+    }
+    
+    .line {
+        height: 35px;
+    }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    .step-indicator {
+        flex-direction: row;
+        margin-left: 0;
+        margin-top: 20px;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .circle {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    
+    .line {
+        width: 60px;
+        height: 2px;
+        margin: 0 10px;
+    }
+}
+
+/* Responsividade para dispositivos pequenos */
+@media (max-width: 480px) {
+    .step-indicator {
+        margin-top: 15px;
+    }
+    
+    .circle {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+    
+    .line {
+        width: 40px;
+        margin: 0 8px;
+    }
+}
+
+/* Responsividade para telas muito pequenas */
+@media (max-width: 360px) {
+    .circle {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+    }
+    
+    .line {
+        width: 30px;
+        margin: 0 6px;
+    }
+}
+
+/* Responsividade para modo paisagem em dispositivos móveis */
+@media (max-width: 768px) and (orientation: landscape) {
+    .step-indicator {
+        flex-direction: column;
+        margin-left: 10px;
+        margin-top: 0;
+        width: auto;
+    }
+    
+    .circle {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+    
+    .line {
+        width: 2px;
+        height: 25px;
+        margin: 5px 0;
+    }
+}
