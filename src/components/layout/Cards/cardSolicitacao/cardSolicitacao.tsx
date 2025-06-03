@@ -1,5 +1,5 @@
-import './CardSolicitacao.css';
-import foto from '../../../../assets/imagemPaciente.jpg';
+import "./CardSolicitacao.css";
+import foto from "../../../../assets/imagemPaciente.jpg";
 
 interface CardSolicitacaoProps {
   nome: string;
@@ -11,9 +11,15 @@ interface CardSolicitacaoProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export default function CardSolicitacaoVinculo(props: CardSolicitacaoProps) {
-  const { nome, idade, crp, avaliacao, status, botao, onClick } = props;
-
+export default function CardSolicitacaoVinculo({
+  nome,
+  idade,
+  crp,
+  avaliacao,
+  status,
+  onClick,
+  botao,
+}: CardSolicitacaoProps) {
   const getStatusClass = () => {
     if (status === 'Pendente') return 'card-solicitacao-vinculo__status card-solicitacao-vinculo__status--pendente';
     return 'card-solicitacao-vinculo__status card-solicitacao-vinculo__status--recusado';
