@@ -12,8 +12,13 @@ interface ProximaSessaoProps {
 }
 
 export default function ProximasSessoes(props: ProximaSessaoProps) {
-  const idade = calcular(props.consulta.paciente.dataNascimento);
-  const dataFormatada = formatarDataHora(props.consulta.dataHora);
+  const dataFormatada = formatarDataHora(props.consulta.dataHora.inicio);
+  
+  
+  const isPsicologo = props.fluxo === 'psicologo';
+  const pessoa = isPsicologo ? props.consulta.paciente : props.consulta.psicologo;
+  const idade = isPsicologo ? calcular(props.consulta.paciente.dataNascimento) : null;
+  const endereco = isPsicologo ? props.consulta.paciente.endereco : props.consulta.psicologo.enderecoAtendimento;
 
   return (
     <div className="proxima-sessao">
@@ -29,18 +34,18 @@ export default function ProximasSessoes(props: ProximaSessaoProps) {
           <div className="sessao-info">
             <img
               className="sessao-foto"
-              src={props.consulta.paciente.fotoUrl}
-              alt="Foto do psicólogo"
+              src={pessoa.fotoUrl || "/imagens/foto-padrao.png"}
+              alt={isPsicologo ? "Foto do paciente" : "Foto do psicólogo"}
             />
             <div className="sessao-textos">
-              <p className="sessao-nome">{props.consulta.paciente.nome}</p>
-              <p>{idade} anos</p>
-              <p>{props.consulta.paciente.telefone}</p>
+              <p className="sessao-nome">{pessoa.nome}</p>
+              {isPsicologo && idade ? <p>{idade} anos</p> : null}
+              <p>{pessoa.telefone}</p>
             </div>
           </div>
 
           <div className="sessao-detalhes">
-            <p>Local: {props.consulta.paciente.endereco.rua}</p>
+            <p>Local: {endereco.rua}</p>
             <p>Data: {dataFormatada.data}</p>
             <p>Horário: {dataFormatada.hora}</p>
           </div>
