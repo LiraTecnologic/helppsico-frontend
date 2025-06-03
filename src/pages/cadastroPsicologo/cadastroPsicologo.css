@@ -96,3 +96,63 @@
 input:valid {
     color: #474747;
   }
+
+@media (max-width: 1200px) {
+    .left-content {
+        display: none;
+    }
+    
+    .linha-vertical {
+        display: none;
+    }
+    
+    .login-container {
+        justify-content: center;
+    }
+    
+    .right-content {
+        flex: none;
+        width: 100%;
+        max-width: 600px;
+        padding: 20px;
+    }
+    
+    .imagem {
+        width: 500px;
+        height: 450px;
+    }
+}
+
+@media (max-width: 720px) {
+    .login-container {
+        padding: 20px;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .right-content {
+        height: auto;
+        padding: 16px;
+    }
+    
+    .text-white {
+        font-size: 36px;
+        text-align: center;
+        padding-bottom: 16px;
+    }
+    
+    .formulario {
+        max-width: 400px;
+        gap: 12px;
+    }
+    
+    .input-pair {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .semConta {
+        font-size: 14px;
+        text-align: center;
+    }
+}

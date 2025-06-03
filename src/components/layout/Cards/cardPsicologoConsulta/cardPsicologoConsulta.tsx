@@ -15,7 +15,7 @@ export default function CardPsicologoConsulta(props: CardPsicologoConsultaProps)
                 alt={`Foto de ${props.nome}`}
                 className="foto-psicologo"
             />
-            <div className="info-psicologo">
+            <div className="info-psicologo-consulta">
                 <h2>{props.nome}</h2>
                 <p className="biografia">{props.biografia}</p>
                 <div>

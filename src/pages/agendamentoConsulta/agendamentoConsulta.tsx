@@ -116,7 +116,7 @@ export default function AgendamentoConsulta() {
     <>
       <Header fluxo="" headerPsicologo={false} />
       <main>
-        <h1>Consulta</h1>
+        <h1 className="titulo-agendamento-consulta">Consulta</h1>
         <div className="container-psicologo">
           <div className="dados-psicologo-consulta">
             {psicologo && horariosPsicologo &&

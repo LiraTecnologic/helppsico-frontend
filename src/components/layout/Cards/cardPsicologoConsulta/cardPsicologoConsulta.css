@@ -16,25 +16,25 @@
     flex-shrink: 0;
 }
 
-.info-psicologo {
+.info-psicologo-consulta {
     display: flex;
     flex-direction: column;
     gap: 12px;
     flex: 1;
 }
 
-.info-psicologo .biografia {
+.info-psicologo-consulta .biografia {
     margin: 0;
     line-height: 1.4;
 }
 
-.info-psicologo > div {
+.info-psicologo-consulta > div {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.info-psicologo .tempo {
+.info-psicologo-consulta .tempo {
     background-color: #3b82f6;
     color: white;
     font-size: 0.85rem;
@@ -42,20 +42,34 @@
     border-radius: 20px;
 }
 
+.container-psicologo{
+    padding: 15px;
+}
+
 /* Responsividade */
-@media (max-width: 640px) {
+@media (max-width: 720px) {
     .cards-psicologo-consulta {
-        flex-direction: column;
+        margin: 12px;
         text-align: center;
         padding: 20px;
+        font-size: 12px;
     }
     
     .foto-psicologo {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
     }
     
     .info-psicologo .nome {
-        font-size: 1.25rem;
+        font-size: 6px;
     }
+
+    .container-psicologo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    
 }
