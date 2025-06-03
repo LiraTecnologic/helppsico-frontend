@@ -80,7 +80,6 @@
 .card-solicitacao-psicologo__acoes {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   justify-content: center;
   gap: 1rem;
   flex-shrink: 0;
@@ -98,15 +97,11 @@
 }
 
 .card-solicitacao-psicologo__status--pendente {
-  border-bottom-color: #ffc107;
-}
-
-.card-solicitacao-psicologo__status--aceito {
-  border-bottom-color: #28a745;
+  border-bottom: 3px solid #ffc107;
 }
 
 .card-solicitacao-psicologo__status--recusado {
-  border-bottom-color: #dc3545;
+  border-bottom: 3px solid #dc3545;
 }
 
 .card-solicitacao-psicologo__botoes {
