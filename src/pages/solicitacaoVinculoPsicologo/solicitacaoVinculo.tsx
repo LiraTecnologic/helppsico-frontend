@@ -48,47 +48,56 @@ const dadosMockados = [
 ];
 
 export default function SolicitacaoDeVinculoPsicologo() {
-  const [popupCancelar, setPopupCancelar] = useState(false);
+  const [popupAceitar, setPopupAceitar] = useState(false);
+  const [popupRecusar, setPopupRecusar] = useState(false);
   const [vinculoSelecionadoId, setVinculoSelecionadoId] = useState<string | null>(null);
   const [vinculos, setVinculos] = useState(dadosMockados);
 
-  const abrirPopupCancelamento = (idVinculo: string) => {
+  const abrirPopupAceitacao = (idVinculo: string) => {
     setVinculoSelecionadoId(idVinculo);
-    setPopupCancelar(true);
+    setPopupAceitar(true);
   };
 
-  const fecharPopupCancelamento = () => {
-    setPopupCancelar(false);
+  const abrirPopupRecusa = (idVinculo: string) => {
+    setVinculoSelecionadoId(idVinculo);
+    setPopupRecusar(true);
+  };
+
+  const fecharPopups = () => {
+    setPopupAceitar(false);
+    setPopupRecusar(false);
     setVinculoSelecionadoId(null);
   };
 
-  const handleConfirmarCancelamento = () => {
+  const handleConfirmarAceitacao = () => {
     if (!vinculoSelecionadoId) return;
     
-    // Remove o vínculo da lista (simulando cancelamento)
     setVinculos(prev => prev.filter(vinculo => vinculo.id !== vinculoSelecionadoId));
-    fecharPopupCancelamento();
+    fecharPopups();
   };
 
-  const handleAceitarSolicitacao = (idVinculo: string) => {
-    // Implementar lógica para aceitar solicitação
-    console.log('Aceitar solicitação:', idVinculo);
-    // Aqui você pode atualizar o status ou fazer outras ações
-  };
-
-  const handleRecusarSolicitacao = (idVinculo: string) => {
-    // Atualiza o status para recusado
+  const handleConfirmarRecusa = () => {
+    if (!vinculoSelecionadoId) return;
+    
     setVinculos(prev => 
       prev.map(vinculo => 
-        vinculo.id === idVinculo 
+        vinculo.id === vinculoSelecionadoId 
           ? { ...vinculo, status: 'Recusado' }
           : vinculo
       )
     );
+    fecharPopups();
+  };
+
+  const handleAceitarSolicitacao = (idVinculo: string) => {
+    abrirPopupAceitacao(idVinculo);
+  };
+
+  const handleRecusarSolicitacao = (idVinculo: string) => {
+    abrirPopupRecusa(idVinculo);
   };
 
   const handleVerMais = (idVinculo: string) => {
-    // Implementar lógica para ver mais detalhes
     console.log('Ver mais detalhes:', idVinculo);
   };
 
@@ -97,9 +106,9 @@ export default function SolicitacaoDeVinculoPsicologo() {
 
   return (
     <>
-      <Header fluxo="minhasSessoes" headerPsicologo={true} />
+      <Header fluxo="" headerPsicologo={true} />
       <div className="solicitacao-vinculo-psicologo__container">
-        <h1 className="solicitacao-vinculo-psicologo__titulo">Solicitações de Vínculo</h1>
+        <h1 className="solicitacao-vinculo-psicologo__titulo">Solicitações de Pacientes</h1>
         
         {vinculosPendentes.length > 0 && (
           <section className='solicitacao-vinculo-psicologo__section'>
@@ -149,10 +158,19 @@ export default function SolicitacaoDeVinculoPsicologo() {
         )}
       </div>
 
-      {popupCancelar && vinculoSelecionadoId && (
+      {popupAceitar && vinculoSelecionadoId && (
         <PopupCancelamento
-          fechar={fecharPopupCancelamento}
-          onConfirm={handleConfirmarCancelamento} 
+          fechar={fecharPopups}
+          onConfirm={handleConfirmarAceitacao}
+          titulo="Deseja aceitar esse paciente?"
+        />
+      )}
+
+      {popupRecusar && vinculoSelecionadoId && (
+        <PopupCancelamento
+          fechar={fecharPopups}
+          onConfirm={handleConfirmarRecusa}
+          titulo="Deseja recusar esse paciente?"
         />
       )}
     </>
