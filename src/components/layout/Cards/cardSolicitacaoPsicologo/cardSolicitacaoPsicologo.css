@@ -1,0 +1,179 @@
+.solicitacao-vinculo-psicologo__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.solicitacao-vinculo-psicologo__titulo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.solicitacao-vinculo-psicologo__section {
+  margin-bottom: 40px;
+}
+
+.solicitacao-vinculo-psicologo__subtitulo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.solicitacao-vinculo-psicologo__cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.solicitacao-vinculo-psicologo__vazio {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* cardSolicitacaoPsicologo.css */
+.card-solicitacao-psicologo {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.card-solicitacao-psicologo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-solicitacao-psicologo__content {
+  padding: 20px;
+}
+
+.card-solicitacao-psicologo__foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #e0e0e0;
+}
+
+.card-solicitacao-psicologo__info {
+  margin-bottom: 20px;
+}
+
+.card-solicitacao-psicologo__nome {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.card-solicitacao-psicologo__idade,
+.card-solicitacao-psicologo__cpf,
+.card-solicitacao-psicologo__telefone {
+  margin: 5px 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.card-solicitacao-psicologo__acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card-solicitacao-psicologo__status {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.card-solicitacao-psicologo__status--pendente {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.card-solicitacao-psicologo__status--aceito {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.card-solicitacao-psicologo__status--recusado {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.card-solicitacao-psicologo__botoes {
+  display: flex;
+  gap: 10px;
+}
+
+.card-solicitacao-psicologo__botao {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-solicitacao-psicologo__botao--aceitar {
+  background-color: #28a745;
+  color: white;
+}
+
+.card-solicitacao-psicologo__botao--aceitar:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+.card-solicitacao-psicologo__botao--recusar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.card-solicitacao-psicologo__botao--recusar:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+.card-solicitacao-psicologo__botao--ver-mais {
+  background-color: #007bff;
+  color: white;
+}
+
+.card-solicitacao-psicologo__botao--ver-mais:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+
+/* @media (max-width: 768px) {
+  .solicitacao-vinculo-psicologo__cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-solicitacao-psicologo__botoes {
+    flex-direction: column;
+  }
+  
+  .solicitacao-vinculo-psicologo__titulo {
+    font-size: 1.5rem;
+  }
+} */

@@ -22,6 +22,7 @@ import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
 import GerenciamentoDeHorarios from "./pages/gereciamentoHorarios/gerenciamentoHorarios";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
 import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
+import SolicitacaoVinculoPsicologo from "./pages/solicitacaoVinculoPsicologo/solicitacaoVinculo";
 
 //Nenhum fluxo
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
@@ -55,6 +56,7 @@ function App() {
         <Route path="/gerenciamentoHorarios" element={<GerenciamentoDeHorarios />} /> 
         <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
         <Route path="/detalhesProntuario" element={<DetalhesProntuario />} />
+        <Route path="/solicitacaoVinculoPsicologo" element={<SolicitacaoVinculoPsicologo />}/>
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
