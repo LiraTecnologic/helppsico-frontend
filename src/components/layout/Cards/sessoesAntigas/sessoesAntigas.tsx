@@ -30,7 +30,7 @@ export default function SessoesAntigas({ sessoesAntigas }: ListagemSessoesAntiga
                   <p>Data: {formatarDataHora(sessao.dataHora).data}</p>
                   <p>Horário: {formatarDataHora(sessao.dataHora).hora}</p>
                 </div>
-              </div>development
+              </div>
             </div>
           ))}
         </div>

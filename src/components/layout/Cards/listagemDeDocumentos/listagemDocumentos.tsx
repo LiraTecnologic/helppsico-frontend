@@ -21,7 +21,7 @@ export default function ListagemDocumentos({
         <div className="prontuarioContainer" key={documento.id}>
           <div className="prontuarioCard">
             <div className="prontuarioCardHeader">
-              <img src={Documento} alt="" />
+              <img className="prontuarioImage" src={Documento} alt="" />
               <div className="prontuarioIcone" />
               <strong className="prontuarioTitulo">{documento.titulo}</strong>
             </div>
