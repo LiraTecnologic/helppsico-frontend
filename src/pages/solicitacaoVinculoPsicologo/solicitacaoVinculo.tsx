@@ -1,57 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './solicitacaoVinculo.css';
 import Header from '../../components/layout/header/header';
 import CardSolicitacaoVinculo from '../../components/layout/Cards/cardSolicitacaoPsicologo/cardSolicitacaoPsicologo';
 import PopupCancelamento from '../../components/layout/PopupCancelamento/popupCancelamento';
-
-const dadosMockados = [
-  {
-    id: '1',
-    nome: 'Maria Silva Santos',
-    idade: 28,
-    cpf: '123.456.789-01',
-    telefone: '(11) 99999-1234',
-    status: 'Pendente'
-  },
-  {
-    id: '2',
-    nome: 'João Pedro Oliveira',
-    idade: 34,
-    cpf: '987.654.321-09',
-    telefone: '(11) 88888-5678',
-    status: 'Pendente'
-  },
-  {
-    id: '3',
-    nome: 'Ana Carolina Lima',
-    idade: 22,
-    cpf: '456.789.123-45',
-    telefone: '(11) 77777-9012',
-    status: 'Recusado'
-  },
-  {
-    id: '4',
-    nome: 'Carlos Eduardo Costa',
-    idade: 41,
-    cpf: '321.654.987-32',
-    telefone: '(11) 66666-3456',
-    status: 'Recusado'
-  },
-  {
-    id: '5',
-    nome: 'Fernanda Souza',
-    idade: 26,
-    cpf: '789.123.456-78',
-    telefone: '(11) 55555-7890',
-    status: 'Pendente'
-  }
-];
+import VinculoModel, { StatusVinculo } from '../../models/vinculo';
+import { solicitarVinculosPsicologo, aceitarSolicitacao, recusarSolicitacao } from './solicitacaoVinculoService';
+import calcular from '../../utils/calculoData';
 
 export default function SolicitacaoDeVinculoPsicologo() {
   const [popupAceitar, setPopupAceitar] = useState(false);
   const [popupRecusar, setPopupRecusar] = useState(false);
   const [vinculoSelecionadoId, setVinculoSelecionadoId] = useState<string | null>(null);
-  const [vinculos, setVinculos] = useState(dadosMockados);
+  const [vinculos, setVinculos] = useState<VinculoModel[]>([]);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState<string | null>(null);
+
+  // const idPsicologo = localStorage.getItem('idPsicologo');
+  const idPsicologo = "1";
+
+  const carregarVinculos = useCallback(async () => {
+    if (!idPsicologo) {
+      setErro("ID do psicólogo não encontrado.");
+      setCarregando(false);
+      return;
+    }
+
+    setCarregando(true);
+    setErro(null);
+
+    try {
+      const dadosVinculos = await solicitarVinculosPsicologo(idPsicologo);
+      setVinculos(dadosVinculos);
+    } catch (error) {
+      console.error(`Erro ao carregar os vinculos :(  Erro:`, error);
+      setErro('Erro ao carregar os vinculos. Tente novamente mais tarde.');
+    } finally {
+      setCarregando(false);
+    }
+  }, [idPsicologo]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    carregarVinculos();
+  }, [carregarVinculos]);
 
   const abrirPopupAceitacao = (idVinculo: string) => {
     setVinculoSelecionadoId(idVinculo);
@@ -69,24 +60,30 @@ export default function SolicitacaoDeVinculoPsicologo() {
     setVinculoSelecionadoId(null);
   };
 
-  const handleConfirmarAceitacao = () => {
+  const handleConfirmarAceitacao = async () => {
     if (!vinculoSelecionadoId) return;
     
-    setVinculos(prev => prev.filter(vinculo => vinculo.id !== vinculoSelecionadoId));
-    fecharPopups();
+    try {
+      await aceitarSolicitacao(vinculoSelecionadoId);
+      fecharPopups();
+      carregarVinculos();
+    } catch (error) {
+      console.error("Erro ao aceitar solicitação:", error);
+      setErro("Falha ao aceitar a solicitação. Tente novamente.");
+    }
   };
 
-  const handleConfirmarRecusa = () => {
+  const handleConfirmarRecusa = async () => {
     if (!vinculoSelecionadoId) return;
     
-    setVinculos(prev => 
-      prev.map(vinculo => 
-        vinculo.id === vinculoSelecionadoId 
-          ? { ...vinculo, status: 'Recusado' }
-          : vinculo
-      )
-    );
-    fecharPopups();
+    try {
+      await recusarSolicitacao(vinculoSelecionadoId);
+      fecharPopups();
+      carregarVinculos();
+    } catch (error) {
+      console.error("Erro ao recusar solicitação:", error);
+      setErro("Falha ao recusar a solicitação. Tente novamente.");
+    }
   };
 
   const handleAceitarSolicitacao = (idVinculo: string) => {
@@ -97,8 +94,33 @@ export default function SolicitacaoDeVinculoPsicologo() {
     abrirPopupRecusa(idVinculo);
   };
 
-  const vinculosPendentes = vinculos.filter(v => v.status === 'Pendente');
-  const vinculosRecusados = vinculos.filter(v => v.status === 'Recusado');
+  const vinculosPendentes = vinculos.filter(v => v.status === StatusVinculo.PENDENTE);
+  const vinculosRecusados = vinculos.filter(v => v.status === StatusVinculo.INATIVO);
+
+  if (carregando) {
+    return (
+      <>
+        <Header fluxo="" headerPsicologo={true} />
+        <div className="solicitacao-vinculo-psicologo__container">
+          <h1 className="solicitacao-vinculo-psicologo__titulo">Solicitações de Pacientes</h1>
+          <p>Carregando...</p>
+        </div>
+      </>
+    );
+  }
+
+  if (erro) {
+    return (
+      <>
+        <Header fluxo="" headerPsicologo={true} />
+        <div className="solicitacao-vinculo-psicologo__container">
+          <h1 className="solicitacao-vinculo-psicologo__titulo">Solicitações de Pacientes</h1>
+          <p style={{ color: 'red' }}>{erro}</p>
+          <button onClick={carregarVinculos}>Tentar Novamente</button>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -113,10 +135,10 @@ export default function SolicitacaoDeVinculoPsicologo() {
               {vinculosPendentes.map((vinculo) => (
                 <CardSolicitacaoVinculo
                   key={vinculo.id}
-                  nome={vinculo.nome}
-                  idade={vinculo.idade}
-                  cpf={vinculo.cpf}
-                  telefone={vinculo.telefone}
+                  nome={vinculo.paciente.nome}
+                  idade={calcular(vinculo.paciente.dataNascimento)}
+                  cpf={vinculo.paciente.cpf}
+                  telefone={vinculo.paciente.telefone}
                   status="Pendente"
                   botao="Aceitar"
                   onClick={() => handleAceitarSolicitacao(vinculo.id)}
@@ -134,10 +156,10 @@ export default function SolicitacaoDeVinculoPsicologo() {
               {vinculosRecusados.map((vinculo) => (
                 <CardSolicitacaoVinculo
                   key={vinculo.id}
-                  nome={vinculo.nome}
-                  idade={vinculo.idade}
-                  cpf={vinculo.cpf}
-                  telefone={vinculo.telefone}
+                  nome={vinculo.paciente.nome}
+                  idade={calcular(vinculo.paciente.dataNascimento)}
+                  cpf={vinculo.paciente.cpf}
+                  telefone={vinculo.paciente.telefone}
                   status="Recusado"
                 />
               ))}
@@ -145,7 +167,7 @@ export default function SolicitacaoDeVinculoPsicologo() {
           </section>
         )}
 
-        {(vinculosPendentes.length === 0 && vinculosRecusados.length === 0) && (
+        {(vinculosPendentes.length === 0 && vinculosRecusados.length === 0 && !carregando) && (
           <div className="solicitacao-vinculo-psicologo__vazio">
             <p>Nenhuma solicitação encontrada.</p>
           </div>
