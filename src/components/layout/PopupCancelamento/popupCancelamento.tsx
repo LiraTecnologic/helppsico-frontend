@@ -11,7 +11,7 @@ export default function PopupCancelamento({ fechar, onConfirm, titulo = "Deseja 
     <div className="overlay">
       <div className="popup">
         <h1>{titulo}</h1>
-        <div className="botoes">
+        <div className="botoes-Sim-Nao">
           <button className='aceitar' onClick={onConfirm}>Sim</button> 
           <button className='recusar' onClick={fechar}>Não</button>
         </div>
