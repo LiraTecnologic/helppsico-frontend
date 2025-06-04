@@ -5,10 +5,13 @@ import VinculoPsicologo from '../../components/layout/Cards/vinculoPsicologo/vin
 import ProximasSessoes from '../../components/layout/Cards/proximaSessao/proximaSessao';
 import ListagemDocumentos from '../../components/layout/Cards/listagemDeDocumentos/listagemDocumentos';
 
-import { getVinculo, getSessoes, getProntuarios } from './meuPainelService';
-import VinculoModel from '../../models/vinculo';
 import ConsultaModel from '../../models/consulta';
+import VinculoModel from '../../models/vinculo';
 import ProntuarioModel from '../../models/prontuario';
+
+import { consultaSessoesFuturas } from '../../services/consultas.service';
+import { consultaVinculosPaciente } from '../../services/vinculos.service';
+import { consultaProntuariosPaciente } from '../../services/prontuarios.service';
 
 export default function MeuPainelPaciente() {
   const [vinculo, setVinculo] = useState<VinculoModel | null>(null);
@@ -16,13 +19,22 @@ export default function MeuPainelPaciente() {
   const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
 
   useEffect(() => {
-    getVinculo().then(setVinculo);
-    getSessoes().then(sessoes => {
-      if (sessoes.length > 0) {
-        setConsulta(sessoes[0]);
+    async function carregarDadosPaciente(idPaciente: string) {
+      const vinculoConsultado = await consultaVinculosPaciente(idPaciente, 1);
+      setVinculo(vinculoConsultado.content.length > 0 ? vinculoConsultado.content[0] : null);
+
+      const sessoesConsultadas = await consultaSessoesFuturas(idPaciente, 1);
+      if (sessoesConsultadas.content.length > 0) {
+        setConsulta(sessoesConsultadas.content[0]);
       }
-    });
-    getProntuarios().then(setProntuarios);
+
+      const prontuariosConsultados = await consultaProntuariosPaciente(idPaciente, 1);
+      setProntuarios(prontuariosConsultados.content);
+    }
+
+    // Pegar o paciente logado da mesma forma que psicologo (ajustar conforme o app)
+    const pacienteId = 'id-fixo-ou-pegar-localstorage'; 
+    carregarDadosPaciente(pacienteId);
   }, []);
 
   const handleDocumentoClick = (id: string) => {

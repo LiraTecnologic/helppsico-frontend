@@ -1,14 +1,31 @@
 import axios from 'axios';
 import ProntuarioModel from '../models/prontuario';
-import Page from '../models/page'
+import Page from '../models/page';
 
 export function consultaProntuariosPsicologo(idPsicologo: string, page: number): Promise<Page<ProntuarioModel>> {
     return axios.get<Page<ProntuarioModel>>(
-        `http://localhost:8080/prontuarios/psicologo/${idPsicologo}?page=${page}&size=${15}`
+        `http://localhost:8080/prontuarios/psicologo/${idPsicologo}?page=${page}&size=15`
     )
     .then(response => response.data)
     .catch(err => {
-        console.error("Erro ao carregar prontuarios:", err);
+        console.error("Erro ao carregar prontuários do psicólogo:", err);
+        return {
+            content: [],
+            totalElements: 0,
+            totalPages: 0,
+            number: 0,
+            size: 0
+        };
+    });
+}
+
+export function consultaProntuariosPaciente(idPaciente: string, page: number): Promise<Page<ProntuarioModel>> {
+    return axios.get<Page<ProntuarioModel>>(
+        `http://localhost:8080/prontuarios/paciente/${idPaciente}?page=${page}&size=15`
+    )
+    .then(response => response.data)
+    .catch(err => {
+        console.error("Erro ao carregar prontuários do paciente:", err);
         return {
             content: [],
             totalElements: 0,
