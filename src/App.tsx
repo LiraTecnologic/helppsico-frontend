@@ -18,7 +18,7 @@ import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo'
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
-import AtPfPsicologo from "./pages/atPfPsicologo/atualizarPerfilPsicologo";
+import AtualizarPerfilPsicologo from "./pages/atualizarPerfilPsicologo/atualizarPerfilPsicologo";
 
 import GerenciamentoDeHorarios from "./pages/gereciamentoHorarios/gerenciamentoHorarios";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
@@ -56,7 +56,7 @@ function App() {
         <Route path="/gerenciamentoHorarios" element={<GerenciamentoDeHorarios />} /> 
         <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
         <Route path="/detalhesProntuario" element={<DetalhesProntuario />} />
-        <Route path="/atualizacaoPerfil" element={<AtPfPsicologo />} />
+        <Route path="/atualizacaoPerfil" element={<AtualizarPerfilPsicologo />} />
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
