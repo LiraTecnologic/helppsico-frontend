@@ -37,6 +37,7 @@ function App() {
   return (
     <Router>
       <Routes>
+
         {/* FLUXO DE PACIENTE */}
         <Route path="/paciente/login" element={<LoginPaciente />} />
         <Route path="/paciente/cadastro" element={<CadastroPaciente />} />
@@ -44,7 +45,7 @@ function App() {
         <Route path="/paciente/sessao" element={<DetalhesSessao />} />
         <Route path="/paciente/solicitacao-vinculo" element={<SolicitacaoDeVinculo />} />
         <Route path="/paciente/agendamento" element={<AgendamentoConsulta />} />
-        <Route path="/paciente/solicitacao-documento" element={<SolicitacaoDocumento />}/>
+        <Route path="/paciente/solicitacao-documento" element={<SolicitacaoDocumento />} />
 
         {/* FLUXO DE PSICÓLOGO */}
         <Route path="/psicologo/login" element={<LoginPsicologo />} />
@@ -56,10 +57,10 @@ function App() {
         <Route path="/psicologo/prontuario/detalhes" element={<DetalhesProntuario />} />
         <Route path="/psicologo/horarios" element={<GerenciamentoDeHorarios />} />
         <Route path="/psicologo/documentos-pendentes" element={<RequisicaoDocumento />} />
-        <Route path="/psicologo/solicitacao-vinculo" element={<SolicitacaoVinculoPsicologo />}/>
+        <Route path="/psicologo/solicitacao-vinculo" element={<SolicitacaoVinculoPsicologo />} />
         <Route path="/psicologo/sessoes" element={<MinhasConsultasPsicologo />} />
         <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} />
-        
+
         {/* AMBOS OS FLUXOS */}
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
