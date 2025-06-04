@@ -2,10 +2,10 @@ import './loginPsicologo.css';
 import InputTotal from '../../components/commmon/Inputs/InputTotal';
 import Botao from '../../components/commmon/botoes/botao/botao';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { login } from '../../services/auth.service';
-import { useNavigate } from 'react-router-dom';
 import { getUserCRP, getUserEmail, getUserId, getUserType } from '../../services/auth.service';
+import { Link, useNavigate } from 'react-router-dom';
+
 const Login = () => {
     const [crp, setCrp] = useState('');
     const [senha, setSenha] = useState('');
@@ -31,7 +31,7 @@ const Login = () => {
             alert('A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
             return;
         }
-
+      
         const response = await login(crp, senha, 'PSICOLOGO');
         if (response.dado) {
             console.log('Login realizado com sucesso!, dados do usuário:', response.dado);

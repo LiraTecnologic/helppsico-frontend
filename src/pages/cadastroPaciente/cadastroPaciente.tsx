@@ -6,7 +6,7 @@ import Select from '../../components/commmon/select/Select';
 import EtapasCadastro from '../../components/commmon/marcadores/etapasCadastro';
 import { useState, useEffect } from 'react';
 import { formatarCPF, validarCPF, buscarEnderecoPorCEP } from './cadastroPaciente.service';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Cadastro() {
     const [step, setStep] = useState(1);
@@ -26,6 +26,8 @@ export default function Cadastro() {
     const [dataNascimento, setDataNascimento] = useState('');
 
     const generos = ['Masculino', 'Feminino', 'Outros'];
+
+    const navigate = useNavigate();
 
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setGenero(e.target.value);
@@ -77,7 +79,7 @@ export default function Cadastro() {
 
             validandoSenha();
         } else {
-            alert('Cadastro finalizado!');
+            navigate("/paciente/login")
         }
     };
 
@@ -160,7 +162,7 @@ export default function Cadastro() {
                             <InputTotal label="Data de Nascimento" pleaceHolder="Digite sua data de nascimento..." tipo='date' value={dataNascimento} onChange={(e) => setDataNascimento(e.target.value)} />
                         </>
                     )}
-                    <Botao texto={textBotao()} onClick={handleClick} />
+                        <Botao texto={textBotao()} onClick={handleClick} />                
                     <p className='semConta'>Já tem uma conta? <br /><Link to="/" className='link'>Acesse</Link></p>
                 </div>
                 <EtapasCadastro etapaAtual={step} />

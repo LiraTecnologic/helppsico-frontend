@@ -6,6 +6,9 @@ import TabelaHorario from "../../components/layout/tabela/tabelaHorario"
 import CardInfoAvaliacao from "../../components/layout/Cards/cardsInformacoesPsicologo/avaliacao/info/cardInfoAvaliacao"
 import BotaoAvaliarInfoPsicologo from "../../components/layout/Cards/cardsInformacoesPsicologo/botaoAvaliar/botaoAvaliarInfoPsicologo"
 import CardAvaliacao from "../../components/layout/Cards/cardsInformacoesPsicologo/avaliacao/cardAvaliacao"
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { EstadoVinculo } from "../../models/enum.vinculo";
 
 import './informacoesPsicologo.css';
 
@@ -79,17 +82,55 @@ const mediaNotaAvaliacao = 4.6;
 
 const quantidadeVinculados = 12;
 
-export default function InformacoesPsicologo() {
 
+
+export default function InformacoesPsicologo() {
+    const [hasVinculo, setHasVinculo] = useState<EstadoVinculo>(EstadoVinculo.NAO_VINCULADO);
+    const [hoverSolicitado, setHoverSolicitado] = useState(false);
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+    window.scrollTo(0, 0);
+    }, [pathname]);
+
+    const location = useLocation();
+    const headerPsicologo = location.state.headerPsicologo;
 
     return (
         <>
-            <Header fluxo="" headerPsicologo={false} />
+            <Header fluxo="" headerPsicologo={headerPsicologo} />
             <main className="main-info-psicologico">
                 <div className="div-psicologo">
                     <img className="estrela-fundo-cinza" src={FotoPsicologo} alt="Foto psicólogo" />
                     <h1>{psicologo.nome} ({mediaNotaAvaliacao} <img className="estrela-fundo-cinza" src={Estrela} alt="Icon estrela" />)</h1>
-                    <button>Vincular</button>
+                    
+                    {hasVinculo === EstadoVinculo.VINCULADO && (
+                        <button className="btn-desvinc">Desvincular</button>
+                    )}
+
+                    {hasVinculo === EstadoVinculo.PENDENTE && (
+                        hoverSolicitado ? (
+                            <Link
+                                to="/paciente/solicitacao-vinculo"
+                                className="btn-solic-hover"
+                                onMouseLeave={() => setHoverSolicitado(false)}
+                            >
+                                Ver solicitações
+                            </Link>
+                        ) : (
+                            <button
+                                className="btn-solic"
+                                onMouseEnter={() => setHoverSolicitado(true)}
+                            >
+                                Solicitado
+                            </button>
+                        )
+                    )}
+
+                    {hasVinculo === EstadoVinculo.NAO_VINCULADO &&(
+                        <button>Vincular</button>
+                    )}
+
                     <div>
                         <p>{quantidadeVinculados} vinculados | {avaliacaos.length} avaliações</p>
                         <p>CRP {psicologo.crp}</p>
@@ -121,14 +162,7 @@ export default function InformacoesPsicologo() {
                                 nota={4.5}
                                 quantidadeAvaliacao="20"
                             />
-                            <BotaoAvaliarInfoPsicologo
-                                psicologo={{
-                                    id: psicologo.id,
-                                    nome: psicologo.nome,
-                                    foto: FotoPsicologo
-                                }}
-                            />
-
+                            {hasVinculo === EstadoVinculo.VINCULADO && <BotaoAvaliarInfoPsicologo psicologo={{id: psicologo.id, nome: psicologo.nome, foto: FotoPsicologo}}/> }
                         </div>
                         <div className="listagem-avaliacao">
                             {avaliacaos.map((avaliacao, index) => (

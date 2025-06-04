@@ -36,7 +36,9 @@ export default function SessoesAntigas({ sessoesAntigas }: ListagemSessoesAntiga
         </div>
       ) : (
         <div className="sessao-antiga-nao-marcada">
-          <p className="titulo-nao-marcada">Ainda não marcou a próxima consulta?</p>
+          <p className="titulo-nao-marcada">
+            Ainda não marcou a próxima consulta?
+          </p>
           <p className="subtitulo-nao-marcada">
             Vá até o perfil do(a) seu(sua) psicólogo(a) e marque agora mesmo!
           </p>
