@@ -1,9 +1,6 @@
 import ConsultaModel from '../../../../models/consulta';
 import calcular from '../../../../utils/calculoData'
 import {formatarDataHora} from '../../../../utils/formataData'
-import ConsultaModel from "../../../../models/consulta";
-import calcular from "../../../../utils/calculoData";
-import formatarDataHora from "../../../../utils/formataData";
 import { Link } from "react-router-dom";
 
 import "./proximaSessao.css";
@@ -22,10 +19,10 @@ export default function ProximasSessoes({
   fluxo,
   sessaoMarcada,
 }: ProximaSessaoProps) {
-  const isPsicologo = props.fluxo === 'psicologo';
-  const pessoa = isPsicologo ? props.consulta.paciente : props.consulta.psicologo;
-  const idade = isPsicologo ? calcular(props.consulta.paciente.dataNascimento) : null;
-  const endereco = isPsicologo ? props.consulta.paciente.endereco : props.consulta.psicologo.enderecoAtendimento;
+  const isPsicologo = fluxo === 'psicologo';
+  // const pessoa = isPsicologo ? consulta.paciente : consulta.psicologo;
+  const idade = isPsicologo ? calcular(consulta.paciente.dataNascimento) : null;
+  // const endereco = isPsicologo ? consulta.paciente.endereco : consulta.psicologo.enderecoAtendimento;
 
   return (
     <div className="proxima-sessao">
@@ -54,8 +51,8 @@ export default function ProximasSessoes({
           <div className="sessao-detalhes">
             <p>Local: {consulta.paciente.endereco.rua}</p>
 
-            <p>Data: {dataFormatada.data}</p>
-            <p>Horário: {dataFormatada.hora}</p>
+            {/* <p>Data: {dataFormatada.data}</p>
+            <p>Horário: {dataFormatada.hora}</p> */}
           </div>
 
           <div className="sessao-pagamento">
