@@ -1,4 +1,4 @@
-import EnderecoModel from "./endereco";
+import EnderecoModel from "./endereco"
 
 export default interface PsicologoModel {
     id:string,

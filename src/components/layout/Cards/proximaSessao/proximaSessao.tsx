@@ -22,8 +22,10 @@ export default function ProximasSessoes({
   fluxo,
   sessaoMarcada,
 }: ProximaSessaoProps) {
-  const idade = calcular(consulta.paciente.dataNascimento);
-  const dataFormatada = formatarDataHora(consulta.dataHora);
+  const isPsicologo = props.fluxo === 'psicologo';
+  const pessoa = isPsicologo ? props.consulta.paciente : props.consulta.psicologo;
+  const idade = isPsicologo ? calcular(props.consulta.paciente.dataNascimento) : null;
+  const endereco = isPsicologo ? props.consulta.paciente.endereco : props.consulta.psicologo.enderecoAtendimento;
 
   return (
     <div className="proxima-sessao">
@@ -39,17 +41,19 @@ export default function ProximasSessoes({
             <img
               className="sessao-foto"
               src={consulta.paciente.fotoUrl}
-              alt="Foto do psicólogo"
+              alt={isPsicologo ? "Foto do paciente" : "Foto do psicólogo"}
             />
             <div className="sessao-textos">
               <p className="sessao-nome">{consulta.paciente.nome}</p>
               <p>{idade} anos</p>
               <p>{consulta.paciente.telefone}</p>
+
             </div>
           </div>
 
           <div className="sessao-detalhes">
             <p>Local: {consulta.paciente.endereco.rua}</p>
+
             <p>Data: {dataFormatada.data}</p>
             <p>Horário: {dataFormatada.hora}</p>
           </div>

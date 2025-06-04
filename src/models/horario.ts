@@ -1,10 +1,12 @@
 import PsicologoModel from "./psicologo";
 
 export interface HorarioModel {
-    id: string;
-    diaSemana: string;
-    inicio: string;
-    fim: string;
-    disponivel: boolean;
-    psicologo: PsicologoModel
+  id: string;
+  psicologo: PsicologoModel;
+  diaSemana: string[];
+  inicio: string;
+  fim: string;
+  intervalo: number;
+  duracao: number;
+  disponivel: boolean;
 }
