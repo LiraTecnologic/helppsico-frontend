@@ -5,9 +5,9 @@ import { HorarioModel } from '../../models/horario';
 
 const API_BASE_URL = 'http://localhost:3000';
 
-export function consultaPsicologo(): Promise<PsicologoModel> {
+export function consultaPsicologo(id: number): Promise<PsicologoModel> {
   return axios
-    .get<PsicologoModel>(`${API_BASE_URL}/psicologo/`)
+    .get<PsicologoModel>(`${API_BASE_URL}/psicologo/${id}`)
     .then((response) => response.data)
     .catch((err) => {
       console.error('Erro ao carregar psicólogo:', err);
@@ -25,9 +25,9 @@ export function consultaAvaliacoes(): Promise<AvaliacaoModel[]> {
     });
 }
 
-export function consultaHorarios(): Promise<HorarioModel[]> {
+export function consultaHorarios(psicologoId: number): Promise<HorarioModel[]> {
   return axios
-    .get<HorarioModel[]>('http://localhost:3000/Horarios')
+    .get<HorarioModel[]>(`${API_BASE_URL}/horario?psicologoId=${psicologoId}`)
     .then((res) => res.data)
     .catch((err) => {
       console.error('Erro ao carregar horários:', err);

@@ -12,7 +12,11 @@ interface Avaliacao {
 export default function CardAvaliacaoCrp(avaliacao: Avaliacao) {
     
     function formatarData(dataISO: string): string {
+        if (!dataISO) return "";
+        
         const data = new Date(dataISO);
+        if (isNaN(data.getTime())) return "";
+        
         return new Intl.DateTimeFormat('pt-BR', {
             day: 'numeric',
             month: 'long',

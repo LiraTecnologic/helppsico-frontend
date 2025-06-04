@@ -27,25 +27,37 @@ export default function InformacoesPsicologo() {
 
   useEffect(() => {
     async function fetchData() {
+      const id = 1;
+
       try {
         const [psicologoData, avaliacoesData, horariosData] = await Promise.all([
-          consultaPsicologo(),
+          consultaPsicologo(id),
           consultaAvaliacoes(),
-          consultaHorarios(),
+          consultaHorarios(id),
         ]);
+        console.log(horariosData)
 
         setPsicologo(psicologoData);
-        setAvaliacoes(avaliacoesData);
-        setHorarios(horariosData);
 
-        const somaNotas = avaliacoesData.reduce(
+        // Filtra avaliações do psicólogo atual (id)
+        const avaliacoesFiltradas = avaliacoesData.filter(
+          (a) => a.psicologo?.id?.toString() === id.toString()
+        );
+        setAvaliacoes(avaliacoesFiltradas);
+
+        const somaNotas = avaliacoesFiltradas.reduce(
           (acc: number, cur: AvaliacaoModel) => acc + cur.nota,
           0
         );
-        const media = avaliacoesData.length > 0 ? somaNotas / avaliacoesData.length : 0;
+        const media =
+          avaliacoesFiltradas.length > 0
+            ? somaNotas / avaliacoesFiltradas.length
+            : 0;
         setMediaNotaAvaliacao(media.toFixed(1));
 
         setQuantidadeVinculados(12);
+
+        setHorarios(horariosData);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
@@ -54,24 +66,31 @@ export default function InformacoesPsicologo() {
     fetchData();
   }, []);
 
-  function calcularSessoes(inicio: string, fim: string, duracao: number, intervalo: number): string[] {
-    const [inicioHora, inicioMinuto] = inicio.split(":").map(Number);
-    const [fimHora, fimMinuto] = fim.split(":").map(Number);
+  function calcularSessoes(
+    inicio: string | undefined,
+    fim: string | undefined,
+    duracao: number,
+    intervalo: number
+  ): string[] {
+    if (!inicio || !fim) return [];
 
-    const inicioTotalMin = inicioHora * 60 + inicioMinuto;
-    const fimTotalMin = fimHora * 60 + fimMinuto;
+    const horarios: string[] = [];
+    const [hInicio, mInicio] = inicio.split(":").map(Number);
+    const [hFim, mFim] = fim.split(":").map(Number);
 
-    let atual = inicioTotalMin;
-    const sessoes: string[] = [];
+    let inicioEmMinutos = hInicio * 60 + mInicio;
+    const fimEmMinutos = hFim * 60 + mFim;
 
-    while (atual + duracao <= fimTotalMin) {
-      const hora = Math.floor(atual / 60).toString().padStart(2, "0");
-      const minuto = (atual % 60).toString().padStart(2, "0");
-      sessoes.push(`${hora}:${minuto}`);
-      atual += duracao + intervalo;
+    while (inicioEmMinutos + duracao <= fimEmMinutos) {
+      const hora = Math.floor(inicioEmMinutos / 60)
+        .toString()
+        .padStart(2, "0");
+      const minuto = (inicioEmMinutos % 60).toString().padStart(2, "0");
+      horarios.push(`${hora}:${minuto}`);
+      inicioEmMinutos += duracao + intervalo;
     }
 
-    return sessoes;
+    return horarios;
   }
 
   if (!psicologo) {
@@ -105,7 +124,8 @@ export default function InformacoesPsicologo() {
             <p>Local de atendimento:</p>
             <p>
               <img src={Localizacao} alt="Icon localização" />
-              {psicologo.enderecoAtendimento.rua}, {psicologo.enderecoAtendimento.numero}.
+              {psicologo.enderecoAtendimento?.rua},{" "}
+              {psicologo.enderecoAtendimento?.numero}.
             </p>
           </div>
         </div>
@@ -121,17 +141,29 @@ export default function InformacoesPsicologo() {
           <section className="section-tabela">
             <h2>Horários de consulta:</h2>
 
-            {horarios.map((h, i) => {
-              const horariosInicio = calcularSessoes(h.inicio, h.fim, h.duracao, h.intervalo);
+            {horarios.length === 0 ? (
+              <p>Sem horários cadastrados</p>
+            ) : (
+              horarios.map((h, i) => {
+                // Proteção para propriedades possivelmente undefined
+                const dias = Array.isArray(h.diaSemana) ? h.diaSemana : [];
 
-              return (
-                <TabelaHorario
-                  key={h.id || i}
-                  diasSelecionados={h.diaSemana}
-                  horariosInicio={horariosInicio}
-                />
-              );
-            })}
+                const horariosInicio = calcularSessoes(
+                  h.inicio,
+                  h.fim,
+                  h.duracao,
+                  h.intervalo
+                );
+
+                return (
+                  <TabelaHorario
+                    key={h.id || i}
+                    diasSelecionados={dias}
+                    horariosInicio={horariosInicio}
+                  />
+                );
+              })
+            )}
           </section>
 
           <section className="section-avaliacao">

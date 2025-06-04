@@ -1,26 +1,29 @@
-import './tabelaHorario.css';
+import "./tabelaHorario.css";
 
 type TabelaHorarioProps = {
-  diasSelecionados: string[];
-  horariosInicio: string[];
+  diaSemana?: string[];
+  horariosInicio?: string[];
 };
 
 const nomeDiaMap: Record<string, string> = {
-  seg: 'Segunda',
-  ter: 'Terça',
-  qua: 'Quarta',
-  qui: 'Quinta',
-  sex: 'Sexta',
-  sab: 'Sábado',
-  dom: 'Domingo',
+  seg: "Segunda",
+  ter: "Terça",
+  qua: "Quarta",
+  qui: "Quinta",
+  sex: "Sexta",
+  sab: "Sábado",
+  dom: "Domingo",
 };
 
-export default function TabelaHorario({ diasSelecionados, horariosInicio }: TabelaHorarioProps) {
+export default function TabelaHorario({
+  diaSemana = [],
+  horariosInicio = [],
+}: TabelaHorarioProps) {
   return (
     <table>
       <thead>
         <tr>
-          {diasSelecionados.map((dia) => (
+          {diaSemana.map((dia) => (
             <th key={dia}>{nomeDiaMap[dia] || dia}</th>
           ))}
         </tr>
@@ -28,7 +31,7 @@ export default function TabelaHorario({ diasSelecionados, horariosInicio }: Tabe
       <tbody>
         {horariosInicio.map((hora, i) => (
           <tr key={i}>
-            {diasSelecionados.map((dia) => (
+            {diaSemana.map((dia) => (
               <td key={dia + i}>{hora}</td>
             ))}
           </tr>
