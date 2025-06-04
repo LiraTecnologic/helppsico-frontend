@@ -160,6 +160,7 @@ export default function SolicitacaoDeVinculo() {
         <PopupCancelamento
           fechar={fecharPopupCancelamento}
           onConfirm={handleConfirmarCancelamento} 
+          titulo='Deseja realmente cancelar a solicitação ?'
         />
       )}
     </>
