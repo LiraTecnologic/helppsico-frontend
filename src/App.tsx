@@ -24,6 +24,7 @@ import AtualizarPerfilPsicologo from "./pages/atualizarPerfilPsicologo/atualizar
 import GerenciamentoDeHorarios from "./pages/gereciamentoHorarios/gerenciamentoHorarios";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
 import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
+import MinhasConsultasPsicologo from "./pages/minhasConsultasPsicologo/minhasConsultasPsicologo";
 import SolicitacaoVinculoPsicologo from "./pages/solicitacaoVinculoPsicologo/solicitacaoVinculo";
 import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
 
@@ -56,22 +57,12 @@ function App() {
         <Route path="/psicologo/horarios" element={<GerenciamentoDeHorarios />} />
         <Route path="/psicologo/documentos-pendentes" element={<RequisicaoDocumento />} />
         <Route path="/psicologo/solicitacao-vinculo" element={<SolicitacaoVinculoPsicologo />}/>
-
+        <Route path="/psicologo/sessoes" element={<MinhasConsultasPsicologo />} />
+        <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} />
+        
         {/* AMBOS OS FLUXOS */}
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
-       
-        {/* FLUXO DE PSICOLOGO */}
-        <Route path="/loginPsicologo" element={<LoginPsicologo />} />
-        <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} />
-        <Route path="/listagemDocumentos" element={<ListagemProntuario />} />
-        <Route path="/listagemPacientes" element={<ListagemPacientes />} />
-        <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
-        <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
-        <Route path="/gerenciamentoHorarios" element={<GerenciamentoDeHorarios />} /> 
-        <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
-        <Route path="/detalhesProntuario" element={<DetalhesProntuario />} />
-        <Route path="/atualizacaoPerfil" element={<AtualizarPerfilPsicologo />} />
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
