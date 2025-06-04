@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import { useState } from 'react';
 import SetaDireita from "../../../../../assets/right-seta.png";
 import SetaEsquerda from "../../../../../assets/left-seta.png";
 import ModalAvaliacaoPsicologo from '../../../modalAvaliacaoPsicologo/modalAvaliacaoPsicologo';
 
-import './botaoAvaliarInfoPsicologo.css';
+import "./botaoAvaliarInfoPsicologo.css";
 
 interface BotaoAvaliarProps {
     psicologo: {

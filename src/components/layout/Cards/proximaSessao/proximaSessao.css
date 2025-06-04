@@ -47,7 +47,7 @@
   object-fit: cover;
 }
 
-.sessao-textos p{
+.sessao-textos p {
   background-color: white;
 }
 
@@ -56,7 +56,7 @@
   font-size: 16px;
 }
 
-.sessao-detalhes p{
+.sessao-detalhes p {
   background-color: white;
   text-align: left;
   font-size: 14px;
@@ -69,7 +69,8 @@
   min-width: 120px;
 }
 
-.sessao-pagamento p,strong{
+.sessao-pagamento p,
+strong {
   background-color: white;
 }
 

@@ -1,71 +1,76 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import './App.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 // Telas do fluxo de Paciente
-import LoginPaciente from '../src/pages/loginPaciente/loginPaciente';
-import CadsatroPaciente from '../src/pages/cadastroPaciente/cadastroPaciente';
+import LoginPaciente from "../src/pages/loginPaciente/loginPaciente";
+import CadastroPaciente from "../src/pages/cadastroPaciente/cadastroPaciente";
 import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import DetalhesSessao from "./pages/minhasConsultasPaciente/minhasConsultasPaciente";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
 import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
+import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
 
-// Telas do fluxo de Pscicologo
-import LoginPsicologo from '../src/pages/loginPsicologo/loginPsicologo';
-import CadsatroPsicologo from '../src/pages/cadastroPsicologo/cadastroPsicologo';
+// Telas do fluxo de Psicologo
+import LoginPsicologo from "../src/pages/loginPsicologo/loginPsicologo";
+import CadastroPsicologo from "../src/pages/cadastroPsicologo/cadastroPsicologo";
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
+import AtualizarPerfilPsicologo from "./pages/atualizarPerfilPsicologo/atualizarPerfilPsicologo";
 import GerenciamentoDeHorarios from "./pages/gereciamentoHorarios/gerenciamentoHorarios";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
 import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 import MinhasConsultasPsicologo from "./pages/minhasConsultasPsicologo/minhasConsultasPsicologo";
-
-//Nenhum fluxo
-import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
-import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
+import SolicitacaoVinculoPsicologo from "./pages/solicitacaoVinculoPsicologo/solicitacaoVinculo";
 import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
+
+// Nenhum fluxo
+import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+
+
 
 function App() {
   return (
-
-
     <Router>
       <Routes>
         {/* FLUXO DE PACIENTE */}
-        <Route path="/loginPaciente" element={<LoginPaciente />} />
-        <Route path="/cadastroPaciente" element={<CadsatroPaciente />} />
-        <Route path="/meuPainelPaciente" element={<MeuPainelPaciente />} />
-        <Route path="/detalhesSessao" element={<DetalhesSessao />} />
+        <Route path="/paciente/login" element={<LoginPaciente />} />
+        <Route path="/paciente/cadastro" element={<CadastroPaciente />} />
+        <Route path="/paciente/painel" element={<MeuPainelPaciente />} />
+        <Route path="/paciente/sessao" element={<DetalhesSessao />} />
+        <Route path="/paciente/solicitacao-vinculo" element={<SolicitacaoDeVinculo />} />
+        <Route path="/paciente/agendamento" element={<AgendamentoConsulta />} />
+        <Route path="/paciente/solicitacao-documento" element={<SolicitacaoDocumento />}/>
+
+        {/* FLUXO DE PSICÓLOGO */}
+        <Route path="/psicologo/login" element={<LoginPsicologo />} />
+        <Route path="/psicologo/cadastro" element={<CadastroPsicologo />} />
+        <Route path="/psicologo/painel" element={<MeuPainelPsicologo />} />
+        <Route path="/psicologo/pacientes" element={<ListagemPacientes />} />
+        <Route path="/psicologo/prontuarios" element={<ListagemProntuario />} />
+        <Route path="/psicologo/prontuario/novo" element={<CadastroProntuarios />} />
+        <Route path="/psicologo/prontuario/detalhes" element={<DetalhesProntuario />} />
+        <Route path="/psicologo/horarios" element={<GerenciamentoDeHorarios />} />
+        <Route path="/psicologo/documentos-pendentes" element={<RequisicaoDocumento />} />
+        <Route path="/psicologo/solicitacao-vinculo" element={<SolicitacaoVinculoPsicologo />}/>
+        <Route path="/psicologo/sessoes" element={<MinhasConsultasPsicologo />} />
+        <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} />
+        
+        {/* AMBOS OS FLUXOS */}
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
-        <Route path="/solicitacaoVinculo" element={<SolicitacaoDeVinculo />} />
-        <Route path="/agendamentoConsulta" element={<AgendamentoConsulta />} />
-        <Route path="/solicitacaoDocumento" element={<SolicitacaoDocumento />}/>
-
-        {/* FLUXO DE PSICOLOGO */}
-        <Route path="/loginPsicologo" element={<LoginPsicologo />} />
-        <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} />
-        <Route path="/listagemDocumentos" element={<ListagemProntuario />} />
-        <Route path="/listagemPacientes" element={<ListagemPacientes />} />
-        <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
-        <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
-        <Route path="/gerenciamentoHorarios" element={<GerenciamentoDeHorarios />} /> 
-        <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
-        <Route path="/detalhesProntuario" element={<DetalhesProntuario />} />
-        <Route path="/minhasConsultasPsicologo" element={<MinhasConsultasPsicologo />} />
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
-        <Route path="/requisicaoDocumento" element={<RequisicaoDocumento />} />
 
       </Routes>
-      <ToastContainer/>
+      <ToastContainer />
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

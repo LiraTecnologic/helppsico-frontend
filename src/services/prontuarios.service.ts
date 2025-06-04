@@ -3,9 +3,13 @@ import ProntuarioModel from '../models/prontuario';
 import Page from '../models/page'
 import Response from '../models/response';
 
-export function consultaProntuariosPsicologo(idPsicologo: string, page: number): Promise<Page<ProntuarioModel>> {
-    return axios.get<Page<ProntuarioModel>>(
-        `http://localhost:8080/prontuarios/psicologo/${idPsicologo}?page=${page}&size=${15}`
+export function consultaProntuariosPsicologo(
+  idPsicologo: string,
+  page: number
+): Promise<Page<ProntuarioModel>> {
+  return axios
+    .get<Page<ProntuarioModel>>(
+      `http://localhost:8080/prontuarios/psicologo/${idPsicologo}?page=${page}&size=${15}`
     )
         .then(response => response.data)
         .catch(err => {

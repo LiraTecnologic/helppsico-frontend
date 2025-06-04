@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from 'react';
 import PopupCancelamento from '../../components/layout/PopupCancelamento/popupCancelamento';
 import VinculoModel, { StatusVinculo } from '../../models/vinculo'; 
 import { solicitarVinculosPaciente, cancelarSolicitacao } from './solicitiacaoDeVinculoService';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function SolicitacaoDeVinculo() {
   const [popupCancelar, setPopupCancelar] = useState(false);
@@ -12,6 +13,7 @@ export default function SolicitacaoDeVinculo() {
   const [vinculos, setVinculos] = useState<VinculoModel[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
+  const { pathname } = useLocation();
 
   // const idPaciente = localStorage.getItem('idPaciente');
   const idPaciente = "1"; 
@@ -45,6 +47,7 @@ export default function SolicitacaoDeVinculo() {
   }, [idPaciente]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     carregarVinculos();
   }, [carregarVinculos]);
 
@@ -81,7 +84,7 @@ export default function SolicitacaoDeVinculo() {
   if (carregando) {
     return (
       <>
-        <Header fluxo="minhasSessoes" headerPsicologo={false} />
+        <Header fluxo="solicitacoesVinculo" headerPsicologo={false} />
         <div className="container">
           <h1>Solicitações</h1>
           <p>Carregando...</p>
@@ -157,6 +160,7 @@ export default function SolicitacaoDeVinculo() {
         <PopupCancelamento
           fechar={fecharPopupCancelamento}
           onConfirm={handleConfirmarCancelamento} 
+          titulo='Deseja realmente cancelar a solicitação ?'
         />
       )}
     </>

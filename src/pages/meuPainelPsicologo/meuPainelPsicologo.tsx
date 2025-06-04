@@ -8,8 +8,10 @@ import ConsultaModel from '../../models/consulta';
 import VinculoModel from '../../models/vinculo';
 import ProntuarioModel from '../../models/prontuario';
 import { consultaProntuariosPsicologo } from "../../services/prontuarios.service";
-import { consultaSessoesFuturasPsicologo } from '../../services/consultas.service';
-import { consultaVinculosPsicologo } from '../../services/vinculos.service'
+import { consultaSessoesFuturas } from '../../services/consultas.service';
+import { consultaVinculosPsicologo } from '../../services/vinculos.service';
+import BlocoHorario from '../../components/layout/blocoHorario/blocoHorario';
+import { Link } from "react-router-dom";
 import PsicologoModel from '../../models/psicologo';
 
 export default function MeuPainelPsicologo() {
@@ -89,7 +91,13 @@ export default function MeuPainelPsicologo() {
             <div className="imagensPacientes">
                 <ListagemDePacientes vinculos={vinculos} verMais={true} />
             </div>
-            <h1 className='prontuarioTittle'>Prontuário</h1>
+            <BlocoHorario hasConfig={true} />
+            <div className="listagemProntuarios">
+                <h1 className='prontuarioTittle'>Prontuário</h1>
+                <button className="botao-verMais">
+                    <Link to="/psicologo/prontuarios" className="botao-link">Ver mais</Link>
+                </button>
+            </div>
             <ListagemDocumentos
                 documentos={prontuarios}
                 onDocumentoClick={handleDocumentoClick}

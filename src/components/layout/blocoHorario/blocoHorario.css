@@ -1,0 +1,38 @@
+.container-cadHoraio {
+    padding: 24px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 80%;
+    margin: 32px auto 0 auto;
+}
+
+.tittle-cadHorario{
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 24px;
+}
+
+.botao-horarioCad {
+    color: white;
+    border: none;
+    background-color: #0044cc;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+.subtittle-cadHorario{
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+.cadHorario-card{
+    background-color: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}

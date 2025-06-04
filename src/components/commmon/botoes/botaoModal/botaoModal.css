@@ -1,34 +1,33 @@
 .botao-cancel {
-    background-color: #ffffff;
-    border: solid 1px black;
-    border-radius: 0.3rem;
-    width: 40%;
-    height: 2.5rem;
-    font-size: 1.3rem;
+  background-color: #ffffff;
+  border: solid 1px black;
+  border-radius: 0.3rem;
+  width: 40%;
+  height: 2.5rem;
+  font-size: 1.3rem;
 }
 
 .botao-confirm {
-    background-color: #0D42BD;
-    border-radius: 0.3rem;
-    color: #ffffff;
-    width: 40%;
-    height: 2.5rem;
-    font-size: 1.3rem;  
+  background-color: #0d42bd;
+  border-radius: 0.3rem;
+  color: #ffffff;
+  width: 40%;
+  height: 2.5rem;
+  font-size: 1.3rem;
 }
 
 .botao-cancel:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .botao-confirm:hover {
-    cursor: pointer;  
+  cursor: pointer;
 }
 
-
 .botao-cancel:active {
-    background-color: #e0dfdf;
+  background-color: #e0dfdf;
 }
 
 .botao-confirm:active {
-    background-color: #365ebd;  
+  background-color: #365ebd;
 }
