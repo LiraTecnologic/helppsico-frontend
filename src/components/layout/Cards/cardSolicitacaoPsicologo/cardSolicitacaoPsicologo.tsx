@@ -8,7 +8,7 @@ interface CardSolicitacaoPsicologoProps {
   cpf: string;
   telefone: string;
   status: string;
-  botao: string;
+  botao?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   onSecondaryAction?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
@@ -22,12 +22,11 @@ export default function CardSolicitacaoVinculo(props: CardSolicitacaoPsicologoPr
     return 'card-solicitacao-psicologo__status card-solicitacao-psicologo__status--recusado';
   };
 
-  const getBotaoClass = () => {
-    if (status === 'Pendente') return 'card-solicitacao-psicologo__botao card-solicitacao-psicologo__botao--aceitar';
-    return 'card-solicitacao-psicologo__botao card-solicitacao-psicologo__botao--ver-mais';
-  };
+  const getBotaoSecundarioClassAceitar = () => {
+    return 'card-solicitacao-psicologo__botao card-solicitacao-psicologo__botao--aceitar';
+  }
 
-  const getBotaoSecundarioClass = () => {
+  const getBotaoSecundarioClassRecusar = () => {
     return 'card-solicitacao-psicologo__botao card-solicitacao-psicologo__botao--recusar';
   };
 
@@ -46,11 +45,13 @@ export default function CardSolicitacaoVinculo(props: CardSolicitacaoPsicologoPr
         <div className="card-solicitacao-psicologo__acoes">
           <span className={getStatusClass()}>{status}</span>
           <div className="card-solicitacao-psicologo__botoes">
-            <button className={getBotaoClass()} onClick={onClick}>
-              {botao}
-            </button>
+            {status === 'Pendente' && onClick && (
+              <button className={getBotaoSecundarioClassAceitar()} onClick={onClick}>
+                Aceitar
+              </button>
+            )}
             {status === 'Pendente' && onSecondaryAction && (
-              <button className={getBotaoSecundarioClass()} onClick={onSecondaryAction}>
+              <button className={getBotaoSecundarioClassRecusar()} onClick={onSecondaryAction}>
                 Recusar
               </button>
             )}

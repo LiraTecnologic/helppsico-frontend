@@ -97,10 +97,6 @@ export default function SolicitacaoDeVinculoPsicologo() {
     abrirPopupRecusa(idVinculo);
   };
 
-  const handleVerMais = (idVinculo: string) => {
-    console.log('Ver mais detalhes:', idVinculo);
-  };
-
   const vinculosPendentes = vinculos.filter(v => v.status === 'Pendente');
   const vinculosRecusados = vinculos.filter(v => v.status === 'Recusado');
 
@@ -143,8 +139,6 @@ export default function SolicitacaoDeVinculoPsicologo() {
                   cpf={vinculo.cpf}
                   telefone={vinculo.telefone}
                   status="Recusado"
-                  botao="Ver mais"
-                  onClick={() => handleVerMais(vinculo.id)}
                 />
               ))}
             </div>
