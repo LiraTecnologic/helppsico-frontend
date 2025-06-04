@@ -20,6 +20,7 @@ import CadastroPsicologo from "../src/pages/cadastroPsicologo/cadastroPsicologo"
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
 import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
+import AtualizarPerfilPsicologo from "./pages/atualizarPerfilPsicologo/atualizarPerfilPsicologo";
 import GerenciamentoDeHorarios from "./pages/gereciamentoHorarios/gerenciamentoHorarios";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
 import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
@@ -59,9 +60,18 @@ function App() {
         {/* AMBOS OS FLUXOS */}
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
-        
-        
-
+       
+        {/* FLUXO DE PSICOLOGO */}
+        <Route path="/loginPsicologo" element={<LoginPsicologo />} />
+        <Route path="/cadastroPsicologo" element={<CadsatroPsicologo />} />
+        <Route path="/listagemDocumentos" element={<ListagemProntuario />} />
+        <Route path="/listagemPacientes" element={<ListagemPacientes />} />
+        <Route path="/listagemProntuarios" element={<ListagemProntuario />} />
+        <Route path="/meuPainelPsicologo" element={<MeuPainelPsicologo />} />
+        <Route path="/gerenciamentoHorarios" element={<GerenciamentoDeHorarios />} /> 
+        <Route path="/cadastroDeProntuario" element={<CadastroProntuarios />} />
+        <Route path="/detalhesProntuario" element={<DetalhesProntuario />} />
+        <Route path="/atualizacaoPerfil" element={<AtualizarPerfilPsicologo />} />
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
