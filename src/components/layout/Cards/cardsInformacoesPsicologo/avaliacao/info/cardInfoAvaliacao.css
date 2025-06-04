@@ -1,22 +1,26 @@
 .card-avaliacao {
-    display: flex;
-    flex-direction: row;
-    width: 18%;
-    height: 8rem;
-    border: solid 2px #A1A1A1;
-    border-radius: 1rem;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  width: 18%;
+  height: 8rem;
+  border: solid 2px #a1a1a1;
+  border-radius: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .nota-card-avaliacao {
-    font-size: 4rem;
+  font-size: 4rem;
 }
 
 .detalhes-card-avaliacao {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.detalhes-card-avaliacao img {
+  background-color: #f3f4f6;
 }

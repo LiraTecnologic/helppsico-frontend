@@ -108,6 +108,7 @@ export default function CriarProntuario({ pacientes, consultas }: CriarProntuari
                 pacienteSelecionado,
                 consultaSelecionada,
                 conteudo
+                ,
               });
               alert('Prontuário salvo!');
             }}

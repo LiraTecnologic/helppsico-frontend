@@ -1,119 +1,272 @@
 .card-validacao-crp {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    border: solid 2px #A1A1A1;
-    background-color: #FFFF;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    justify-content: space-between;
-    height: 12rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 320px;
+  border: solid 2px #a1a1a1;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  justify-content: space-between;
+  min-height: 12rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.card-validacao-crp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .div-info-1 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.img-psicologo-card-crp {
-    border-radius: 50%;
-    width: 6rem;
-    height: 6rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .div-img-info-1 {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
 }
 
-.botoes-card-crp {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 3rem;
-    height: 2.5rem;
+.img-psicologo-card-crp {
+  border-radius: 50%;
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 3px solid #f3f4f6;
 }
 
-.div-container-crp {
-    display: flex;
-    flex-direction: row;    
-    justify-content: space-around;
-    width: 100%;
-    background-color: #D9D9D9;
-    padding: 0.3rem;
-    border-radius: 0.3rem;
-    align-items: center;
+.div-info-psico {
+  flex: 1;
+  min-width: 0;
 }
 
-.button-copiar {
-    width: 17%;
-    height: 1.4rem;
-    background-color: #D9D9D9;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.button-copiar img:active {
-    background-color: #f0eeee;
-}
-
-.button-copiar:hover {
-    cursor: pointer;
-}
-
-
-.button-copiar img {
-    width: 1.8rem;
-    background-color: #D9D9D9;
-}
-
-.div-main-container-crp {
-    display: flex;
-    flex-direction: column;
-    width: 16%;
-    font-size: 20px;
+.nome-psicologo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #1f2937;
+  line-height: 1.3;
+  word-wrap: break-word;
 }
 
 .div-info-psico p {
-    display: flex;
-    flex-direction: column;
-    color: #797979;
+  display: block;
+  color: #797979;
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.div-main-container-crp {
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.label-crp {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #1f2937;
+}
+
+.div-container-crp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #d9d9d9;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  gap: 0.5rem;
+}
+
+.numero-crp {
+  flex: 1;
+  margin: 0;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.button-copiar {
+  width: 2.5rem;
+  height: 2rem;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.button-copiar:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.button-copiar:active {
+  background-color: rgba(240, 238, 238, 0.5);
+}
+
+.button-copiar img {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #d9d9d9;
+}
+
+.botoes-card-crp {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
+  align-items: center;
+}
+
+.botao-reprovar,
+.botao-aprovar {
+  min-width: 120px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
 .botao-reprovar {
-    width: 15%;
-    background-color: #FFDDDD;
-    color: #FF1A1A;
-    font-size: 1.1rem;
-    border-radius: 0.3rem;
-}
-
-.botao-aprovar {
-    width: 15%;
-    background-color: #0D42BD;
-    color: white;
-    font-size: 1.1rem;
-    border-radius: 0.3rem;  
+  background-color: #ffdddd;
+  color: #ff1a1a;
+  border: 2px solid transparent;
 }
 
 .botao-reprovar:hover {
-    cursor: pointer;
-}
-
-.botao-aprovar:hover {
-    cursor: pointer;  
+  background-color: #ffb3b3;
+  transform: translateY(-1px);
 }
 
 .botao-reprovar:active {
-    background-color: #f8e6e6;
+  background-color: #f8e6e6;
+  transform: translateY(0);
+}
+
+.botao-aprovar {
+  background-color: #0d42bd;
+  color: white;
+  border: 2px solid transparent;
+}
+
+.botao-aprovar:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
 }
 
 .botao-aprovar:active {
-    background-color: #3b61b8;  
+  background-color: #3b61b8;
+  transform: translateY(0);
 }
 
+@media screen and (max-width: 768px) {
+  .card-validacao-crp {
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    min-height: 11rem;
+  }
 
+  .div-info-1 {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
 
+  .div-img-info-1 {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .img-psicologo-card-crp {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .nome-psicologo {
+    font-size: 1.1rem;
+  }
+
+  .div-info-psico p {
+    font-size: 0.85rem;
+  }
+
+  .div-main-container-crp {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .label-crp {
+    font-size: 1.1rem;
+  }
+
+  .botoes-card-crp {
+    gap: 2rem;
+  }
+
+  .botao-reprovar,
+  .botao-aprovar {
+    min-width: 100px;
+    padding: 0.625rem 1.25rem;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card-validacao-crp {
+    padding: 1rem;
+    min-height: 10rem;
+  }
+
+  .div-img-info-1 {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .img-psicologo-card-crp {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .div-info-psico {
+    text-align: center;
+    width: 100%;
+  }
+
+  .nome-psicologo {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .div-info-psico p {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+}

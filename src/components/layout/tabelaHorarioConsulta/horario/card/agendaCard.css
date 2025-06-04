@@ -1,0 +1,38 @@
+.agenda-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.agenda-card-selecionado {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  color: white;
+}
+
+.agenda-status {
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.agenda-status-disponivel {
+  color: #3b82f6;
+}
+
+.agenda-status-selecionado {
+  color: white;
+}
+
+.agenda-horario {
+  color: #1e293b;
+}
+
+.agenda-card-selecionado .agenda-horario {
+  color: white;
+}

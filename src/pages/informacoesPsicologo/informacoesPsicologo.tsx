@@ -77,7 +77,6 @@ export default function InformacoesPsicologo() {
     const horarios: string[] = [];
     const [hInicio, mInicio] = inicio.split(":").map(Number);
     const [hFim, mFim] = fim.split(":").map(Number);
-
     let inicioEmMinutos = hInicio * 60 + mInicio;
     const fimEmMinutos = hFim * 60 + mFim;
 
@@ -145,7 +144,7 @@ export default function InformacoesPsicologo() {
               <p>Sem horários cadastrados</p>
             ) : (
               horarios.map((h, i) => {
-                // Proteção para propriedades possivelmente undefined
+                
                 const dias = Array.isArray(h.diaSemana) ? h.diaSemana : [];
 
                 const horariosInicio = calcularSessoes(

@@ -1,4 +1,5 @@
 import EnderecoModel from "./endereco"
+import { HorarioModel } from "./horario"
 import PacienteModel from "./paciente"
 import PsicologoModel from "./psicologo"
 
@@ -7,7 +8,7 @@ export default interface ConsultaModel {
     psicologo:PsicologoModel,
     paciente:PacienteModel,
     valor:number,
-    dataHora:string,
+    dataHora:HorarioModel,
     endereco:EnderecoModel,
     finalizada:Boolean
 }

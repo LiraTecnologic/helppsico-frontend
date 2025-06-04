@@ -2,11 +2,15 @@ body {
     background-color: #F3F4F6;
 }
 
-main {
+.main-info-psicologico {
     display: flex;
     flex-direction: column;
     margin: 4rem 6rem 4rem 6rem;
     gap: 2rem;
+}
+
+.estrela-fundo-cinza {
+    background-color: #F3F4F6;
 }
 
 .section-psico-bio {
@@ -38,14 +42,6 @@ main {
     width: 100%;
     border-radius: 10px;
     height: 2rem;
-}
-
-.div-psicologo button:hover {
-    background-color: #2a54b7;
-}
-
-.div-psicologo button:active {
-    background-color: #6a82ba;
 }
 
 hr {
@@ -84,10 +80,6 @@ hr {
     gap: 4rem;
 }
 
-img {
-    background-color: #F3F4F6;;
-}
-
 .main-info-psicologico {
     display: flex;
     flex-direction: row;
@@ -98,4 +90,29 @@ img {
     display: flex;
     flex-direction: column;
     gap: 3rem;
+}
+
+.btn-desvinc{
+    background-color: #FFA9AA !important;
+    color: #FF1313 !important;
+}
+
+.btn-solic{
+    background-color: #ffefa9 !important;
+    color: #665716 !important;
+}
+
+.btn-solic-hover {
+    background-color: #ffdf2a !important; 
+    color: #27270c !important;
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 10px;
+    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-size: 0.8rem;
 }
