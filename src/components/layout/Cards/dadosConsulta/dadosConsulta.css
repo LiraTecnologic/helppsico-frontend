@@ -1,0 +1,41 @@
+.calculo-consulta {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.total-selecionado, 
+.valor-consulta {
+    margin: 0 0 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.linha-divisoria {
+    border: none;
+    border-top: 2px solid #e2e8f0;
+    margin: 20px 0;
+}
+
+.valor-total {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.valor-total span:last-child {
+    color: #3b82f6;
+    font-size: 1.25rem;
+}
+
+.total-selecionado span:last-child {
+    color: black;
+    padding: 2px 8px;
+    min-width: 20px;
+    text-align: center;
+}

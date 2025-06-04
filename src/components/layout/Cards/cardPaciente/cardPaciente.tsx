@@ -9,28 +9,31 @@ interface CardPacienteProps {
   temProntuario: boolean;
 }
 
-export default function CardPaciente(props: CardPacienteProps) {
+export default function CardPaciente({
+  nome,
+  idade,
+  email,
+  telefone,
+  fotoUrl,
+  temProntuario,
+}: CardPacienteProps) {
   return (
     <div className="card-paciente">
       <div className="card-topo">
-        <img
-          className="foto-paciente"
-          src={props.fotoUrl}
-          alt={`Foto de ${props.nome}`}
-        />
+        <img className="foto-paciente" src={fotoUrl} alt={`Foto de ${nome}`} />
         <div className="info-paciente">
-          <h2 className="nome">{props.nome}</h2>
-          <p className="idade">{props.idade} anos</p>
-          <p className="email">{props.email}</p>
-          <p className="telefone">{props.telefone}</p>
+          <h2 className="nome">{nome}</h2>
+          <p className="idade">{idade} anos</p>
+          <p className="email">{email}</p>
+          <p className="telefone">{telefone}</p>
         </div>
       </div>
-      
+
       <button
-        className={props.temProntuario ? "btn-prontuario" : "btn-sem-prontuario"}
-        disabled={!props.temProntuario}
+        className={temProntuario ? "btn-prontuario" : "btn-sem-prontuario"}
+        disabled={!temProntuario}
       >
-        {props.temProntuario ? "Abrir Prontuário" : "Sem prontuário"}
+        {temProntuario ? "Abrir Prontuário" : "Sem prontuário"}
       </button>
     </div>
   );

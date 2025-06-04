@@ -1,131 +1,131 @@
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
 .modal-content {
-    background: #fff;
-    padding: 30px 40px;
-    border-radius: 8px;
-    width: 40%;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    font-family: Arial, sans-serif;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 8px;
+  width: 40%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: Arial, sans-serif;
 }
 
 .modal-content h2 {
-    text-align: center;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #0033cc;
-    padding-bottom: 8px;
-    color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #0033cc;
+  padding-bottom: 8px;
+  color: #333;
 }
 
 .dias-atendimento {
-    text-align: center;
+  text-align: center;
 }
 
 .dias-botoes {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }
 
 .dias-botoes button {
-    border: 1px solid #0033cc;
-    background-color: white;
-    color: #0033cc;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+  border: 1px solid #0033cc;
+  background-color: white;
+  color: #0033cc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .dias-botoes button.ativo {
-    background-color: #0033cc;
-    color: white;
+  background-color: #0033cc;
+  color: white;
 }
 
 .dias-botoes button:hover {
-    background-color: #0033cc;
-    color: white;
+  background-color: #0033cc;
+  color: white;
 }
 
 .tempo-sessao {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 15px;
-    width: 100%;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
 }
 
 .tempo-sessao label,
 .horario-expediente label {
-    display: flex;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 5px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 5px;
+  align-items: center;
+  justify-content: center;
 }
 
 .tempo-sessao input,
 .horarios input {
-    padding: 6px 10px;
-    border-radius: 4px;
-    border: 1px solid #999;
-    width: 100px;
-    text-align: center;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #999;
+  width: 100px;
+  text-align: center;
 }
 
 .horarios {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .botoes-acao {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
 }
 
 .botoes-acao .cancelar {
-    background-color: white;
-    color: #333;
-    border: 1px solid #333;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
+  background-color: white;
+  color: #333;
+  border: 1px solid #333;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .botoes-acao .salvar {
-    background-color: #0033cc;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
+  background-color: #0033cc;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .erro {
-    color: red;
-    text-align: center;
-    margin-top: -10px;
-    font-size: 14px;
+  color: red;
+  text-align: center;
+  margin-top: -10px;
+  font-size: 14px;
 }
