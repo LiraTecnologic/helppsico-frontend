@@ -1,4 +1,4 @@
-import './popupCancelamento.css';
+import "./popupCancelamento.css";
 
 interface Props {
   fechar: () => void;

@@ -6,7 +6,7 @@ import Select from '../../components/commmon/select/Select';
 import EtapasCadastro from '../../components/commmon/marcadores/etapasCadastro';
 import { useState, useEffect } from 'react';
 import { formatarCPF, validarCPF, buscarEnderecoPorCEP, formatarCRP, validarCRP } from './cadastroPsicologo.service';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Cadastro() {
     const [step, setStep] = useState(1);
@@ -27,6 +27,8 @@ export default function Cadastro() {
     const [crp, setCrp] = useState('');
 
     const generos = ['Masculino', 'Feminino', 'Outros'];
+
+    const navigate = useNavigate();
 
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setGenero(e.target.value);
@@ -83,7 +85,7 @@ export default function Cadastro() {
 
             validandoSenha();
         } else {
-            alert('Cadastro finalizado!');
+            navigate("/psicologo/login")
         }
     };
 
