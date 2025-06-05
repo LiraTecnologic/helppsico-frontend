@@ -1,26 +1,28 @@
-import { VinculoModel } from "../../models/vinculo";
+import Page from "../../models/page";
+import Response from "../../models/response";
+import VinculoModel  from "../../models/vinculo";
 import  {StatusVinculo} from "../../models/vinculo";
 import axios from "axios";
 
-export async function solicitarVinculosPaciente(id: string): Promise<VinculoModel[]> {
-    try {
-        const response = await axios.get(`http://localhost:7000/vinculos?pacienteId=${id}&_expand=psicologo&_expand=paciente`, {
-            headers: {
-                "Content-Type": "application/json",
-                "application": "application/json"
-            }
-        });
+export function solicitarVinculosPaciente(idPaciente: string, page: number): Promise<Response<Page<VinculoModel>>> {
+    return axios.get<Response>
+}
 
-        if (response.status !== 200) {
-            throw new Error(`Erro na fetch :) ${response.status}`);
-        }
-
-        const data = response.data;
-        return data as VinculoModel[];
-
-    } catch (e) {
-        throw new Error(`sla deu erro ${e}`);
-    }
+export function consultaSessoesFuturasPsicologo(idPsicologo: string, page: number): Promise<Page<ConsultaModel>> {
+  return axios.get<Page<ConsultaModel>>(
+      `http://localhost:8080/consultas/futuras/psicologo/${idPsicologo}?page=${page}&size=${15}`
+  )
+      .then(response => response.data)
+      .catch(err => {
+          console.error("Erro ao carregar consultas:", err);
+          return {
+              content: [],
+              totalElements: 0,
+              totalPages: 0,
+              number: 0,
+              size: 0
+          };
+      });
 }
 
 export async function cancelarSolicitacao(vinculoId: string): Promise<boolean> {

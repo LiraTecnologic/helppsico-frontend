@@ -68,6 +68,8 @@ function App() {
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
 
+        <Route path="/" element={<LoginPaciente/>}/>
+
       </Routes>
       <ToastContainer />
     </Router>
