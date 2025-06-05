@@ -42,3 +42,7 @@
   min-height: 100px;
   resize: vertical;
 }
+
+.full-width {
+  grid-column: 1 / -1 !important;
+}

@@ -5,19 +5,20 @@ import LaudoPsicologicoForm from './TipoDocumentoForm/LaudoPsicologicoForm';
 import ParecerPsicologicoForm from './TipoDocumentoForm/ParecerPsicologicoForm';
 import RelatorioPsicologicoForm from './TipoDocumentoForm/RelatorioPsicologicoForm';
 import DeclaracaoForm from './TipoDocumentoForm/DeclaracaoForm';
-import './DocumentoForm.css'
+import './DocumentoForm.css';
 
-interface Paciente {
-  id: string;
-  nome: string;
-}
+import DadosGeraisDocumentoModel from '../../models/dadosGeraisDocumento';
+import PacienteModel from '../../models/paciente';
+import PsicologoModel from '../../models/psicologo';
+import EnderecoModel from '../../models/endereco';
 
 interface DocumentoFormProps {
   tipoDocumento: string;
-  pacientes: Paciente[];
+  pacientes: PacienteModel[];
+  onSubmit: (dados: DadosGeraisDocumentoModel) => void;
 }
 
-export default function DocumentoForm({ tipoDocumento, pacientes }: DocumentoFormProps) {
+export default function DocumentoForm({ tipoDocumento, pacientes, onSubmit }: DocumentoFormProps) {
   const [camposComuns, setCamposComuns] = useState({
     paciente: '',
     dataEmissao: '',
@@ -41,9 +42,52 @@ export default function DocumentoForm({ tipoDocumento, pacientes }: DocumentoFor
     }
   };
 
+  const handleSalvar = () => {
+    const dadosDocumento: DadosGeraisDocumentoModel = {
+      paciente: { id: camposComuns.paciente } as PacienteModel,
+      psicologo: { id: "456e1234-e89b-12d3-a456-426614174000" } as PsicologoModel,
+      dataEmissao: camposComuns.dataEmissao,
+      assinaturaPsicologo: camposComuns.assinaturaPsicologo,
+      dataValidade: "",
+      motivo: "",
+      descricao: "",
+      finalidade: "",
+      solicitante: "",
+      objetivo: "",
+      historico: "",
+      procedimentosUtilizados: "",
+      descricaoResultados: "",
+      conclusao: "",
+      recomendacoes: "",
+      sigilo: "",
+      contextualizacao: "",
+      fundamentacao: "",
+      analiseDoCaso: "",
+      respostaDemanda: "",
+      dataAtendimento: "",
+      local: {
+        id: "",
+        rua: "",
+        numero: "",
+        cidade: "",
+        estado: "",
+        cep: "",
+        complemento: ""
+      } as EnderecoModel,
+      descricaoEstadoPsicologico: "",
+      periodoAfastamento: ""
+    };
+
+    onSubmit(dadosDocumento);
+  };
+
   return (
     <div className="documento-form-container">
-      <CamposComuns campos={camposComuns} setCampos={setCamposComuns} pacientes={pacientes} />
+      <CamposComuns
+        campos={camposComuns}
+        setCampos={setCamposComuns}
+        pacientes={pacientes}
+      />
 
       {renderFormularioEspecifico()}
 
@@ -51,9 +95,10 @@ export default function DocumentoForm({ tipoDocumento, pacientes }: DocumentoFor
         <button className="btn-cancelar" onClick={() => window.location.reload()}>
           Cancelar
         </button>
-        <button className="btn-salvar">Salvar</button>
+        <button className="btn-salvar" onClick={handleSalvar}>
+          Salvar
+        </button>
       </div>
-      
     </div>
   );
 }
