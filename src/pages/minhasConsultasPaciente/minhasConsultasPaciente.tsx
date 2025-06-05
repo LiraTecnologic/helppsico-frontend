@@ -13,13 +13,20 @@ export default function DetalhesSessao() {
 
   useEffect(() => {
     async function consultarConsultaFutura(idPaciente: string) {
-      const consultasFuturas = await consultaSessoesFuturasPaciente(idPaciente, 1);
-      setConsultaFutura(consultaMaisRecente(consultasFuturas.content));
+      const consultasFuturas = await consultaSessoesFuturasPaciente(idPaciente, 0);
+
+      if(consultasFuturas.dado) {
+        setConsultaFutura(consultaMaisRecente(consultasFuturas.dado.content));
+      }
+      
     }
 
     async function consultarConsultasAntigas(idPaciente: string) {
-      const consultasAntigas = await consultarSessoesAntigasPaciente(idPaciente, 1);
-      setConsultasAntigas(consultasAntigas.content);
+      const consultasAntigas = await consultarSessoesAntigasPaciente(idPaciente, 0);
+
+      if(consultasAntigas.dado) {
+        setConsultasAntigas(consultasAntigas.dado.content);
+      }
     }
 
     consultarConsultaFutura("teste");

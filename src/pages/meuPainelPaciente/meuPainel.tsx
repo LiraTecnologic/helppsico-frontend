@@ -4,33 +4,105 @@ import VinculoPsicologo from '../../components/layout/Cards/vinculoPsicologo/vin
 import ProximasSessoes from '../../components/layout/Cards/proximaSessao/proximaSessao';
 import ListagemDocumentos from '../../components/layout/Cards/listagemDeDocumentos/listagemDocumentos';
 import { Link } from "react-router-dom";
+import VinculoModel from '../../models/vinculo';
+import ConsultaModel from '../../models/consulta';
+import DocumentoModel from '../../models/documento/documento';
+import { useState, useEffect } from 'react';
+import { consultaSessoesFuturasPaciente } from '../../services/consultas.service';
+import { consultarVinculosPaciente } from '../../services/vinculos.service';
+import { consultarDocumentosPaciente } from '../../services/documentos.service';
 
 export default function MeuPainelPaciente() {
-    const documentos = [
-        { id: '1', titulo: 'Documento bonito' },
-        { id: '2', titulo: 'Relatório de Sessão' },
-        { id: '3', titulo: 'Plano de Tratamento' },
-        { id: '4', titulo: 'Andre feioso' },
-        { id: '5', titulo: 'Andre feioso' }
-    ];
+    const [vinculo, setVinculo] = useState<VinculoModel | null>(null);
+    const [consultas, setConsultas] = useState<ConsultaModel[] | []>([]);
+    const [documentos, setDocumentos] = useState<DocumentoModel[] | []>([]);
 
     const handleDocumentoClick = (id: string) => {
         console.log(`Documento com ID ${id} foi clicado`);
         alert("clicou no documento");
     };
 
+    useEffect(() => {
+        const idPaciente = 'deec458b-a6b7-4a70-b308-97dcc1a16ec6';
+
+        async function carregarDocumentos(idPaciente:string) {
+            try {
+                const documentos = await consultarDocumentosPaciente(idPaciente, 0);
+            
+                if(documentos.dado) {
+                    setDocumentos(documentos.dado.content);
+                }
+    
+              } catch (error) {
+                console.error('Erro ao carregar vinculos:', error);
+              }
+        }
+
+        async function carregarVinculo(id: string) {
+            try {
+              const vinculos = await consultarVinculosPaciente(id, 0);
+              let vinculosFiltrados: VinculoModel[] = [] as VinculoModel[];
+
+              if(vinculos.dado) {
+                vinculosFiltrados = vinculos.dado.content.filter(vic => vic.status === 'ATIVO');
+              }
+
+              if(vinculosFiltrados && vinculosFiltrados.length === 1) {
+                  setVinculo(vinculosFiltrados[0]);
+              }
+  
+            } catch (error) {
+              console.error('Erro ao carregar vinculos:', error);
+            }
+          }
+    
+        async function carregarConsultas(id: string) {
+          try {
+            const consultas = await consultaSessoesFuturasPaciente(id, 0);
+
+            if(consultas.dado) {
+                setConsultas(consultas.dado.content);
+            }
+
+          } catch (error) {
+            console.error('Erro ao carregar consultas:', error);
+          }
+        }
+    
+        carregarConsultas(idPaciente);
+        carregarVinculo(idPaciente);
+        carregarDocumentos(idPaciente);
+        
+      }, []);
+
     return (
         <>
             <div className="fundo">
                 <Header fluxo='meuPainel' headerPsicologo={false} />
-                <VinculoPsicologo nome='João Victor' email='joao@teste.com' fotoUrl='https://f.i.uol.com.br/fotografia/2023/12/19/17030128826581ea125661a_1703012882_3x4_md.jpg' />
-                <ProximasSessoes fluxo='paciente' sessaoMarcada={false} nome='João Victor' idade='19 anos' telefone='(44) 9 9718-9920' local='Rua Natividade Regina Brianezi 547' data='26/04/2025' horario='08:45' valor='R$ 120,00' urlFoto='https://f.i.uol.com.br/fotografia/2023/12/19/17030128826581ea125661a_1703012882_3x4_md.jpg' statusPagamento='Pago' verMais={true} />
+
+                {vinculo &&
+                    <VinculoPsicologo
+                        nome={vinculo.psicologo.nome}
+                        email={vinculo.psicologo.email}
+                        fotoUrl={vinculo.psicologo.fotoUrl}
+                    />
+                }
+
+
+                <ProximasSessoes
+                    consulta={consultas[0]}
+                    verMais={true}
+                    fluxo="paciente"
+                    sessaoMarcada={false}
+                />
+
                 <div className="listagemDocumentos">
                     <h1 className='documentoTittle'>Prontuário</h1>
                     <button className="botaoVerMais">
                         <Link to="/paciente/solicitacao-documento" className="botao-link">Solicitar Documento</Link>
                     </button>
                 </div>
+
                 <ListagemDocumentos
                     documentos={documentos}
                     onDocumentoClick={handleDocumentoClick}

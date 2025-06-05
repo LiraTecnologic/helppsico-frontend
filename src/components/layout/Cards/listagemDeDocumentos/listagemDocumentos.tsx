@@ -1,13 +1,10 @@
 import "./listagemDocumentos.css";
 import Documento from "../../../../assets/Documento.svg";
+import DocumentoModel from "../../../../models/documento/documento";
 
-interface DocumentoProps {
-  titulo: string;
-  id: string;
-}
 
 interface ListagemDocumentosProps {
-  documentos: DocumentoProps[];
+  documentos: DocumentoModel[];
   onDocumentoClick?: (id: string) => void;
 }
 

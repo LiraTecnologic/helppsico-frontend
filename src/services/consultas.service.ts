@@ -20,36 +20,42 @@ export function consultaSessoesFuturasPsicologo(idPsicologo: string, page: numbe
         });
 }
 
-export function consultaSessoesFuturasPaciente(idPaciente: string, page: number): Promise<Page<ConsultaModel>> {
-    return axios.get<Page<ConsultaModel>>(
-        `http://localhost:8080/consultas/futuras/paciente/${idPaciente}?page=${page}&size=${15}`
+export function consultaSessoesFuturasPaciente(idPaciente: string, page: number): Promise<Response<Page<ConsultaModel>>> {
+    return axios.get<Response<Page<ConsultaModel>>>(
+        `http://localhost:8080/consultas/paciente/futuras/${idPaciente}?page=${page}&size=${15}`
     )
         .then(response => response.data)
         .catch(err => {
             console.error("Erro ao carregar consultas:", err);
             return {
-                content: [],
-                totalElements: 0,
-                totalPages: 0,
-                number: 0,
-                size: 0
+                dado: {
+                    content: [],
+                    totalElements: 0,
+                    totalPages: 0,
+                    number: 0,
+                    size: 0
+                },
+                erro: err
             };
         });
 }
 
-export function consultarSessoesAntigasPaciente(idPaciente: string, page: number): Promise<Page<ConsultaModel>> {
-    return axios.get<Page<ConsultaModel>>(
+export function consultarSessoesAntigasPaciente(idPaciente: string, page: number): Promise<Response<Page<ConsultaModel>>> {
+    return axios.get<Response<Page<ConsultaModel>>>(
         `http://localhost:8080/consultas/antigas/paciente/${idPaciente}?page=${page}&size=${15}`
     )
         .then(response => response.data)
         .catch(err => {
             console.error("Erro ao carregar consultas:", err);
             return {
-                content: [],
-                totalElements: 0,
-                totalPages: 0,
-                number: 0,
-                size: 0
+                dado: {
+                    content: [],
+                    totalElements: 0,
+                    totalPages: 0,
+                    number: 0,
+                    size: 0
+                },
+                erro: err
             };
         });
 }

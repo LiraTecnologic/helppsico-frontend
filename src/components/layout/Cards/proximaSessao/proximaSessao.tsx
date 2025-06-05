@@ -51,17 +51,17 @@ export default function ProximasSessoes({
           <div className="sessao-detalhes">
             <p>Local: {consulta.paciente.endereco.rua}</p>
 
-            {/* <p>Data: {dataFormatada.data}</p>
-            <p>Horário: {dataFormatada.hora}</p> */}
+            <p>Data: {dataFormatada.data}</p>
+            <p>Horário: {dataFormatada.hora}</p>
           </div>
 
           <div className="sessao-pagamento">
             <p>
               <strong>Valor:</strong> {consulta.valor}
             </p>
-            {/* <span className={`sessao-status ${statusPagamento?.toLowerCase().replace(' ', '-')}`}>
+            <span className={`sessao-status ${statusPagamento?.toLowerCase().replace(' ', '-')}`}>
                 {statusPagamento}
-            </span> */}
+            </span>
           </div>
         </div>
       ) : fluxo === "paciente" ? (
