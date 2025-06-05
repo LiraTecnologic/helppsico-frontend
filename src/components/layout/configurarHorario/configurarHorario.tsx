@@ -39,7 +39,9 @@ export default function ConfiguracaoHorario({
     dias ?? []
   );
   const [tempoSessao, setTempoSessao] = useState<number>(tempo ?? 50);
-  const [intervaloSessao, setIntervaloSessao] = useState<number>(intervalo ?? 10);
+  const [intervaloSessao, setIntervaloSessao] = useState<number>(
+    intervalo ?? 10
+  );
   const [horaInicio, setHoraInicio] = useState<string>(inicio ?? "07:00");
   const [horaFim, setHoraFim] = useState<string>(fim ?? "18:00");
   const [erro, setErro] = useState<string>("");

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import "./verPsicologos.css";
+import { useLocation } from "react-router-dom";
 import Header from "../../components/layout/header/header";
 import CardPsicologo from "../../components/layout/Cards/cardPsicologo/cardPsicologo";
 import Pesquisa from "../../components/layout/pesquisa/pesquisa";
@@ -66,17 +67,27 @@ export default function VerPsicologos() {
     setPesquisaTermo(termo);
   };
 
+  const location = useLocation();
+  const headerPsicologo = location.state.headerPsicologo;
+
   return (
     <>
-      <Header fluxo="verProfissionais" headerPsicologo={false} />
-      <Carrossel profissionais={profissionais} />
+      <Header fluxo="verProfissionais" headerPsicologo={headerPsicologo} />
+      <Carrossel
+        profissionais={Profissionais}
+        headerPsicologo={headerPsicologo}
+      />
+
       <Pesquisa onPesquisar={handlePesquisar} />
       {profissionaisFiltrados.length === 0 ? (
         <p className="mensagem-nenhum-psicologo">
           Nenhum psicólogo com esse nome foi encontrado.
         </p>
       ) : (
-        <CardPsicologo profissionais={profissionaisFiltrados} />
+        <CardPsicologo
+          profissionais={profissionaisFiltrados}
+          headerPsicologo={headerPsicologo}
+        />
       )}
     </>
   );
