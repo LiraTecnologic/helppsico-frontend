@@ -52,7 +52,9 @@ export default function CadastroProntuarios() {
             conteudo,
             consulta: consultaCompleta,
             psicologo: consultaCompleta.psicologo,
-            paciente: pacienteCompleto
+            paciente: pacienteCompleto,
+            dataCriacao: '',
+            dataEdicao: ''
         };
 
         try {

@@ -42,7 +42,7 @@
   align-items: center;
 }
 
-.th-config-item p{
+.th-config-item p {
   font-size: 1.3rem;
 }
 
@@ -176,7 +176,7 @@
 /* Quando o horário será disponibilizado */
 .th-card-disponibilizar {
   background-color: #2564eb67;
-  border-left: 4px solid #2563EB;
+  border-left: 4px solid #2563eb;
 }
 
 /* Quando o horário será removido */
@@ -185,12 +185,12 @@
   border-left: 4px solid #e53e3e;
 }
 
-.th-botao-area{
+.th-botao-area {
   margin-top: 20px;
 }
 
 .th-card-disponivel {
-  background-color: #2563EB;
+  background-color: #2563eb;
   border-left: 4px solid #042b5f;
 }
 

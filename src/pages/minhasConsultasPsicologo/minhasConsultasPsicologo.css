@@ -1,0 +1,27 @@
+.text-tittle {
+    max-width: 80%;
+    margin: 32px auto 0 auto;
+    font-size: 36px;
+    text-align: left;
+}
+
+.carregando {
+    max-width: 80%;
+    margin: 32px auto;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+}
+
+.erro {
+    max-width: 80%;
+    margin: 32px auto;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #e74c3c;
+    background-color: #fdeaea;
+    border-radius: 8px;
+    border-left: 4px solid #e74c3c;
+}

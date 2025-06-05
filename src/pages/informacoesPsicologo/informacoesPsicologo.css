@@ -32,20 +32,16 @@ body {
     gap: 1rem;
 }
 
+.div-psicologo img{
+    border-radius: 50%;
+}
+
 .div-psicologo button {
     background-color: #0D42BD;
     color: #F3F4F6;
     width: 100%;
     border-radius: 10px;
     height: 2rem;
-}
-
-.div-psicologo button:hover {
-    background-color: #2a54b7;
-}
-
-.div-psicologo button:active {
-    background-color: #6a82ba;
 }
 
 hr {
@@ -94,4 +90,29 @@ hr {
     display: flex;
     flex-direction: column;
     gap: 3rem;
+}
+
+.btn-desvinc{
+    background-color: #FFA9AA !important;
+    color: #FF1313 !important;
+}
+
+.btn-solic{
+    background-color: #ffefa9 !important;
+    color: #665716 !important;
+}
+
+.btn-solic-hover {
+    background-color: #ffdf2a !important; 
+    color: #27270c !important;
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 10px;
+    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-size: 0.8rem;
 }

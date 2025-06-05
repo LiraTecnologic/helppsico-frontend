@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import './Pesquisa.css';
-import Lupa from '../../../assets/lupa.svg'
+import React, { useState } from "react";
+import "./Pesquisa.css";
+import Lupa from "../../../assets/lupa.svg";
 
 interface PesquisaProps {
   onPesquisar: (termo: string) => void;
 }
 
 export default function Pesquisa({ onPesquisar }: PesquisaProps) {
-  const [termoPesquisa, setTermoPesquisa] = useState('');
+  const [termoPesquisa, setTermoPesquisa] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,7 +16,9 @@ export default function Pesquisa({ onPesquisar }: PesquisaProps) {
 
   return (
     <div className="container-pesquisa">
-      <h2 className="titulo-pesquisa">Ou pesquise pelo nome do seu profissional</h2>
+      <h2 className="titulo-pesquisa">
+        Ou pesquise pelo nome do seu profissional
+      </h2>
       <form onSubmit={handleSubmit} className="form-pesquisa">
         <input
           type="text"
