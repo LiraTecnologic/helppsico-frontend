@@ -1,11 +1,15 @@
 import './solicitiacaoDeVinculo.css';
 import Header from '../../components/layout/header/header';
 import CardSolicitacao from '../../components/layout/Cards/cardSolicitacao/cardSolicitacao';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import PopupCancelamento from '../../components/layout/PopupCancelamento/popupCancelamento';
-import VinculoModel, { StatusVinculo } from '../../models/vinculo'; 
+import { StatusVinculo } from '../../models/vinculo';
+import VinculoModel from '../../models/vinculo';
 import { solicitarVinculosPaciente, cancelarSolicitacao } from './solicitiacaoDeVinculoService';
-import { Link, useLocation } from 'react-router-dom';
+import calcular from '../../utils/calculoData';
+import calcularMedia from '../../utils/mediaAvaliacao';
+import { AvaliacaoModel } from '../../models/avaliacoes';
+import { listarAvaliacoesPorPsicologo } from '../../services/listarAvaliacoesPorPsicologo';
 
 export default function SolicitacaoDeVinculo() {
   const [popupCancelar, setPopupCancelar] = useState(false);
@@ -13,13 +17,11 @@ export default function SolicitacaoDeVinculo() {
   const [vinculos, setVinculos] = useState<VinculoModel[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
-  const { pathname } = useLocation();
+  const [idPaciente, setIdPaciente] = useState('');
+  const [avaliacoes, setAvaliacoes] = useState<AvaliacaoModel[]>([]);
 
-  // const idPaciente = localStorage.getItem('idPaciente');
-  const idPaciente = "1"; 
 
-  const carregarVinculos = useCallback(async () => {
-
+  async function carregarVinculos(idPaciente: string) {
     if (!idPaciente) {
       setErro("ID do paciente não encontrado.");
       setCarregando(false);
@@ -44,12 +46,35 @@ export default function SolicitacaoDeVinculo() {
       setCarregando(false);
 
     }
-  }, [idPaciente]);
+  };
+
+
+  function filtrarAvaliacoesPorPsicologo(idPsicologo: string) {
+    return avaliacoes.filter(avaliacao => avaliacao.psicologo.id = idPsicologo);
+  }
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    carregarVinculos();
-  }, [carregarVinculos]);
+    const id = localStorage.getItem('id-paciente');
+
+    async function carregarAvaliacoes() {
+      const avaliacoesArrays = await Promise.all(vinculos.map(async (vinculo) => {
+        return await listarAvaliacoesPorPsicologo(vinculo.psicologo.id);
+      }));
+    
+      const avaliacoes = avaliacoesArrays.flat();
+    
+      setAvaliacoes(avaliacoes);
+    }
+
+    if (id) {
+      setIdPaciente(id);
+      carregarVinculos(idPaciente);
+      carregarAvaliacoes();
+      
+    } else {
+      console.log('Id paciente null');
+    }
+  }, [])
 
   const abrirPopupCancelamento = (idVinculo: string) => {
     setVinculoSelecionadoId(idVinculo);
@@ -68,13 +93,13 @@ export default function SolicitacaoDeVinculo() {
 
       await cancelarSolicitacao(vinculoSelecionadoId);
       fecharPopupCancelamento();
-      carregarVinculos(); 
+      carregarVinculos(idPaciente);
 
     } catch (error) {
 
       console.error("Erro ao cancelar solicitação:", error);
       setErro("Falha ao cancelar a solicitação. Tente novamente.");
-     
+
     }
   };
 
@@ -93,19 +118,6 @@ export default function SolicitacaoDeVinculo() {
     );
   }
 
-  if (erro) {
-    return (
-      <>
-        <Header fluxo="minhasSessoes" headerPsicologo={false} />
-        <div className="container">
-          <h1>Solicitações</h1>
-          <p style={{ color: 'red' }}>{erro}</p>
-          <button onClick={carregarVinculos}>Tentar Novamente</button>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <Header fluxo="minhasSessoes" headerPsicologo={false} />
@@ -118,10 +130,12 @@ export default function SolicitacaoDeVinculo() {
               {vinculosPendentes.map((vinculo) => (
                 <CardSolicitacao
                   key={vinculo.id}
-                  nome={vinculo.psicologo.nome} 
-                  idade={vinculo.psicologo.idade} 
-                  crp={vinculo.psicologo.crp} 
-                  avaliacao={vinculo.psicologo.avaliacao} 
+                  nome={vinculo.psicologo.nome}
+                  idade={calcular(vinculo.psicologo.dataNascimento)}
+                  crp={vinculo.psicologo.crp}
+                  avaliacao={
+                    calcularMedia(filtrarAvaliacoesPorPsicologo(vinculo.psicologo.id))
+                  }
                   status="Pendente"
                   botao="Cancelar"
                   onClick={() => abrirPopupCancelamento(vinculo.id)}
@@ -139,12 +153,14 @@ export default function SolicitacaoDeVinculo() {
                 <CardSolicitacao
                   key={vinculo.id}
                   nome={vinculo.psicologo.nome}
-                  idade={vinculo.psicologo.idade}
+                  idade={calcular(vinculo.psicologo.dataNascimento)}
                   crp={vinculo.psicologo.crp}
-                  avaliacao={vinculo.psicologo.avaliacao}
+                  avaliacao={
+                    calcularMedia(filtrarAvaliacoesPorPsicologo(vinculo.psicologo.id))
+                  }
                   status="Recusado"
-                  botao="Ver mais" 
-                  
+                  botao="Ver mais"
+
                 />
               ))}
             </div>
@@ -152,15 +168,14 @@ export default function SolicitacaoDeVinculo() {
         )}
 
         {(vinculosPendentes.length === 0 && vinculosRecusados.length === 0 && !carregando) && (
-            <p>Nenhuma solicitação encontrada.</p>
+          <p>Nenhuma solicitação encontrada.</p>
         )}
       </div>
 
       {popupCancelar && vinculoSelecionadoId && (
         <PopupCancelamento
           fechar={fecharPopupCancelamento}
-          onConfirm={handleConfirmarCancelamento} 
-          titulo='Deseja realmente cancelar a solicitação ?'
+          onConfirm={handleConfirmarCancelamento}
         />
       )}
     </>
