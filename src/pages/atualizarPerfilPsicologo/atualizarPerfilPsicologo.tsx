@@ -3,6 +3,8 @@ import './atualizarPerfilPsicologo.css';
 import CardPerfilPsicologo from '../../components/layout/Cards/cardAtualizarPerfilPsicologo/cardPerfilPsicologo';
 import PsicologoModel from '../../models/psicologo';
 import Header from '../../components/layout/header/header';
+import { atualizarPerfilPsicologo } from '../../services/atualizarperfil';
+
 
 const AtualizarPerfilPsicologo: React.FC = () => {
     const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
@@ -55,15 +57,23 @@ const AtualizarPerfilPsicologo: React.FC = () => {
         setBiografia(novaBiografia);
     };
 
-    const handleEditar = () => {
-        
-        console.log('Salvando alterações:', {
-            valorSessao: parseFloat(valorSessao.replace(',', '.')),
-            biografia
-        });
-        
-        
-        alert('Dados salvos com sucesso!');
+    const handleEditar = async () => {
+        if (!psicologo) return;
+    
+        const valorConvertido = parseFloat(valorSessao.replace(/[R$\s.]/g, '').replace(',', '.')) || 0;
+    
+        const dadosAtualizados = {
+            biografia,
+            valorSessao: valorConvertido
+        };
+    
+        try {
+            const psicologoAtualizado = await atualizarPerfilPsicologo(psicologo.id, dadosAtualizados);
+            setPsicologo(psicologoAtualizado);
+            alert('Perfil atualizado com sucesso!');
+        } catch (error) {
+            alert('Erro ao atualizar o perfil. Tente novamente mais tarde.');
+        }
     };
 
     const handleVoltar = () => {
