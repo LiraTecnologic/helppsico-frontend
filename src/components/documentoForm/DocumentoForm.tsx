@@ -25,16 +25,16 @@ export default function DocumentoForm({ tipoDocumento, pacientes }: DocumentoFor
   });
 
   const renderFormularioEspecifico = () => {
-    switch (tipoDocumento.toLowerCase()) {
-      case 'atestado':
+    switch (tipoDocumento) {
+      case 'ATESTADO':
         return <AtestadoForm />;
-      case 'laudo':
+      case 'LAUDO_PSICOLOGICO':
         return <LaudoPsicologicoForm />;
-      case 'parecer':
+      case 'PARECER_PSICOLOGICO':
         return <ParecerPsicologicoForm />;
-      case 'relatorio':
+      case 'RELATORIO_PSICOLOGICO':
         return <RelatorioPsicologicoForm />;
-      case 'declaracao':
+      case 'DECLARACAO':
         return <DeclaracaoForm />;
       default:
         return <div className="tipo-nao-suportado">Tipo de documento não suportado!</div>;
