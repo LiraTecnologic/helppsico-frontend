@@ -13,19 +13,19 @@ const AtualizarPerfilPsicologo: React.FC = () => {
     useEffect(() => {
         
         const dadosPsicologo: PsicologoModel = {
-            id: '1',
-            nome: 'Dr. João Silva',
-            crp: '12345',
-            cpf: '123.456.789-00',
-            email: 'joao@exemplo.com',
-            telefone: '(11) 99999-9999',
-            dataNascimento: '1985-05-15',
-            genero: 'Masculino',
-            enderecoAtendimento: 'Rua das Flores, 123',
-            biografia: '',
-            status: 'Ativo',
-            fotoUrl: ''
-        };
+            // id: '1',
+            // nome: 'Dr. João Silva',
+            // crp: '12345',
+            // cpf: '123.456.789-00',
+            // email: 'joao@exemplo.com',
+            // telefone: '(11) 99999-9999',
+            // dataNascimento: '1985-05-15',
+            // genero: 'Masculino',
+            // enderecoAtendimento: 'Rua das Flores, 123',
+            // biografia: '',
+            // status: 'Ativo',
+            // fotoUrl: ''
+        } as PsicologoModel;
         
         
         const valorSessaoInicial = 0; 

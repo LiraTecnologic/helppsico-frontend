@@ -72,13 +72,13 @@ export default function CadastroProntuarios() {
     useEffect(() => {
         async function carregarPacientes(idPsicologo: string) {
             const vinculos = await consultaVinculosPsicologo(idPsicologo, 0);
-            const pacientes = vinculos.dado.content.map(vinculo => vinculo.paciente);
+            // const pacientes = vinculos.dado.content.map(vinculo => vinculo.paciente);
             setPacientes(pacientes);
         }
 
         async function carregarConsultas(idPsicologo: string) {
             const consultas = await consultarSessoesAntigasPsicologo(idPsicologo, 0);
-            setConsultas(consultas.dado.content);
+            // setConsultas(consultas.dado.content);
         }
 
         carregarPacientes('deec458b-a6b7-4a70-b308-97dcc1a16ec6');

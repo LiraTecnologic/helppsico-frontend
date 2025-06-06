@@ -3,7 +3,7 @@ import { AvaliacaoModel } from '../models/avaliacoes';
 import Response from '../models/response';
 import Page from '../models/page';
 
-export async function listarAvaliacoesPorPsicologo(idPsicologo: string, page: number): Promise<Response<Page<AvaliacaoModel>>> {
+export function listarAvaliacoesPorPsicologo(idPsicologo: string, page: number): Promise<Response<Page<AvaliacaoModel>>> {
     return axios.get<Response<Page<AvaliacaoModel>>>(
         `http://localhost:8080/avaliacoes/psicologo/${idPsicologo}?page=${page}&size=15`
     )
@@ -21,3 +21,4 @@ export async function listarAvaliacoesPorPsicologo(idPsicologo: string, page: nu
             }
         });
 }
+ 

@@ -17,7 +17,7 @@ export default function MinhasConsultasPsicologo() {
     async function consultarConsultaFutura(idPsicologo: string) {
       try {
         const consultasFuturas = await consultaSessoesFuturasPsicologo(idPsicologo, 1);
-        setConsultaFutura(consultaMaisRecente(consultasFuturas.content));
+        // setConsultaFutura(consultaMaisRecente(consultasFuturas.content));
       } catch (error) {
         console.error("Erro ao consultar consultas futuras:", error);
         setErro("Não foi possível carregar suas próximas consultas. Tente novamente mais tarde.");

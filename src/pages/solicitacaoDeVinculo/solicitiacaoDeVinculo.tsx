@@ -33,8 +33,13 @@ export default function SolicitacaoDeVinculo() {
 
     try {
 
-      const dadosVinculos = await solicitarVinculosPaciente(idPaciente);
-      setVinculos(dadosVinculos);
+      const dadosVinculos = await solicitarVinculosPaciente(idPaciente, 0);
+
+      if(dadosVinculos.dado) {
+        setVinculos(dadosVinculos.dado.content);
+      }
+
+      
 
     } catch (error) {
 
@@ -57,13 +62,14 @@ export default function SolicitacaoDeVinculo() {
     const id = localStorage.getItem('id-paciente');
 
     async function carregarAvaliacoes() {
-      const avaliacoesArrays = await Promise.all(vinculos.map(async (vinculo) => {
-        return await listarAvaliacoesPorPsicologo(vinculo.psicologo.id);
-      }));
+      
     
-      const avaliacoes = avaliacoesArrays.flat();
+      const avaliacoes = await listarAvaliacoesPorPsicologo(idPaciente, 0);
     
-      setAvaliacoes(avaliacoes);
+      if(avaliacoes.dado) {
+        setAvaliacoes(avaliacoes.dado.content);
+      }
+
     }
 
     if (id) {

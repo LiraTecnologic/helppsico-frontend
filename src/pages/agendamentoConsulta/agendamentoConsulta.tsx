@@ -24,63 +24,63 @@ export default function AgendamentoConsulta() {
   const idPaciente = 'teste';
 
   async function agendar() {
-    if (idsHorariosSelecionados.length === 0) {
-      alert("Selecione ao menos um horário para agendar!");
-      return;
-    }
+    // if (idsHorariosSelecionados.length === 0) {
+    //   alert("Selecione ao menos um horário para agendar!");
+    //   return;
+    // }
 
-    try {
-      for (const idHorario of idsHorariosSelecionados) {
+    // try {
+    //   for (const idHorario of idsHorariosSelecionados) {
 
-        if (psicologo) {
-
-
-          let paciente: PacienteModel = {} as PacienteModel;
-
-          if (idPaciente) {
-            paciente = {
-              id: idPaciente,
-              nome: '',
-              cpf: '',
-              email: '',
-              telefone: '',
-              dataNascimento: '',
-              genero: 'MASCULINO',
-              endereco: {} as EnderecoModel,
-              fotoUrl: ''
-            }
-          }
-
-          const horario: HorarioModel = {
-            id: idHorario,
-            diaSemana: '',
-            inicio: '',
-            fim: '',
-            disponivel: true,
-            psicologo: psicologo
-          }
+    //     if (psicologo) {
 
 
-          const novaConsulta: ConsultaModel = {
-            id: '',
-            psicologo: psicologo,
-            paciente: paciente,
-            valor: psicologo.valorSessao,
-            dataHora: horario,
-            endereco: psicologo.enderecoAtendimento,
-            finalizada: false
-          }
+    //       let paciente: PacienteModel = {} as PacienteModel;
 
-          await cadastrarConsulta(novaConsulta);
-        }
-      }
+    //       if (idPaciente) {
+    //         paciente = {
+    //           id: idPaciente,
+    //           nome: '',
+    //           cpf: '',
+    //           email: '',
+    //           telefone: '',
+    //           dataNascimento: '',
+    //           genero: 'MASCULINO',
+    //           endereco: {} as EnderecoModel,
+    //           fotoUrl: ''
+    //         }
+    //       }
 
-      alert("Consultas agendadas com sucesso!");
+    //       const horario: HorarioModel = {
+    //         id: idHorario,
+    //         diaSemana: '',
+    //         inicio: '',
+    //         fim: '',
+    //         disponivel: true,
+    //         psicologo: psicologo
+    //       }
 
-    } catch (error) {
-      console.error("Erro ao agendar:", error);
-      alert("Ocorreu um erro ao agendar. Tente novamente.");
-    }
+
+    //       const novaConsulta: ConsultaModel = {
+    //         id: '',
+    //         psicologo: psicologo,
+    //         paciente: paciente,
+    //         valor: psicologo.valorSessao,
+    //         dataHora: horario,
+    //         endereco: psicologo.enderecoAtendimento,
+    //         finalizada: false
+    //       }
+
+    //       await cadastrarConsulta(novaConsulta);
+    //     }
+    //   }
+
+    //   alert("Consultas agendadas com sucesso!");
+
+    // } catch (error) {
+    //   console.error("Erro ao agendar:", error);
+    //   alert("Ocorreu um erro ao agendar. Tente novamente.");
+    // }
   }
 
   useEffect(() => {
@@ -102,7 +102,7 @@ export default function AgendamentoConsulta() {
 
     async function carregarHorarios(idPsicologo: string) {
       const horariosResponse = await listarHorariosPsicologo(idPsicologo, 1);
-      setHorariosPsicologo(horariosResponse.dado.content);
+      // setHorariosPsicologo(horariosResponse.dado.content);
     }
 
     if (vinculo && vinculo.psicologo?.id) {

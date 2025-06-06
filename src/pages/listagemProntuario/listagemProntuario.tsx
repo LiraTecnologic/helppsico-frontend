@@ -17,7 +17,7 @@ export default function ListagemProntuario() {
         async function carregarProntuarios() {
             const prontuariosConsultados = await consultaProntuariosPsicologo('deec458b-a6b7-4a70-b308-97dcc1a16ec6', 0);
             console.log(prontuariosConsultados);
-            setProntuarios(prontuariosConsultados.dado.content);
+            // setProntuarios(prontuariosConsultados.dado.content);
         }
 
         carregarProntuarios();

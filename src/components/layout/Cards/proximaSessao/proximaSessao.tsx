@@ -1,6 +1,5 @@
 import ConsultaModel from '../../../../models/consulta';
 import calcular from '../../../../utils/calculoData'
-import {formatarDataHora} from '../../../../utils/formataData'
 import { Link } from "react-router-dom";
 
 import "./proximaSessao.css";
@@ -16,13 +15,12 @@ interface ProximaSessaoProps {
 export default function ProximasSessoes({
   consulta,
   verMais,
-  fluxo,
-  sessaoMarcada,
+  fluxo
 }: ProximaSessaoProps) {
   const isPsicologo = fluxo === 'psicologo';
   // const pessoa = isPsicologo ? consulta.paciente : consulta.psicologo;
   const idade = isPsicologo ? calcular(consulta.paciente.dataNascimento) : null;
-  // const endereco = isPsicologo ? consulta.paciente.endereco : consulta.psicologo.enderecoAtendimento;
+  // const endereco = isPsicologo ? consulta.paciente.endereco : consulta.psicologo.enderecoAtendimento
 
   return (
     <div className="proxima-sessao">
@@ -32,7 +30,7 @@ export default function ProximasSessoes({
         {verMais && fluxo === "psicologo" && <button className="botao-ver-mais"><Link to="/paciente/sessao">Ver mais</Link></button>}{/*  falta tela */}
       </div>
 
-      {sessaoMarcada ? (
+      {consulta ? (
         <div className="sessao-card">
           <div className="sessao-info">
             <img
@@ -51,17 +49,14 @@ export default function ProximasSessoes({
           <div className="sessao-detalhes">
             <p>Local: {consulta.paciente.endereco.rua}</p>
 
-            <p>Data: {dataFormatada.data}</p>
-            <p>Horário: {dataFormatada.hora}</p>
+            <p>Data: {consulta.hora.inicio}</p>
+            <p>Horário: {consulta.hora.inicio} : {consulta.hora.fim}</p>
           </div>
 
           <div className="sessao-pagamento">
             <p>
               <strong>Valor:</strong> {consulta.valor}
             </p>
-            <span className={`sessao-status ${statusPagamento?.toLowerCase().replace(' ', '-')}`}>
-                {statusPagamento}
-            </span>
           </div>
         </div>
       ) : fluxo === "paciente" ? (

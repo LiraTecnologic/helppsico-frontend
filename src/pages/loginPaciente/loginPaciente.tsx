@@ -2,12 +2,8 @@ import './loginPaciente.css';
 import InputTotal from '../../components/commmon/Inputs/InputTotal';
 import Botao from '../../components/commmon/botoes/botao/botao';
 import { useState } from 'react';
-<<<<<<< HEAD
 import { Link, useNavigate } from 'react-router-dom';
-=======
-import { Link } from 'react-router-dom';
 import PacienteModel from '../../models/paciente';
->>>>>>> c32fa28394fa2674787128708d96e2bde59b330f
 
 const Login = () => {
     const [crp, setCrp] = useState('');
@@ -30,13 +26,12 @@ const Login = () => {
             return;
         }
 
-<<<<<<< HEAD
+
         return(navigate("/paciente/painel"))
-=======
+
         // colocar o retorno da requisição
         const paciente : PacienteModel = {} as PacienteModel;
         localStorage.setItem('id-paciente', paciente.id);
->>>>>>> c32fa28394fa2674787128708d96e2bde59b330f
     };
 
     return (

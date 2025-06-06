@@ -25,7 +25,7 @@ export function consultaVinculosPsicologo(idPsicologo: string, page: number): Pr
 
 export function consultarVinculosPaciente(idPaciente: string, page: number): Promise<Response<Page<VinculoModel>>> {
     return axios.get<Response<Page<VinculoModel>>>(
-        `http://localhost:8080/vinculos/listar/paciente/${idPaciente}?page=${page}&size=${15}`
+        `http://localhost:8081/vinculos/listar/paciente/${idPaciente}?page=${page}&size=${15}`
     )
         .then(response => response.data)
         .catch(err => {

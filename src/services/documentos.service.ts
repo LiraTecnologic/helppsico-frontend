@@ -5,7 +5,7 @@ import DocumentoModel from '../models/documento/documento';
 
 export function consultarDocumentosPaciente(idPaciente: string, page: number): Promise<Response<Page<DocumentoModel>>> {
     return axios.get<Response<Page<DocumentoModel>>>(
-        `http://localhost:8080/vinculos/psicologo/${idPaciente}?page=${page}&size=${15}`
+        `http://localhost:8081/vinculos/psicologo/${idPaciente}?page=${page}&size=${15}`
     )
         .then(response => response.data)
         .catch(err => {
