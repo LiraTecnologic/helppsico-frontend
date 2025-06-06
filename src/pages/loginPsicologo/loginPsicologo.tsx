@@ -2,9 +2,8 @@ import './loginPsicologo.css';
 import InputTotal from '../../components/commmon/Inputs/InputTotal';
 import Botao from '../../components/commmon/botoes/botao/botao';
 import { useState } from 'react';
-import { login } from '../../services/auth.service';
-import { getUserCRP, getUserEmail, getUserId, getUserType } from '../../services/auth.service';
 import { Link, useNavigate } from 'react-router-dom';
+import PsicologoModel from '../../models/psicologo';
 
 const Login = () => {
     const [crp, setCrp] = useState('');
@@ -31,22 +30,11 @@ const Login = () => {
             alert('A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
             return;
         }
-      
-        const response = await login(crp, senha, 'PSICOLOGO');
-        if (response.dado) {
-            console.log('Login realizado com sucesso!, dados do usuário:', response.dado);
-            
-           console.log(`LocalStorage: \n 
-            id: ${getUserId()}
-            crp: ${getUserCRP()}
-            email: ${getUserEmail()}
-            userType: ${getUserType()}
-            ` )
 
-            redirecionarTeste();
-        } else {
-            alert(response.erro || 'Erro ao fazer login.');
-        }
+
+        //Parte que recebe o retorno do login
+        const psicologo: PsicologoModel = {} as PsicologoModel
+        localStorage.setItem('id-psicologo', psicologo.id);
     };
 
     return (

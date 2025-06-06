@@ -11,7 +11,7 @@ export default function RequisicaoDocumento() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const idPsicologo = 'deec458b-a6b7-4a70-b308-97dcc1a16ec6';
+    const idPsicologo = localStorage.getItem('id-psicologo');
 
     async function carregarSolicitacoes(id: string) {
       try {
@@ -28,9 +28,9 @@ export default function RequisicaoDocumento() {
       }
     }
 
-    carregarSolicitacoes(idPsicologo);
-
-    
+    if(idPsicologo) {
+      carregarSolicitacoes(idPsicologo);
+    }  
   }, []);
 
   const handleApprove = (solicitacaoId: string) => {

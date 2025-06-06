@@ -52,23 +52,19 @@ export default function MeuPainelPsicologo() {
         }
 
 
-        // // Apenas nessa task para funcionar integração
-        // const idRandomPsico = '71ff60f6-0272-41db-89fb-621c488b8642';
-        // localStorage.setItem('psicologoLogado', idRandomPsico);
+        const idPsicologo = localStorage.getItem('id-psicologo');
 
-        // const psicologoString: string = localStorage.getItem('psicologoLogado');
+        if (idPsicologo) {
+            carregarConsultas(idPsicologo);
+            carregarProntuarios(idPsicologo);
+            carregarVinculos(idPsicologo);
+        } else {
+            console.log('Id do psicologo null');
+        }
 
-        // const psicologoId: string = JSON.parse(psicologoString);
 
-        const psicologoId = '71ff60f6-0272-41db-89fb-621c488b8642';
-
-        carregarConsultas(psicologoId);
-        carregarProntuarios(psicologoId);
-        carregarVinculos(psicologoId);
 
     }, []);
-
-
 
     const sessaoMarcada = consultas.length > 0;;
 

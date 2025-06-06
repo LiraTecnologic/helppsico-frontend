@@ -61,7 +61,7 @@ export default function CadastroProntuarios() {
             const prontuarioSalvo = await cadastar(novoProntuario);
             console.log('Prontuario salvo com sucesso.', prontuarioSalvo);
             alert('Prontuário salvo com sucesso!');
-            window.location.reload(); 
+            window.location.reload();
         } catch (error) {
             console.error('Erro ao salvar prontuário:', error);
             alert('Erro ao salvar prontuário!');
@@ -82,8 +82,13 @@ export default function CadastroProntuarios() {
             setConsultas(consultas.dado.content);
         }
 
-        carregarPacientes('teste');
-        carregarConsultas('teste')
+        const idPsicologo = localStorage.getItem('id-psicologo');
+
+        if (idPsicologo) {
+            carregarPacientes(idPsicologo);
+            carregarConsultas(idPsicologo);
+        }
+
     }, []);
 
     return (
