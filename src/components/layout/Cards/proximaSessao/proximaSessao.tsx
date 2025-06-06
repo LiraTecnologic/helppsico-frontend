@@ -8,8 +8,6 @@ interface ProximaSessaoProps {
   consulta: ConsultaModel;
   verMais: boolean;
   fluxo: string;
-  sessaoMarcada: boolean;
-
 }
 
 export default function ProximasSessoes({
@@ -30,7 +28,7 @@ export default function ProximasSessoes({
         {verMais && fluxo === "psicologo" && <button className="botao-ver-mais"><Link to="/paciente/sessao">Ver mais</Link></button>}{/*  falta tela */}
       </div>
 
-      {consulta ? (
+      {consulta && consulta.hora && 
         <div className="sessao-card">
           <div className="sessao-info">
             <img
@@ -59,7 +57,9 @@ export default function ProximasSessoes({
             </p>
           </div>
         </div>
-      ) : fluxo === "paciente" ? (
+      }
+      
+      {/* { fluxo === "paciente" ? (
         <div className="sessao-nao-marcada">
           <p className="titulo-nao-marcada">
             Ainda não marcou a próxima consulta?
@@ -79,7 +79,7 @@ export default function ProximasSessoes({
             automaticamente.
           </p>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

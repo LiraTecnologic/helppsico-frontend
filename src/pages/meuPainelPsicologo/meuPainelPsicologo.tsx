@@ -8,11 +8,9 @@
 // import VinculoModel from '../../models/vinculo';
 // import ProntuarioModel from '../../models/prontuario';
 // import { consultaProntuariosPsicologo } from "../../services/prontuarios.service";
-// import { consultaSessoesFuturas } from '../../services/consultas.service';
 // import { consultaVinculosPsicologo } from '../../services/vinculos.service';
 // import BlocoHorario from '../../components/layout/blocoHorario/blocoHorario';
 // import { Link } from "react-router-dom";
-// import PsicologoModel from '../../models/psicologo';
 
 // export default function MeuPainelPsicologo() {
 
@@ -51,22 +49,18 @@
 //             setVinculos(vinculosConsultados.dado.content);
 //         }
 
+//         const idPsicologo = localStorage.getItem('id-psicologo');
 
-//         // // Apenas nessa task para funcionar integração
-//         // const idRandomPsico = '71ff60f6-0272-41db-89fb-621c488b8642';
-//         // localStorage.setItem('psicologoLogado', idRandomPsico);
-
-//         // const psicologoString: string = localStorage.getItem('psicologoLogado');
-
-//         // const psicologoId: string = JSON.parse(psicologoString);
-
-//         const psicologoId = '71ff60f6-0272-41db-89fb-621c488b8642';
-
-//         carregarConsultas(psicologoId);
-//         carregarProntuarios(psicologoId);
-//         carregarVinculos(psicologoId);
-
+//         if (idPsicologo) {
+//             carregarConsultas(idPsicologo);
+//             carregarProntuarios(idPsicologo);
+//             carregarVinculos(idPsicologo);
+//         } else {
+//             console.log('Id do psicologo null');
+//         }
 //     }, []);
+
+//     const sessaoMarcada = consultas.length > 0;;
 
 //     const handleDocumentoClick = (id: string) => {
 //         console.log(`Documento com ID ${id} foi clicado`);

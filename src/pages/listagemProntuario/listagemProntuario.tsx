@@ -14,13 +14,18 @@ export default function ListagemProntuario() {
     const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
 
     useEffect(() => {
-        async function carregarProntuarios() {
-            const prontuariosConsultados = await consultaProntuariosPsicologo('deec458b-a6b7-4a70-b308-97dcc1a16ec6', 0);
+        async function carregarProntuarios(idPsicologo: string) {
+            const prontuariosConsultados = await consultaProntuariosPsicologo(idPsicologo, 1);
             console.log(prontuariosConsultados);
             // setProntuarios(prontuariosConsultados.dado.content);
         }
 
-        carregarProntuarios();
+        const idPsicologo = localStorage.getItem('id-psicologo');
+
+        if(idPsicologo) {
+            carregarProntuarios(idPsicologo);
+        }
+        
     }, []);
 
     const solicitacoesPendentes = 18;
@@ -49,6 +54,7 @@ export default function ListagemProntuario() {
                             nomePaciente={prontuario.paciente.nome}
                             titulo={prontuario.titulo}
                             fotoPerfilUrl={prontuario.paciente.fotoUrl}
+                            idProntuario={prontuario.id}
                         />
                     ))}
                 </div>
