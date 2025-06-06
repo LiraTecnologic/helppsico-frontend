@@ -4,37 +4,58 @@ import CardPerfilPsicologo from '../../components/layout/Cards/cardAtualizarPerf
 import PsicologoModel from '../../models/psicologo';
 import Header from '../../components/layout/header/header';
 import { atualizarPerfilPsicologo } from '../../services/atualizarperfil';
+import { getUserId } from '../../services/auth.service';
+import axios from 'axios';
 
 
 const AtualizarPerfilPsicologo: React.FC = () => {
     const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
     const [valorSessao, setValorSessao] = useState<string>('');
     const [biografia, setBiografia] = useState<string>('');
+    const [carregando, setCarregando] = useState<boolean>(true);
+    const [erro, setErro] = useState<string | null>(null);
 
     
     useEffect(() => {
-        
-        const dadosPsicologo: PsicologoModel = {
-            id: '1',
-            nome: 'Dr. João Silva',
-            crp: '12345',
-            cpf: '123.456.789-00',
-            email: 'joao@exemplo.com',
-            telefone: '(11) 99999-9999',
-            dataNascimento: '1985-05-15',
-            genero: 'Masculino',
-            enderecoAtendimento: 'Rua das Flores, 123',
-            biografia: '',
-            status: 'Ativo',
-            fotoUrl: ''
+        const carregarDadosPsicologo = async () => {
+            setCarregando(true);
+            setErro(null);
+            
+            const idPsicologo = getUserId();
+            
+            if (!idPsicologo) {
+                setErro('Usuário não identificado. Faça login novamente.');
+                setCarregando(false);
+                return;
+            }
+            
+            try {
+                const response = await axios.get<PsicologoModel>(
+                    `http://localhost:8080/psicologo/${idPsicologo}`
+                );
+                
+                const dadosPsicologo = response.data;
+                setPsicologo(dadosPsicologo);
+                
+                
+                if (dadosPsicologo.valorSessao) {
+                    const valorFormatado = dadosPsicologo.valorSessao.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                    setValorSessao(valorFormatado);
+                }
+                
+                setBiografia(dadosPsicologo.biografia || '');
+            } catch (error) {
+                console.error('Erro ao carregar dados do psicólogo:', error);
+                setErro('Não foi possível carregar seus dados. Tente novamente mais tarde.');
+            } finally {
+                setCarregando(false);
+            }
         };
         
-        
-        const valorSessaoInicial = 0; 
-        
-        setPsicologo(dadosPsicologo);
-        setValorSessao(valorSessaoInicial > 0 ? valorSessaoInicial.toString() : '');
-        setBiografia(dadosPsicologo.biografia);
+        carregarDadosPsicologo();
     }, []);
 
     const handleValorSessaoChange = (valor: string) => {
@@ -59,6 +80,13 @@ const AtualizarPerfilPsicologo: React.FC = () => {
 
     const handleEditar = async () => {
         if (!psicologo) return;
+        
+        const idPsicologo = getUserId();
+        
+        if (!idPsicologo) {
+            alert('Usuário não identificado. Faça login novamente.');
+            return;
+        }
     
         const valorConvertido = parseFloat(valorSessao.replace(/[R$\s.]/g, '').replace(',', '.')) || 0;
     
@@ -68,7 +96,7 @@ const AtualizarPerfilPsicologo: React.FC = () => {
         };
     
         try {
-            const psicologoAtualizado = await atualizarPerfilPsicologo(psicologo.id, dadosAtualizados);
+            const psicologoAtualizado = await atualizarPerfilPsicologo(idPsicologo, dadosAtualizados);
             setPsicologo(psicologoAtualizado);
             alert('Perfil atualizado com sucesso!');
         } catch (error) {
@@ -81,8 +109,16 @@ const AtualizarPerfilPsicologo: React.FC = () => {
         window.history.back();
     };
 
-    if (!psicologo) {
+    if (carregando) {
         return <div className="loading">Carregando...</div>;
+    }
+    
+    if (erro) {
+        return <div className="erro">{erro}</div>;
+    }
+
+    if (!psicologo) {
+        return <div className="erro">Não foi possível carregar os dados do perfil.</div>;
     }
 
     const getBotaoTexto = () => {
