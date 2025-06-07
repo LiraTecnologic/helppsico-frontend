@@ -18,10 +18,6 @@
     justify-content: center;
 }
 
-.div-h1 h1 {
-    height: 1.5rem; 
-}
-
 .div-h1 hr {
     border: solid 1px #1A56DB;
 }
