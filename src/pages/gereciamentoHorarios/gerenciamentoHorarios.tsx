@@ -3,7 +3,7 @@ import Header from "../../components/layout/header/header";
 import { useEffect, useState } from "react";
 import ConfiguracaoHorario from "../../components/layout/configurarHorario/configurarHorario";
 import TabelaHorarios from "../../components/layout/configurarHorario/tabelaHorarios";
-import { buscarHorarios } from "./gerenciamentoHorariosService";
+import { salvarHorario, buscarHorarios } from "../../services/horarios.service";
 import HorarioModel from "../../models/horario";
 
 export default function GerenciamentoDeHorarios() {
@@ -16,19 +16,24 @@ export default function GerenciamentoDeHorarios() {
   const [tempoSessao, setTempoSessao] = useState<number>(50);
   const [intervaloSessao, setIntervaloSessao] = useState<number>(10);
 
+  const idPsicologo = "123";
+
   const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
 
   useEffect(() => {
     async function carregarHorarios() {
       try {
-        const data = await buscarHorarios();
+        const data: HorarioModel[] = await buscarHorarios();
         if (data.length === 0) {
           setHasConfig(false);
         } else {
           setHasConfig(true);
           setHorarios(data);
-          const diasUnicos = [...new Set(data.map(h => h.diaSemana))];
+
+          const diasUnicos = [...new Set(data.map((h: HorarioModel) => h.diaSemana))];
+          diasUnicos.sort((a, b) => ordemDias.indexOf(a) - ordemDias.indexOf(b));
           setDiasSelecionados(diasUnicos);
+
           setHoraInicio(data[0].inicio);
           setHoraFim(data[0].fim);
         }
@@ -39,6 +44,38 @@ export default function GerenciamentoDeHorarios() {
 
     carregarHorarios();
   }, []);
+
+  async function salvarHorariosSelecionados(novosCards: Record<string, string>) {
+    const horariosASalvar = [];
+
+    for (const id in novosCards) {
+      if (novosCards[id] === "Disponivel para Agendamento") {
+        const [diaSemana, faixa] = id.split("-");
+        if (!faixa) continue;
+        const [inicio, fim] = faixa.trim().split(" - ");
+
+        horariosASalvar.push({
+          diaSemana,
+          inicio,
+          fim,
+          disponivel: true,
+          psicologo: { id: idPsicologo },
+        });
+      }
+    }
+
+    try {
+      for (const horario of horariosASalvar) {
+        await salvarHorario(horario);
+      }
+      alert("Horários salvos com sucesso!");
+      const data = await buscarHorarios();
+      setHorarios(data);
+    } catch (error) {
+      alert("Erro ao salvar horários.");
+      console.error(error);
+    }
+  }
 
   return (
     <>
@@ -58,7 +95,8 @@ export default function GerenciamentoDeHorarios() {
             duracao={tempoSessao}
             intervalo={intervaloSessao}
             onEditar={() => setOpenModal(true)}
-            horarios={horarios} // novo prop
+            horarios={horarios}
+            onSalvar={salvarHorariosSelecionados}
           />
         )}
       </div>

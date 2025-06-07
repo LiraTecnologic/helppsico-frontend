@@ -1,8 +1,8 @@
-import HorairoModel from "./horario";
-import PacienteModel from "./paciente";
+import HorarioModel from "./horario";
+import PsicologoModel from "./psicologo";
 
 export default interface HorairoPsicologoModel {
     id: string,
-    psicologo: PacienteModel,
-    horario: HorairoModel
+    psicologo: PsicologoModel,
+    horario: HorarioModel
 }
