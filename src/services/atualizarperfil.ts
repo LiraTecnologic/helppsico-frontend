@@ -1,17 +1,18 @@
 import axios from 'axios';
 import PsicologoModel from '../models/psicologo';
+import Response from '../models/response';
 
-
-export function atualizarPerfilPsicologo(idPsicologo: string, dadosAtualizados: Partial<PsicologoModel>): Promise<PsicologoModel> {
-    return axios.put<PsicologoModel>(
+export function atualizarPerfilPsicologo(idPsicologo: string, dadosAtualizados: Partial<PsicologoModel>): Promise<Response<PsicologoModel>> {
+    return axios.put<Response<PsicologoModel>>(
         `http://localhost:8080/psicologo/${idPsicologo}`,
         dadosAtualizados
     )
     .then(response => response.data)
     .catch(err => {
-        console.error("Erro ao atualizar o perfil do Psicólogo", err);
-        throw err;
+        console.error("Erro ao atualizar o perfil do Psicólogo:", err);
+        return {
+            dado: null,
+            erro: err
+        };
     });
 }
-
-
