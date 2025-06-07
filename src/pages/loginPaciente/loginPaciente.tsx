@@ -3,7 +3,6 @@ import InputTotal from '../../components/commmon/Inputs/InputTotal';
 import Botao from '../../components/commmon/botoes/botao/botao';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import PacienteModel from '../../models/paciente';
 
 
 import { login } from '../../services/auth.service';
@@ -20,34 +19,37 @@ const Login = () => {
 
 
   const validarLogin = async () => {
-    if (!email || !senha) {
-      alert('Por favor, preencha todos os campos antes de continuar.');
-      return;
-    }
+    localStorage.setItem('id-paciente', '4a0dd9db-3b2a-4c08-8ab3-2af4f6854650')
+    navigate('/paciente/painel');
+
+    // if (!email || !senha) {
+    //   alert('Por favor, preencha todos os campos antes de continuar.');
+    //   return;
+    // }
 
 
-    if (!validarSenha(senha)) {
-      alert(
-        'A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.'
-      );
-      return;
-    }
+    // if (!validarSenha(senha)) {
+    //   alert(
+    //     'A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.'
+    //   );
+    //   return;
+    // }
 
-    try {
+    // try {
     
-      const resposta = await login(email, senha, 'PACIENTE');
+    //   const resposta = await login(email, senha, 'PACIENTE');
 
-      if (resposta.dado) {
+    //   if (resposta.dado) {
       
-        navigate('/paciente/painel');
-      } else {
+    //     navigate('/paciente/painel');
+    //   } else {
        
-        alert(`Falha na autenticação: ${resposta.erro}`);
-      }
-    } catch (err) {
+    //     alert(`Falha na autenticação: ${resposta.erro}`);
+    //   }
+    // } catch (err) {
      
-      alert(`Ocorreu um erro ao tentar logar: ${err}`);
-    }
+    //   alert(`Ocorreu um erro ao tentar logar: ${err}`);
+    // }
   };
 
   return (

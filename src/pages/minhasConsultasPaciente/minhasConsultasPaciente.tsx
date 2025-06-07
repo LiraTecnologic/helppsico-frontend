@@ -29,8 +29,7 @@ export default function DetalhesSessao() {
       }
     }
 
-    // const idPaciente = localStorage.getItem('id-paciente');
-    const idPaciente = '4a0dd9db-3b2a-4c08-8ab3-2af4f6854650';
+    const idPaciente = localStorage.getItem('id-paciente');
 
     if (idPaciente) {
       consultarConsultaFutura(idPaciente);

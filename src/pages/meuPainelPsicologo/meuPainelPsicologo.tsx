@@ -62,14 +62,13 @@ export default function MeuPainelPsicologo() {
         }
 
         async function carregarHorarios(id:string) {
-            const horarios = await listarHorariosPsicologo(idPsicologo);
+            const horarios = await listarHorariosPsicologo(id);
             if(horarios.dado) {
                 setHorarios(horarios.dado);
             }
         }
 
-        // const idPsicologo = localStorage.getItem('id-psicologo');
-        const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+        const idPsicologo = localStorage.getItem('id-psicologo');
 
         if (idPsicologo) {
             carregarConsultas(idPsicologo);

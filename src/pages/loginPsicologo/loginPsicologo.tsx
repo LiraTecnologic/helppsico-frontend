@@ -21,20 +21,21 @@ const Login = () => {
     };
 
     const validarLogin = async () => {
-        if (!crp || !senha) {
-            alert('Por favor, preencha todos os campos antes de continuar.');
-            return;
-        }
+        // if (!crp || !senha) {
+        //     alert('Por favor, preencha todos os campos antes de continuar.');
+        //     return;
+        // }
 
-        if (!validarSenha(senha)) {
-            alert('A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
-            return;
-        }
+        // if (!validarSenha(senha)) {
+        //     alert('A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
+        //     return;
+        // }
 
 
         //Parte que recebe o retorno do login
         const psicologo: PsicologoModel = {} as PsicologoModel
-        localStorage.setItem('id-psicologo', psicologo.id);
+        localStorage.setItem('id-psicologo', '0873d229-fd10-488a-b7e9-f294aa10e5db');
+        navigate('/psicologo/painel');
     };
 
     return (
