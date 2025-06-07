@@ -3,9 +3,9 @@ import PsicologoModel from '../models/psicologo';
 import Page from '../models/page';
 import Response from '../models/response';
 
-export function listarPsicologos(): Promise<Response<Page<PsicologoModel>>> {
+export function listarPsicologos(page:number): Promise<Response<Page<PsicologoModel>>> {
     return axios.get<Response<Page<PsicologoModel>>>(
-        'http://localhost:8080/psicologos'
+        `http://localhost:8080/psicologos?page=${page}&size=15`
     )
         .then(response => response.data)
         .catch(err => {

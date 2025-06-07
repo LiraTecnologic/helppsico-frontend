@@ -15,20 +15,21 @@ export default function ListagemProntuario() {
 
     useEffect(() => {
         async function carregarProntuarios(idPsicologo: string) {
-            const prontuariosConsultados = await consultaProntuariosPsicologo(idPsicologo, 1);
-            console.log(prontuariosConsultados);
-            // setProntuarios(prontuariosConsultados.dado.content);
+            const prontuariosConsultados = await consultaProntuariosPsicologo(idPsicologo, 0);
+
+            if (prontuariosConsultados.dado) {
+                setProntuarios(prontuariosConsultados.dado.content);
+            }
         }
 
-        const idPsicologo = localStorage.getItem('id-psicologo');
+        // const idPsicologo = localStorage.getItem('id-psicologo');
+        const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
-        if(idPsicologo) {
+        if (idPsicologo) {
             carregarProntuarios(idPsicologo);
         }
-        
-    }, []);
 
-    const solicitacoesPendentes = 18;
+    }, []);
 
     return (
         <>
@@ -42,20 +43,25 @@ export default function ListagemProntuario() {
                         <BotaoPrimario texto="Cadastrar Prontuário" />
                     </Link>
                     <Link to="/psicologo/documentos-pendentes">
-                        <BotaoPrimario texto={`(${solicitacoesPendentes}) Solicitações pendentes`} />
+                        <BotaoPrimario texto={`Solicitações pendentes`} />
                     </Link>
 
                 </div>
 
                 <div className="prontuarioGrid">
                     {prontuarios.map((prontuario) => (
-                        <Prontuario
+                        <Link
                             key={prontuario.id}
-                            nomePaciente={prontuario.paciente.nome}
-                            titulo={prontuario.titulo}
-                            fotoPerfilUrl={prontuario.paciente.fotoUrl}
-                            idProntuario={prontuario.id}
-                        />
+                            to={`/psicologo/detalhes-prontuario/${prontuario.id}`}
+                            style={{ textDecoration: 'none', color: 'inherit' }} 
+                        >
+                            <Prontuario
+                                nomePaciente={prontuario.paciente.nome}
+                                titulo={prontuario.titulo}
+                                fotoPerfilUrl={prontuario.paciente.fotoUrl}
+                                idProntuario={prontuario.id}
+                            />
+                        </Link>
                     ))}
                 </div>
             </main>

@@ -16,8 +16,7 @@ export function consultaPsicologo(id: number): Promise<PsicologoModel> {
 }
 
 export function consultaAvaliacoes(): Promise<AvaliacaoModel[]> {
-  return axios
-    .get<AvaliacaoModel[]>(`${API_BASE_URL}/avaliacoes`)
+  return axios.get<AvaliacaoModel[]>(`${API_BASE_URL}/avaliacoes`)
     .then((response) => response.data)
     .catch((err) => {
       console.error('Erro ao carregar avaliações:', err);

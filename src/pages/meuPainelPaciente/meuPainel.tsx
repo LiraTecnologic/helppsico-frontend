@@ -11,7 +11,6 @@ import { useState, useEffect } from 'react';
 import { consultaSessoesFuturasPaciente } from '../../services/consultas.service';
 import { consultarVinculosPaciente } from '../../services/vinculos.service';
 import { consultarDocumentosPaciente } from '../../services/documentos.service';
-import { FaS } from 'react-icons/fa6';
 
 export default function MeuPainelPaciente() {
   const [vinculo, setVinculo] = useState<VinculoModel | null>(null);
@@ -110,6 +109,7 @@ export default function MeuPainelPaciente() {
 
         <ListagemDocumentos
           documentos={documentos}
+          prontuarios={[]}
           onDocumentoClick={handleDocumentoClick}
         />
       </div>

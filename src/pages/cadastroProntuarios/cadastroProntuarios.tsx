@@ -72,16 +72,23 @@ export default function CadastroProntuarios() {
     useEffect(() => {
         async function carregarPacientes(idPsicologo: string) {
             const vinculos = await consultaVinculosPsicologo(idPsicologo, 0);
-            // const pacientes = vinculos.dado.content.map(vinculo => vinculo.paciente);
-            setPacientes(pacientes);
+
+            if (vinculos.dado) {
+                const pacientes = vinculos.dado.content.map(vinculo => vinculo.paciente);
+                setPacientes(pacientes);
+            }
         }
 
         async function carregarConsultas(idPsicologo: string) {
             const consultas = await consultarSessoesAntigasPsicologo(idPsicologo, 0);
-            // setConsultas(consultas.dado.content);
+
+            if(consultas.dado) {
+                setConsultas(consultas.dado.content);
+            }
         }
 
-        const idPsicologo = localStorage.getItem('id-psicologo');
+        // const idPsicologo = localStorage.getItem('id-psicologo');
+        const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
         if (idPsicologo) {
             carregarPacientes(idPsicologo);

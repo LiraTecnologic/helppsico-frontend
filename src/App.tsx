@@ -19,7 +19,7 @@ import LoginPsicologo from "../src/pages/loginPsicologo/loginPsicologo";
 import CadastroPsicologo from "../src/pages/cadastroPsicologo/cadastroPsicologo";
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
 import ListagemPacientes from "./pages/listagemPaciente/listagemPaciente";
-// import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
+import MeuPainelPsicologo from "./pages/meuPainelPsicologo/meuPainelPsicologo";
 import AtualizarPerfilPsicologo from "./pages/atualizarPerfilPsicologo/atualizarPerfilPsicologo";
 import GerenciamentoDeHorarios from "./pages/gereciamentoHorarios/gerenciamentoHorarios";
 import CadastroProntuarios from "./pages/cadastroProntuarios/cadastroProntuarios";
@@ -27,6 +27,10 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 import CadastroDocumento from "./pages/cadastroDocumento/cadastroDocumento";
 import MinhasConsultasPsicologo from "./pages/minhasConsultasPsicologo/minhasConsultasPsicologo";
 import SolicitacaoVinculoPsicologo from "./pages/solicitacaoVinculoPsicologo/solicitacaoVinculo";
+import CardValidacaoCrp from "./components/layout/Cards/cardValidacaoCrp/cardValidacaoCrp";
+import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+import VerPsicologos from "./pages/verPsicologos/verPsicologos";
+import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 // import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
 
 // Nenhum fluxo
@@ -49,27 +53,24 @@ function App() {
         {/* FLUXO DE PSICÓLOGO */}
         <Route path="/psicologo/login" element={<LoginPsicologo />} />
         <Route path="/psicologo/cadastro" element={<CadastroPsicologo />} />
-        {/* <Route path="/psicologo/painel" element={<MeuPainelPsicologo />} /> */}
+        <Route path="/psicologo/painel" element={<MeuPainelPsicologo />} />
         <Route path="/psicologo/pacientes" element={<ListagemPacientes />} />
         <Route path="/psicologo/prontuarios" element={<ListagemProntuario />} />
         <Route path="/psicologo/prontuario/novo" element={<CadastroProntuarios />} />
-        <Route path="/psicologo/prontuario/detalhes" element={<DetalhesProntuario />} />
-        <Route path="/psicologo/horarios" element={<GerenciamentoDeHorarios />} />
+        <Route path="/psicologo/detalhes-prontuario/:id" element={<DetalhesProntuario />} />
+        <Route path="/psicologo/horarios" element={<GerenciamentoDeHorarios />} /> {/*GerenciamentoDeHorarios*/}
         {/* <Route path="/psicologo/documentos-pendentes" element={<RequisicaoDocumento />} /> */}
         <Route path="/psicologo/solicitacao-vinculo" element={<SolicitacaoVinculoPsicologo />} />
         <Route path="/psicologo/sessoes" element={<MinhasConsultasPsicologo />} />
-        <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} />
-        <Route path="/psicologo/documento/novo" element={<CadastroDocumento />} />
+        <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} /> {/*AtualizarPerfilPsico*/}
+        <Route path="/psicologo/documento/novo" element={<CadastroDocumento />} /> {/*Cadastro documento*/}
 
         {/* AMBOS OS FLUXOS */}
-        {/* <Route path="/psicologos" element={<VerPsicologos />} />
-        <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} /> */}
-
-        <Route path="/solicitacaoVinculo" element={<SolicitacaoDeVinculo />} />
-        <Route path="/solicitacaoDocumento" element={<SolicitacaoDocumento />}/>
+        <Route path="/psicologos" element={<VerPsicologos />} />
+        <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} /> {/*Informações*/}
 
         {/* Nenhum fluxo */}
-        {/* <Route path="/validacaoCrp" element={<ValidacaoCrp />} /> */}
+        <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
 
         <Route path="/" element={<LoginPaciente/>}/>
 

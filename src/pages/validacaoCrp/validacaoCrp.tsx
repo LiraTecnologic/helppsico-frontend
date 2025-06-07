@@ -1,98 +1,101 @@
 
-// import Header from '../../components/layout/header/header';
-// import ValidacaoCrpModel from '../../models/validacaoCrp';
-// import { useState, useEffect } from 'react';
-// import './validacaoCrp.css'
-// import CardValidacaoCrp from '../../components/layout/Cards/cardValidacaoCrp/cardValidacaoCrp';
-// import ModalReprovar from '../../components/layout/validacaoCrp/reprovar/modalReprovar';
-// import ModalAprovar from '../../components/layout/validacaoCrp/aprovar/modalAprovar';
-// import { consultaValidacoesCrp } from './validacaoCrp.service';
+import Header from '../../components/layout/header/header';
+import ValidacaoCrpModel from '../../models/validacaoCrp';
+import { useState, useEffect } from 'react';
+import './validacaoCrp.css'
+import CardValidacaoCrp from '../../components/layout/Cards/cardValidacaoCrp/cardValidacaoCrp';
+import ModalReprovar from '../../components/layout/validacaoCrp/reprovar/modalReprovar';
+import ModalAprovar from '../../components/layout/validacaoCrp/aprovar/modalAprovar';
+import { consultaValidacoesCrp } from './validacaoCrp.service';
 
-// export default function ValidacaoCrp() {
+export default function ValidacaoCrp() {
 
-//     const [validacoes, setValidacoes] = useState<ValidacaoCrpModel[]>([]);
-//     const [mostrarModalReprovar, setMostrarModalReprovar] = useState(false);
-//     const [mostrarModalAprovar, setMostrarModalAprovar] = useState(false);
-//     const [psicologoSelecionado, setPsicologoSelecionado] = useState<string | null>(null);
+    const [validacoes, setValidacoes] = useState<ValidacaoCrpModel[]>([]);
+    const [mostrarModalReprovar, setMostrarModalReprovar] = useState(false);
+    const [mostrarModalAprovar, setMostrarModalAprovar] = useState(false);
+    const [psicologoSelecionado, setPsicologoSelecionado] = useState<string | null>(null);
 
-//     useEffect(() => {
-//         async function carregarValidacoes() {
-//             const validacoes = await consultaValidacoesCrp(0);
-//             setValidacoes(validacoes.dado.content);
-//         }
+    useEffect(() => {
+        async function carregarValidacoes() {
+            const validacoes = await consultaValidacoesCrp(0);
 
-//         carregarValidacoes();
-//         console.log(validacoes);
-//     }, []);
+            if(validacoes.dado) {
+                setValidacoes(validacoes.dado.content);   
+            }
+        }
 
-
-//     const abrirModalReprovar = (id: string) => {
-//         setPsicologoSelecionado(id);
-//         setMostrarModalReprovar(true);
-//     };
-
-//     const fecharModalReprovar = () => {
-//         setMostrarModalReprovar(false);
-//         setPsicologoSelecionado(null);
-//     };
-
-//     const abrirModalAprovar = (id: string) => {
-//         setPsicologoSelecionado(id);
-//         setMostrarModalAprovar(true);
-//     };
-
-//     const fecharModalAprovar = () => {
-//         setMostrarModalAprovar(false);
-//         setPsicologoSelecionado(null);
-//     };
-
-//     const removerValidacaoDaLista = (id: string) => {
-//         setValidacoes(prev => prev.filter(v => v.id !== id));
-//     };
+        carregarValidacoes();
+        console.log(validacoes);
+    }, []);
 
 
+    const abrirModalReprovar = (id: string) => {
+        setPsicologoSelecionado(id);
+        setMostrarModalReprovar(true);
+    };
 
-//     return (
-//         <>
-//             <Header fluxo='' headerPsicologo={false}></Header>
-//             <main className='main-validacao-crp'>
-//                 <h1 className='titulo-main-validacao-crp' >CRPs({validacoes.length})</h1>
-//                 {validacoes.map((validacao) => (
-//                     <CardValidacaoCrp
-//                         key={validacao.id}
-//                         validacao={validacao}
-//                         onReprovar={() => abrirModalReprovar(validacao.id)}
-//                         onAprovar={() => abrirModalAprovar(validacao.id)}
-//                     />
-//                 ))}
+    const fecharModalReprovar = () => {
+        setMostrarModalReprovar(false);
+        setPsicologoSelecionado(null);
+    };
 
-//             </main>
+    const abrirModalAprovar = (id: string) => {
+        setPsicologoSelecionado(id);
+        setMostrarModalAprovar(true);
+    };
 
+    const fecharModalAprovar = () => {
+        setMostrarModalAprovar(false);
+        setPsicologoSelecionado(null);
+    };
 
-//             {mostrarModalReprovar && (
-//                 <>
-//                     <div className='modal-overlay'></div>
-//                     <ModalReprovar
-//                         onClose={fecharModalReprovar}
-//                         idPsicologo={psicologoSelecionado}
-//                         validacao={validacoes.find(v => v.id === psicologoSelecionado)!}
-//                         onValidado={removerValidacaoDaLista}
-//                     />
-//                 </>
-//             )}
+    const removerValidacaoDaLista = (id: string) => {
+        setValidacoes(prev => prev.filter(v => v.id !== id));
+    };
 
 
-//             {mostrarModalAprovar && (
-//                 <>
-//                     <div className='modal-overlay'></div>
-//                     <ModalAprovar
-//                         onClose={fecharModalAprovar}
-//                         idPsicologo={psicologoSelecionado}
-//                         validacao={validacoes.find(v => v.id === psicologoSelecionado)!}
-//                         onValidado={removerValidacaoDaLista}
-//                     />
-//                 </>
-//             )}
-//         </>
-//     );
-// }
+
+    return (
+        <>
+            <Header fluxo='' headerPsicologo={false}></Header>
+            <main className='main-validacao-crp'>
+                <h1 className='titulo-main-validacao-crp' >CRPs({validacoes.length})</h1>
+                {validacoes.map((validacao) => (
+                    <CardValidacaoCrp
+                        key={validacao.id}
+                        validacao={validacao}
+                        onReprovar={() => abrirModalReprovar(validacao.id)}
+                        onAprovar={() => abrirModalAprovar(validacao.id)}
+                    />
+                ))}
+
+            </main>
+
+
+            {mostrarModalReprovar && (
+                <>
+                    <div className='modal-overlay'></div>
+                    <ModalReprovar
+                        onClose={fecharModalReprovar}
+                        idPsicologo={psicologoSelecionado}
+                        validacao={validacoes.find(v => v.id === psicologoSelecionado)!}
+                        onValidado={removerValidacaoDaLista}
+                    />
+                </>
+            )}
+
+
+            {mostrarModalAprovar && (
+                <>
+                    <div className='modal-overlay'></div>
+                    <ModalAprovar
+                        onClose={fecharModalAprovar}
+                        idPsicologo={psicologoSelecionado}
+                        validacao={validacoes.find(v => v.id === psicologoSelecionado)!}
+                        onValidado={removerValidacaoDaLista}
+                    />
+                </>
+            )}
+        </>
+    );
+}

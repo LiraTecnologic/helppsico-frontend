@@ -12,7 +12,7 @@ export default interface VinculoModel {
 enum StatusVinculo {
   PENDENTE = "PENDENTE",
   ATIVO = "ATIVO",
-  INATIVO = "INATIVO",
+  RECUSADO = "RECUSADO",
 }
 
 export { StatusVinculo };

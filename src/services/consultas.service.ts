@@ -5,7 +5,7 @@ import Response from '../models/response';
 
 export function consultaSessoesFuturasPsicologo(idPsicologo: string, page: number): Promise<Response<Page<ConsultaModel>>> {
     return axios.get<Response<Page<ConsultaModel>>>(
-        `http://localhost:8080/consultas/futuras/psicologo/${idPsicologo}?page=${page}&size=${15}`
+        `http://localhost:8080/consultas/psicologo/futuras/${idPsicologo}?page=${page}&size=${15}`
     )
         .then(response => response.data)
         .catch(err => {
@@ -65,7 +65,7 @@ export function consultarSessoesAntigasPaciente(idPaciente: string, page: number
 
 export function consultarSessoesAntigasPsicologo(idPsicologo: string, page: number): Promise<Response<Page<ConsultaModel>>> {
     return axios.get<Response<Page<ConsultaModel>>>(
-        `http://localhost:8080/consultas/antigas/psicologo/${idPsicologo}?page=${page}&size=${15}`
+        `http://localhost:8080/consultas/psicologo/historico/${idPsicologo}?page=${page}&size=${15}`
     )
         .then(response => response.data)
         .catch(err => {

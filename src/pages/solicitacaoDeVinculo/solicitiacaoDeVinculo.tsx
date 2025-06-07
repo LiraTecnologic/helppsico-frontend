@@ -3,7 +3,6 @@ import Header from '../../components/layout/header/header';
 import CardSolicitacao from '../../components/layout/Cards/cardSolicitacao/cardSolicitacao';
 import { useEffect, useState } from 'react';
 import PopupCancelamento from '../../components/layout/PopupCancelamento/popupCancelamento';
-import { StatusVinculo } from '../../models/vinculo';
 import VinculoModel from '../../models/vinculo';
 import { solicitarVinculosPaciente, cancelarSolicitacao } from './solicitiacaoDeVinculoService';
 import calcular from '../../utils/calculoData';

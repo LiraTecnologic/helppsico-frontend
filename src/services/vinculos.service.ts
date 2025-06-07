@@ -5,7 +5,7 @@ import Response from '../models/response';
 
 export function consultaVinculosPsicologo(idPsicologo: string, page: number): Promise<Response<Page<VinculoModel>>> {
     return axios.get<Response<Page<VinculoModel>>>(
-        `http://localhost:8080/vinculos/psicologo/${idPsicologo}?page=${page}&size=${15}`
+        `http://localhost:8080/vinculos/listar/psicologo/${idPsicologo}?page=${page}&size=${15}`
     )
         .then(response => response.data)
         .catch(err => {

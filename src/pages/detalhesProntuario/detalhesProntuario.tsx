@@ -8,6 +8,8 @@ import { formatarData } from "../../utils/formataData";
 import { useParams } from 'react-router-dom';
 
 export default function DetalhesProntuario() {
+    const { id } = useParams();
+
     const [isEditing, setIsEditing] = useState(false);
 
     const [prontuario, setProntuario] = useState<ProntuarioModel | null>(null);
@@ -50,8 +52,6 @@ export default function DetalhesProntuario() {
     }
 
     useEffect(() => {
-        const { id } = useParams();
-
         async function carregarProntuario(idPronturio: string) {
             const prontuario = await consultarProntuarioPorId(idPronturio);
             setProntuario(prontuario.dado);

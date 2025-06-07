@@ -1,10 +1,7 @@
 import './listagemPaciente.css';
 import { useEffect, useState } from 'react';
-import { jwtDecode } from "jwt-decode";
-import axios from 'axios';
 import Header from '../../components/layout/header/header';
 import CardPaciente from '../../components/layout/Cards/cardPaciente/cardPaciente';
-import PacienteModel from '../../models/paciente';
 import { consultaVinculosPsicologo } from '../../services/vinculos.service';
 import VinculoModel from '../../models/vinculo';
 import calcular from '../../utils/calculoData';
@@ -18,16 +15,23 @@ export default function ListagemPacientes() {
   const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
 
   useEffect(() => {
-    const idPsicologo = localStorage.getItem('id-psicologo');
+    // const idPsicologo = localStorage.getItem('id-psicologo');
+    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
     async function carregarVinculos(idPsicologo: string) {
-      const vinculos = await consultaVinculosPsicologo(idPsicologo, 1);
-      setPacientes(vinculos.dado.content);
+      const vinculos = await consultaVinculosPsicologo(idPsicologo, 0);
+
+      if(vinculos.dado) {
+        setPacientes(vinculos.dado.content);
+      }
     }
 
     async function carregarProntuarios(idPsicologo: string) {
-      const prontuarios = await consultaProntuariosPsicologo(idPsicologo, 1);
-      setProntuarios(prontuarios.content);
+      const prontuarios = await consultaProntuariosPsicologo(idPsicologo, 0);
+
+      if(prontuarios.dado) {
+        setProntuarios(prontuarios.dado.content);
+      }
     }
 
     if (idPsicologo) {
