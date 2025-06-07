@@ -1,3 +1,4 @@
+import HorarioModel from "../../../models/horario";
 import "./tabelaHorarios.css";
 import { useEffect, useState } from "react";
 
@@ -8,6 +9,8 @@ interface TabelaHorariosProps {
   duracao: number;
   intervalo: number;
   onEditar: () => void;
+  horarios: HorarioModel[];
+  onSalvar: (novosCards: Record<string, string>) => void;
 }
 
 const nomesDias: Record<string, string> = {
@@ -46,7 +49,7 @@ function gerarIntervalos(
   return intervalos;
 }
 
-type StatusCard = "Disponibilizar Agendamento" | "Disponivel para Agendamento";
+type StatusCard = "Disponibilizar Agendamento" | "Disponivel para Agendamento" | "Reseservado";
 type AcaoSelecionada = "para_disponibilizar" | "para_remover";
 
 export default function TabelaHorarios({
@@ -56,30 +59,43 @@ export default function TabelaHorarios({
   duracao,
   intervalo,
   onEditar,
+  horarios,
+  onSalvar,
 }: TabelaHorariosProps) {
   const intervalos = gerarIntervalos(inicio, fim, duracao, intervalo);
 
-  const [cards, setCards] = useState<Record<string, StatusCard>>({});
-  const [selecionados, setSelecionados] = useState<
-    Map<string, AcaoSelecionada>
-  >(new Map());
+  const inicialCards = () => {
+    const cards: Record<string, StatusCard> = {};
+
+    dias.forEach((dia) => {
+      intervalos.forEach((faixa) => {
+        const id = `${dia}-${faixa}`;
+
+        const horarioEncontrado = horarios.find(
+          (h) =>
+            h.diaSemana === dia &&
+            `${h.inicio} - ${h.fim}` === faixa
+        );
+
+        if (horarioEncontrado) {
+          cards[id] = horarioEncontrado.disponivel
+            ? "Disponivel para Agendamento"
+            : "Disponibilizar Agendamento";
+        } else {
+          cards[id] = "Disponibilizar Agendamento";
+        }
+      });
+    });
+
+    return cards;
+  };
+
+  const [cards, setCards] = useState<Record<string, StatusCard>>(inicialCards);
+  const [selecionados, setSelecionados] = useState<Map<string, AcaoSelecionada>>(new Map());
 
   useEffect(() => {
-    setCards((prevCards) => {
-      const novosCards = { ...prevCards };
-
-      dias.forEach((dia) => {
-        intervalos.forEach((faixa) => {
-          const id = `${dia}-${faixa}`;
-          if (!(id in novosCards)) {
-            novosCards[id] = "Disponibilizar Agendamento";
-          }
-        });
-      });
-
-      return novosCards;
-    });
-  }, [dias, inicio, fim, duracao, intervalo]);
+    setCards(inicialCards);
+  }, [dias, inicio, fim, duracao, intervalo, horarios]);
 
   const toggleSelecionado = (id: string) => {
     const novoMap = new Map(selecionados);
@@ -111,6 +127,9 @@ export default function TabelaHorarios({
 
     setCards(novosCards);
     setSelecionados(new Map());
+
+    // Chamar função para salvar no backend os horários disponíveis
+    onSalvar(novosCards);
   };
 
   return (
@@ -193,9 +212,7 @@ export default function TabelaHorarios({
       <div className="th-botao-area">
         {selecionados.size > 0 && (
           <div className="th-salvar">
-            <button onClick={salvarSelecionados}>
-              Salvar horários selecionados
-            </button>
+            <button onClick={salvarSelecionados}>Salvar Selecionados</button>
           </div>
         )}
       </div>
