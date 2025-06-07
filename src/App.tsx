@@ -31,6 +31,7 @@ import CardValidacaoCrp from "./components/layout/Cards/cardValidacaoCrp/cardVal
 import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
+import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
 // import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
 
 // Nenhum fluxo
@@ -59,15 +60,15 @@ function App() {
         <Route path="/psicologo/prontuario/novo" element={<CadastroProntuarios />} />
         <Route path="/psicologo/detalhes-prontuario/:id" element={<DetalhesProntuario />} />
         <Route path="/psicologo/horarios" element={<GerenciamentoDeHorarios />} /> {/*GerenciamentoDeHorarios*/}
-        {/* <Route path="/psicologo/documentos-pendentes" element={<RequisicaoDocumento />} /> */}
+        <Route path="/psicologo/documentos-pendentes" element={<RequisicaoDocumento />} /> {/*João vai ligar*/}
         <Route path="/psicologo/solicitacao-vinculo" element={<SolicitacaoVinculoPsicologo />} />
         <Route path="/psicologo/sessoes" element={<MinhasConsultasPsicologo />} />
         <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} /> {/*AtualizarPerfilPsico*/}
-        <Route path="/psicologo/documento/novo" element={<CadastroDocumento />} /> {/*Cadastro documento*/}
+        <Route path="/psicologo/documento/novo" element={<CadastroDocumento />} /> {/*João vai ligar*/}
 
         {/* AMBOS OS FLUXOS */}
         <Route path="/psicologos" element={<VerPsicologos />} />
-        <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} /> {/*Informações*/}
+        <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />  {/*João ajustar*/}
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />

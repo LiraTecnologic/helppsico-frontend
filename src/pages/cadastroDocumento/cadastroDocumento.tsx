@@ -13,7 +13,7 @@ export default function CadastroDocumento() {
     const idSolicitacao = "789e4567-e89b-12d3-a456-426614174000"; // mock
 
     useEffect(() => {
-        setTipoDocumento('ATESTADO');
+        setTipoDocumento('DECLARACAO');
     }, []);
 
     const handleSubmitDocumento = async (dados: DadosGeraisDocumentoModel) => {

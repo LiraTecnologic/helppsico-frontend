@@ -2,25 +2,38 @@ import axios from 'axios';
 import PsicologoModel from '../../models/psicologo';
 import { AvaliacaoModel } from '../../models/avaliacao';
 import { HorarioModel } from '../../models/horario';
+import Response from '../../models/response';
+import Page from '../../models/page';
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'http://localhost:8080';
 
-export function consultaPsicologo(id: number): Promise<PsicologoModel> {
-  return axios
-    .get<PsicologoModel>(`${API_BASE_URL}/psicologo/${id}`)
-    .then((response) => response.data)
-    .catch((err) => {
+export function consultaPsicologo(id: string): Promise<Response<PsicologoModel>> {
+  return axios.get<Response<PsicologoModel>>(`${API_BASE_URL}/psicologos/${id}`)
+    .then(response => response.data)
+    .catch(err => {
       console.error('Erro ao carregar psicólogo:', err);
-      throw err;
+      return {
+        dado: {} as PsicologoModel,
+        erro: err
+      }
     });
 }
 
-export function consultaAvaliacoes(): Promise<AvaliacaoModel[]> {
-  return axios.get<AvaliacaoModel[]>(`${API_BASE_URL}/avaliacoes`)
-    .then((response) => response.data)
-    .catch((err) => {
+export function consultaAvaliacoes(idPsicologo: string, page: number): Promise<Response<Page<AvaliacaoModel>>> {
+  return axios.get<Response<Page<AvaliacaoModel>>>(`${API_BASE_URL}/avaliacoes/psicologo/${idPsicologo}?page=${page}&size=15`)
+    .then(response => response.data)
+    .catch(err => {
       console.error('Erro ao carregar avaliações:', err);
-      return [];
+      return {
+        dado: {
+          content: [],
+          totalElements: 0,
+          totalPages: 0,
+          number: 0,
+          size: 0
+        },
+        erro: err
+      };
     });
 }
 

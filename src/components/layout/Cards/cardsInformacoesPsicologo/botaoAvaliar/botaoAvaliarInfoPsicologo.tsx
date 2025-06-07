@@ -5,13 +5,10 @@ import SetaEsquerda from "../../../../../assets/left-seta.png";
 import ModalAvaliacaoPsicologo from '../../../modalAvaliacaoPsicologo/modalAvaliacaoPsicologo';
 
 import "./botaoAvaliarInfoPsicologo.css";
+import PsicologoModel from "../../../../../models/psicologo";
 
 interface BotaoAvaliarProps {
-    psicologo: {
-        id: string;
-        nome: string;
-        foto: string;
-    };
+    psicologo: PsicologoModel;
     onAvaliacaoSubmit?: (rating: number, comment: string) => void;
 }
 
