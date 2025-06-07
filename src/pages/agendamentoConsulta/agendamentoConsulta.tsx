@@ -6,7 +6,7 @@ import TabelaHorarioConsulta from "../../components/layout/tabelaHorarioConsulta
 import { useEffect, useState } from "react";
 import PsicologoModel from "../../models/psicologo";
 import { consultarPsicologoPeloId, consultarVinculoPaciente } from './agendamentoConsulta.service';
-import { listarHorariosPsicologo } from '../../services/horarioPsicologo.service'
+import { listarHorariosPsicologo } from '../../services/horarios.service';
 import { HorarioModel } from "../../models/horario";
 import { cadastrarConsulta } from './agendamentoConsulta.service';
 import VinculoModel from "../../models/vinculo";
@@ -39,7 +39,7 @@ export default function AgendamentoConsulta() {
           const horario: HorarioModel = {
             id: idHorario,
             psicologo: {} as PsicologoModel,
-            diaSemana: [],
+            diaSemana: '',
             inicio: '',
             fim: '',
             intervalo: 0,
@@ -99,7 +99,7 @@ export default function AgendamentoConsulta() {
 
   useEffect(() => {
     async function carregarHorarios(idPsicologo: string) {
-      const horariosResponse = await listarHorariosPsicologo(idPsicologo, 0);
+      const horariosResponse = await listarHorariosPsicologo(idPsicologo);
       console.log(horariosResponse);
       if(horariosResponse.dado) {
         setHorariosPsicologo(horariosResponse.dado);

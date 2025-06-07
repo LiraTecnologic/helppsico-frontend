@@ -7,7 +7,7 @@ import CardInfoAvaliacao from "../../components/layout/Cards/cardsInformacoesPsi
 import BotaoAvaliarInfoPsicologo from "../../components/layout/Cards/cardsInformacoesPsicologo/botaoAvaliar/botaoAvaliarInfoPsicologo";
 import CardAvaliacao from "../../components/layout/Cards/cardsInformacoesPsicologo/avaliacao/cardAvaliacao";
 import { consultaPsicologo, consultaAvaliacoes } from "./informacoesPsicologoService";
-import { listarHorariosPsicologo } from '../../services/horarioPsicologo.service';
+import { listarHorariosPsicologo } from '../../services/horarios.service';
 import PsicologoModel from "../../models/psicologo";
 import { AvaliacaoModel } from "../../models/avaliacao";
 import { HorarioModel } from "../../models/horario";

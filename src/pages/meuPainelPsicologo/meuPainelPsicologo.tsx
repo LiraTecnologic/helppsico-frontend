@@ -10,7 +10,7 @@ import ProntuarioModel from '../../models/prontuario';
 import { consultaProntuariosPsicologo } from "../../services/prontuarios.service";
 import { consultaVinculosPsicologo } from '../../services/vinculos.service';
 import { consultaSessoesFuturasPsicologo } from '../../services/consultas.service';
-import { listarHorariosPsicologo } from '../../services/horarioPsicologo.service';
+import { listarHorariosPsicologo } from '../../services/horarios.service';
 import BlocoHorario from '../../components/layout/blocoHorario/blocoHorario';
 import { Link } from "react-router-dom";
 import { HorarioModel } from '../../models/horario';

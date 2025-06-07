@@ -1,4 +1,4 @@
-import HorarioModel from "../../../models/horario";
+import { HorarioModel } from "../../../models/horario";
 import "./tabelaHorarios.css";
 import { useEffect, useState } from "react";
 
@@ -22,6 +22,11 @@ const nomesDias: Record<string, string> = {
   SAB: "Sábado",
   DOM: "Domingo",
 };
+
+function formatarHora(hora: string): string {
+  return hora.slice(0, 5); 
+}
+
 
 function gerarIntervalos(
   inicio: string,
@@ -74,7 +79,7 @@ export default function TabelaHorarios({
         const horarioEncontrado = horarios.find(
           (h) =>
             h.diaSemana === dia &&
-            `${h.inicio} - ${h.fim}` === faixa
+            `${formatarHora(h.inicio)} - ${formatarHora(h.fim)}` === faixa
         );
 
         if (horarioEncontrado) {
@@ -128,7 +133,6 @@ export default function TabelaHorarios({
     setCards(novosCards);
     setSelecionados(new Map());
 
-    // Chamar função para salvar no backend os horários disponíveis
     onSalvar(novosCards);
   };
 
@@ -180,23 +184,21 @@ export default function TabelaHorarios({
                 return (
                   <div
                     key={id}
-                    className={`th-card ${
-                      selecionado
+                    className={`th-card ${selecionado
                         ? acao === "para_disponibilizar"
                           ? "th-card-disponibilizar"
                           : "th-card-remover"
                         : status === "Disponivel para Agendamento"
-                        ? "th-card-disponivel"
-                        : ""
-                    }`}
+                          ? "th-card-disponivel"
+                          : ""
+                      }`}
                     onClick={() => toggleSelecionado(id)}
                   >
                     <div
-                      className={`th-status ${
-                        status === "Disponibilizar Agendamento"
+                      className={`th-status ${status === "Disponibilizar Agendamento"
                           ? "th-status-livre"
                           : "th-status-disponivel"
-                      }`}
+                        }`}
                     >
                       {status}
                     </div>

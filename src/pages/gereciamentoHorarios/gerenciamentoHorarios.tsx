@@ -3,40 +3,59 @@ import Header from "../../components/layout/header/header";
 import { useEffect, useState } from "react";
 import ConfiguracaoHorario from "../../components/layout/configurarHorario/configurarHorario";
 import TabelaHorarios from "../../components/layout/configurarHorario/tabelaHorarios";
-import { salvarHorario, buscarHorarios } from "../../services/horarios.service";
+import { salvarHorario, listarHorariosPsicologo } from "../../services/horarios.service";
 import { HorarioModel } from "../../models/horario";
+import PsicologoModel from "../../models/psicologo";
+import EnderecoModel from "../../models/endereco";
+import { converterDiaSemana } from '../../utils/converteDias';
 
 export default function GerenciamentoDeHorarios() {
   const [hasConfig, setHasConfig] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [horarios, setHorarios] = useState<HorarioModel[]>([]);
   const [diasSelecionados, setDiasSelecionados] = useState<string[]>([]);
-  const [horaInicio, setHoraInicio] = useState("08:00");
-  const [horaFim, setHoraFim] = useState("18:00");
+  const [horaInicio, setHoraInicio] = useState("08:00:00");
+  const [horaFim, setHoraFim] = useState("18:00:00");
   const [tempoSessao, setTempoSessao] = useState<number>(50);
   const [intervaloSessao, setIntervaloSessao] = useState<number>(10);
 
-  const idPsicologo = "123";
+  const idPsicologo: string = "0873d229-fd10-488a-b7e9-f294aa10e5db";
 
   const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
+  
+  function calcularFim(inicio: string, duracao: number): string {
+    const [hora, minuto] = inicio.split(':').map(Number);
+    const data = new Date();
+    data.setHours(hora, minuto + duracao);
+
+    const horaFim = data.getHours().toString().padStart(2, '0');
+    const minutoFim = data.getMinutes().toString().padStart(2, '0');
+    return `${horaFim}:${minutoFim}`;
+  }
 
   useEffect(() => {
     async function carregarHorarios() {
       try {
-        const data: HorarioModel[] = await buscarHorarios();
-        if (data.length === 0) {
-          setHasConfig(false);
-        } else {
-          setHasConfig(true);
-          setHorarios(data);
+        const horarios = await listarHorariosPsicologo(idPsicologo);
 
-          const diasUnicos = [...new Set(data.map((h: HorarioModel) => h.diaSemana))];
-          diasUnicos.sort((a, b) => ordemDias.indexOf(a) - ordemDias.indexOf(b));
-          setDiasSelecionados(diasUnicos);
+        if (horarios.dado) {
+          const data = horarios.dado;
+          if (horarios.dado.length === 0) {
+            setHasConfig(false);
+          } else {
+            setHasConfig(true);
+            setHorarios(data);
 
-          setHoraInicio(data[0].inicio);
-          setHoraFim(data[0].fim);
+            const diasUnicos = [...new Set(data.map((h: HorarioModel) => h.diaSemana))];
+            const diasReduzidos = diasUnicos.map(dia => dia.substring(0, 3).toUpperCase());
+            setDiasSelecionados(diasReduzidos);
+
+            setHoraInicio(data[0].inicio);
+            setHoraFim(data[0].fim);
+          }
         }
+
+
       } catch (err) {
         console.error("Erro ao carregar horários:", err);
       }
@@ -66,11 +85,45 @@ export default function GerenciamentoDeHorarios() {
 
     try {
       for (const horario of horariosASalvar) {
-        await salvarHorario(horario);
+
+        const psicologo: PsicologoModel = {
+          id: idPsicologo,
+          nome: '',
+          crp: '',
+          cpf: '',
+          email: '',
+          telefone: '',
+          dataNascimento: '',
+          genero: 'MASCULINO',
+          enderecoAtendimento: {} as EnderecoModel,
+          biografia: '',
+          status: '',
+          fotoUrl: '',
+          valorSessao: 0,
+          tempoSessao: 0
+        }
+
+        const novoHorario: HorarioModel = {
+          id: '',
+          psicologo: psicologo,
+          diaSemana: converterDiaSemana(horario.diaSemana),
+          inicio: horario.inicio,
+          fim: calcularFim(horario.inicio, tempoSessao),
+          intervalo: intervaloSessao,
+          duracao: tempoSessao,
+          disponivel: horario.disponivel
+        }
+
+        console.log('Novo horário: ', novoHorario);
+
+        await salvarHorario(novoHorario);
       }
       alert("Horários salvos com sucesso!");
-      const data = await buscarHorarios();
-      setHorarios(data);
+      const data = await listarHorariosPsicologo(idPsicologo);
+
+      if (data.dado) {
+        setHorarios(data.dado);
+      }
     } catch (error) {
       alert("Erro ao salvar horários.");
       console.error(error);
