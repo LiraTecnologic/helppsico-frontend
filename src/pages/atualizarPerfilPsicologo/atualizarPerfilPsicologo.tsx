@@ -22,7 +22,8 @@ const AtualizarPerfilPsicologo: React.FC = () => {
             setCarregando(true);
             setErro(null);
 
-            const idPsicologo = getUserId();
+            // const idPsicologo = getUserId();
+            const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
             if (!idPsicologo) {
                 setErro('Usuário não identificado. Faça login novamente.');
@@ -32,7 +33,7 @@ const AtualizarPerfilPsicologo: React.FC = () => {
 
             try {
                 const response = await axios.get<Response<PsicologoModel>>(
-                    `http://localhost:8080/psicologo/${idPsicologo}`
+                    `http://localhost:8080/psicologos/${idPsicologo}`
                 );
 
                 if (response.data.dado) {
@@ -50,7 +51,7 @@ const AtualizarPerfilPsicologo: React.FC = () => {
 
                     setBiografia(dadosPsicologo.biografia || '');
                 }
-                
+
             } catch (error) {
                 console.error('Erro ao carregar dados do psicólogo:', error);
                 setErro('Não foi possível carregar seus dados. Tente novamente mais tarde.');
@@ -85,7 +86,8 @@ const AtualizarPerfilPsicologo: React.FC = () => {
     const handleEditar = async () => {
         if (!psicologo) return;
 
-        const idPsicologo = getUserId();
+        // const idPsicologo = getUserId();
+        const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
         if (!idPsicologo) {
             alert('Usuário não identificado. Faça login novamente.');
@@ -94,9 +96,21 @@ const AtualizarPerfilPsicologo: React.FC = () => {
 
         const valorConvertido = parseFloat(valorSessao.replace(/[R$\s.]/g, '').replace(',', '.')) || 0;
 
-        const dadosAtualizados = {
+        const dadosAtualizados: PsicologoModel = {
+            id: '',
+            nome: psicologo.nome,
+            crp: psicologo.crp,
+            cpf: psicologo.cpf,
+            email: psicologo.email,
+            telefone: psicologo.telefone,
+            dataNascimento: psicologo.dataNascimento,
+            genero: psicologo.genero,
+            enderecoAtendimento: psicologo.enderecoAtendimento,
             biografia,
-            valorSessao: valorConvertido
+            status: psicologo.status,
+            fotoUrl: psicologo.fotoUrl,
+            valorSessao: valorConvertido,
+            tempoSessao: psicologo.tempoSessao
         };
 
         try {

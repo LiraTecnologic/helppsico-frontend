@@ -25,22 +25,13 @@ const Login = () => {
       return;
     }
 
-<<<<<<< HEAD
 
-        return(navigate("/paciente/painel"))
-
-        // colocar o retorno da requisição
-        const paciente : PacienteModel = {} as PacienteModel;
-        localStorage.setItem('id-paciente', paciente.id);
-    };
-=======
     if (!validarSenha(senha)) {
       alert(
         'A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.'
       );
       return;
     }
->>>>>>> d0648e6d1018ce6504134543c12cb7cef64943b6
 
     try {
     
