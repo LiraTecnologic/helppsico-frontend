@@ -1,0 +1,125 @@
+
+
+.requisicao-documento-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .page-header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    height: 1.5rem;
+  }
+  
+  .page-header hr {
+    border: solid 1px #1A56DB;
+    margin-top: 10px;
+  }
+  
+  .requisicoes-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .loading-container p {
+    color: #6c757d;
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .empty-state p {
+    color: #6c757d;
+    font-size: 18px;
+    margin: 0;
+  }
+  
+
+  @media (max-width: 768px) {
+    .requisicao-documento-page {
+      padding: 16px;
+    }
+    
+    .page-header {
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .page-header h1 {
+      font-size: 24px;
+    }
+    
+    .loading-container {
+      padding: 40px 20px;
+    }
+    
+    .empty-state {
+      padding: 40px 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .requisicao-documento-page {
+      padding: 12px;
+    }
+    
+    .page-header {
+      padding: 12px;
+    }
+    
+    .page-header h1 {
+      font-size: 20px;
+    }
+  }

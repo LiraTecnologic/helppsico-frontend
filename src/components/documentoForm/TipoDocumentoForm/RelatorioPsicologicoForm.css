@@ -1,0 +1,37 @@
+.relatorio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.relatorio-grid-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  grid-column: span 3;
+}
+
+.subtext-relatorio {
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.relatorio-input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+  color: #333;
+}
+
+.relatorio-input:focus {
+  border-color: #0d42bd;
+  outline: none;
+}

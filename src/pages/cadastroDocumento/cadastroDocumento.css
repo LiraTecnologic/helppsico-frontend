@@ -1,0 +1,22 @@
+.cadDoc-Titulo {
+    text-align: center;
+    font-size: 36px;
+    position: relative;
+    margin: 5px 0 0 0;
+}
+
+.cadDoc-Linha {
+    height: 5px;
+    background-color: #0038a8;
+    width: 30%;
+    margin: auto auto 10px;
+    border-radius: 5px;
+}
+
+.cadDoc-prontuario {
+    background-color: #f5f5f5;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 80%;
+    margin: 0 auto;
+}

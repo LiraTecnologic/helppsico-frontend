@@ -1,0 +1,106 @@
+.agenda-container {
+    width: 100%;
+    padding: 0;
+}
+
+.agenda-tabela-scroll {
+    overflow-x: auto;
+    max-height: 600px;
+    padding: 4px;
+}
+
+.agenda-tabela {
+    display: flex;
+    gap: 16px;
+    min-width: max-content;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.agenda-dia-coluna {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+    min-width: 140px;
+}
+
+.agenda-dia-titulo {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 12px;
+    text-align: center;
+    padding: 8px;
+    background-color: #3b82f6;
+    border-radius: 8px;
+}
+
+.agenda-card {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.agenda-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.agenda-card-selecionado {
+    background: #bfdbfe;
+    border: 1px solid #3b82f6;
+    color: black;
+}
+
+.agenda-status {
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.agenda-status-disponivel {
+    color: #3b82f6;
+}
+
+.agenda-status-selecionado {
+    color: black;
+}
+
+.agenda-horario {
+    font-size: 0.9rem;
+    color: #1e293b;
+}
+
+.agenda-card-selecionado .agenda-horario {
+    color: black;
+}
+
+
+.agenda-salvar button {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.agenda-salvar button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+.agenda-card-indisponivel {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

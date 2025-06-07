@@ -1,0 +1,45 @@
+.documento-form-container {
+  max-width: 80%;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.botoes-documento {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-cancelar,
+.btn-salvar {
+  padding: 10px 22px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-cancelar {
+  background-color: #ccc;
+  color: #333;
+}
+
+.btn-cancelar:hover {
+  background-color: #b3b3b3;
+}
+
+.btn-salvar {
+  background-color: #0d42bd;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background-color: #0a3490;
+}
+
