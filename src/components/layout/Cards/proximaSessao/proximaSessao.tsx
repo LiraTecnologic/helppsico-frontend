@@ -3,6 +3,7 @@ import calcular from '../../../../utils/calculoData'
 import { Link } from "react-router-dom";
 
 import "./proximaSessao.css";
+import { useEffect, useState } from 'react';
 
 interface ProximaSessaoProps {
   consulta: ConsultaModel;
@@ -15,9 +16,17 @@ export default function ProximasSessoes({
   verMais,
   fluxo
 }: ProximaSessaoProps) {
+
+  const [idade, setIdade] = useState<number>(0);
+
   const isPsicologo = fluxo === 'psicologo';
   // const pessoa = isPsicologo ? consulta.paciente : consulta.psicologo;
-  const idade = isPsicologo ? calcular(consulta.paciente.dataNascimento) : null;
+
+  useEffect(() => {
+    setIdade(calcular(consulta.psicologo.dataNascimento))
+  }, [])
+
+   
   // const endereco = isPsicologo ? consulta.paciente.endereco : consulta.psicologo.enderecoAtendimento
 
   return (
@@ -28,7 +37,7 @@ export default function ProximasSessoes({
         {verMais && fluxo === "psicologo" && <button className="botao-ver-mais"><Link to="/paciente/sessao">Ver mais</Link></button>}{/*  falta tela */}
       </div>
 
-      {consulta && consulta.hora && 
+      {consulta ? (
         <div className="sessao-card">
           <div className="sessao-info">
             <img
@@ -47,19 +56,20 @@ export default function ProximasSessoes({
           <div className="sessao-detalhes">
             <p>Local: {consulta.paciente.endereco.rua}</p>
 
-            <p>Data: {consulta.hora.inicio}</p>
-            <p>Horário: {consulta.hora.inicio} : {consulta.hora.fim}</p>
+            {/* <p>Data: {dataFormatada.data}</p>
+            <p>Horário: {dataFormatada.hora}</p> */}
           </div>
 
           <div className="sessao-pagamento">
             <p>
               <strong>Valor:</strong> {consulta.valor}
             </p>
+            {/* <span className={`sessao-status ${statusPagamento?.toLowerCase().replace(' ', '-')}`}>
+                {statusPagamento}
+            </span> */}
           </div>
         </div>
-      }
-      
-      {/* { fluxo === "paciente" ? (
+      ) : fluxo === "paciente" ? (
         <div className="sessao-nao-marcada">
           <p className="titulo-nao-marcada">
             Ainda não marcou a próxima consulta?
@@ -79,7 +89,7 @@ export default function ProximasSessoes({
             automaticamente.
           </p>
         </div>
-      )} */}
+      )}
     </div>
   );
 }

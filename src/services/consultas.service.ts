@@ -25,7 +25,7 @@ export function consultaSessoesFuturasPsicologo(idPsicologo: string, page: numbe
 
 export function consultaSessoesFuturasPaciente(idPaciente: string, page: number): Promise<Response<Page<ConsultaModel>>> {
     return axios.get<Response<Page<ConsultaModel>>>(
-        `http://localhost:8081/consultas/paciente/futuras/${idPaciente}?page=${page}&size=${15}`
+        `http://localhost:8080/consultas/paciente/futuras/${idPaciente}?page=${page}&size=${15}`
     )
         .then(response => response.data)
         .catch(err => {

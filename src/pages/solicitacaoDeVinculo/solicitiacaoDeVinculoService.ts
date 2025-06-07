@@ -6,7 +6,7 @@ import axios from "axios";
 
 export function solicitarVinculosPaciente(idPaciente: string, page: number): Promise<Response<Page<VinculoModel>>> {
     return axios.get<Response<Page<VinculoModel>>>(
-      `http://localhost:8081/vinculos/listar/paciente/${idPaciente}?page=${page}&size=15`
+      `http://localhost:8080/vinculos/listar/paciente/${idPaciente}?page=${page}&size=15`
     )
     .then(response => response.data)
     .catch(err => {
@@ -26,7 +26,7 @@ export function solicitarVinculosPaciente(idPaciente: string, page: number): Pro
 
 export async function cancelarSolicitacao(vinculoId: string): Promise<boolean> {
     try {
-      const response = await axios.delete(`http://localhost:8081/vinculos/${vinculoId}`);
+      const response = await axios.delete(`http://localhost:8080/vinculos/${vinculoId}`);
   
       if (response.status !== 200) {
         throw new Error(`Erro ao cancelar solicitação: ${response.status},\n\n cancelamento falhou :(  response:  ${response.data}`);

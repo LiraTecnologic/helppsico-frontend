@@ -19,6 +19,7 @@ export default function SolicitacaoDeVinculo() {
   const [erro, setErro] = useState<string | null>(null);
   const [idPaciente, setIdPaciente] = useState('');
   const [avaliacoes, setAvaliacoes] = useState<AvaliacaoModel[]>([]);
+  const [mediasAvaliacoes, setMediasAvaliacoes] = useState<Record<string, number>>({});
 
 
   async function carregarVinculos(idPaciente: string) {
@@ -35,11 +36,16 @@ export default function SolicitacaoDeVinculo() {
 
       const dadosVinculos = await solicitarVinculosPaciente(idPaciente, 0);
 
-      if(dadosVinculos.dado) {
-        setVinculos(dadosVinculos.dado.content);
+      if (dadosVinculos.dado) {
+        const vinculosRecebidos = dadosVinculos.dado.content;
+        setVinculos(vinculosRecebidos);
+
+        for (const vinculo of vinculosRecebidos) {
+          carregarAvaliacoes(vinculo.psicologo.id);
+        }
       }
 
-      
+
 
     } catch (error) {
 
@@ -58,29 +64,39 @@ export default function SolicitacaoDeVinculo() {
     return avaliacoes.filter(avaliacao => avaliacao.psicologo.id = idPsicologo);
   }
 
-  useEffect(() => {
-    const id = localStorage.getItem('id-paciente');
+  async function carregarAvaliacoes(idPsicologo: string) {
+    try {
+      const resposta = await listarAvaliacoesPorPsicologo(idPsicologo, 0);
 
-    async function carregarAvaliacoes() {
-      
-    
-      const avaliacoes = await listarAvaliacoesPorPsicologo(idPaciente, 0);
-    
-      if(avaliacoes.dado) {
-        setAvaliacoes(avaliacoes.dado.content);
+      if (resposta.dado) {
+        const avaliacoes = resposta.dado.content;
+        const media = calcularMedia(avaliacoes);
+
+        setMediasAvaliacoes(prev => ({
+          ...prev,
+          [idPsicologo]: media,
+        }));
       }
-
+    } catch (erro) {
+      console.error('Erro ao carregar avaliações', erro);
     }
 
+  }
+
+  useEffect(() => {
+    const id = '4a0dd9db-3b2a-4c08-8ab3-2af4f6854650';
     if (id) {
       setIdPaciente(id);
-      carregarVinculos(idPaciente);
-      carregarAvaliacoes();
-      
     } else {
       console.log('Id paciente null');
     }
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    if (idPaciente) {
+      carregarVinculos(idPaciente);
+    }
+  }, [idPaciente]);
 
   const abrirPopupCancelamento = (idVinculo: string) => {
     setVinculoSelecionadoId(idVinculo);
@@ -109,8 +125,10 @@ export default function SolicitacaoDeVinculo() {
     }
   };
 
-  const vinculosPendentes = vinculos.filter(v => v.status === StatusVinculo.PENDENTE);
-  const vinculosRecusados = vinculos.filter(v => v.status === StatusVinculo.INATIVO);
+  console.log(vinculos);
+
+  const vinculosPendentes = vinculos.filter(v => v.status === 'PENDENTE');
+  const vinculosRecusados = vinculos.filter(v => v.status === 'ATIVO');
 
   if (carregando) {
     return (
@@ -139,9 +157,7 @@ export default function SolicitacaoDeVinculo() {
                   nome={vinculo.psicologo.nome}
                   idade={calcular(vinculo.psicologo.dataNascimento)}
                   crp={vinculo.psicologo.crp}
-                  avaliacao={
-                    calcularMedia(filtrarAvaliacoesPorPsicologo(vinculo.psicologo.id))
-                  }
+                  avaliacao={mediasAvaliacoes[vinculo.psicologo.id] ?? 0}
                   status="Pendente"
                   botao="Cancelar"
                   onClick={() => abrirPopupCancelamento(vinculo.id)}

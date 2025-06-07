@@ -1,5 +1,5 @@
 import ConsultaModel from '../../../../models/consulta';
-import {formatarDataHora} from '../../../../utils/formataData';
+import {formatarData} from '../../../../utils/formataData';
 import './sessoesAntigas.css';
 
 interface ListagemSessoesAntigasProps {
@@ -33,8 +33,8 @@ export default function SessoesAntigas({ sessoesAntigas, fluxo = 'paciente' }: L
                   />
                   <div className="sessao-antiga-textos">
                     <p className="sessao-antiga-nome">{pessoa.nome}</p>
-                    <p>Data: {formatarDataHora(sessao.dataHora.inicio).data}</p>
-                    <p>Horário: {formatarDataHora(sessao.dataHora.inicio).hora}</p>
+                    <p>Data: {formatarData(sessao.data)}</p>
+                    <p>Horário: {sessao.horario.inicio}</p>
                   </div>
                 </div>
               </div>
