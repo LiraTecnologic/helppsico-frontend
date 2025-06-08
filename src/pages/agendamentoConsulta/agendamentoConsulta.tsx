@@ -21,7 +21,7 @@ export default function AgendamentoConsulta() {
   const [idsHorariosSelecionados, setIdsHorariosSelecionados] = useState<string[]>([]);
   const [vinculo, setVinculo] = useState<VinculoModel | null>(null);
 
-  const idPaciente = localStorage.getItem('id-paciente');
+  const idPaciente = "e6a5ba4a-11fc-41a5-8f45-a524fff5d94b";
 
 
   async function agendar() {

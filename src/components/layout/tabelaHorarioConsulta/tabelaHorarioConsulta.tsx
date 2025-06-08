@@ -18,6 +18,8 @@ const nomesDias: Record<string, string> = {
   DOM: "Domingo",
 };
 
+const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
+
 export default function TabelaHorarioConsulta({
   horarios,
   onSelecionado,
@@ -25,7 +27,11 @@ export default function TabelaHorarioConsulta({
 }: TabelaHorariosProps) {
   const [selecionados, setSelecionados] = useState<Set<string>>(new Set());
   const horariosPorDia = horarios.reduce((acc, horario) => {
-    for (const dia of horario.diaSemana) {
+    const dias = Array.isArray(horario.diaSemana) 
+      ? horario.diaSemana 
+      : [horario.diaSemana];
+    
+    for (const dia of dias) {
       if (!acc[dia]) {
         acc[dia] = [];
       }
@@ -34,7 +40,22 @@ export default function TabelaHorarioConsulta({
     return acc;
   }, {} as Record<string, HorarioModel[]>);
 
+  const horarioParaMinutos = (horario: string) => {
+    const [horas, minutos] = horario.split(':').map(num => parseInt(num));
+    return horas * 60 + minutos;
+  };
 
+  Object.keys(horariosPorDia).forEach(dia => {
+    horariosPorDia[dia].sort((a, b) => 
+      horarioParaMinutos(a.inicio) - horarioParaMinutos(b.inicio)
+    );
+  });
+
+  const diasOrdenados = Object.keys(horariosPorDia).sort((a, b) => {
+    const indexA = ordemDias.indexOf(a);
+    const indexB = ordemDias.indexOf(b);
+    return indexA - indexB;
+  });
 
   const toggleSelecionado = (id: string) => {
     const novoSet = new Set(selecionados);
@@ -49,32 +70,31 @@ export default function TabelaHorarioConsulta({
   useEffect(() => {
     if (onSelecionado) {
       onSelecionado(selecionados.size);
-      onSelecionadosChange?.(Array.from(selecionados));
     }
-  }, [selecionados, onSelecionado]);
+    if (onSelecionadosChange) {
+      onSelecionadosChange(Array.from(selecionados));
+    }
+  }, [selecionados]);
 
   return (
     <div className="agenda-tabela">
-      {Object.entries(horariosPorDia).map(([dia, horarios]) => (
+      {diasOrdenados.map((dia) => (
         <div key={dia} className="agenda-dia-coluna">
-          <h3 className="agenda-dia-titulo">{nomesDias[dia]}</h3>
-          {horarios.map((horario) => {
-            const id = `${horario.id}-${dia}`; 
+          <h3 className="agenda-dia-titulo">{nomesDias[dia] || dia}</h3>
+          {horariosPorDia[dia].map((horario) => {
             const selecionado = selecionados.has(horario.id);
 
             return (
               <div
-                key={id}
-                className={`agenda-card ${selecionado ? "agenda-card-selecionado" : ""} ${!horario.disponivel ? "agenda-card-indisponivel" : ""
-                  }`}
+                key={horario.id}
+                className={`agenda-card ${selecionado ? "agenda-card-selecionado" : ""} ${!horario.disponivel ? "agenda-card-indisponivel" : ""}`}
                 onClick={() => {
                   if (!horario.disponivel) return;
                   toggleSelecionado(horario.id);
                 }}
               >
                 <div
-                  className={`agenda-status ${selecionado ? "agenda-status-selecionado" : "agenda-status-disponivel"
-                    }`}
+                  className={`agenda-status ${selecionado ? "agenda-status-selecionado" : "agenda-status-disponivel"}`}
                 >
                   {selecionado ? "Selecionado" : horario.disponivel ? "Disponível" : "Indisponível"}
                 </div>
@@ -87,6 +107,5 @@ export default function TabelaHorarioConsulta({
         </div>
       ))}
     </div>
-
   );
 }
