@@ -3,18 +3,16 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-// Telas do fluxo de Paciente
+// TELAS DE FLUXO DE PACIENTE
 import LoginPaciente from "../src/pages/loginPaciente/loginPaciente";
 import CadastroPaciente from "../src/pages/cadastroPaciente/cadastroPaciente";
 import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import DetalhesSessao from "./pages/minhasConsultasPaciente/minhasConsultasPaciente";
-// import VerPsicologos from "./pages/verPsicologos/verPsicologos";
-// import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
 import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
 import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
 
-// Telas do fluxo de Psicologo
+// TELAS DE FLUXO DE PSICÓLOGO
 import LoginPsicologo from "../src/pages/loginPsicologo/loginPsicologo";
 import CadastroPsicologo from "../src/pages/cadastroPsicologo/cadastroPsicologo";
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
@@ -27,15 +25,14 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 import CadastroDocumento from "./pages/cadastroDocumento/cadastroDocumento";
 import MinhasConsultasPsicologo from "./pages/minhasConsultasPsicologo/minhasConsultasPsicologo";
 import SolicitacaoVinculoPsicologo from "./pages/solicitacaoVinculoPsicologo/solicitacaoVinculo";
-import CardValidacaoCrp from "./components/layout/Cards/cardValidacaoCrp/cardValidacaoCrp";
-import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
+
+// TELAS DE AMBOS OS FLUXOS
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
-import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
-// import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
 
-// Nenhum fluxo
-// import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+// TELAS DE NENHUM FLUXO
+import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 
 function App() {
   return (
@@ -70,7 +67,7 @@ function App() {
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
 
-        {/* Nenhum fluxo */}
+        {/*NENHUM FLUXO */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
 
 

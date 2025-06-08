@@ -6,15 +6,17 @@ import PacienteModel from '../../models/paciente';
 import DadosGeraisDocumentoModel from '../../models/dadosGeraisDocumento';
 import { cadastrarDocumento } from '../../services/documento.service';
 import { notificarErro, notificarSucesso } from '../../utils/notificacoes';
+import { useLocation } from 'react-router';
 
 export default function CadastroDocumento() {
     const [Paciente, setPaciente] = useState<PacienteModel[]>([]);
     const [tipoDocumento, setTipoDocumento] = useState(String);
+    const location = useLocation();
 
-    const idSolicitacao = "789e4567-e89b-12d3-a456-426614174000"; // mock
+    const idSolicitacao = "c6412cc5-7461-48e2-9489-aadb0a23d838";
 
     useEffect(() => {
-        setTipoDocumento('DECLARACAO');
+        setTipoDocumento(location.state.tipoDocumento);
     }, []);
 
     const handleSubmitDocumento = async (dados: DadosGeraisDocumentoModel) => {

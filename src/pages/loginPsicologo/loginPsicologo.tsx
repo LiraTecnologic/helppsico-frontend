@@ -6,15 +6,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../services/auth.service';
 import { apresentarErro } from '../../utils/notificacoes';
 import PsicologoModel from '../../models/psicologo';
+import imagemLogin from '../../assets/image-loginPsicologo.svg';
+import marcaDagua from '../../assets/marcaDagua-login.png';
 
-export default function Login (){
+export default function Login() {
   const [crp, setCrp] = useState('');
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
-
-  const redirecionarTeste = () => {
-    navigate("/meuPainelPsicologo");
-  };
 
   const validarLogin = async () => {
     if (!crp || !senha) {
@@ -26,33 +24,23 @@ export default function Login (){
       const response = await login(crp, senha, 'PSICOLOGO');
 
       if (response.dado) {
-        console.log('Login realizado com sucesso! Dados do usuário:', response.dado);
+        const psicologo: PsicologoModel = response.dado;
 
-        console.log(`LocalStorage: 
-          id: ${getUserId()}
-          crp: ${getUserCRP()}
-          email: ${getUserEmail()}
-          userType: ${getUserType()}
-        `);
+        localStorage.setItem('id-psicologo', psicologo.id || '0873d229-fd10-488a-b7e9-f294aa10e5db');
 
-  //       redirecionarTeste();
-  //     } else {
-  //       apresentarErro(response.erro || 'Erro ao fazer login.');
-  //     }
-  //   } catch (err) {
-  //     apresentarErro('Erro ao tentar logar');
-  //   }
-  // };
-        //Parte que recebe o retorno do login
-        const psicologo: PsicologoModel = {} as PsicologoModel
-        localStorage.setItem('id-psicologo', '0873d229-fd10-488a-b7e9-f294aa10e5db');
         navigate('/psicologo/painel');
-    };
+      } else {
+        apresentarErro(response.erro || 'Erro ao fazer login.');
+      }
+    } catch (err) {
+      apresentarErro('Erro ao tentar logar.');
+    }
+  };
 
   return (
     <div className="novo-login-container">
       <img
-        src="../../src/assets/marcaDagua-login.png"
+        src={marcaDagua}
         alt="marca d'água"
         className="nova-marca-dagua"
       />
@@ -60,6 +48,7 @@ export default function Login (){
       <div className="novo-left-content">
         <div className="novo-formulario">
           <h1 className="novo-texto-titulo">Minha Conta</h1>
+
           <InputTotal
             label="CRP:"
             pleaceHolder="Digite seu crp..."
@@ -74,12 +63,14 @@ export default function Login (){
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
           />
+
           <p className="novo-texto-sem-conta">
-            Não tem conta?{" "}
+            Não tem conta?{' '}
             <Link to="/psicologo/cadastro" className="novo-link">
               crie agora
             </Link>
           </p>
+
           <Botao texto="Entrar" onClick={validarLogin} />
         </div>
       </div>
@@ -88,11 +79,11 @@ export default function Login (){
 
       <div className="novo-right-content">
         <img
-          src="../../src/assets/image-loginPsicologo.svg"
+          src={imagemLogin}
           alt="login paciente"
           className="nova-imagem-login"
         />
       </div>
     </div>
   );
-};
+}
