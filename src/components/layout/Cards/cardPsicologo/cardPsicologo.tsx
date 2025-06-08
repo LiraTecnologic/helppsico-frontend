@@ -36,7 +36,7 @@ export default function CardPsicologo({ profissionais, headerPsicologo }: CardPs
               ({psicologo.quantidadeAvaliacoes} avaliações)
             </p>
             <p className="biografia">{psicologo.biografia}</p>
-            <button className="btn-ver-mais"><Link to="/psicologos/perfil" className="botao-link" state={{ headerPsicologo }}>Ver mais</Link></button>
+            <Link to="/psicologos/perfil" className="botao-link btn-ver-mais" state={{ headerPsicologo }}>Ver mais</Link>
           </div>
         </div>
       ))}

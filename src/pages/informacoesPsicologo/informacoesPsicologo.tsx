@@ -17,7 +17,7 @@ import { consultaVinculosPsicologo } from '../../services/vinculos.service';
 import "./informacoesPsicologo.css";
 import VinculoModel from "../../models/vinculo";
 import { EstadoVinculo } from "../../models/enum.vinculo";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function InformacoesPsicologo() {
   const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
@@ -67,7 +67,7 @@ export default function InformacoesPsicologo() {
   ).sort()
 
   useEffect(() => {
-    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+    const idPsicologo = '4f0332c8-7346-44cb-81d6-9a40c621afc9';
 
     async function carregarPsicologo(idPsicologo: string) {
       const psicologo = await consultaPsicologo(idPsicologo);
@@ -110,8 +110,6 @@ export default function InformacoesPsicologo() {
         setVinculos(vinculos.dado.content);
       }
     }
-
-
     carregarPsicologo(idPsicologo);
     carregarAvaliacoes(idPsicologo);
     carregarHorarios(idPsicologo);
@@ -124,9 +122,12 @@ export default function InformacoesPsicologo() {
     return <p>Carregando...</p>;
   }
 
+  const location = useLocation();
+  const headerPsicologo = (location.state && location.state.headerPsicologo) ?? false;
+
   return (
     <>
-      <Header fluxo="" headerPsicologo={false} />
+      <Header fluxo="" headerPsicologo={headerPsicologo} />
       <main className="main-info-psicologico">
         <div className="div-psicologo">
           <img
@@ -137,11 +138,11 @@ export default function InformacoesPsicologo() {
             {psicologo.nome} ({mediaNotaAvaliacao}{" "}
             <img src={Estrela} alt="Icon estrela" />)
           </h1>
-          {hasVinculo === EstadoVinculo.VINCULADO && (
+          {hasVinculo === EstadoVinculo.VINCULADO && headerPsicologo === false && (
             <button className="btn-desvinc">Desvincular</button>
           )}
 
-          {hasVinculo === EstadoVinculo.PENDENTE && (
+          {hasVinculo === EstadoVinculo.PENDENTE && headerPsicologo === false && (
             hoverSolicitado ? (
               <Link
                 to="/paciente/solicitacao-vinculo"
@@ -160,9 +161,10 @@ export default function InformacoesPsicologo() {
             )
           )}
 
-          {hasVinculo === EstadoVinculo.NAO_VINCULADO && (
+          {hasVinculo === EstadoVinculo.NAO_VINCULADO && headerPsicologo === false && (
             <button>Vincular</button>
           )}
+
           <div>
             <p>
               {vinculos.length} vinculados | {avaliacoes.length} avaliações
