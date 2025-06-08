@@ -14,13 +14,12 @@ export default function GerenciamentoDeHorarios() {
   const [openModal, setOpenModal] = useState(false);
   const [horarios, setHorarios] = useState<HorarioModel[]>([]);
   const [diasSelecionados, setDiasSelecionados] = useState<string[]>([]);
-  const [horaInicio, setHoraInicio] = useState("08:00:00");
-  const [horaFim, setHoraFim] = useState("18:00:00");
+  const [horaInicio, setHoraInicio] = useState("08:00");
+  const [horaFim, setHoraFim] = useState("18:00");
   const [tempoSessao, setTempoSessao] = useState<number>(50);
   const [intervaloSessao, setIntervaloSessao] = useState<number>(10);
 
-  const idPsicologo: string = "0873d229-fd10-488a-b7e9-f294aa10e5db";
-
+  const idPsicologo: string = "b03784b0-15f9-4f94-883a-d11f120a74f4";
   const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
   
   function calcularFim(inicio: string, duracao: number): string {
@@ -33,29 +32,91 @@ export default function GerenciamentoDeHorarios() {
     return `${horaFim}:${minutoFim}`;
   }
 
+  function converterDiaAbreviadoCompleto(diaAbreviado: string): string {
+    const conversao: Record<string, string> = {
+      "SEG": "SEGUNDA_FEIRA",
+      "TER": "TERCA_FEIRA",
+      "QUA": "QUARTA_FEIRA", 
+      "QUI": "QUINTA_FEIRA",
+      "SEX": "SEXTA_FEIRA",
+      "SAB": "SABADO",
+      "DOM": "DOMINGO",
+    };
+    return conversao[diaAbreviado] || diaAbreviado;
+  }
+
+  function extrairConfiguracoesDosHorarios(horarios: HorarioModel[]) {
+    if (horarios.length === 0) {
+      return {
+        diasSelecionados: [],
+        horaInicio: "08:00",
+        horaFim: "18:00",
+        tempoSessao: 50,
+        intervaloSessao: 10
+      };
+    }
+
+    const diasUnicos = [...new Set(horarios.map((h: HorarioModel) => h.diaSemana))];
+    const ordemDias = ["SEGUNDA_FEIRA", "TERCA_FEIRA", "QUARTA_FEIRA", "QUINTA_FEIRA", "SEXTA_FEIRA", "SABADO", "DOMINGO"];
+    const diasOrdenados = diasUnicos.sort((a, b) => ordemDias.indexOf(a) - ordemDias.indexOf(b));
+    const diasReduzidos = diasOrdenados.map(dia => {
+      const conversao: Record<string, string> = {
+        "SEGUNDA_FEIRA": "SEG",
+        "TERCA_FEIRA": "TER",
+        "QUARTA_FEIRA": "QUA",
+        "QUINTA_FEIRA": "QUI",
+        "SEXTA_FEIRA": "SEX",
+        "SABADO": "SAB",
+        "DOMINGO": "DOM",
+      };
+      return conversao[dia] || dia.substring(0, 3).toUpperCase();
+    });
+
+    const horariosInicio = horarios.map(h => h.inicio.substring(0, 5)); 
+    const horaInicioMaisCedo = horariosInicio.reduce((menor, atual) => {
+      return atual < menor ? atual : menor;
+    });
+
+    const horariosFim = horarios.map(h => h.fim.substring(0, 5));
+    const horaFimMaisTarde = horariosFim.reduce((maior, atual) => {
+      return atual > maior ? atual : maior;
+    });
+
+    const tempoSessao = horarios[0].duracao || 50;
+    const intervaloSessao = horarios[0].intervalo || 10;
+
+    return {
+      diasSelecionados: diasReduzidos,
+      horaInicio: horaInicioMaisCedo,
+      horaFim: horaFimMaisTarde,
+      tempoSessao,
+      intervaloSessao
+    };
+  }
+
   useEffect(() => {
     async function carregarHorarios() {
       try {
-        const horarios = await listarHorariosPsicologo(idPsicologo);
+        const response = await listarHorariosPsicologo(idPsicologo);
 
-        if (horarios.dado) {
-          const data = horarios.dado;
-          if (horarios.dado.length === 0) {
+        if (response.dado) {
+          const data = response.dado;
+          
+          if (data.length === 0) {
             setHasConfig(false);
           } else {
             setHasConfig(true);
             setHorarios(data);
 
-            const diasUnicos = [...new Set(data.map((h: HorarioModel) => h.diaSemana))];
-            const diasReduzidos = diasUnicos.map(dia => dia.substring(0, 3).toUpperCase());
-            setDiasSelecionados(diasReduzidos);
-
-            setHoraInicio(data[0].inicio);
-            setHoraFim(data[0].fim);
+            const configuracoes = extrairConfiguracoesDosHorarios(data);
+            
+            setDiasSelecionados(configuracoes.diasSelecionados);
+            setHoraInicio(configuracoes.horaInicio);
+            setHoraFim(configuracoes.horaFim);
+            setTempoSessao(configuracoes.tempoSessao);
+            setIntervaloSessao(configuracoes.intervaloSessao);
           }
         }
-
-
       } catch (err) {
         console.error("Erro ao carregar horários:", err);
       }
@@ -64,28 +125,29 @@ export default function GerenciamentoDeHorarios() {
     carregarHorarios();
   }, []);
 
-  async function salvarHorariosSelecionados(novosCards: Record<string, string>) {
-    const horariosASalvar = [];
-
-    for (const id in novosCards) {
-      if (novosCards[id] === "Disponivel para Agendamento") {
-        const [diaSemana, faixa] = id.split("-");
-        if (!faixa) continue;
-        const [inicio, fim] = faixa.trim().split(" - ");
-
-        horariosASalvar.push({
-          diaSemana,
-          inicio,
-          fim,
-          disponivel: true,
-          psicologo: { id: idPsicologo },
-        });
-      }
+  async function salvarHorariosSelecionados(horariosParaSalvar: string[]) {
+    if (horariosParaSalvar.length === 0) {
+      alert("Nenhum horário foi selecionado para salvar.");
+      return;
     }
 
-    try {
-      for (const horario of horariosASalvar) {
+    const horariosASalvar = [];
 
+    try {
+      for (const id of horariosParaSalvar) {
+        const [diaSemana, faixa] = id.split("-");
+        if (!faixa) continue;
+        
+        const [inicio] = faixa.trim().split(" - ");
+
+        horariosASalvar.push({
+          diaSemana: converterDiaAbreviadoCompleto(diaSemana),
+          inicio: inicio + ":00",
+          fim: calcularFim(inicio, tempoSessao) + ":00",
+          disponivel: true,
+        });
+      }
+      for (const horario of horariosASalvar) {
         const psicologo: PsicologoModel = {
           id: idPsicologo,
           nome: '',
@@ -101,26 +163,25 @@ export default function GerenciamentoDeHorarios() {
           fotoUrl: '',
           valorSessao: 0,
           tempoSessao: 0
-        }
+        };
 
         const novoHorario: HorarioModel = {
           id: '',
           psicologo: psicologo,
-          diaSemana: converterDiaSemana(horario.diaSemana),
+          diaSemana: horario.diaSemana,
           inicio: horario.inicio,
-          fim: calcularFim(horario.inicio, tempoSessao),
+          fim: horario.fim,
           intervalo: intervaloSessao,
           duracao: tempoSessao,
           disponivel: horario.disponivel
-        }
-
-        console.log('Novo horário: ', novoHorario);
+        };
 
         await salvarHorario(novoHorario);
       }
-      alert("Horários salvos com sucesso!");
+      
+      alert(`${horariosASalvar.length} horário(s) salvo(s) com sucesso!`);
+      
       const data = await listarHorariosPsicologo(idPsicologo);
-
       if (data.dado) {
         setHorarios(data.dado);
       }
@@ -129,6 +190,20 @@ export default function GerenciamentoDeHorarios() {
       console.error(error);
     }
   }
+
+  const handleSaveConfig = (dias: string[], tempo: number, intervalo: number, inicio: string, fim: string) => {
+    const diasOrdenados = [...dias].sort(
+      (a, b) => ordemDias.indexOf(a) - ordemDias.indexOf(b)
+    );
+    
+    setDiasSelecionados(diasOrdenados);
+    setTempoSessao(tempo);
+    setIntervaloSessao(intervalo);
+    setHoraInicio(inicio);
+    setHoraFim(fim);
+    setHasConfig(true);
+    setOpenModal(false);
+  };
 
   return (
     <>
@@ -157,18 +232,7 @@ export default function GerenciamentoDeHorarios() {
       {openModal && (
         <ConfiguracaoHorario
           onClose={() => setOpenModal(false)}
-          onSave={(dias, tempo, intervalo, inicio, fim) => {
-            const diasOrdenados = [...dias].sort(
-              (a, b) => ordemDias.indexOf(a) - ordemDias.indexOf(b)
-            );
-            setDiasSelecionados(diasOrdenados);
-            setTempoSessao(tempo);
-            setIntervaloSessao(intervalo);
-            setHoraInicio(inicio);
-            setHoraFim(fim);
-            setHasConfig(true);
-            setOpenModal(false);
-          }}
+          onSave={handleSaveConfig}
           dias={diasSelecionados}
           tempo={tempoSessao}
           intervalo={intervaloSessao}
