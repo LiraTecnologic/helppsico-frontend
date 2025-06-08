@@ -3,11 +3,10 @@ import Header from "../../components/layout/header/header";
 import { useEffect, useState } from "react";
 import ConfiguracaoHorario from "../../components/layout/configurarHorario/configurarHorario";
 import TabelaHorarios from "../../components/layout/configurarHorario/tabelaHorarios";
-import { salvarHorario, listarHorariosPsicologo } from "../../services/horarios.service";
+import { salvarHorario, listarHorariosPsicologo, deletarHorario } from "../../services/horarios.service";
 import { HorarioModel } from "../../models/horario";
 import PsicologoModel from "../../models/psicologo";
 import EnderecoModel from "../../models/endereco";
-import { converterDiaSemana } from '../../utils/converteDias';
 
 export default function GerenciamentoDeHorarios() {
   const [hasConfig, setHasConfig] = useState(false);
@@ -20,6 +19,7 @@ export default function GerenciamentoDeHorarios() {
   const [intervaloSessao, setIntervaloSessao] = useState<number>(10);
 
   const idPsicologo: string = "9e239ace-09aa-465b-b801-dd96535332a9";
+
   const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
   
   function calcularFim(inicio: string, duracao: number): string {
@@ -191,6 +191,18 @@ export default function GerenciamentoDeHorarios() {
     }
   }
 
+  function deletarHorariosSelecionados(horariosParaDeletar: string[]) {
+    if (horariosParaDeletar.length === 0) {
+      alert("Nenhum horário foi selecionado para salvar.");
+      return;
+    }
+
+    horariosParaDeletar.forEach( async (horario) => {
+      await deletarHorario(horario);
+    })
+
+  }
+
   const handleSaveConfig = (dias: string[], tempo: number, intervalo: number, inicio: string, fim: string) => {
     const diasOrdenados = [...dias].sort(
       (a, b) => ordemDias.indexOf(a) - ordemDias.indexOf(b)
@@ -225,6 +237,7 @@ export default function GerenciamentoDeHorarios() {
             onEditar={() => setOpenModal(true)}
             horarios={horarios}
             onSalvar={salvarHorariosSelecionados}
+            onDeletar={deletarHorariosSelecionados}
           />
         )}
       </div>
