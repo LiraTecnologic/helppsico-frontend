@@ -84,6 +84,9 @@ export default function ConfiguracaoHorario({
       return;
     }
 
+    const body = JSON.stringify({diasSelecionados: diasSelecionados, tempoSessao: tempoSessao, intervaloSessao: intervaloSessao, horaInicio: horaInicio, horaFim: horaFim});
+    localStorage.setItem("infoConfigHorarios", body);
+
     setErro("");
     onSave(diasSelecionados, tempoSessao, intervaloSessao, horaInicio, horaFim);
   };
