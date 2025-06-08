@@ -28,6 +28,12 @@ export function listarHorariosPsicologo(idPsicologo: string): Promise<Response<H
     });
 }
 
-export async function salvarHorarios(horarios: HorarioModel[]): Promise<void> {
-  await axios.post("/consulta", horarios);
+export function deletarHorario(idHorario: string) {
+  console.log(idHorario);
+
+  axios.delete(`http://localhost:8080/horarios/${idHorario}`)
+  .then(response => response.data)
+  .catch(err => {
+    console.error("Erro ao carregar horários:", err);
+  });
 }
