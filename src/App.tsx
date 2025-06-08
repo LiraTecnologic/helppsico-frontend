@@ -58,7 +58,7 @@ function App() {
         <Route path="/psicologo/solicitacao-vinculo" element={<SolicitacaoVinculoPsicologo />} />
         <Route path="/psicologo/sessoes" element={<MinhasConsultasPsicologo />} />
         <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} />
-        <Route path="/psicologo/documento/novo" element={<CadastroDocumento />} /> {/*João vai ligar*/}
+        <Route path="/psicologo/documento/novo" element={<CadastroDocumento />} /> 
 
         {/* AMBOS OS FLUXOS */}
         <Route path="/psicologos" element={<VerPsicologos />} />

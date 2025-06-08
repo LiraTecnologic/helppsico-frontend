@@ -3,12 +3,8 @@ import Header from "../../components/layout/header/header";
 import { useEffect, useState } from "react";
 import ConfiguracaoHorario from "../../components/layout/configurarHorario/configurarHorario";
 import TabelaHorarios from "../../components/layout/configurarHorario/tabelaHorarios";
-<<<<<<< HEAD
 import { salvarHorario, listarHorariosPsicologo, deletarHorario } from "../../services/horarios.service";
-=======
 import { apresentarErro, notificarSucesso } from "../../utils/notificacoes";
-import { salvarHorario, listarHorariosPsicologo } from "../../services/horarios.service";
->>>>>>> feature/#FTR85
 import { HorarioModel } from "../../models/horario";
 import PsicologoModel from "../../models/psicologo";
 import EnderecoModel from "../../models/endereco";

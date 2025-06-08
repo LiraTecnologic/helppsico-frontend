@@ -4,7 +4,7 @@ import './requisicaoDocumentoCard.css';
 
 interface CardRequisicaoDocumentoProps {
   solicitacao: SolicitacaoDocumentoModel;
-  onApprove: (id: string, tipoDocumento: string) => void;
+  onApprove: (id: string, tipoDocumento: string, idPaciente: string) => void;
   onReject: (id: string) => void;
 }
 
@@ -65,7 +65,7 @@ export default function CardRequisicaoDocumento({
         <div className="card-acoes">
           <button 
             className="acao-btn aprovar-btn"
-            onClick={() => onApprove(solicitacao.id, solicitacao.tipoDocumento)}
+            onClick={() => onApprove(solicitacao.id, solicitacao.tipoDocumento, solicitacao.paciente.id)}
             disabled={solicitacao.status !== 'PENDENTE'}
           >
             <Check size={20} />

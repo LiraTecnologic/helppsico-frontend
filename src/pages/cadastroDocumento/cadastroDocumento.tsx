@@ -7,25 +7,41 @@ import DadosGeraisDocumentoModel from '../../models/dadosGeraisDocumento';
 import { cadastrarDocumento } from '../../services/documento.service';
 import { notificarErro, notificarSucesso } from '../../utils/notificacoes';
 import { useLocation } from 'react-router';
+import { consultarVinculosPaciente } from '../../services/vinculos.service';
+import PsicologoModel from '../../models/psicologo';
 
 export default function CadastroDocumento() {
-    const [Paciente, setPaciente] = useState<PacienteModel[]>([]);
-    const [tipoDocumento, setTipoDocumento] = useState(String);
+    const [paciente, setPaciente] = useState<PacienteModel | null>(null);
+    const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
+    const [tipoDocumento, setTipoDocumento] = useState<string | ''>('');
+    const [idSolicitacao, setIdSolicitacao] = useState<string | ''>('');
     const location = useLocation();
 
-    const idSolicitacao = "c6412cc5-7461-48e2-9489-aadb0a23d838";
-
     useEffect(() => {
+        async function carregarPaciente(idPaciente: string) {
+            const vinculo = await consultarVinculosPaciente(idPaciente, 0);
+
+            if (vinculo.dado) {
+                setPaciente(vinculo.dado.content[0].paciente);
+                setPsicologo(vinculo.dado.content[0].psicologo);
+            }
+        }
+
+
         setTipoDocumento(location.state.tipoDocumento);
+        setIdSolicitacao(location.state.solicitacaoId);
+        carregarPaciente(location.state.idPaciente);
     }, []);
 
     const handleSubmitDocumento = async (dados: DadosGeraisDocumentoModel) => {
         try {
-            const response = await cadastrarDocumento(dados, idSolicitacao);
-            if (response.erro) {
-                notificarErro("Erro ao cadastrar documento.");
-            } else {
-                notificarSucesso("Documento cadastrado");
+            if (idSolicitacao) {
+                const response = await cadastrarDocumento(dados, idSolicitacao);
+                if (response.erro) {
+                    notificarErro("Erro ao cadastrar documento.");
+                } else {
+                    notificarSucesso("Documento cadastrado");
+                }
             }
         } catch (e) {
             console.error("Erro inesperado:", e);
@@ -55,11 +71,14 @@ export default function CadastroDocumento() {
                 <h1 className="cadDoc-Titulo">Cadastro de Documentos - {nomeDocumento(tipoDocumento)}</h1>
                 <div className="cadDoc-Linha"></div>
 
-                <DocumentoForm
-                    tipoDocumento={tipoDocumento}
-                    pacientes={Paciente}
-                    onSubmit={handleSubmitDocumento}
-                />
+                {paciente && psicologo &&
+                    <DocumentoForm
+                        tipoDocumento={tipoDocumento}
+                        paciente={paciente}
+                        psicologo={psicologo}
+                        onSubmit={handleSubmitDocumento}
+                    />
+                }
             </div>
         </>
     );

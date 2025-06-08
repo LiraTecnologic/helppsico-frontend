@@ -14,11 +14,12 @@ import EnderecoModel from '../../models/endereco';
 
 interface DocumentoFormProps {
   tipoDocumento: string;
-  pacientes: PacienteModel[];
+  paciente: PacienteModel;
+  psicologo: PsicologoModel;
   onSubmit: (dados: DadosGeraisDocumentoModel) => void;
 }
 
-export default function DocumentoForm({ tipoDocumento, pacientes, onSubmit }: DocumentoFormProps) {
+export default function DocumentoForm({ tipoDocumento, paciente, psicologo, onSubmit }: DocumentoFormProps) {
   const [camposComuns, setCamposComuns] = useState({
     paciente: '',
     dataEmissao: '',
@@ -44,8 +45,8 @@ export default function DocumentoForm({ tipoDocumento, pacientes, onSubmit }: Do
 
   const handleSalvar = () => {
     const dadosDocumento: DadosGeraisDocumentoModel = {
-      paciente: { id: camposComuns.paciente } as PacienteModel,
-      psicologo: { id: "456e1234-e89b-12d3-a456-426614174000" } as PsicologoModel,
+      paciente: { id: paciente.id} as PacienteModel,
+      psicologo: { id: psicologo.id } as PsicologoModel,
       dataEmissao: camposComuns.dataEmissao,
       assinaturaPsicologo: camposComuns.assinaturaPsicologo,
       dataValidade: "",
@@ -86,7 +87,7 @@ export default function DocumentoForm({ tipoDocumento, pacientes, onSubmit }: Do
       <CamposComuns
         campos={camposComuns}
         setCampos={setCamposComuns}
-        pacientes={pacientes}
+        paciente={paciente}
       />
 
       {renderFormularioEspecifico()}
