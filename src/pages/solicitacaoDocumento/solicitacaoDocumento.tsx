@@ -43,18 +43,21 @@ export default function SolicitacaoDocumento() {
     ];
 
     useEffect(() => {
-        const idPacienteLocal = '4a0dd9db-3b2a-4c08-8ab3-2af4f6854650';
+        const idPacienteLocal = localStorage.getItem('id-paciente');
 
-        async function consultarVinculoPaciente(id:string) {
+        async function consultarVinculoPaciente(id: string) {
             const vinculos = await consultarVinculosPaciente(id, 0);
-            
-            if(vinculos.dado) {
+
+            if (vinculos.dado) {
                 setPsicologo(vinculos.dado.content[0].psicologo);
             }
         }
 
-        consultarVinculoPaciente(idPacienteLocal);
-        setIdPaciente(idPacienteLocal);
+        if (idPacienteLocal) {
+            consultarVinculoPaciente(idPacienteLocal);
+            setIdPaciente(idPacienteLocal);
+        }
+        
     }, []);
 
     const handleSolicitarDocumento = async () => {

@@ -43,7 +43,7 @@ function App() {
       <Routes>
 
         {/* FLUXO DE PACIENTE */}
-        <Route path="/paciente/login" element={<LoginPaciente />} />
+        <Route path="/" element={<LoginPaciente />} />
         <Route path="/paciente/cadastro" element={<CadastroPaciente />} />
         <Route path="/paciente/painel" element={<MeuPainelPaciente />} />
         <Route path="/paciente/sessao" element={<DetalhesSessao />} />
@@ -63,7 +63,7 @@ function App() {
         <Route path="/psicologo/documentos-pendentes" element={<RequisicaoDocumento />} /> {/*João vai ligar*/}
         <Route path="/psicologo/solicitacao-vinculo" element={<SolicitacaoVinculoPsicologo />} />
         <Route path="/psicologo/sessoes" element={<MinhasConsultasPsicologo />} />
-        <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} /> 
+        <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} />
         <Route path="/psicologo/documento/novo" element={<CadastroDocumento />} /> {/*João vai ligar*/}
 
         {/* AMBOS OS FLUXOS */}
@@ -73,7 +73,6 @@ function App() {
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
 
-        <Route path="/" element={<LoginPaciente />}/>
 
       </Routes>
       <ToastContainer />

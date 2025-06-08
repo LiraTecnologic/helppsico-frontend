@@ -4,7 +4,6 @@ import CardPerfilPsicologo from '../../components/layout/Cards/cardAtualizarPerf
 import PsicologoModel from '../../models/psicologo';
 import Header from '../../components/layout/header/header';
 import { atualizarPerfilPsicologo } from '../../services/atualizarperfil';
-import { getUserId } from '../../services/auth.service';
 import axios from 'axios';
 import Response from '../../models/response';
 
@@ -22,8 +21,7 @@ const AtualizarPerfilPsicologo: React.FC = () => {
             setCarregando(true);
             setErro(null);
 
-            // const idPsicologo = getUserId();
-            const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+            const idPsicologo = localStorage.getItem('id-psicologo');
 
             if (!idPsicologo) {
                 setErro('Usuário não identificado. Faça login novamente.');

@@ -45,7 +45,7 @@ export default function MinhasConsultasPsicologo() {
       setErro(null);
 
     
-      const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+      const idPsicologo = localStorage.getItem('id-psicologo');
 
       if (idPsicologo) {
         await Promise.all([

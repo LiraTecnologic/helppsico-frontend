@@ -15,8 +15,7 @@ export default function ListagemPacientes() {
   const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
 
   useEffect(() => {
-    // const idPsicologo = localStorage.getItem('id-psicologo');
-    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+    const idPsicologo = localStorage.getItem('id-psicologo');
 
     async function carregarVinculos(idPsicologo: string) {
       const vinculos = await consultaVinculosPsicologo(idPsicologo, 0);

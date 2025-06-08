@@ -16,8 +16,7 @@ export default function SolicitacaoDeVinculoPsicologo() {
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
 
-  // const idPsicologo = localStorage.getItem('idPsicologo');
-  const idPsicologo = "0873d229-fd10-488a-b7e9-f294aa10e5db";
+  const idPsicologo = localStorage.getItem('idPsicologo');
 
   const carregarVinculos = useCallback(async () => {
     if (!idPsicologo) {
