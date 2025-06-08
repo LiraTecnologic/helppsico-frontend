@@ -17,10 +17,9 @@ export default function MeuPainelPaciente() {
   const [consultas, setConsultas] = useState<ConsultaModel[] | []>([]);
   const [documentos, setDocumentos] = useState<DocumentoModel[] | []>([]);
 
-  const handleDocumentoClick = (id: string) => {
-    console.log(`Documento com ID ${id} foi clicado`);
-    alert("clicou no documento");
-  };
+    const handleDocumentoClick = (id: string) => {
+        console.log(`Documento com ID ${id} foi clicado`);
+    };
 
   useEffect(() => {
     const idPaciente = localStorage.getItem('id-paciente');

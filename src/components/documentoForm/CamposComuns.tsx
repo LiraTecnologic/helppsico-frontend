@@ -11,10 +11,10 @@ interface CamposComunsProps {
     dataEmissao: string;
     assinaturaPsicologo: string;
   }>>;
-  pacientes: { id: string; nome: string }[];
+  paciente: { id: string; nome: string };
 }
 
-export default function CamposComuns({ campos, setCampos, pacientes }: CamposComunsProps) {
+export default function CamposComuns({ campos, setCampos, paciente }: CamposComunsProps) {
   return (
     <div className="campos-comuns-grid">
       <div className="campo-grid-item">
@@ -26,9 +26,7 @@ export default function CamposComuns({ campos, setCampos, pacientes }: CamposCom
           onChange={(e) => setCampos({ ...campos, paciente: e.target.value })}
         >
           <option value="">Selecione o paciente</option>
-          {pacientes.map((p) => (
-            <option key={p.id} value={p.id}>{p.nome}</option>
-          ))}
+          {paciente.nome}
         </select>
       </div>
 

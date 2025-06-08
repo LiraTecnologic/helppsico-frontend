@@ -35,3 +35,11 @@ export const notificarErro = async (label: string = "Texto") => {
     theme: "colored",
   });
 };
+
+export const apresentarErro = async (label: string = "Texto") => {
+  toast.error(`${label.toLowerCase()}!`, {
+    position: "top-right",
+    autoClose: 3000,
+    theme: "colored",
+  });
+};

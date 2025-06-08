@@ -3,62 +3,87 @@ import InputTotal from '../../components/commmon/Inputs/InputTotal';
 import Botao from '../../components/commmon/botoes/botao/botao';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../../services/auth.service';
+import { apresentarErro } from '../../utils/notificacoes';
 import PsicologoModel from '../../models/psicologo';
+import imagemLogin from '../../assets/image-loginPsicologo.svg';
+import marcaDagua from '../../assets/marcaDagua-login.png';
 
-const Login = () => {
-    const [crp, setCrp] = useState('');
-    const [senha, setSenha] = useState('');
-    const navigate = useNavigate();
+export default function Login() {
+  const [crp, setCrp] = useState('');
+  const [senha, setSenha] = useState('');
+  const navigate = useNavigate();
 
-    const validarSenha = (senha: string) => {
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-        return regex.test(senha);
-    };
+  const validarLogin = async () => {
+    if (!crp || !senha) {
+      apresentarErro('Por favor, preencha todos os campos antes de continuar.');
+      return;
+    }
 
-    const redirecionarTeste = () => {
-      
-        navigate("/meuPainelPsicologo");
-    };
+    try {
+      const response = await login(crp, senha, 'PSICOLOGO');
 
-    const validarLogin = async () => {
-        // if (!crp || !senha) {
-        //     alert('Por favor, preencha todos os campos antes de continuar.');
-        //     return;
-        // }
+      if (response.dado) {
+        const psicologo: PsicologoModel = response.dado;
 
-        // if (!validarSenha(senha)) {
-        //     alert('A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
-        //     return;
-        // }
+        localStorage.setItem('id-psicologo', psicologo.id || '0873d229-fd10-488a-b7e9-f294aa10e5db');
 
-
-        //Parte que recebe o retorno do login
-        const psicologo: PsicologoModel = {} as PsicologoModel
-        localStorage.setItem('id-psicologo', '0873d229-fd10-488a-b7e9-f294aa10e5db');
         navigate('/psicologo/painel');
-    };
+      } else {
+        apresentarErro(response.erro || 'Erro ao fazer login.');
+      }
+    } catch (err) {
+      apresentarErro('Erro ao tentar logar.');
+    }
+  };
 
-    return (
-        <div className="novo-login-container">
-            <img src="../../src/assets/marcaDagua-login.png" alt="marca d'água" className="nova-marca-dagua" />
-            
-            <div className="novo-left-content">
-                <div className='novo-formulario'>
-                    <h1 className='novo-texto-titulo'>Minha Conta</h1>
-                    <InputTotal label="CRP:" pleaceHolder="Digite seu crp..." tipo="text" value={crp} onChange={(e) => setCrp(e.target.value)} />
-                    <InputTotal label="Senha:" pleaceHolder="Digite sua senha..." tipo="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
-                    <p className='novo-texto-sem-conta'>Não tem conta? <Link to="/cadastroPsicologo" className='novo-link'>crie agora</Link></p>
-                    <Botao texto='Entrar' onClick={validarLogin} />
-                </div>
-            </div>
+  return (
+    <div className="novo-login-container">
+      <img
+        src={marcaDagua}
+        alt="marca d'água"
+        className="nova-marca-dagua"
+      />
 
-            <div className="nova-linha-vertical"></div>
+      <div className="novo-left-content">
+        <div className="novo-formulario">
+          <h1 className="novo-texto-titulo">Minha Conta</h1>
 
-            <div className="novo-right-content">
-                <img src="../../src/assets/image-loginPsicologo.svg" alt="login paciente" className='nova-imagem-login'/>
-            </div>
+          <InputTotal
+            label="CRP:"
+            pleaceHolder="Digite seu crp..."
+            tipo="text"
+            value={crp}
+            onChange={(e) => setCrp(e.target.value)}
+          />
+          <InputTotal
+            label="Senha:"
+            pleaceHolder="Digite sua senha..."
+            tipo="password"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
+
+          <p className="novo-texto-sem-conta">
+            Não tem conta?{' '}
+            <Link to="/psicologo/cadastro" className="novo-link">
+              crie agora
+            </Link>
+          </p>
+
+          <Botao texto="Entrar" onClick={validarLogin} />
         </div>
-    );
-}
+      </div>
 
-export default Login;
+      <div className="nova-linha-vertical"></div>
+
+      <div className="novo-right-content">
+        <img
+          src={imagemLogin}
+          alt="login paciente"
+          className="nova-imagem-login"
+        />
+      </div>
+    </div>
+  );
+}

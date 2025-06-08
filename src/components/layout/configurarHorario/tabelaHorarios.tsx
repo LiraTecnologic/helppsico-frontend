@@ -154,7 +154,11 @@ export default function TabelaHorarios({
         });
 
         if (horarioEncontrado) {
+<<<<<<< HEAD
           mapping[id] = horarioEncontrado.id;
+=======
+          mapping[id] = horarioEncontrado.id; 
+>>>>>>> 0e9bd8b5b3b36b27fba4ac9602ad9fb5ad3b8db2
           if (horarioEncontrado.disponivel) {
             cards[id] = "Disponivel para Agendamento";
           } else {

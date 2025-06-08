@@ -5,10 +5,11 @@ import PsicologoModel from '../../models/psicologo';
 import Header from '../../components/layout/header/header';
 import { atualizarPerfilPsicologo } from '../../services/atualizarperfil';
 import axios from 'axios';
+import { apresentarErro, notificarSucesso } from '../../utils/notificacoes';
 import Response from '../../models/response';
 
 
-const AtualizarPerfilPsicologo: React.FC = () => {
+export default function AtualizarPerfilPsicologo() {
     const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
     const [valorSessao, setValorSessao] = useState<string>('');
     const [biografia, setBiografia] = useState<string>('');
@@ -88,7 +89,7 @@ const AtualizarPerfilPsicologo: React.FC = () => {
         const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
         if (!idPsicologo) {
-            alert('Usuário não identificado. Faça login novamente.');
+            apresentarErro("Usuario não encontrado. Faça o login novamente")
             return;
         }
 
@@ -114,9 +115,9 @@ const AtualizarPerfilPsicologo: React.FC = () => {
         try {
             const psicologoAtualizado = await atualizarPerfilPsicologo(idPsicologo, dadosAtualizados);
             setPsicologo(psicologoAtualizado.dado);
-            alert('Perfil atualizado com sucesso!');
+            notificarSucesso("Perfil atualizado");
         } catch (error) {
-            alert('Erro ao atualizar o perfil. Tente novamente mais tarde.');
+            apresentarErro('Erro ao atualizar o perfil. Tente novamente mais tarde.');
         }
     };
 
@@ -160,5 +161,3 @@ const AtualizarPerfilPsicologo: React.FC = () => {
         </>
     );
 };
-
-export default AtualizarPerfilPsicologo;

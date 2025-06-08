@@ -1,61 +1,42 @@
-import './loginPaciente.css';
-import InputTotal from '../../components/commmon/Inputs/InputTotal';
-import Botao from '../../components/commmon/botoes/botao/botao';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import "./loginPaciente.css";
+import InputTotal from "../../components/commmon/Inputs/InputTotal";
+import Botao from "../../components/commmon/botoes/botao/botao";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../services/auth.service";
+import { apresentarErro } from "../../utils/notificacoes";
+import imagemLogin from "../../assets/image-loginPaciente.svg";
+import marcaDagua from "../../assets/marcaDagua-login.png";
 
-
-import { login } from '../../services/auth.service';
-
-const Login = () => {
-  const [email, setEmail] = useState('');  
-  const [senha, setSenha] = useState('');
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const navigate = useNavigate();
 
-  const validarSenha = (senha: string) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-    return regex.test(senha);
-  };
-
-
   const validarLogin = async () => {
-    localStorage.setItem('id-paciente', '4a0dd9db-3b2a-4c08-8ab3-2af4f6854650')
-    navigate('/paciente/painel');
+    if (!email || !senha) {
+      apresentarErro("Por favor, preencha todos os campos antes de continuar");
+      return;
+    }
 
-    // if (!email || !senha) {
-    //   alert('Por favor, preencha todos os campos antes de continuar.');
-    //   return;
-    // }
+    try {
+      const resposta = await login(email, senha, "PACIENTE");
 
-
-    // if (!validarSenha(senha)) {
-    //   alert(
-    //     'A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.'
-    //   );
-    //   return;
-    // }
-
-    // try {
-    
-    //   const resposta = await login(email, senha, 'PACIENTE');
-
-    //   if (resposta.dado) {
-      
-    //     navigate('/paciente/painel');
-    //   } else {
-       
-    //     alert(`Falha na autenticação: ${resposta.erro}`);
-    //   }
-    // } catch (err) {
-     
-    //   alert(`Ocorreu um erro ao tentar logar: ${err}`);
-    // }
+      if (resposta.dado) {
+        localStorage.setItem("id-paciente", resposta.dado.id || "id-fake-tmp");
+        navigate("/paciente/painel");
+      } else {
+        apresentarErro(resposta.erro || "Erro ao fazer login");
+      }
+    } catch (err) {
+      apresentarErro("Erro ao tentar logar");
+    }
   };
 
   return (
     <div className="login-container-paciente">
       <img
-        src="../../src/assets/marcaDagua-login.png"
+        src={marcaDagua}
         alt="marca d'água"
         className="nova-marca-dagua"
       />
@@ -63,7 +44,6 @@ const Login = () => {
       <div className="left-content-paciente">
         <div className="formulario-paciente">
           <h1 className="texto-titulo-paciente">Minha Conta</h1>
-
 
           <InputTotal
             label="E-mail:"
@@ -81,13 +61,12 @@ const Login = () => {
           />
 
           <p className="novo-texto-sem-conta">
-            Não tem conta?{' '}
+            Não tem conta?{" "}
             <Link to="/cadastroPaciente" className="link-paciente">
               crie agora
             </Link>
           </p>
 
-  
           <Botao texto="Entrar" onClick={validarLogin} />
         </div>
       </div>
@@ -96,13 +75,11 @@ const Login = () => {
 
       <div className="right-content-paciente">
         <img
-          src="../../src/assets/image-loginPaciente.svg"
+          src={imagemLogin}
           alt="login paciente"
           className="imagem-login-paciente"
         />
       </div>
     </div>
   );
-};
-
-export default Login;
+}

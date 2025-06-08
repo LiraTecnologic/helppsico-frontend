@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ConfiguracaoHorario from "../../components/layout/configurarHorario/configurarHorario";
 import TabelaHorarios from "../../components/layout/configurarHorario/tabelaHorarios";
 import { salvarHorario, listarHorariosPsicologo, deletarHorario } from "../../services/horarios.service";
+import { apresentarErro, notificarSucesso } from "../../utils/notificacoes";
 import { HorarioModel } from "../../models/horario";
 import PsicologoModel from "../../models/psicologo";
 import EnderecoModel from "../../models/endereco";
@@ -28,7 +29,7 @@ export default function GerenciamentoDeHorarios() {
     horaFim: "18:00"
   });
 
-  const idPsicologo: string = "9e239ace-09aa-465b-b801-dd96535332a9";
+  const idPsicologo: string = "0873d229-fd10-488a-b7e9-f294aa10e5db";
 
   const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
   
@@ -166,7 +167,7 @@ export default function GerenciamentoDeHorarios() {
 
   async function salvarHorariosSelecionados(horariosParaSalvar: string[]) {
     if (horariosParaSalvar.length === 0) {
-      alert("Nenhum horário foi selecionado para salvar.");
+      apresentarErro("Nenhum horário foi selecionado para salvar.");
       return;
     }
 
@@ -219,14 +220,14 @@ export default function GerenciamentoDeHorarios() {
         await salvarHorario(novoHorario);
       }
       
-      alert(`${horariosASalvar.length} horário(s) salvo(s) com sucesso!`);
+      notificarSucesso(`${horariosASalvar.length} horário(s) salvo(s)`);
       
       const data = await listarHorariosPsicologo(idPsicologo);
       if (data.dado) {
         setHorarios(data.dado);
       }
     } catch (error) {
-      alert("Erro ao salvar horários.");
+      apresentarErro("Erro ao salvar horários.");
       console.error(error);
     }
   }

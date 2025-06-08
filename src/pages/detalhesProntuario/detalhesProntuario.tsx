@@ -4,6 +4,7 @@ import Header from "../../components/layout/header/header";
 import InputLeitura from "../../components/commmon/Inputs/InputLeitura";
 import ProntuarioModel from "../../models/prontuario";
 import { consultarProntuarioPorId, editarProntuario } from "../../services/prontuarios.service";
+import { notificarErro } from "../../utils/notificacoes";
 import { formatarData } from "../../utils/formataData";
 import { useParams } from 'react-router-dom';
 
@@ -27,6 +28,7 @@ export default function DetalhesProntuario() {
     const handleEditar = () => {
         setProntuarioOriginal(prontuario);
         setIsEditing(true);
+        notificarErro("Prontuario alterado")
     };
 
     const handleCancelar = () => {
