@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../services/auth.service';
 import { apresentarErro } from '../../utils/notificacoes';
+import PsicologoModel from '../../models/psicologo';
 
 export default function Login (){
   const [crp, setCrp] = useState('');
@@ -34,14 +35,19 @@ export default function Login (){
           userType: ${getUserType()}
         `);
 
-        redirecionarTeste();
-      } else {
-        apresentarErro(response.erro || 'Erro ao fazer login.');
-      }
-    } catch (err) {
-      apresentarErro('Erro ao tentar logar');
-    }
-  };
+  //       redirecionarTeste();
+  //     } else {
+  //       apresentarErro(response.erro || 'Erro ao fazer login.');
+  //     }
+  //   } catch (err) {
+  //     apresentarErro('Erro ao tentar logar');
+  //   }
+  // };
+        //Parte que recebe o retorno do login
+        const psicologo: PsicologoModel = {} as PsicologoModel
+        localStorage.setItem('id-psicologo', '0873d229-fd10-488a-b7e9-f294aa10e5db');
+        navigate('/psicologo/painel');
+    };
 
   return (
     <div className="novo-login-container">

@@ -22,7 +22,7 @@ export default function MeuPainelPaciente() {
     };
 
   useEffect(() => {
-    const idPaciente = '4a0dd9db-3b2a-4c08-8ab3-2af4f6854650';
+    const idPaciente = localStorage.getItem('id-paciente');
 
     async function carregarDocumentos(idPaciente: string) {
       try {
@@ -58,7 +58,7 @@ export default function MeuPainelPaciente() {
     async function carregarConsultas(id: string) {
       try {
         const consultas = await consultaSessoesFuturasPaciente(id, 0);
-        
+
 
         if (consultas.dado) {
           setConsultas(consultas.dado.content);
@@ -69,9 +69,11 @@ export default function MeuPainelPaciente() {
       }
     }
 
-    carregarConsultas(idPaciente);
-    carregarVinculo(idPaciente);
-    carregarDocumentos(idPaciente);
+    if (idPaciente) {
+      carregarConsultas(idPaciente);
+      carregarVinculo(idPaciente);
+      carregarDocumentos(idPaciente);
+    }
 
 
 

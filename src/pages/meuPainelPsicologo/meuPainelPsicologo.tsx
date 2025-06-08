@@ -10,7 +10,7 @@ import ProntuarioModel from '../../models/prontuario';
 import { consultaProntuariosPsicologo } from "../../services/prontuarios.service";
 import { consultaVinculosPsicologo } from '../../services/vinculos.service';
 import { consultaSessoesFuturasPsicologo } from '../../services/consultas.service';
-import { listarHorariosPsicologo } from '../../services/horarioPsicologo.service';
+import { listarHorariosPsicologo } from '../../services/horarios.service';
 import BlocoHorario from '../../components/layout/blocoHorario/blocoHorario';
 import { Link } from "react-router-dom";
 import { HorarioModel } from '../../models/horario';
@@ -62,14 +62,13 @@ export default function MeuPainelPsicologo() {
         }
 
         async function carregarHorarios(id:string) {
-            const horarios = await listarHorariosPsicologo(idPsicologo);
+            const horarios = await listarHorariosPsicologo(id);
             if(horarios.dado) {
                 setHorarios(horarios.dado);
             }
         }
 
-        // const idPsicologo = localStorage.getItem('id-psicologo');
-        const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+        const idPsicologo = localStorage.getItem('id-psicologo');
 
         if (idPsicologo) {
             carregarConsultas(idPsicologo);

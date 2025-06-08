@@ -1,4 +1,4 @@
-import HorarioModel from "../../../models/horario";
+import { HorarioModel } from "../../../models/horario";
 import "./tabelaHorarios.css";
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ interface TabelaHorariosProps {
   intervalo: number;
   onEditar: () => void;
   horarios: HorarioModel[];
-  onSalvar: (novosCards: Record<string, string>) => void;
+  onSalvar: (horariosParaSalvar: string[]) => void;
 }
 
 const nomesDias: Record<string, string> = {
@@ -22,6 +22,10 @@ const nomesDias: Record<string, string> = {
   SAB: "Sábado",
   DOM: "Domingo",
 };
+
+function formatarHora(hora: string): string {
+  return hora.slice(0, 5); 
+}
 
 function gerarIntervalos(
   inicio: string,
@@ -49,6 +53,19 @@ function gerarIntervalos(
   return intervalos;
 }
 
+function converterDiaParaAbreviado(diaCompleto: string): string {
+  const conversao: Record<string, string> = {
+    "SEGUNDA_FEIRA": "SEG",
+    "TERCA_FEIRA": "TER", 
+    "QUARTA_FEIRA": "QUA",
+    "QUINTA_FEIRA": "QUI",
+    "SEXTA_FEIRA": "SEX",
+    "SABADO": "SAB",
+    "DOMINGO": "DOM",
+  };
+  return conversao[diaCompleto] || diaCompleto;
+}
+
 type StatusCard = "Disponibilizar Agendamento" | "Disponivel para Agendamento" | "Reseservado";
 type AcaoSelecionada = "para_disponibilizar" | "para_remover";
 
@@ -72,15 +89,22 @@ export default function TabelaHorarios({
         const id = `${dia}-${faixa}`;
 
         const horarioEncontrado = horarios.find(
-          (h) =>
-            h.diaSemana === dia &&
-            `${h.inicio} - ${h.fim}` === faixa
+          (h) => {
+            const diaAbreviado = converterDiaParaAbreviado(h.diaSemana);
+            const faixaHorario = `${formatarHora(h.inicio)} - ${formatarHora(h.fim)}`;
+            
+            console.log(`Comparando: ${diaAbreviado} === ${dia} && ${faixaHorario} === ${faixa}`);
+            
+            return diaAbreviado === dia && faixaHorario === faixa;
+          }
         );
 
         if (horarioEncontrado) {
-          cards[id] = horarioEncontrado.disponivel
-            ? "Disponivel para Agendamento"
-            : "Disponibilizar Agendamento";
+          if (horarioEncontrado.disponivel) {
+            cards[id] = "Disponivel para Agendamento";
+          } else {
+            cards[id] = "Reseservado";
+          }
         } else {
           cards[id] = "Disponibilizar Agendamento";
         }
@@ -90,11 +114,15 @@ export default function TabelaHorarios({
     return cards;
   };
 
-  const [cards, setCards] = useState<Record<string, StatusCard>>(inicialCards);
+  const [cards, setCards] = useState<Record<string, StatusCard>>({});
   const [selecionados, setSelecionados] = useState<Map<string, AcaoSelecionada>>(new Map());
 
   useEffect(() => {
-    setCards(inicialCards);
+    const novosCards = inicialCards();
+    setCards(novosCards);
+
+    console.log("Horários carregados:", horarios);
+    console.log("Cards gerados:", novosCards);
   }, [dias, inicio, fim, duracao, intervalo, horarios]);
 
   const toggleSelecionado = (id: string) => {
@@ -116,20 +144,34 @@ export default function TabelaHorarios({
 
   const salvarSelecionados = () => {
     const novosCards = { ...cards };
+    const horariosParaSalvar: string[] = [];
+    const horariosParaRemover: string[] = [];
 
     selecionados.forEach((acao, id) => {
       if (acao === "para_disponibilizar") {
         novosCards[id] = "Disponivel para Agendamento";
+        horariosParaSalvar.push(id);
       } else if (acao === "para_remover") {
         novosCards[id] = "Disponibilizar Agendamento";
+        horariosParaRemover.push(id);
       }
     });
 
     setCards(novosCards);
     setSelecionados(new Map());
 
-    // Chamar função para salvar no backend os horários disponíveis
-    onSalvar(novosCards);
+    if (horariosParaSalvar.length > 0 || horariosParaRemover.length > 0) {
+      console.log("Horários para salvar:", horariosParaSalvar);
+      console.log("Horários para remover:", horariosParaRemover);
+      
+      if (horariosParaSalvar.length > 0) {
+        onSalvar(horariosParaSalvar);
+      }
+      
+      if (horariosParaRemover.length > 0) {
+        // Aqui irá implementar a lógica de remoção futuramente
+      }
+    }
   };
 
   return (
@@ -180,23 +222,21 @@ export default function TabelaHorarios({
                 return (
                   <div
                     key={id}
-                    className={`th-card ${
-                      selecionado
+                    className={`th-card ${selecionado
                         ? acao === "para_disponibilizar"
                           ? "th-card-disponibilizar"
                           : "th-card-remover"
                         : status === "Disponivel para Agendamento"
-                        ? "th-card-disponivel"
-                        : ""
-                    }`}
+                          ? "th-card-disponivel"
+                          : ""
+                      }`}
                     onClick={() => toggleSelecionado(id)}
                   >
                     <div
-                      className={`th-status ${
-                        status === "Disponibilizar Agendamento"
+                      className={`th-status ${status === "Disponibilizar Agendamento"
                           ? "th-status-livre"
                           : "th-status-disponivel"
-                      }`}
+                        }`}
                     >
                       {status}
                     </div>

@@ -4,7 +4,6 @@ import CardPerfilPsicologo from '../../components/layout/Cards/cardAtualizarPerf
 import PsicologoModel from '../../models/psicologo';
 import Header from '../../components/layout/header/header';
 import { atualizarPerfilPsicologo } from '../../services/atualizarperfil';
-import { getUserId } from '../../services/auth.service';
 import axios from 'axios';
 import { apresentarErro, notificarSucesso } from '../../utils/notificacoes';
 import Response from '../../models/response';
@@ -23,7 +22,7 @@ export default function AtualizarPerfilPsicologo() {
             setCarregando(true);
             setErro(null);
 
-            const idPsicologo = getUserId();
+            const idPsicologo = localStorage.getItem('id-psicologo');
 
             if (!idPsicologo) {
                 setErro('Usuário não identificado. Faça login novamente.');
@@ -33,7 +32,7 @@ export default function AtualizarPerfilPsicologo() {
 
             try {
                 const response = await axios.get<Response<PsicologoModel>>(
-                    `http://localhost:8080/psicologo/${idPsicologo}`
+                    `http://localhost:8080/psicologos/${idPsicologo}`
                 );
 
                 if (response.data.dado) {
@@ -51,7 +50,7 @@ export default function AtualizarPerfilPsicologo() {
 
                     setBiografia(dadosPsicologo.biografia || '');
                 }
-                
+
             } catch (error) {
                 console.error('Erro ao carregar dados do psicólogo:', error);
                 setErro('Não foi possível carregar seus dados. Tente novamente mais tarde.');
@@ -86,7 +85,8 @@ export default function AtualizarPerfilPsicologo() {
     const handleEditar = async () => {
         if (!psicologo) return;
 
-        const idPsicologo = getUserId();
+        // const idPsicologo = getUserId();
+        const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
         if (!idPsicologo) {
             apresentarErro("Usuario não encontrado. Faça o login novamente")
@@ -95,9 +95,21 @@ export default function AtualizarPerfilPsicologo() {
 
         const valorConvertido = parseFloat(valorSessao.replace(/[R$\s.]/g, '').replace(',', '.')) || 0;
 
-        const dadosAtualizados = {
+        const dadosAtualizados: PsicologoModel = {
+            id: '',
+            nome: psicologo.nome,
+            crp: psicologo.crp,
+            cpf: psicologo.cpf,
+            email: psicologo.email,
+            telefone: psicologo.telefone,
+            dataNascimento: psicologo.dataNascimento,
+            genero: psicologo.genero,
+            enderecoAtendimento: psicologo.enderecoAtendimento,
             biografia,
-            valorSessao: valorConvertido
+            status: psicologo.status,
+            fotoUrl: psicologo.fotoUrl,
+            valorSessao: valorConvertido,
+            tempoSessao: psicologo.tempoSessao
         };
 
         try {

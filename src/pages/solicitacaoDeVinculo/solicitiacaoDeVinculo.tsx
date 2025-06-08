@@ -83,7 +83,7 @@ export default function SolicitacaoDeVinculo() {
   }
 
   useEffect(() => {
-    const id = '4a0dd9db-3b2a-4c08-8ab3-2af4f6854650';
+    const id = localStorage.getItem('id-paciente');
     if (id) {
       setIdPaciente(id);
     } else {

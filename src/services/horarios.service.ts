@@ -2,15 +2,7 @@ import axios from "axios";
 import { HorarioModel } from "../models/horario";
 import Response from "../models/response";
 
-interface HorarioParaSalvar {
-  diaSemana: string;
-  inicio: string;
-  fim: string;
-  disponivel: boolean;
-  psicologo: { id: string };
-}
-
-export function salvarHorario(horario: HorarioParaSalvar): Promise<Response<HorarioModel>> {
+export function salvarHorario(horario: HorarioModel): Promise<Response<HorarioModel>> {
   return axios.post<Response<HorarioModel>>("http://localhost:8080/horarios", horario)
     .then(response => response.data)
     .catch(error => {
@@ -22,14 +14,20 @@ export function salvarHorario(horario: HorarioParaSalvar): Promise<Response<Hora
     });
 }
 
-export function buscarHorarios(): Promise<Response<HorarioModel[]>> {
-  return axios.get<Response<HorarioModel[]>>("http://localhost:8080/horarios")
+export function listarHorariosPsicologo(idPsicologo: string): Promise<Response<HorarioModel[]>> {
+  return axios.get<Response<HorarioModel[]>>(
+    `http://localhost:8080/horarios/psicologo/${idPsicologo}`
+  )
     .then(response => response.data)
-    .catch(error => {
-      console.error("Erro ao buscar horários:", error);
+    .catch(err => {
+      console.error("Erro ao carregar horários:", err);
       return {
         dado: [],
-        erro: error
+        erro: err
       };
     });
+}
+
+export async function salvarHorarios(horarios: HorarioModel[]): Promise<void> {
+  await axios.post("/consulta", horarios);
 }
