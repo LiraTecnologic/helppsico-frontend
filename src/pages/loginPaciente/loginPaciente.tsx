@@ -1,50 +1,32 @@
-import './loginPaciente.css';
-import InputTotal from '../../components/commmon/Inputs/InputTotal';
-import Botao from '../../components/commmon/botoes/botao/botao';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import "./loginPaciente.css";
+import InputTotal from "../../components/commmon/Inputs/InputTotal";
+import Botao from "../../components/commmon/botoes/botao/botao";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../services/auth.service";
+import { apresentarErro } from "../../utils/notificacoes";
 
-
-import { login } from '../../services/auth.service';
-
-const Login = () => {
-  const [email, setEmail] = useState('');  
-  const [senha, setSenha] = useState('');
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const navigate = useNavigate();
-
-  const validarSenha = (senha: string) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-    return regex.test(senha);
-  };
-
 
   const validarLogin = async () => {
     if (!email || !senha) {
-      alert('Por favor, preencha todos os campos antes de continuar.');
-      return;
-    }
-
-    if (!validarSenha(senha)) {
-      alert(
-        'A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.'
-      );
+      apresentarErro("Por favor, preencha todos os campos antes de continuar.");
       return;
     }
 
     try {
-    
-      const resposta = await login(email, senha, 'PACIENTE');
+      const resposta = await login(email, senha, "PACIENTE");
 
       if (resposta.dado) {
-      
-        navigate('/paciente/painel');
+        navigate("/paciente/painel");
       } else {
-       
-        alert(`Falha na autenticação: ${resposta.erro}`);
+        apresentarErro(resposta.erro || 'Erro ao fazer login.');
       }
     } catch (err) {
-     
-      alert(`Ocorreu um erro ao tentar logar: ${err}`);
+      apresentarErro(`Erro ao tentar logar`)
     }
   };
 
@@ -59,7 +41,6 @@ const Login = () => {
       <div className="left-content-paciente">
         <div className="formulario-paciente">
           <h1 className="texto-titulo-paciente">Minha Conta</h1>
-
 
           <InputTotal
             label="E-mail:"
@@ -77,13 +58,12 @@ const Login = () => {
           />
 
           <p className="novo-texto-sem-conta">
-            Não tem conta?{' '}
+            Não tem conta?{" "}
             <Link to="/cadastroPaciente" className="link-paciente">
               crie agora
             </Link>
           </p>
 
-  
           <Botao texto="Entrar" onClick={validarLogin} />
         </div>
       </div>
@@ -99,6 +79,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}

@@ -16,7 +16,6 @@ export default function MeuPainelPaciente() {
 
     const handleDocumentoClick = (id: string) => {
         console.log(`Documento com ID ${id} foi clicado`);
-        alert("clicou no documento");
     };
 
     return (

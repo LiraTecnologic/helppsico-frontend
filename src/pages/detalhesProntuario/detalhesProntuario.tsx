@@ -5,6 +5,7 @@ import InputLeitura from "../../components/commmon/Inputs/InputLeitura";
 import ProntuarioModel from "../../models/prontuario";
 import { consultarProntuarioPorId, editarProntuario } from "../../services/prontuarios.service";
 import {formatarData} from "../../utils/formataData";
+import { notificarErro } from "../../utils/notificacoes";
 
 export default function DetalhesProntuario() {
     const [isEditing, setIsEditing] = useState(false);
@@ -24,6 +25,7 @@ export default function DetalhesProntuario() {
     const handleEditar = () => {
         setProntuarioOriginal(prontuario);
         setIsEditing(true);
+        notificarErro("Prontuario alterado")
     };
 
     const handleCancelar = () => {

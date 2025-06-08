@@ -5,16 +5,12 @@ import { useState } from 'react';
 import { login } from '../../services/auth.service';
 import { getUserCRP, getUserEmail, getUserId, getUserType } from '../../services/auth.service';
 import { Link, useNavigate } from 'react-router-dom';
+import { apresentarErro } from '../../utils/notificacoes';
 
 const Login = () => {
     const [crp, setCrp] = useState('');
     const [senha, setSenha] = useState('');
     const navigate = useNavigate();
-
-    const validarSenha = (senha: string) => {
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-        return regex.test(senha);
-    };
 
     const redirecionarTeste = () => {
       
@@ -23,14 +19,10 @@ const Login = () => {
 
     const validarLogin = async () => {
         if (!crp || !senha) {
-            alert('Por favor, preencha todos os campos antes de continuar.');
+            apresentarErro('Por favor, preencha todos os campos antes de continuar.');
             return;
         }
 
-        if (!validarSenha(senha)) {
-            alert('A senha deve ter no mínimo 6 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
-            return;
-        }
       
         const response = await login(crp, senha, 'PSICOLOGO');
         if (response.dado) {
@@ -45,7 +37,7 @@ const Login = () => {
 
             redirecionarTeste();
         } else {
-            alert(response.erro || 'Erro ao fazer login.');
+            apresentarErro(response.erro || 'Erro ao fazer login.');
         }
     };
 
@@ -58,7 +50,7 @@ const Login = () => {
                     <h1 className='novo-texto-titulo'>Minha Conta</h1>
                     <InputTotal label="CRP:" pleaceHolder="Digite seu crp..." tipo="text" value={crp} onChange={(e) => setCrp(e.target.value)} />
                     <InputTotal label="Senha:" pleaceHolder="Digite sua senha..." tipo="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
-                    <p className='novo-texto-sem-conta'>Não tem conta? <Link to="/cadastroPsicologo" className='novo-link'>crie agora</Link></p>
+                    <p className='novo-texto-sem-conta'>Não tem conta? <Link to="/psicologo/cadastro" className='novo-link'>crie agora</Link></p>
                     <Botao texto='Entrar' onClick={validarLogin} />
                 </div>
             </div>

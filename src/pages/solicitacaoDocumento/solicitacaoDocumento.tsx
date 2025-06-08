@@ -5,6 +5,7 @@ import Header from '../../components/layout/header/header';
 import PsicologoModel from '../../models/psicologo';
 import { buscarPsicologoVinculado, criarSolicitacaoDocumento, TipoDocumento } from './solicitacaoDocuemnto';
 import './solicitacaoDocumento.css';
+import { notificarSucesso } from '../../utils/notificacoes';
 
 export default function SolicitacaoDocumento() {
     const [documentoSelecionado, setDocumentoSelecionado] = useState<number | null>(null);
@@ -91,7 +92,7 @@ export default function SolicitacaoDocumento() {
             );
 
             setDocumentoSelecionado(null);
-            alert('Solicitação enviada com sucesso!');
+            notificarSucesso('Solicitação enviada com sucesso!');
             
         } catch (error) {
             console.error("Erro ao solicitar documento:", error);

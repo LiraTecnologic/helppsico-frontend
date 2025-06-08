@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import PacienteModel from '../../models/paciente';
 import DadosGeraisDocumentoModel from '../../models/dadosGeraisDocumento';
 import { cadastrarDocumento } from '../../services/documento.service';
+import { notificarErro, notificarSucesso } from '../../utils/notificacoes';
 
 export default function CadastroDocumento() {
     const [Paciente, setPaciente] = useState<PacienteModel[]>([]);
@@ -20,13 +21,13 @@ export default function CadastroDocumento() {
         try {
             const response = await cadastrarDocumento(dados, idSolicitacao);
             if (response.erro) {
-                alert("Erro ao cadastrar documento.");
+                notificarErro("Erro ao cadastrar documento.");
             } else {
-                alert("Documento cadastrado com sucesso!");
+                notificarSucesso("Documento cadastrado");
             }
         } catch (e) {
             console.error("Erro inesperado:", e);
-            alert("Erro inesperado ao salvar documento.");
+            notificarErro("Erro inesperado ao salvar documento.");
         }
     };
 

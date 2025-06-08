@@ -65,9 +65,6 @@ function App() {
         <Route path="/psicologos" element={<VerPsicologos />} />
         <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
 
-        <Route path="/solicitacaoVinculo" element={<SolicitacaoDeVinculo />} />
-        <Route path="/solicitacaoDocumento" element={<SolicitacaoDocumento />}/>
-
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
 

@@ -5,6 +5,7 @@ import ConfiguracaoHorario from "../../components/layout/configurarHorario/confi
 import TabelaHorarios from "../../components/layout/configurarHorario/tabelaHorarios";
 import { salvarHorario, buscarHorarios } from "../../services/horarios.service";
 import HorarioModel from "../../models/horario";
+import { apresentarErro, notificarSucesso } from "../../utils/notificacoes";
 
 export default function GerenciamentoDeHorarios() {
   const [hasConfig, setHasConfig] = useState(false);
@@ -68,11 +69,11 @@ export default function GerenciamentoDeHorarios() {
       for (const horario of horariosASalvar) {
         await salvarHorario(horario);
       }
-      alert("Horários salvos com sucesso!");
+      notificarSucesso("Horários salvos com sucesso!");
       const data = await buscarHorarios();
       setHorarios(data);
     } catch (error) {
-      alert("Erro ao salvar horários.");
+      apresentarErro("Erro ao salvar horários.");
       console.error(error);
     }
   }

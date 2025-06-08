@@ -7,6 +7,7 @@ import EtapasCadastro from '../../components/commmon/marcadores/etapasCadastro';
 import { useState, useEffect } from 'react';
 import { formatarCPF, validarCPF, buscarEnderecoPorCEP } from './cadastroPaciente.service';
 import { Link, useNavigate } from 'react-router-dom';
+import { apresentarErro } from '../../utils/notificacoes';
 
 export default function Cadastro() {
     const [step, setStep] = useState(1);
@@ -40,7 +41,7 @@ export default function Cadastro() {
 
     const validandoSenha = () => {
         if (senha !== senhaC) {
-            alert("Senhas não são iguais!");
+            apresentarErro("Senhas não são iguais!");
             return;
         }
 
@@ -51,7 +52,7 @@ export default function Cadastro() {
             /[!@#$%^&*(),.?":{}|<>]/.test(senha);
 
         if (!senhaValida) {
-            alert("Senha fraca! A senha precisa ter pelo menos 6 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.");
+            apresentarErro("Senha fraca! A senha precisa ter pelo menos 6 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.");
             return;
         }
 
@@ -63,17 +64,17 @@ export default function Cadastro() {
     const handleClick = () => {
         if (step === 1) {
             if (!nome || !email || !cpfValue || !senha || !senhaC) {
-                alert('Por favor, preencha todos os campos antes de continuar.');
+                apresentarErro('Por favor, preencha todos os campos antes de continuar.');
                 return;
             }
 
             if (!validarEmail(email)) {
-                alert('E-mail inválido. Verifique e tente novamente.');
+                apresentarErro('E-mail inválido. Verifique e tente novamente.');
                 return;
             }
 
             if (!validarCPF(cpfValue)) {
-                alert('CPF inválido, verifique e tente novamente');
+                apresentarErro('CPF inválido, verifique e tente novamente');
                 return;
             }
 
@@ -93,7 +94,7 @@ export default function Cadastro() {
                     setPais(dados.pais);
                 })
                 .catch(error => {
-                    alert(error.message);
+                    apresentarErro(error.message);
                 });
         }
     }, [cep]);

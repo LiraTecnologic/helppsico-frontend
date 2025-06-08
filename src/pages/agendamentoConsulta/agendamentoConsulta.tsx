@@ -12,6 +12,7 @@ import ConsultaModel from "../../models/consulta";
 import PacienteModel from "../../models/paciente";
 import EnderecoModel from "../../models/endereco";
 import VinculoModel from "../../models/vinculo";
+import { apresentarErro, notificarErro } from "../../utils/notificacoes";
 
 export default function AgendamentoConsulta() {
   const [quantidadeSelecionada, setQuantidadeSelecionada] = useState(0);
@@ -25,7 +26,7 @@ export default function AgendamentoConsulta() {
 
   async function agendar() {
     if (idsHorariosSelecionados.length === 0) {
-      alert("Selecione ao menos um horário para agendar!");
+      apresentarErro("Selecione ao menos um horário para agendar!");
       return;
     }
 
@@ -75,11 +76,11 @@ export default function AgendamentoConsulta() {
         }
       }
 
-      alert("Consultas agendadas com sucesso!");
+      notificarErro("Consultas agendadas com sucesso!");
 
     } catch (error) {
       console.error("Erro ao agendar:", error);
-      alert("Ocorreu um erro ao agendar. Tente novamente.");
+      notificarErro("Ocorreu um erro ao agendar. Tente novamente.");
     }
   }
 
