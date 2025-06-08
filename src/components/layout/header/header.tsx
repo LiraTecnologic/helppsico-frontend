@@ -37,8 +37,7 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
               {headerPsicologo && (
                 <>
                   <li className={fluxo === "dadosPessoais" ? "active" : ""}>
-                    <Link to={`/${usuario}/pacientes`}>Dados Pessoais</Link>
-                    {/* FALTA TELA */}
+                    <Link to={`/${usuario}/atualizar-perfil`}>Dados Pessoais</Link>
                   </li>
 
                   <li className={fluxo === "meusPacientes" ? "active" : ""}>
@@ -85,8 +84,8 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
           {headerPsicologo && (
             <>
               <li className={fluxo === "dadosPessoais" ? "active" : ""}>
-                <Link to={`/${usuario}/pacientes`} onClick={closeMenu}>
-                  Dados Pessoais {/* FALTA TELA */}
+                <Link to={`/${usuario}/atualizar-perfil`} onClick={closeMenu}>
+                  Dados Pessoais
                 </Link>
               </li>
 

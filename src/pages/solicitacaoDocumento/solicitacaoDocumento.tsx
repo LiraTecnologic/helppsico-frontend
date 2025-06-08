@@ -5,6 +5,7 @@ import Header from '../../components/layout/header/header';
 import PsicologoModel from '../../models/psicologo';
 import { criarSolicitacaoDocumento, TipoDocumento } from './solicitacaoDocuemento.service';
 import './solicitacaoDocumento.css';
+import { notificarSucesso } from '../../utils/notificacoes';
 import { consultarVinculosPaciente } from '../../services/vinculos.service';
 
 export default function SolicitacaoDocumento() {
@@ -77,8 +78,8 @@ export default function SolicitacaoDocumento() {
             );
 
             setDocumentoSelecionado(null);
-            alert('Solicitação enviada com sucesso!');
-
+            notificarSucesso('Solicitação enviada com sucesso!');
+            
         } catch (error) {
             console.error("Erro ao solicitar documento:", error);
             setErro('Erro ao enviar solicitação. Tente novamente mais tarde.');

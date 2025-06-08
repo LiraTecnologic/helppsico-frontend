@@ -1,18 +1,20 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import CardRequisicaoDocumento from '../../components/layout/Cards/cardRequisicaoDocumento/requisicaoDocumentoCard';
 import Header from '../../components/layout/header/header';
 import './requisicaoDocumento.css';
 import SolicitacaoDocumentoModel from '../../models/solicitacaoDocumento';
 import { listarSolicitacoesDocumento, rejeitarSolicitacaoDocumento } from './solicitacaoDocumento.service';
+import { useNavigate } from 'react-router';
+import { notificarErro } from '../../utils/notificacoes';
 
 export default function RequisicaoDocumento() {
   const [solicitacoes, setSolicitacoes] = useState<SolicitacaoDocumentoModel[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // const idPsicologo = localStorage.getItem('id-psicologo');
-    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+    const idPsicologo = 'c71cdb93-d05e-4fcc-89ad-ea0ffdd2ad1d';
 
     async function carregarSolicitacoes(id: string) {
       try {
@@ -41,7 +43,7 @@ export default function RequisicaoDocumento() {
     }
   }, []);
 
-  const handleApprove = (solicitacaoId: string) => {
+  const handleApprove = (solicitacaoId: string, tipoDocumento: string) => {
     setSolicitacoes(prev =>
       prev.map(sol =>
         sol.id === solicitacaoId
@@ -49,7 +51,7 @@ export default function RequisicaoDocumento() {
           : sol
       )
     );
-    console.log('Aprovando solicitação:', solicitacaoId);
+    navigate('/psicologo/documento/novo',{state: {tipoDocumento}})
   };
 
   const handleReject = (solicitacaoId: string) => {
@@ -62,6 +64,7 @@ export default function RequisicaoDocumento() {
           : sol
       )
     );
+    notificarErro("Solicitação rejeitada")
     console.log('Rejeitando solicitação:', solicitacaoId);
   };
 

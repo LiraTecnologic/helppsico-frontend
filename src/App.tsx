@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-// Telas do fluxo de Paciente
+// TELAS DE FLUXO DE PACIENTE
 import LoginPaciente from "../src/pages/loginPaciente/loginPaciente";
 import CadastroPaciente from "../src/pages/cadastroPaciente/cadastroPaciente";
 import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
@@ -12,7 +12,7 @@ import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVin
 import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
 import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
 
-// Telas do fluxo de Psicologo
+// TELAS DE FLUXO DE PSICÓLOGO
 import LoginPsicologo from "../src/pages/loginPsicologo/loginPsicologo";
 import CadastroPsicologo from "../src/pages/cadastroPsicologo/cadastroPsicologo";
 import ListagemProntuario from "./pages/listagemProntuario/listagemProntuario";
@@ -29,6 +29,7 @@ import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
+
 
 function App() {
   return (
@@ -61,9 +62,9 @@ function App() {
 
         {/* AMBOS OS FLUXOS */}
         <Route path="/psicologos" element={<VerPsicologos />} />
-        <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />  {/*João ajustar*/}
+        <Route path="/informacoesPsicologo" element={<InformacoesPsicologo />} />
 
-        {/* Nenhum fluxo */}
+        {/*NENHUM FLUXO */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
 
 

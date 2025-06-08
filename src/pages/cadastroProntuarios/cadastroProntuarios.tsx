@@ -8,6 +8,7 @@ import ProntuarioModel from '../../models/prontuario';
 import { consultaVinculosPsicologo } from '../../services/vinculos.service';
 import { consultarSessoesAntigasPsicologo } from '../../services/consultas.service';
 import { cadastar } from '../../services/prontuarios.service';
+import { apresentarErro, notificarSucesso } from '../../utils/notificacoes';
 
 export default function CadastroProntuarios() {
 
@@ -29,7 +30,7 @@ export default function CadastroProntuarios() {
 
     async function salvar() {
         if (!pacienteSelecionado || !consultaSelecionada || !conteudo || !titulo) {
-            alert('Preencha todos os campos!');
+            apresentarErro('Preencha todos os campos!');
             return;
         }
 
@@ -37,12 +38,12 @@ export default function CadastroProntuarios() {
         const consultaCompleta = consultas.find(c => c.id.toString() === consultaSelecionada);
 
         if (!pacienteCompleto) {
-            alert('Paciente inválido!');
+            apresentarErro('Paciente inválido!');
             return;
         }
 
         if (!consultaCompleta) {
-            alert('Paciente inválido!');
+            apresentarErro('Paciente inválido!');
             return;
         }
 
@@ -60,11 +61,11 @@ export default function CadastroProntuarios() {
         try {
             const prontuarioSalvo = await cadastar(novoProntuario);
             console.log('Prontuario salvo com sucesso.', prontuarioSalvo);
-            alert('Prontuário salvo com sucesso!');
-            window.location.reload();
+            notificarSucesso('Prontuário salvo com sucesso!');
+            window.location.reload(); 
         } catch (error) {
             console.error('Erro ao salvar prontuário:', error);
-            alert('Erro ao salvar prontuário!');
+            apresentarErro('Erro ao salvar prontuário!');
         }
     }
 
