@@ -103,7 +103,7 @@ export default function TabelaHorarios({
         );
 
         if (horarioEncontrado) {
-          mapping[id] = horarioEncontrado.id; // Mapeia o ID interno para o ID do banco
+          mapping[id] = horarioEncontrado.id; 
           if (horarioEncontrado.disponivel) {
             cards[id] = "Disponivel para Agendamento";
           } else {

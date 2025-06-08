@@ -18,7 +18,7 @@ export default function GerenciamentoDeHorarios() {
   const [tempoSessao, setTempoSessao] = useState<number>(50);
   const [intervaloSessao, setIntervaloSessao] = useState<number>(10);
 
-  const idPsicologo: string = "9e239ace-09aa-465b-b801-dd96535332a9";
+  const idPsicologo: string = "0873d229-fd10-488a-b7e9-f294aa10e5db";
 
   const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
   
