@@ -1,4 +1,4 @@
-export default function calcularMedia(avaliacoes: {nota: number}[]): number {
+export default function calcularMedia(avaliacoes: {nota: number}[]): number {  
   if (avaliacoes.length === 0) return 0;
   
   const soma = avaliacoes.reduce((acc, curr) => acc + curr.nota, 0);

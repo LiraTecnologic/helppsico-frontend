@@ -23,10 +23,10 @@ export default function Login() {
       if (resposta.dado) {
         navigate("/paciente/painel");
       } else {
-        apresentarErro(resposta.erro || 'Erro ao fazer login.');
+        apresentarErro(resposta.erro || "Erro ao fazer login.");
       }
     } catch (err) {
-      apresentarErro(`Erro ao tentar logar`)
+      apresentarErro("Erro ao tentar logar");
     }
   };
 

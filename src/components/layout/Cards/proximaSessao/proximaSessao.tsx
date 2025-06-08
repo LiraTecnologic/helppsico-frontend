@@ -1,28 +1,33 @@
 import ConsultaModel from '../../../../models/consulta';
 import calcular from '../../../../utils/calculoData'
-import {formatarDataHora} from '../../../../utils/formataData'
 import { Link } from "react-router-dom";
 
 import "./proximaSessao.css";
+import { useEffect, useState } from 'react';
 
 interface ProximaSessaoProps {
   consulta: ConsultaModel;
   verMais: boolean;
   fluxo: string;
-  sessaoMarcada: boolean;
-
 }
 
 export default function ProximasSessoes({
   consulta,
   verMais,
-  fluxo,
-  sessaoMarcada,
+  fluxo
 }: ProximaSessaoProps) {
+
+  const [idade, setIdade] = useState<number>(0);
+
   const isPsicologo = fluxo === 'psicologo';
   // const pessoa = isPsicologo ? consulta.paciente : consulta.psicologo;
-  const idade = isPsicologo ? calcular(consulta.paciente.dataNascimento) : null;
-  // const endereco = isPsicologo ? consulta.paciente.endereco : consulta.psicologo.enderecoAtendimento;
+
+  useEffect(() => {
+    setIdade(calcular(consulta.psicologo.dataNascimento))
+  }, [])
+
+   
+  // const endereco = isPsicologo ? consulta.paciente.endereco : consulta.psicologo.enderecoAtendimento
 
   return (
     <div className="proxima-sessao">
@@ -32,7 +37,7 @@ export default function ProximasSessoes({
         {verMais && fluxo === "psicologo" && <button className="botao-ver-mais"><Link to="/paciente/sessao">Ver mais</Link></button>}{/*  falta tela */}
       </div>
 
-      {sessaoMarcada ? (
+      {consulta ? (
         <div className="sessao-card">
           <div className="sessao-info">
             <img

@@ -13,17 +13,31 @@ export default function DetalhesSessao() {
 
   useEffect(() => {
     async function consultarConsultaFutura(idPaciente: string) {
-      const consultasFuturas = await consultaSessoesFuturasPaciente(idPaciente, 1);
-      setConsultaFutura(consultaMaisRecente(consultasFuturas.content));
+      const consultasFuturas = await consultaSessoesFuturasPaciente(idPaciente, 0);
+
+      if(consultasFuturas.dado) {
+        setConsultaFutura(consultaMaisRecente(consultasFuturas.dado.content));
+      }
+      
     }
 
     async function consultarConsultasAntigas(idPaciente: string) {
-      const consultasAntigas = await consultarSessoesAntigasPaciente(idPaciente, 1);
-      setConsultasAntigas(consultasAntigas.content);
+      const consultasAntigas = await consultarSessoesAntigasPaciente(idPaciente, 0);
+
+      if(consultasAntigas.dado) {
+        setConsultasAntigas(consultasAntigas.dado.content);
+      }
     }
 
-    consultarConsultaFutura("teste");
-    consultarConsultasAntigas("teste");
+    // const idPaciente = localStorage.getItem('id-paciente');
+    const idPaciente = '4a0dd9db-3b2a-4c08-8ab3-2af4f6854650';
+
+    if (idPaciente) {
+      consultarConsultaFutura(idPaciente);
+      consultarConsultasAntigas(idPaciente);
+    } else {
+      console.log("Id de paciente null");
+    }
   }, []);
 
   return (
@@ -35,7 +49,6 @@ export default function DetalhesSessao() {
           consulta={consultaFutura}
           verMais={true}
           fluxo='paciente'
-          sessaoMarcada={true}
         />
       )}
       <div style={{ marginTop: '48px' }}>

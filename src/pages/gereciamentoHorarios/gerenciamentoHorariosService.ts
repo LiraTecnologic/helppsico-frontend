@@ -1,8 +1,9 @@
 import axios from "axios";
-import HorarioModel from "../../models/horario";
+import { HorarioModel } from "../../models/horario";
+import Response from "../../models/response";
 
-export async function buscarHorarios(): Promise<HorarioModel[]> {
-  const response = await axios.get<HorarioModel[]>("/consulta");
+export async function buscarHorarios(): Promise<Response<HorarioModel[]>> {
+  const response = await axios.get<Response<HorarioModel[]>>("/consulta");
   return response.data;
 }
 

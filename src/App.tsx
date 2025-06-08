@@ -8,8 +8,8 @@ import LoginPaciente from "../src/pages/loginPaciente/loginPaciente";
 import CadastroPaciente from "../src/pages/cadastroPaciente/cadastroPaciente";
 import MeuPainelPaciente from "./pages/meuPainelPaciente/meuPainel";
 import DetalhesSessao from "./pages/minhasConsultasPaciente/minhasConsultasPaciente";
-import VerPsicologos from "./pages/verPsicologos/verPsicologos";
-import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
+// import VerPsicologos from "./pages/verPsicologos/verPsicologos";
+// import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import SolicitacaoDeVinculo from "./pages/solicitacaoDeVinculo/solicitiacaoDeVinculo";
 import AgendamentoConsulta from "./pages/agendamentoConsulta/agendamentoConsulta";
 import SolicitacaoDocumento from "./pages/solicitacaoDocumento/solicitacaoDocumento";
@@ -27,10 +27,15 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 import CadastroDocumento from "./pages/cadastroDocumento/cadastroDocumento";
 import MinhasConsultasPsicologo from "./pages/minhasConsultasPsicologo/minhasConsultasPsicologo";
 import SolicitacaoVinculoPsicologo from "./pages/solicitacaoVinculoPsicologo/solicitacaoVinculo";
+import CardValidacaoCrp from "./components/layout/Cards/cardValidacaoCrp/cardValidacaoCrp";
+import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+import VerPsicologos from "./pages/verPsicologos/verPsicologos";
+import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
 import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
+// import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
 
 // Nenhum fluxo
-import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
+// import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 
 function App() {
   return (
@@ -53,13 +58,13 @@ function App() {
         <Route path="/psicologo/pacientes" element={<ListagemPacientes />} />
         <Route path="/psicologo/prontuarios" element={<ListagemProntuario />} />
         <Route path="/psicologo/prontuario/novo" element={<CadastroProntuarios />} />
-        <Route path="/psicologo/prontuario/detalhes" element={<DetalhesProntuario />} />
-        <Route path="/psicologo/horarios" element={<GerenciamentoDeHorarios />} />
-        <Route path="/psicologo/documentos-pendentes" element={<RequisicaoDocumento />} />
+        <Route path="/psicologo/detalhes-prontuario/:id" element={<DetalhesProntuario />} />
+        <Route path="/psicologo/horarios" element={<GerenciamentoDeHorarios />} /> {/*GerenciamentoDeHorarios*/}
+        <Route path="/psicologo/documentos-pendentes" element={<RequisicaoDocumento />} /> {/*João vai ligar*/}
         <Route path="/psicologo/solicitacao-vinculo" element={<SolicitacaoVinculoPsicologo />} />
         <Route path="/psicologo/sessoes" element={<MinhasConsultasPsicologo />} />
-        <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} />
-        <Route path="/psicologo/documento/novo" element={<CadastroDocumento />} />
+        <Route path="/psicologo/atualizar-perfil" element={<AtualizarPerfilPsicologo />} /> {/*AtualizarPerfilPsico*/}
+        <Route path="/psicologo/documento/novo" element={<CadastroDocumento />} /> {/*João vai ligar*/}
 
         {/* AMBOS OS FLUXOS */}
         <Route path="/psicologos" element={<VerPsicologos />} />
@@ -67,6 +72,8 @@ function App() {
 
         {/* Nenhum fluxo */}
         <Route path="/validacaoCrp" element={<ValidacaoCrp />} />
+
+        <Route path="/" element={<LoginPaciente/>}/>
 
       </Routes>
       <ToastContainer />

@@ -4,10 +4,13 @@ import Header from "../../components/layout/header/header";
 import InputLeitura from "../../components/commmon/Inputs/InputLeitura";
 import ProntuarioModel from "../../models/prontuario";
 import { consultarProntuarioPorId, editarProntuario } from "../../services/prontuarios.service";
-import {formatarData} from "../../utils/formataData";
 import { notificarErro } from "../../utils/notificacoes";
+import { formatarData } from "../../utils/formataData";
+import { useParams } from 'react-router-dom';
 
 export default function DetalhesProntuario() {
+    const { id } = useParams();
+
     const [isEditing, setIsEditing] = useState(false);
 
     const [prontuario, setProntuario] = useState<ProntuarioModel | null>(null);
@@ -35,9 +38,9 @@ export default function DetalhesProntuario() {
 
     const handleSalvar = async () => {
         if (!prontuario) return;
-    
+
         setIsEditing(false);
-    
+
         try {
             await editarProntuario(prontuario.id, prontuario);
             console.log("Prontuário salvo com sucesso!");
@@ -46,8 +49,8 @@ export default function DetalhesProntuario() {
         }
     };
 
-    function formataIdentificacao(id: string) { 
-        return "CONS-" + id.substring(0, 8).toUpperCase(); 
+    function formataIdentificacao(id: string) {
+        return "CONS-" + id.substring(0, 8).toUpperCase();
     }
 
     useEffect(() => {
@@ -56,7 +59,11 @@ export default function DetalhesProntuario() {
             setProntuario(prontuario.dado);
         }
 
-        carregarProntuario("teste");
+        if(id) {
+            carregarProntuario(id);
+        } else {
+            console.log('Id do prontuário null');
+        }
     }, []);
 
     return (

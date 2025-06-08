@@ -8,69 +8,78 @@ import ConsultaModel from '../../models/consulta';
 import VinculoModel from '../../models/vinculo';
 import ProntuarioModel from '../../models/prontuario';
 import { consultaProntuariosPsicologo } from "../../services/prontuarios.service";
-import { consultaSessoesFuturas } from '../../services/consultas.service';
 import { consultaVinculosPsicologo } from '../../services/vinculos.service';
+import { consultaSessoesFuturasPsicologo } from '../../services/consultas.service';
+import { listarHorariosPsicologo } from '../../services/horarioPsicologo.service';
 import BlocoHorario from '../../components/layout/blocoHorario/blocoHorario';
 import { Link } from "react-router-dom";
-import PsicologoModel from '../../models/psicologo';
+import { HorarioModel } from '../../models/horario';
 
 export default function MeuPainelPsicologo() {
 
     const [consultas, setConsutas] = useState<ConsultaModel[]>([]);
     const [vinculos, setVinculos] = useState<VinculoModel[]>([]);
     const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
+    const [horarios, setHorarios] = useState<HorarioModel[] | []>([]);
 
     useEffect(() => {
         async function carregarProntuarios(id: string) {
-            const prontuariosConsultados = await consultaProntuariosPsicologo(id, 1);
+            const prontuariosConsultados = await consultaProntuariosPsicologo(id, 0);
             console.log('Prontuarios: ', prontuariosConsultados);
-            setProntuarios(prontuariosConsultados.content);
+
+            if (prontuariosConsultados.dado) {
+                setProntuarios(prontuariosConsultados.dado.content);
+            }
         }
 
         async function carregarConsultas(id: string) {
-            const consultasConsultadas = await consultaSessoesFuturasPsicologo(id, 1);
+            const consultasConsultadas = await consultaSessoesFuturasPsicologo(id, 0);
             console.log('Consultas: ', consultasConsultadas);
 
-            const consultasOrdenadas = consultasConsultadas.content.sort((a, b) => {
-                const dataA = new Date(a.dataHora).getTime();
-                const dataB = new Date(b.dataHora).getTime();
-                const agora = Date.now();
+            if (consultasConsultadas.dado) {
+                const consultasOrdenadas = consultasConsultadas.dado.content.sort((a, b) => {
+                    const dataA = new Date(a.data).getTime();
+                    const dataB = new Date(b.data).getTime();
+                    const agora = Date.now();
 
-                const diffA = Math.abs(dataA - agora);
-                const diffB = Math.abs(dataB - agora);
+                    const diffA = Math.abs(dataA - agora);
+                    const diffB = Math.abs(dataB - agora);
 
-                return diffA - diffB;
-            });
+                    return diffA - diffB;
+                });
 
-            setConsutas(consultasOrdenadas);
+                setConsutas(consultasOrdenadas);
+            }
         }
 
         async function carregarVinculos(id: string) {
-            const vinculosConsultados = await consultaVinculosPsicologo(id, 1);
+            const vinculosConsultados = await consultaVinculosPsicologo(id, 0);
             console.log('Vinculos: ', vinculosConsultados);
-            setVinculos(vinculosConsultados.dado.content);
+
+            if (vinculosConsultados.dado) {
+                setVinculos(vinculosConsultados.dado.content);
+            }
         }
 
+        async function carregarHorarios(id:string) {
+            const horarios = await listarHorariosPsicologo(idPsicologo);
+            if(horarios.dado) {
+                setHorarios(horarios.dado);
+            }
+        }
 
-        // // Apenas nessa task para funcionar integração
-        // const idRandomPsico = '71ff60f6-0272-41db-89fb-621c488b8642';
-        // localStorage.setItem('psicologoLogado', idRandomPsico);
+        // const idPsicologo = localStorage.getItem('id-psicologo');
+        const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
-        // const psicologoString: string = localStorage.getItem('psicologoLogado');
-
-        // const psicologoId: string = JSON.parse(psicologoString);
-
-        const psicologoId = '71ff60f6-0272-41db-89fb-621c488b8642';
-
-        carregarConsultas(psicologoId);
-        carregarProntuarios(psicologoId);
-        carregarVinculos(psicologoId);
-
+        if (idPsicologo) {
+            carregarConsultas(idPsicologo);
+            carregarProntuarios(idPsicologo);
+            carregarVinculos(idPsicologo);
+            carregarHorarios(idPsicologo);
+        } else {
+            console.log('Id do psicologo null');
+        }
     }, []);
-
-
-
-    const sessaoMarcada = consultas.length > 0;;
 
     const handleDocumentoClick = (id: string) => {
         console.log(`Documento com ID ${id} foi clicado`);
@@ -81,7 +90,6 @@ export default function MeuPainelPsicologo() {
             <Header fluxo='meuPainel' headerPsicologo={true} />
             {consultas.length > 0 && (
                 <ProximasSessoes
-                    sessaoMarcada={true}
                     verMais={true}
                     fluxo='psicologo'
                     consulta={consultas[0]}
@@ -90,7 +98,7 @@ export default function MeuPainelPsicologo() {
             <div className="imagensPacientes">
                 <ListagemDePacientes vinculos={vinculos} verMais={true} />
             </div>
-            <BlocoHorario hasConfig={true} />
+            <BlocoHorario hasConfig={horarios.length > 0} />
             <div className="listagemProntuarios">
                 <h1 className='prontuarioTittle'>Prontuário</h1>
                 <button className="botao-verMais">
@@ -98,7 +106,8 @@ export default function MeuPainelPsicologo() {
                 </button>
             </div>
             <ListagemDocumentos
-                documentos={prontuarios}
+                documentos={[]}
+                prontuarios={prontuarios}
                 onDocumentoClick={handleDocumentoClick}
             />
         </>

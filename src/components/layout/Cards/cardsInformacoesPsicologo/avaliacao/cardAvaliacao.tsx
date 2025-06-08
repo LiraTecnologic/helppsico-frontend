@@ -27,19 +27,19 @@ export default function CardAvaliacaoCrp(avaliacao: Avaliacao) {
     <div className="card-avaliacao-listagem">
       <div className="card-avaliacao-info">
         <img
-          src={fotoPaciente}
-          alt={`Foto de ${nomePaciente}`}
+          src={avaliacao.fotoPaciente}
+          alt={`Foto de ${avaliacao.nomePaciente}`}
           className="foto-paciente-avaliacao"
         />
         <div className="nome-data-avaliacao">
-          <p className="nome-paciente">{nomePaciente}</p>
-          <p className="data-avaliacao">{formatarData(data)}</p>
+          <p className="nome-paciente">{avaliacao.nomePaciente}</p>
+          <p className="data-avaliacao">{formatarData(avaliacao.data)}</p>
         </div>
         <div className="estrelas-container">
-          <Estrelas nota={nota} className="estrelas-custom" />
+          <Estrelas nota={avaliacao.nota} className="estrelas-custom" />
         </div>
       </div>
-      <p className="conteudo-avaliacao">{conteudo}</p>
+      <p className="conteudo-avaliacao">{avaliacao.conteudo}</p>
     </div>
   );
 }

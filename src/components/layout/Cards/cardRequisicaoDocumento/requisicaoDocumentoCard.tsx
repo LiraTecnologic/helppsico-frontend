@@ -34,7 +34,7 @@ export default function CardRequisicaoDocumento({
         <div className="paciente-info">
           <div className="paciente-avatar">
             <img 
-              src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${solicitacao.paciente.nome}`}
+              src={solicitacao.paciente.fotoUrl}
               alt={solicitacao.paciente.nome}
             />
           </div>

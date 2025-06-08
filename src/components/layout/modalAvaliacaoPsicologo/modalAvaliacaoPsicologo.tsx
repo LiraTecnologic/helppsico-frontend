@@ -9,11 +9,7 @@ import PsicologoModel from "../../../models/psicologo";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  psicologo: {
-    nome: string;
-    foto: string;
-    id: string;
-  };
+  psicologo: PsicologoModel;
   onSubmitAvaliacao?: (rating: number, comment: string) => void;
 }
 
@@ -47,8 +43,8 @@ export default function ModalAvaliacaoPsicologo({
     }
 
     // const idPaciente = localStorage.getItem('id-paciente');
-    const idPaciente = '952ec8e8-8a64-414b-8422-83a753aa0d9b';
-    const idPsicologo = 'deec458b-a6b7-4a70-b308-97dcc1a16ec6';
+    const idPaciente = '4a0dd9db-3b2a-4c08-8ab3-2af4f6854650';
+    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
     let novaAvaliacao: AvaliacaoModel = {} as AvaliacaoModel;
 
@@ -78,7 +74,9 @@ export default function ModalAvaliacaoPsicologo({
         crp: '',
         enderecoAtendimento: {} as EnderecoModel,
         biografia: '',
-        status: ''
+        status: '',
+        valorSessao: 0,
+        tempoSessao: 0
       }
 
       novaAvaliacao = {
@@ -117,7 +115,7 @@ export default function ModalAvaliacaoPsicologo({
         <h2 className="modal-title">Avaliar Psicólogo</h2>
         <div className="psicologo-info">
           <div className="psicologo-avatar">
-            <img src={psicologo.foto} />
+            <img src={psicologo.fotoUrl} />
           </div>
           <span className="psicologo-nome">{psicologo?.nome}</span>
         </div>

@@ -14,16 +14,22 @@ export default function ListagemProntuario() {
     const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
 
     useEffect(() => {
-        async function carregarProntuarios() {
-            const prontuariosConsultados = await consultaProntuariosPsicologo('', 1);
-            console.log(prontuariosConsultados);
-            setProntuarios(prontuariosConsultados.content);
+        async function carregarProntuarios(idPsicologo: string) {
+            const prontuariosConsultados = await consultaProntuariosPsicologo(idPsicologo, 0);
+
+            if (prontuariosConsultados.dado) {
+                setProntuarios(prontuariosConsultados.dado.content);
+            }
         }
 
-        carregarProntuarios();
-    }, []);
+        // const idPsicologo = localStorage.getItem('id-psicologo');
+        const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
-    const solicitacoesPendentes = 18;
+        if (idPsicologo) {
+            carregarProntuarios(idPsicologo);
+        }
+
+    }, []);
 
     return (
         <>
@@ -37,19 +43,25 @@ export default function ListagemProntuario() {
                         <BotaoPrimario texto="Cadastrar Prontuário" />
                     </Link>
                     <Link to="/psicologo/documentos-pendentes">
-                        <BotaoPrimario texto={`(${solicitacoesPendentes}) Solicitações pendentes`} />
+                        <BotaoPrimario texto={`Solicitações pendentes`} />
                     </Link>
 
                 </div>
 
                 <div className="prontuarioGrid">
                     {prontuarios.map((prontuario) => (
-                        <Prontuario
+                        <Link
                             key={prontuario.id}
-                            nomePaciente={prontuario.paciente.nome}
-                            titulo={prontuario.titulo}
-                            fotoPerfilUrl={prontuario.paciente.fotoUrl}
-                        />
+                            to={`/psicologo/detalhes-prontuario/${prontuario.id}`}
+                            style={{ textDecoration: 'none', color: 'inherit' }} 
+                        >
+                            <Prontuario
+                                nomePaciente={prontuario.paciente.nome}
+                                titulo={prontuario.titulo}
+                                fotoPerfilUrl={prontuario.paciente.fotoUrl}
+                                idProntuario={prontuario.id}
+                            />
+                        </Link>
                     ))}
                 </div>
             </main>

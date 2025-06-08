@@ -16,8 +16,12 @@ export default function MinhasConsultasPsicologo() {
   useEffect(() => {
     async function consultarConsultaFutura(idPsicologo: string) {
       try {
-        const consultasFuturas = await consultaSessoesFuturasPsicologo(idPsicologo, 1);
-        setConsultaFutura(consultaMaisRecente(consultasFuturas.content));
+        const consultasFuturas = await consultaSessoesFuturasPsicologo(idPsicologo, 0);
+
+        if(consultasFuturas.dado) {
+          setConsultaFutura(consultaMaisRecente(consultasFuturas.dado.content));
+        }
+
       } catch (error) {
         console.error("Erro ao consultar consultas futuras:", error);
         setErro("Não foi possível carregar suas próximas consultas. Tente novamente mais tarde.");
@@ -26,7 +30,7 @@ export default function MinhasConsultasPsicologo() {
 
     async function consultarConsultasAntigas(idPsicologo: string) {
       try {
-        const response = await consultarSessoesAntigasPsicologo(idPsicologo, 1);
+        const response = await consultarSessoesAntigasPsicologo(idPsicologo, 0);
         if (response.dado) {
           setConsultasAntigas(response.dado.content);
         }
@@ -41,7 +45,7 @@ export default function MinhasConsultasPsicologo() {
       setErro(null);
 
     
-      const idPsicologo = '71ff60f6-0272-41db-89fb-621c488b8642';
+      const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
       if (idPsicologo) {
         await Promise.all([
@@ -74,14 +78,12 @@ export default function MinhasConsultasPsicologo() {
               consulta={consultaFutura}
               verMais={true}
               fluxo='psicologo'
-              sessaoMarcada={true}
             />
           ) : (
             <ProximasSessoes
               consulta={{} as ConsultaModel}
               verMais={true}
               fluxo='psicologo'
-              sessaoMarcada={false}
             />
           )}
           <div style={{ marginTop: '48px' }}>

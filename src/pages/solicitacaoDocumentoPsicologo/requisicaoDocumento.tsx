@@ -11,16 +11,24 @@ export default function RequisicaoDocumento() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const idPsicologo = 'deec458b-a6b7-4a70-b308-97dcc1a16ec6';
+    // const idPsicologo = localStorage.getItem('id-psicologo');
+    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
     async function carregarSolicitacoes(id: string) {
       try {
         const solicitacoes = await listarSolicitacoesDocumento(id, 0);
-        const solicitacoesAjustadas = solicitacoes.dado.content.map(s => {
-          s.status = 'PENDENTE'
-          return s;
-        });
-        setSolicitacoes(solicitacoesAjustadas || []);
+
+        if (solicitacoes.dado) {
+          const solicitacoesAjustadas = solicitacoes.dado.content.map(s => {
+            s.status = 'PENDENTE'
+            return s;
+          });
+
+          setSolicitacoes(solicitacoesAjustadas || []);
+        }
+
+
+
       } catch (error) {
         console.error('Erro ao carregar solicitações:', error);
       } finally {
@@ -28,9 +36,9 @@ export default function RequisicaoDocumento() {
       }
     }
 
-    carregarSolicitacoes(idPsicologo);
-
-    
+    if (idPsicologo) {
+      carregarSolicitacoes(idPsicologo);
+    }
   }, []);
 
   const handleApprove = (solicitacaoId: string) => {
@@ -57,23 +65,23 @@ export default function RequisicaoDocumento() {
     console.log('Rejeitando solicitação:', solicitacaoId);
   };
 
-  if (loading) {
-    return (
-      <div className="requisicao-documento-page">
-        <Header fluxo="" headerPsicologo={true} />
-        <div className="page-content">
-          <div className="page-header">
-            <h1>Solicitações de Documentos</h1>
-            <hr />
-          </div>
-          <div className="loading-container">
-            <div className="loading-spinner"></div>
-            <p>Carregando solicitações...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="requisicao-documento-page">
+  //       <Header fluxo="" headerPsicologo={true} />
+  //       <div className="page-content">
+  //         <div className="page-header">
+  //           <h1>Solicitações de Documentos</h1>
+  //           <hr />
+  //         </div>
+  //         <div className="loading-container">
+  //           <div className="loading-spinner"></div>
+  //           <p>Carregando solicitações...</p>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="requisicao-documento-page">

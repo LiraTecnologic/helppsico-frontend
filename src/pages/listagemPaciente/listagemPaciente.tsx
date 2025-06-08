@@ -1,137 +1,62 @@
 import './listagemPaciente.css';
 import { useEffect, useState } from 'react';
-import { jwtDecode } from "jwt-decode";
-import axios from 'axios';
 import Header from '../../components/layout/header/header';
 import CardPaciente from '../../components/layout/Cards/cardPaciente/cardPaciente';
-
-interface Page<T> {
-  content: T[];
-  totalElements: number;
-  totalPages: number;
-  number: number;
-  size: number;
-}
-
-interface JwtPayload {
-  sub: string
-}
-
-interface Paciente {
-  nome: string;
-  idade: string;
-  email: string;
-  telefone: string;
-  fotoUrl: string;
-  temProntuario: boolean;
-}
-
-interface ErroDto {
-  message: string[];
-}
-
-interface ResponseDto<T> {
-  dado: T;
-  erro?: ErroDto;
-}
+import { consultaVinculosPsicologo } from '../../services/vinculos.service';
+import VinculoModel from '../../models/vinculo';
+import calcular from '../../utils/calculoData';
+import { consultaProntuariosPsicologo } from '../../services/prontuarios.service';
+import ProntuarioModel from '../../models/prontuario';
 
 export default function ListagemPacientes() {
 
-  const [pacientes, setPacientes] = useState<Paciente[]>([]);
+  const [pacientes, setPacientes] = useState<VinculoModel[]>([]);
   const [total, setTotal] = useState(0);
+  const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
 
   useEffect(() => {
-    setPacientes([
-      {
-        nome: "Ana Beatriz Silva",
-        idade: "28",
-        email: "ana.silva@example.com",
-        telefone: "(11) 91234-5678",
-        fotoUrl: "https://randomuser.me/api/portraits/women/1.jpg",
-        temProntuario: true
-      },
-      {
-        nome: "Carlos Henrique Souza",
-        idade: "35",
-        email: "carlos.souza@example.com",
-        telefone: "(21) 98876-5432",
-        fotoUrl: "https://randomuser.me/api/portraits/men/2.jpg",
-        temProntuario: false
-      },
-      {
-        nome: "Fernanda Rocha",
-        idade: "24",
-        email: "fernanda.rocha@example.com",
-        telefone: "(31) 99999-1111",
-        fotoUrl: "https://randomuser.me/api/portraits/women/3.jpg",
-        temProntuario: true
-      },
-      {
-        nome: "Lucas Almeida",
-        idade: "30",
-        email: "lucas.almeida@example.com",
-        telefone: "(41) 97777-2222",
-        fotoUrl: "https://randomuser.me/api/portraits/men/4.jpg",
-        temProntuario: false
-      },
-      {
-        nome: "Mariana Castro",
-        idade: "26",
-        email: "mariana.castro@example.com",
-        telefone: "(51) 96666-3333",
-        fotoUrl: "https://randomuser.me/api/portraits/women/5.jpg",
-        temProntuario: true
-      },
-      {
-        nome: "Mariana Castro",
-        idade: "26",
-        email: "mariana.castro@example.com",
-        telefone: "(51) 96666-3333",
-        fotoUrl: "https://randomuser.me/api/portraits/women/5.jpg",
-        temProntuario: true
-      },
-      {
-        nome: "Mariana Castro",
-        idade: "26",
-        email: "mariana.castro@example.com",
-        telefone: "(51) 96666-3333",
-        fotoUrl: "https://randomuser.me/api/portraits/women/5.jpg",
-        temProntuario: true
-      },
-      {
-        nome: "Mariana Castro",
-        idade: "26",
-        email: "mariana.castro@example.com",
-        telefone: "(51) 96666-3333",
-        fotoUrl: "https://randomuser.me/api/portraits/women/5.jpg",
-        temProntuario: true
+    // const idPsicologo = localStorage.getItem('id-psicologo');
+    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+
+    async function carregarVinculos(idPsicologo: string) {
+      const vinculos = await consultaVinculosPsicologo(idPsicologo, 0);
+
+      if(vinculos.dado) {
+        setPacientes(vinculos.dado.content);
       }
-    ]);
+    }
 
-    const token = localStorage.getItem("token");
-    if (!token) return;
+    async function carregarProntuarios(idPsicologo: string) {
+      const prontuarios = await consultaProntuariosPsicologo(idPsicologo, 0);
 
-    const decoded = jwtDecode<JwtPayload>(token);
-    const idPsicologo = decoded.sub;
+      if(prontuarios.dado) {
+        setProntuarios(prontuarios.dado.content);
+      }
+    }
 
-    axios.get<ResponseDto<Page<Paciente>>>(`http://localhost:3000/vinculos/psicologo/${idPsicologo}`)
-      .then(response => {
+    if (idPsicologo) {
+      carregarVinculos(idPsicologo);
+      carregarProntuarios(idPsicologo);
+    }
 
-        if (response.data.erro) {
-          console.error("Erro da API:", response.data.erro.message);
-          return;
-        }
-
-        const dado = response.data.dado;
-        setPacientes(dado.content);
-        setTotal(dado.totalElements);
-      })
-      .catch(error => {
-        console.error("Erro ao buscar pacientes: ", error);
-      });
   }, []);
 
-  
+  function buscarProntuarioMaisRecente(idPaciente: string) {
+    const prontuariosDoPaciente = prontuarios.filter(
+      (prontuario) => prontuario.paciente.id === idPaciente
+    );
+
+    if (prontuariosDoPaciente.length === 0) {
+      return null; 
+    }
+
+    prontuariosDoPaciente.sort(
+      (a, b) => new Date(b.dataCriacao).getTime() - new Date(a.dataCriacao).getTime()
+    );
+
+    return prontuariosDoPaciente[0];
+  }
+
 
   return (
     <>
@@ -141,15 +66,15 @@ export default function ListagemPacientes() {
         <h1>Pacientes ({total})</h1>
 
         <div className="grid-pacientes">
-          {pacientes.map((paciente, index) => (
+          {pacientes.map((vinculo, index) => (
             <CardPaciente
               key={index}
-              nome={paciente.nome}
-              idade={paciente.idade}
-              email={paciente.email}
-              telefone={paciente.telefone}
-              fotoUrl={paciente.fotoUrl}
-              temProntuario={paciente.temProntuario}
+              nome={vinculo.paciente.nome}
+              idade={calcular(vinculo.paciente.dataNascimento)}
+              email={vinculo.paciente.email}
+              telefone={vinculo.paciente.telefone}
+              fotoUrl={vinculo.paciente.fotoUrl}
+              prontuarioId={buscarProntuarioMaisRecente(vinculo.paciente.id)?.id}
             />
           ))}
 

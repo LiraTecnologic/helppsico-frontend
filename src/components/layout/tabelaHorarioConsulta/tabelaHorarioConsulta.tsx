@@ -25,12 +25,15 @@ export default function TabelaHorarioConsulta({
 }: TabelaHorariosProps) {
   const [selecionados, setSelecionados] = useState<Set<string>>(new Set());
   const horariosPorDia = horarios.reduce((acc, horario) => {
-    if (!acc[horario.diaSemana]) {
-      acc[horario.diaSemana] = [];
+    for (const dia of horario.diaSemana) {
+      if (!acc[dia]) {
+        acc[dia] = [];
+      }
+      acc[dia].push(horario);
     }
-    acc[horario.diaSemana].push(horario);
     return acc;
   }, {} as Record<string, HorarioModel[]>);
+
 
 
   const toggleSelecionado = (id: string) => {
@@ -56,8 +59,8 @@ export default function TabelaHorarioConsulta({
         <div key={dia} className="agenda-dia-coluna">
           <h3 className="agenda-dia-titulo">{nomesDias[dia]}</h3>
           {horarios.map((horario) => {
-            const id = horario.id;
-            const selecionado = selecionados.has(id);
+            const id = `${horario.id}-${dia}`; 
+            const selecionado = selecionados.has(horario.id);
 
             return (
               <div
@@ -66,7 +69,7 @@ export default function TabelaHorarioConsulta({
                   }`}
                 onClick={() => {
                   if (!horario.disponivel) return;
-                  toggleSelecionado(id);
+                  toggleSelecionado(horario.id);
                 }}
               >
                 <div

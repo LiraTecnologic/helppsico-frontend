@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import ConfiguracaoHorario from "../../components/layout/configurarHorario/configurarHorario";
 import TabelaHorarios from "../../components/layout/configurarHorario/tabelaHorarios";
 import { salvarHorario, buscarHorarios } from "../../services/horarios.service";
-import HorarioModel from "../../models/horario";
 import { apresentarErro, notificarSucesso } from "../../utils/notificacoes";
+import { HorarioModel } from "../../models/horario";
 
 export default function GerenciamentoDeHorarios() {
   const [hasConfig, setHasConfig] = useState(false);

@@ -6,91 +6,119 @@ import TabelaHorario from "../../components/layout/tabela/tabelaHorario";
 import CardInfoAvaliacao from "../../components/layout/Cards/cardsInformacoesPsicologo/avaliacao/info/cardInfoAvaliacao";
 import BotaoAvaliarInfoPsicologo from "../../components/layout/Cards/cardsInformacoesPsicologo/botaoAvaliar/botaoAvaliarInfoPsicologo";
 import CardAvaliacao from "../../components/layout/Cards/cardsInformacoesPsicologo/avaliacao/cardAvaliacao";
-
-import {
-  consultaPsicologo,
-  consultaAvaliacoes,
-  consultaHorarios,
-} from "./informacoesPsicologoService";
-
+import { consultaPsicologo, consultaAvaliacoes } from "./informacoesPsicologoService";
+import { listarHorariosPsicologo } from '../../services/horarioPsicologo.service';
 import PsicologoModel from "../../models/psicologo";
 import { AvaliacaoModel } from "../../models/avaliacao";
 import { HorarioModel } from "../../models/horario";
+import calcularMedia from '../../utils/mediaAvaliacao';
+import { consultaVinculosPsicologo } from '../../services/vinculos.service';
+
 import "./informacoesPsicologo.css";
+import VinculoModel from "../../models/vinculo";
+import { EstadoVinculo } from "../../models/enum.vinculo";
+import { Link } from "react-router-dom";
 
 export default function InformacoesPsicologo() {
   const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
   const [avaliacoes, setAvaliacoes] = useState<AvaliacaoModel[]>([]);
-  const [mediaNotaAvaliacao, setMediaNotaAvaliacao] = useState("0");
-  const [quantidadeVinculados, setQuantidadeVinculados] = useState(0);
+  const [mediaNotaAvaliacao, setMediaNotaAvaliacao] = useState<number | 0>(0);
+  const [vinculos, setVinculos] = useState<VinculoModel[] | []>([]);
+  const [vinculoPaciente, setVinculoPacietne] = useState<VinculoModel | null>(null)
   const [horarios, setHorarios] = useState<HorarioModel[]>([]);
+  const [hasVinculo, setHasVinculo] = useState<EstadoVinculo>(EstadoVinculo.NAO_VINCULADO);
+  const [hoverSolicitado, setHoverSolicitado] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      const id = 1;
-
-      try {
-        const [psicologoData, avaliacoesData, horariosData] = await Promise.all([
-          consultaPsicologo(id),
-          consultaAvaliacoes(),
-          consultaHorarios(id),
-        ]);
-        console.log(horariosData)
-
-        setPsicologo(psicologoData);
-
-        // Filtra avaliações do psicólogo atual (id)
-        const avaliacoesFiltradas = avaliacoesData.filter(
-          (a) => a.psicologo?.id?.toString() === id.toString()
-        );
-        setAvaliacoes(avaliacoesFiltradas);
-
-        const somaNotas = avaliacoesFiltradas.reduce(
-          (acc: number, cur: AvaliacaoModel) => acc + cur.nota,
-          0
-        );
-        const media =
-          avaliacoesFiltradas.length > 0
-            ? somaNotas / avaliacoesFiltradas.length
-            : 0;
-        setMediaNotaAvaliacao(media.toFixed(1));
-
-        setQuantidadeVinculados(12);
-
-        setHorarios(horariosData);
-      } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  function calcularSessoes(
-    inicio: string | undefined,
-    fim: string | undefined,
-    duracao: number,
-    intervalo: number
-  ): string[] {
-    if (!inicio || !fim) return [];
-
+  function gerarHorarios(inicio: string, fim: string, duracao: number, intervalo: number): string[] {
     const horarios: string[] = [];
-    const [hInicio, mInicio] = inicio.split(":").map(Number);
-    const [hFim, mFim] = fim.split(":").map(Number);
-    let inicioEmMinutos = hInicio * 60 + mInicio;
-    const fimEmMinutos = hFim * 60 + mFim;
+    let [h, m] = inicio.split(":").map(Number);
+    const [endH, endM] = fim.split(":").map(Number);
 
-    while (inicioEmMinutos + duracao <= fimEmMinutos) {
-      const hora = Math.floor(inicioEmMinutos / 60)
-        .toString()
-        .padStart(2, "0");
-      const minuto = (inicioEmMinutos % 60).toString().padStart(2, "0");
-      horarios.push(`${hora}:${minuto}`);
-      inicioEmMinutos += duracao + intervalo;
+    const fimTotalMin = endH * 60 + endM;
+
+    while ((h * 60 + m + duracao) <= fimTotalMin) {
+      horarios.push(`${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`);
+      m += duracao + intervalo;
+      h += Math.floor(m / 60);
+      m = m % 60;
     }
 
     return horarios;
   }
+
+  function agruparPorDia(horarios: HorarioModel[]): Record<string, Set<string>> {
+    const mapa: Record<string, Set<string>> = {};
+
+    horarios.forEach(h => {
+      const lista = gerarHorarios(h.inicio, h.fim, h.duracao, h.intervalo);
+      if (!mapa[h.diaSemana]) {
+        mapa[h.diaSemana] = new Set();
+      }
+      lista.forEach(hor => mapa[h.diaSemana].add(hor));
+    });
+
+    return mapa;
+  }
+
+  const mapaHorarios = agruparPorDia(horarios);
+  const dias = Object.keys(mapaHorarios);
+  const todosHorariosUnicos = Array.from(
+    new Set(dias.flatMap(dia => Array.from(mapaHorarios[dia])))
+  ).sort()
+
+  useEffect(() => {
+    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+
+    async function carregarPsicologo(idPsicologo: string) {
+      const psicologo = await consultaPsicologo(idPsicologo);
+
+      if (psicologo.dado) {
+        setPsicologo(psicologo.dado);
+      }
+    }
+
+    async function carregarAvaliacoes(idPsicologo: string) {
+      const avaliacoes = await consultaAvaliacoes(idPsicologo, 0);
+
+      if (avaliacoes.dado) {
+        const media = calcularMedia(avaliacoes.dado.content.map(avaliacao => {
+          return {
+            nota: avaliacao.nota
+          }
+        }));
+
+        setMediaNotaAvaliacao(media);
+
+        setAvaliacoes(avaliacoes.dado.content);
+      }
+    }
+
+    async function carregarHorarios(idPsicologo: string) {
+      const horarios = await listarHorariosPsicologo(idPsicologo);
+
+      console.log(horarios.dado);
+
+      if (horarios.dado) {
+        setHorarios(horarios.dado);
+      }
+    }
+
+    async function carregarVinculos(idPsicologo: string) {
+      const vinculos = await consultaVinculosPsicologo(idPsicologo, 0);
+
+      if (vinculos.dado) {
+        setVinculos(vinculos.dado.content);
+      }
+    }
+
+
+    carregarPsicologo(idPsicologo);
+    carregarAvaliacoes(idPsicologo);
+    carregarHorarios(idPsicologo);
+    carregarVinculos(idPsicologo);
+  }, []);
+
+
 
   if (!psicologo) {
     return <p>Carregando...</p>;
@@ -109,10 +137,35 @@ export default function InformacoesPsicologo() {
             {psicologo.nome} ({mediaNotaAvaliacao}{" "}
             <img src={Estrela} alt="Icon estrela" />)
           </h1>
-          <button>Vincular</button>
+          {hasVinculo === EstadoVinculo.VINCULADO && (
+            <button className="btn-desvinc">Desvincular</button>
+          )}
+
+          {hasVinculo === EstadoVinculo.PENDENTE && (
+            hoverSolicitado ? (
+              <Link
+                to="/paciente/solicitacao-vinculo"
+                className="btn-solic-hover"
+                onMouseLeave={() => setHoverSolicitado(false)}
+              >
+                Ver solicitações
+              </Link>
+            ) : (
+              <button
+                className="btn-solic"
+                onMouseEnter={() => setHoverSolicitado(true)}
+              >
+                Solicitado
+              </button>
+            )
+          )}
+
+          {hasVinculo === EstadoVinculo.NAO_VINCULADO && (
+            <button>Vincular</button>
+          )}
           <div>
             <p>
-              {quantidadeVinculados} vinculados | {avaliacoes.length} avaliações
+              {vinculos.length} vinculados | {avaliacoes.length} avaliações
             </p>
             <p>CRP {psicologo.crp}</p>
             <p>{psicologo.email}</p>
@@ -140,39 +193,22 @@ export default function InformacoesPsicologo() {
           <section className="section-tabela">
             <h2>Horários de consulta:</h2>
 
-            {horarios.length === 0 ? (
-              <p>Sem horários cadastrados</p>
-            ) : (
-              horarios.map((h, i) => {
-                
-                const dias = Array.isArray(h.diaSemana) ? h.diaSemana : [];
-
-                const horariosInicio = calcularSessoes(
-                  h.inicio,
-                  h.fim,
-                  h.duracao,
-                  h.intervalo
-                );
-
-                return (
-                  <TabelaHorario
-                    key={h.id || i}
-                    diasSelecionados={dias}
-                    horariosInicio={horariosInicio}
-                  />
-                );
-              })
-            )}
+            <TabelaHorario
+              diaSemana={dias}
+              horariosInicio={todosHorariosUnicos}
+              mapaHorarios={mapaHorarios}
+            />
+            
           </section>
 
           <section className="section-avaliacao">
             <h2>Avaliações e comentários:</h2>
             <div className="cards-section-avaliacao">
               <CardInfoAvaliacao
-                nota={parseFloat(mediaNotaAvaliacao)}
+                nota={mediaNotaAvaliacao}
                 quantidadeAvaliacao={avaliacoes.length.toString()}
               />
-              <BotaoAvaliarInfoPsicologo />
+              <BotaoAvaliarInfoPsicologo psicologo={psicologo} />
             </div>
             <div className="listagem-avaliacao">
               {avaliacoes.map((avaliacao, index) => (

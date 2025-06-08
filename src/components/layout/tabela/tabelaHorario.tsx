@@ -3,6 +3,7 @@ import "./tabelaHorario.css";
 type TabelaHorarioProps = {
   diaSemana?: string[];
   horariosInicio?: string[];
+  mapaHorarios: Record<string, Set<string>>;
 };
 
 const nomeDiaMap: Record<string, string> = {
@@ -18,6 +19,7 @@ const nomeDiaMap: Record<string, string> = {
 export default function TabelaHorario({
   diaSemana = [],
   horariosInicio = [],
+  mapaHorarios,
 }: TabelaHorarioProps) {
   return (
     <table>
@@ -32,7 +34,9 @@ export default function TabelaHorario({
         {horariosInicio.map((hora, i) => (
           <tr key={i}>
             {diaSemana.map((dia) => (
-              <td key={dia + i}>{hora}</td>
+              <td key={dia + i}>
+                {mapaHorarios[dia]?.has(hora) ? hora : ""}
+              </td>
             ))}
           </tr>
         ))}

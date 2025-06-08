@@ -4,7 +4,8 @@ import Header from '../../components/layout/header/header';
 import CardSolicitacaoVinculo from '../../components/layout/Cards/cardSolicitacaoPsicologo/cardSolicitacaoPsicologo';
 import PopupCancelamento from '../../components/layout/PopupCancelamento/popupCancelamento';
 import VinculoModel, { StatusVinculo } from '../../models/vinculo';
-import { solicitarVinculosPsicologo, aceitarSolicitacao, recusarSolicitacao } from './solicitacaoVinculoService';
+import { aceitarSolicitacao, recusarSolicitacao } from './solicitacaoVinculoService';
+import { consultaVinculosPsicologo } from '../../services/vinculos.service';
 import calcular from '../../utils/calculoData';
 
 export default function SolicitacaoDeVinculoPsicologo() {
@@ -16,7 +17,7 @@ export default function SolicitacaoDeVinculoPsicologo() {
   const [erro, setErro] = useState<string | null>(null);
 
   // const idPsicologo = localStorage.getItem('idPsicologo');
-  const idPsicologo = "1";
+  const idPsicologo = "0873d229-fd10-488a-b7e9-f294aa10e5db";
 
   const carregarVinculos = useCallback(async () => {
     if (!idPsicologo) {
@@ -29,8 +30,12 @@ export default function SolicitacaoDeVinculoPsicologo() {
     setErro(null);
 
     try {
-      const dadosVinculos = await solicitarVinculosPsicologo(idPsicologo);
-      setVinculos(dadosVinculos);
+      const dadosVinculos = await consultaVinculosPsicologo(idPsicologo, 0);
+
+      if(dadosVinculos.dado) {
+        setVinculos(dadosVinculos.dado.content);
+      }
+
     } catch (error) {
       console.error(`Erro ao carregar os vinculos :(  Erro:`, error);
       setErro('Erro ao carregar os vinculos. Tente novamente mais tarde.');
@@ -94,8 +99,8 @@ export default function SolicitacaoDeVinculoPsicologo() {
     abrirPopupRecusa(idVinculo);
   };
 
-  const vinculosPendentes = vinculos.filter(v => v.status === StatusVinculo.PENDENTE);
-  const vinculosRecusados = vinculos.filter(v => v.status === StatusVinculo.INATIVO);
+  const vinculosPendentes = vinculos.filter(v => v.status === 'PENDENTE');
+  const vinculosRecusados = vinculos.filter(v => v.status === 'RECUSADO');
 
   if (carregando) {
     return (

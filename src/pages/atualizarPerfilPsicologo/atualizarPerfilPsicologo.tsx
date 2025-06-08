@@ -7,6 +7,7 @@ import { atualizarPerfilPsicologo } from '../../services/atualizarperfil';
 import { getUserId } from '../../services/auth.service';
 import axios from 'axios';
 import { apresentarErro, notificarSucesso } from '../../utils/notificacoes';
+import Response from '../../models/response';
 
 
 export default function AtualizarPerfilPsicologo() {
@@ -16,38 +17,41 @@ export default function AtualizarPerfilPsicologo() {
     const [carregando, setCarregando] = useState<boolean>(true);
     const [erro, setErro] = useState<string | null>(null);
 
-    
+
     useEffect(() => {
         const carregarDadosPsicologo = async () => {
             setCarregando(true);
             setErro(null);
-            
+
             const idPsicologo = getUserId();
-            
+
             if (!idPsicologo) {
                 setErro('Usuário não identificado. Faça login novamente.');
                 setCarregando(false);
                 return;
             }
-            
+
             try {
-                const response = await axios.get<PsicologoModel>(
+                const response = await axios.get<Response<PsicologoModel>>(
                     `http://localhost:8080/psicologo/${idPsicologo}`
                 );
-                
-                const dadosPsicologo = response.data;
-                setPsicologo(dadosPsicologo);
-                
-                
-                if (dadosPsicologo.valorSessao) {
-                    const valorFormatado = dadosPsicologo.valorSessao.toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                    });
-                    setValorSessao(valorFormatado);
+
+                if (response.data.dado) {
+                    const dadosPsicologo = response.data.dado;
+                    setPsicologo(dadosPsicologo);
+
+
+                    if (dadosPsicologo.valorSessao) {
+                        const valorFormatado = dadosPsicologo.valorSessao.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
+                        setValorSessao(valorFormatado);
+                    }
+
+                    setBiografia(dadosPsicologo.biografia || '');
                 }
                 
-                setBiografia(dadosPsicologo.biografia || '');
             } catch (error) {
                 console.error('Erro ao carregar dados do psicólogo:', error);
                 setErro('Não foi possível carregar seus dados. Tente novamente mais tarde.');
@@ -55,23 +59,23 @@ export default function AtualizarPerfilPsicologo() {
                 setCarregando(false);
             }
         };
-        
+
         carregarDadosPsicologo();
     }, []);
 
     const handleValorSessaoChange = (valor: string) => {
-        
+
         const numeroLimpo = valor.replace(/\D/g, '');
-        
-        
+
+
         const valorEmCentavos = parseInt(numeroLimpo) / 100;
-        
-        
+
+
         const valorFormatado = valorEmCentavos.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL'
         });
-        
+
         setValorSessao(valorFormatado);
     };
 
@@ -81,24 +85,24 @@ export default function AtualizarPerfilPsicologo() {
 
     const handleEditar = async () => {
         if (!psicologo) return;
-        
+
         const idPsicologo = getUserId();
-        
+
         if (!idPsicologo) {
             apresentarErro("Usuario não encontrado. Faça o login novamente")
             return;
         }
-    
+
         const valorConvertido = parseFloat(valorSessao.replace(/[R$\s.]/g, '').replace(',', '.')) || 0;
-    
+
         const dadosAtualizados = {
             biografia,
             valorSessao: valorConvertido
         };
-    
+
         try {
             const psicologoAtualizado = await atualizarPerfilPsicologo(idPsicologo, dadosAtualizados);
-            setPsicologo(psicologoAtualizado);
+            setPsicologo(psicologoAtualizado.dado);
             notificarSucesso("Perfil atualizado");
         } catch (error) {
             apresentarErro('Erro ao atualizar o perfil. Tente novamente mais tarde.');
@@ -106,14 +110,14 @@ export default function AtualizarPerfilPsicologo() {
     };
 
     const handleVoltar = () => {
-        
+
         window.history.back();
     };
 
     if (carregando) {
         return <div className="loading">Carregando...</div>;
     }
-    
+
     if (erro) {
         return <div className="erro">{erro}</div>;
     }
@@ -129,7 +133,7 @@ export default function AtualizarPerfilPsicologo() {
     return (
         <>
             <Header fluxo="atualizacaoPerfil" headerPsicologo={true} />
-            
+
             <main className="main-content">
                 <CardPerfilPsicologo
                     psicologo={psicologo}
