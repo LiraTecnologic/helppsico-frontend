@@ -3,12 +3,11 @@ import Header from "../../components/layout/header/header";
 import { useEffect, useState } from "react";
 import ConfiguracaoHorario from "../../components/layout/configurarHorario/configurarHorario";
 import TabelaHorarios from "../../components/layout/configurarHorario/tabelaHorarios";
+import { salvarHorario, listarHorariosPsicologo, deletarHorario } from "../../services/horarios.service";
 import { apresentarErro, notificarSucesso } from "../../utils/notificacoes";
-import { salvarHorario, listarHorariosPsicologo } from "../../services/horarios.service";
 import { HorarioModel } from "../../models/horario";
 import PsicologoModel from "../../models/psicologo";
 import EnderecoModel from "../../models/endereco";
-import { converterDiaSemana } from '../../utils/converteDias';
 
 export default function GerenciamentoDeHorarios() {
   const [hasConfig, setHasConfig] = useState(false);
@@ -20,7 +19,8 @@ export default function GerenciamentoDeHorarios() {
   const [tempoSessao, setTempoSessao] = useState<number>(50);
   const [intervaloSessao, setIntervaloSessao] = useState<number>(10);
 
-  const idPsicologo: string = "b03784b0-15f9-4f94-883a-d11f120a74f4";
+  const idPsicologo: string = "0873d229-fd10-488a-b7e9-f294aa10e5db";
+
   const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
   
   function calcularFim(inicio: string, duracao: number): string {
@@ -192,6 +192,18 @@ export default function GerenciamentoDeHorarios() {
     }
   }
 
+  function deletarHorariosSelecionados(horariosParaDeletar: string[]) {
+    if (horariosParaDeletar.length === 0) {
+      alert("Nenhum horário foi selecionado para salvar.");
+      return;
+    }
+
+    horariosParaDeletar.forEach( async (horario) => {
+      await deletarHorario(horario);
+    })
+
+  }
+
   const handleSaveConfig = (dias: string[], tempo: number, intervalo: number, inicio: string, fim: string) => {
     const diasOrdenados = [...dias].sort(
       (a, b) => ordemDias.indexOf(a) - ordemDias.indexOf(b)
@@ -226,6 +238,7 @@ export default function GerenciamentoDeHorarios() {
             onEditar={() => setOpenModal(true)}
             horarios={horarios}
             onSalvar={salvarHorariosSelecionados}
+            onDeletar={deletarHorariosSelecionados}
           />
         )}
       </div>

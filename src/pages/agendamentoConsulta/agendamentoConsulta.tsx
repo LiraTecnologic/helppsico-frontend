@@ -22,7 +22,7 @@ export default function AgendamentoConsulta() {
   const [idsHorariosSelecionados, setIdsHorariosSelecionados] = useState<string[]>([]);
   const [vinculo, setVinculo] = useState<VinculoModel | null>(null);
 
-  const idPaciente = localStorage.getItem('id-paciente');
+  const idPaciente = "4a0dd9db-3b2a-4c08-8ab3-2af4f6854650";
 
 
   async function agendar() {
@@ -34,12 +34,14 @@ export default function AgendamentoConsulta() {
     try {
       for (const idHorario of idsHorariosSelecionados) {
 
+        console.log(idHorario);
+
         if (psicologo) {
 
           const horario: HorarioModel = {
             id: idHorario,
             psicologo: {} as PsicologoModel,
-            diaSemana: '',
+            diaSemana: 'DOMINGO',
             inicio: '',
             fim: '',
             intervalo: 0,
@@ -47,15 +49,26 @@ export default function AgendamentoConsulta() {
             disponivel: true
           }
 
-
+          const paciente: PacienteModel = {
+            id: idPaciente,
+            nome: '',
+            cpf: '',
+            email: '',
+            telefone: '',
+            dataNascimento: '',
+            genero: 'MASCULINO',
+            endereco: psicologo.enderecoAtendimento,
+            fotoUrl: ''
+          }
+    
           const novaConsulta: ConsultaModel = {
             id: '',
-            psicologo: {} as PsicologoModel,
-            paciente: {} as PacienteModel,
+            psicologo: psicologo,
+            paciente: paciente,
             valor: 0,
             horario: horario,
-            data: '',
-            endereco: {} as EnderecoModel,
+            data: '2025-06-08',
+            endereco: psicologo.enderecoAtendimento,
             finalizada: false
           }
 
@@ -75,7 +88,7 @@ export default function AgendamentoConsulta() {
     async function carregarVinculo(idPaciente: string) {
       const vinculoResponse = await consultarVinculoPaciente(idPaciente);
 
-      if(vinculoResponse.dado) {
+      if (vinculoResponse.dado) {
         setVinculo(vinculoResponse.dado.content[0]);
       }
     }
@@ -101,7 +114,7 @@ export default function AgendamentoConsulta() {
     async function carregarHorarios(idPsicologo: string) {
       const horariosResponse = await listarHorariosPsicologo(idPsicologo);
       console.log(horariosResponse);
-      if(horariosResponse.dado) {
+      if (horariosResponse.dado) {
         setHorariosPsicologo(horariosResponse.dado);
       }
     }
@@ -120,7 +133,7 @@ export default function AgendamentoConsulta() {
         <h1>Consulta</h1>
         <div className="container-psicologo">
           <div className="dados-psicologo-consulta">
-            {psicologo  &&
+            {psicologo &&
               <CardPsicologoConsulta
                 urlFoto={psicologo.fotoUrl}
                 nome={psicologo.nome}

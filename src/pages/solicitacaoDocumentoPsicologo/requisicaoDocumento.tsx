@@ -11,10 +11,11 @@ export default function RequisicaoDocumento() {
   const [solicitacoes, setSolicitacoes] = useState<SolicitacaoDocumentoModel[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [idPsicologo, setIdPsicologo] = useState<string >('0873d229-fd10-488a-b7e9-f294aa10e5db')
 
   useEffect(() => {
     // const idPsicologo = localStorage.getItem('id-psicologo');
-    const idPsicologo = 'c71cdb93-d05e-4fcc-89ad-ea0ffdd2ad1d';
+    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
 
     async function carregarSolicitacoes(id: string) {
       try {
@@ -43,7 +44,7 @@ export default function RequisicaoDocumento() {
     }
   }, []);
 
-  const handleApprove = (solicitacaoId: string, tipoDocumento: string) => {
+  const handleApprove = (solicitacaoId: string, tipoDocumento: string, idPaciente: string) => {
     setSolicitacoes(prev =>
       prev.map(sol =>
         sol.id === solicitacaoId
@@ -51,7 +52,7 @@ export default function RequisicaoDocumento() {
           : sol
       )
     );
-    navigate('/psicologo/documento/novo',{state: {tipoDocumento}})
+    navigate('/psicologo/documento/novo',{state: {tipoDocumento, solicitacaoId, idPsicologo, idPaciente}})
   };
 
   const handleReject = (solicitacaoId: string) => {

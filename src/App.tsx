@@ -25,14 +25,11 @@ import DetalhesProntuario from "./pages/detalhesProntuario/detalhesProntuario";
 import CadastroDocumento from "./pages/cadastroDocumento/cadastroDocumento";
 import MinhasConsultasPsicologo from "./pages/minhasConsultasPsicologo/minhasConsultasPsicologo";
 import SolicitacaoVinculoPsicologo from "./pages/solicitacaoVinculoPsicologo/solicitacaoVinculo";
-import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
-
-// TELAS DE AMBOS OS FLUXOS
+import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 import VerPsicologos from "./pages/verPsicologos/verPsicologos";
 import InformacoesPsicologo from "./pages/informacoesPsicologo/informacoesPsicologo";
+import RequisicaoDocumento from "./pages/solicitacaoDocumentoPsicologo/requisicaoDocumento";
 
-// TELAS DE NENHUM FLUXO
-import ValidacaoCrp from "./pages/validacaoCrp/validacaoCrp";
 
 function App() {
   return (
