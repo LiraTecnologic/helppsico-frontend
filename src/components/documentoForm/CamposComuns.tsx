@@ -1,4 +1,5 @@
 import './CamposComuns.css';
+import { useEffect } from 'react';
 
 interface CamposComunsProps {
   campos: {
@@ -14,20 +15,32 @@ interface CamposComunsProps {
   paciente: { id: string; nome: string };
 }
 
+const getDataBrasileiraHoje = () => {
+  const agora = new Date();
+  const offsetBrasilia = -3 * 60;
+  const local = new Date(agora.getTime() + (offsetBrasilia - agora.getTimezoneOffset()) * 60000);
+  return local.toISOString().split("T")[0];
+};
+
 export default function CamposComuns({ campos, setCampos, paciente }: CamposComunsProps) {
+  useEffect(() => {
+    setCampos((prev) => ({
+      ...prev,
+      paciente: paciente.id,
+      dataEmissao: getDataBrasileiraHoje()
+    }));
+  }, [setCampos, paciente.id]);
+
   return (
     <div className="campos-comuns-grid">
       <div className="campo-grid-item">
         <label className="documento-label" htmlFor="paciente">Paciente</label>
-        <select
+        <input
           id="paciente"
-          className="documento-select"
-          value={campos.paciente}
-          onChange={(e) => setCampos({ ...campos, paciente: e.target.value })}
-        >
-          <option value="">Selecione o paciente</option>
-          {paciente.nome}
-        </select>
+          className="documento-input"
+          value={paciente.nome}
+          readOnly
+        />
       </div>
 
       <div className="campo-grid-item">
@@ -37,7 +50,7 @@ export default function CamposComuns({ campos, setCampos, paciente }: CamposComu
           className="documento-input"
           type="date"
           value={campos.dataEmissao}
-          onChange={(e) => setCampos({ ...campos, dataEmissao: e.target.value })}
+          readOnly
         />
       </div>
 

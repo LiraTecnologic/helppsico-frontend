@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import Header from "../../components/layout/header/header";
 import Estrela from "../../assets/estrela.svg";
 import Localizacao from "../../assets/localização.svg";
-import TabelaHorario from "../../components/layout/tabela/tabelaHorario";
 import CardInfoAvaliacao from "../../components/layout/Cards/cardsInformacoesPsicologo/avaliacao/info/cardInfoAvaliacao";
 import BotaoAvaliarInfoPsicologo from "../../components/layout/Cards/cardsInformacoesPsicologo/botaoAvaliar/botaoAvaliarInfoPsicologo";
 import CardAvaliacao from "../../components/layout/Cards/cardsInformacoesPsicologo/avaliacao/cardAvaliacao";
-import { consultaPsicologo, consultaAvaliacoes } from "./informacoesPsicologoService";
-import { listarHorariosPsicologo } from '../../services/horarios.service';
+import {
+  consultaPsicologo,
+  consultaAvaliacoes,
+} from "./informacoesPsicologoService";
+import { listarHorariosPsicologo } from "../../services/horarios.service";
 import PsicologoModel from "../../models/psicologo";
 import { AvaliacaoModel } from "../../models/avaliacao";
 import { HorarioModel } from "../../models/horario";
-import calcularMedia from '../../utils/mediaAvaliacao';
-import { consultaVinculosPsicologo } from '../../services/vinculos.service';
+import calcularMedia from "../../utils/mediaAvaliacao";
+import { consultaVinculosPsicologo } from "../../services/vinculos.service";
+import TabelaHorarioConsulta from "../../components/layout/tabelaHorarioConsulta/tabelaHorarioConsulta";
 
 import "./informacoesPsicologo.css";
 import VinculoModel from "../../models/vinculo";
@@ -24,7 +27,7 @@ export default function InformacoesPsicologo() {
   const [avaliacoes, setAvaliacoes] = useState<AvaliacaoModel[]>([]);
   const [mediaNotaAvaliacao, setMediaNotaAvaliacao] = useState<number | 0>(0);
   const [vinculos, setVinculos] = useState<VinculoModel[] | []>([]);
-  const [vinculoPaciente, setVinculoPacietne] = useState<VinculoModel | null>(null)
+  const [vinculoPaciente, setVinculoPacietne] = useState<VinculoModel | null>(null);
   const [horarios, setHorarios] = useState<HorarioModel[]>([]);
   const [hasVinculo, setHasVinculo] = useState<EstadoVinculo>(EstadoVinculo.NAO_VINCULADO);
   const [hoverSolicitado, setHoverSolicitado] = useState(false);
@@ -36,8 +39,10 @@ export default function InformacoesPsicologo() {
 
     const fimTotalMin = endH * 60 + endM;
 
-    while ((h * 60 + m + duracao) <= fimTotalMin) {
-      horarios.push(`${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`);
+    while (h * 60 + m + duracao <= fimTotalMin) {
+      horarios.push(
+        `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`
+      );
       m += duracao + intervalo;
       h += Math.floor(m / 60);
       m = m % 60;
@@ -46,15 +51,17 @@ export default function InformacoesPsicologo() {
     return horarios;
   }
 
-  function agruparPorDia(horarios: HorarioModel[]): Record<string, Set<string>> {
+  function agruparPorDia(
+    horarios: HorarioModel[]
+  ): Record<string, Set<string>> {
     const mapa: Record<string, Set<string>> = {};
 
-    horarios.forEach(h => {
+    horarios.forEach((h) => {
       const lista = gerarHorarios(h.inicio, h.fim, h.duracao, h.intervalo);
       if (!mapa[h.diaSemana]) {
         mapa[h.diaSemana] = new Set();
       }
-      lista.forEach(hor => mapa[h.diaSemana].add(hor));
+      lista.forEach((hor) => mapa[h.diaSemana].add(hor));
     });
 
     return mapa;
@@ -63,11 +70,11 @@ export default function InformacoesPsicologo() {
   const mapaHorarios = agruparPorDia(horarios);
   const dias = Object.keys(mapaHorarios);
   const todosHorariosUnicos = Array.from(
-    new Set(dias.flatMap(dia => Array.from(mapaHorarios[dia])))
-  ).sort()
+    new Set(dias.flatMap((dia) => Array.from(mapaHorarios[dia])))
+  ).sort();
 
   useEffect(() => {
-    const idPsicologo = '4f0332c8-7346-44cb-81d6-9a40c621afc9';
+    const idPsicologo = "4f0332c8-7346-44cb-81d6-9a40c621afc9";
 
     async function carregarPsicologo(idPsicologo: string) {
       const psicologo = await consultaPsicologo(idPsicologo);
@@ -81,11 +88,13 @@ export default function InformacoesPsicologo() {
       const avaliacoes = await consultaAvaliacoes(idPsicologo, 0);
 
       if (avaliacoes.dado) {
-        const media = calcularMedia(avaliacoes.dado.content.map(avaliacao => {
-          return {
-            nota: avaliacao.nota
-          }
-        }));
+        const media = calcularMedia(
+          avaliacoes.dado.content.map((avaliacao) => {
+            return {
+              nota: avaliacao.nota,
+            };
+          })
+        );
 
         setMediaNotaAvaliacao(media);
 
@@ -116,14 +125,13 @@ export default function InformacoesPsicologo() {
     carregarVinculos(idPsicologo);
   }, []);
 
-
-
   if (!psicologo) {
     return <p>Carregando...</p>;
   }
 
   const location = useLocation();
-  const headerPsicologo = (location.state && location.state.headerPsicologo) ?? false;
+  const headerPsicologo =
+    (location.state && location.state.headerPsicologo) ?? false;
 
   return (
     <>
@@ -138,12 +146,14 @@ export default function InformacoesPsicologo() {
             {psicologo.nome} ({mediaNotaAvaliacao}{" "}
             <img src={Estrela} alt="Icon estrela" />)
           </h1>
-          {hasVinculo === EstadoVinculo.VINCULADO && headerPsicologo === false && (
-            <button className="btn-desvinc">Desvincular</button>
-          )}
+          {hasVinculo === EstadoVinculo.VINCULADO &&
+            headerPsicologo === false && (
+              <button className="btn-desvinc">Desvincular</button>
+            )}
 
-          {hasVinculo === EstadoVinculo.PENDENTE && headerPsicologo === false && (
-            hoverSolicitado ? (
+          {hasVinculo === EstadoVinculo.PENDENTE &&
+            headerPsicologo === false &&
+            (hoverSolicitado ? (
               <Link
                 to="/paciente/solicitacao-vinculo"
                 className="btn-solic-hover"
@@ -158,12 +168,10 @@ export default function InformacoesPsicologo() {
               >
                 Solicitado
               </button>
-            )
-          )}
+            ))}
 
-          {hasVinculo === EstadoVinculo.NAO_VINCULADO && headerPsicologo === false && (
-            <button>Vincular</button>
-          )}
+          {hasVinculo === EstadoVinculo.NAO_VINCULADO &&
+            headerPsicologo === false && <button>Vincular</button>}
 
           <div>
             <p>
@@ -195,12 +203,7 @@ export default function InformacoesPsicologo() {
           <section className="section-tabela">
             <h2>Horários de consulta:</h2>
 
-            <TabelaHorario
-              diaSemana={dias}
-              horariosInicio={todosHorariosUnicos}
-              mapaHorarios={mapaHorarios}
-            />
-            
+            <TabelaHorarioConsulta horarios={horarios} alterar={false} />
           </section>
 
           <section className="section-avaliacao">
@@ -210,7 +213,10 @@ export default function InformacoesPsicologo() {
                 nota={mediaNotaAvaliacao}
                 quantidadeAvaliacao={avaliacoes.length.toString()}
               />
-              <BotaoAvaliarInfoPsicologo psicologo={psicologo} />
+              {hasVinculo === EstadoVinculo.VINCULADO &&
+                headerPsicologo === false && (
+                  <BotaoAvaliarInfoPsicologo psicologo={psicologo} />
+                )}
             </div>
             <div className="listagem-avaliacao">
               {avaliacoes.map((avaliacao, index) => (

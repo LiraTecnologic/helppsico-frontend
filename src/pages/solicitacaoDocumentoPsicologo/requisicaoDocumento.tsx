@@ -15,7 +15,7 @@ export default function RequisicaoDocumento() {
 
   useEffect(() => {
     // const idPsicologo = localStorage.getItem('id-psicologo');
-    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+    const idPsicologo = '4f0332c8-7346-44cb-81d6-9a40c621afc9';
 
     async function carregarSolicitacoes(id: string) {
       try {

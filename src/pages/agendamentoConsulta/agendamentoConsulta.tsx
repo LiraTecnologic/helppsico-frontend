@@ -22,7 +22,7 @@ export default function AgendamentoConsulta() {
   const [idsHorariosSelecionados, setIdsHorariosSelecionados] = useState<string[]>([]);
   const [vinculo, setVinculo] = useState<VinculoModel | null>(null);
 
-  const idPaciente = "4a0dd9db-3b2a-4c08-8ab3-2af4f6854650";
+  const idPaciente = "3ad67cbb-7877-4152-9883-f68c2af2fa6e";
 
 
   async function agendar() {
@@ -160,6 +160,7 @@ export default function AgendamentoConsulta() {
                 horarios={horariosPsicologo}
                 onSelecionado={(qtd) => setQuantidadeSelecionada(qtd)}
                 onSelecionadosChange={(ids) => setIdsHorariosSelecionados(ids)}
+                alterar={true}
               />
             }
           </div>

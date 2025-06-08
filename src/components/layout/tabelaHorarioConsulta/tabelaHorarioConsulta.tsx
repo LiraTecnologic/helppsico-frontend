@@ -6,6 +6,7 @@ interface TabelaHorariosProps {
   horarios: HorarioModel[];
   onSelecionado?: (quantidade: number) => void;
   onSelecionadosChange?: (ids: string[]) => void;
+  alterar: boolean;
 }
 
 const nomesDias: Record<string, string> = {
@@ -23,14 +24,15 @@ const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
 export default function TabelaHorarioConsulta({
   horarios,
   onSelecionado,
-  onSelecionadosChange
+  onSelecionadosChange,
+  alterar,
 }: TabelaHorariosProps) {
   const [selecionados, setSelecionados] = useState<Set<string>>(new Set());
   const horariosPorDia = horarios.reduce((acc, horario) => {
-    const dias = Array.isArray(horario.diaSemana) 
-      ? horario.diaSemana 
+    const dias = Array.isArray(horario.diaSemana)
+      ? horario.diaSemana
       : [horario.diaSemana];
-    
+
     for (const dia of dias) {
       if (!acc[dia]) {
         acc[dia] = [];
@@ -41,13 +43,13 @@ export default function TabelaHorarioConsulta({
   }, {} as Record<string, HorarioModel[]>);
 
   const horarioParaMinutos = (horario: string) => {
-    const [horas, minutos] = horario.split(':').map(num => parseInt(num));
+    const [horas, minutos] = horario.split(":").map((num) => parseInt(num));
     return horas * 60 + minutos;
   };
 
-  Object.keys(horariosPorDia).forEach(dia => {
-    horariosPorDia[dia].sort((a, b) => 
-      horarioParaMinutos(a.inicio) - horarioParaMinutos(b.inicio)
+  Object.keys(horariosPorDia).forEach((dia) => {
+    horariosPorDia[dia].sort(
+      (a, b) => horarioParaMinutos(a.inicio) - horarioParaMinutos(b.inicio)
     );
   });
 
@@ -87,16 +89,37 @@ export default function TabelaHorarioConsulta({
             return (
               <div
                 key={horario.id}
-                className={`agenda-card ${selecionado ? "agenda-card-selecionado" : ""} ${!horario.disponivel ? "agenda-card-indisponivel" : ""}`}
-                onClick={() => {
-                  if (!horario.disponivel) return;
-                  toggleSelecionado(horario.id);
-                }}
+                className={`agenda-card ${
+                  selecionado ? "agenda-card-selecionado" : ""
+                } ${!horario.disponivel ? "agenda-card-indisponivel" : ""}`}
+                onClick={
+                  alterar && horario.disponivel
+                    ? () => toggleSelecionado(horario.id)
+                    : undefined
+                }
               >
                 <div
-                  className={`agenda-status ${selecionado ? "agenda-status-selecionado" : "agenda-status-disponivel"}`}
+                  className={`agenda-status ${
+                    selecionado
+                      ? "agenda-status-selecionado"
+                      : "agenda-status-disponivel"
+                  }`}
                 >
-                  {selecionado ? "Selecionado" : horario.disponivel ? "Disponível" : "Indisponível"}
+                  <div
+                    className={`agenda-status ${
+                      selecionado
+                        ? "agenda-status-selecionado"
+                        : "agenda-status-disponivel"
+                    }`}
+                  >
+                    {alterar === true
+                      ? selecionado
+                        ? "Selecionado"
+                        : horario.disponivel
+                        ? "Disponível"
+                        : "Indisponível"
+                      : null}
+                  </div>
                 </div>
                 <div className="agenda-horario">
                   {horario.inicio} - {horario.fim}
