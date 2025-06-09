@@ -12,6 +12,81 @@ body {
 }
 
 main {
-  flex: 1; 
-  width: 100%; 
+  flex: 1;
+  width: 100%;
+}
+
+:root {
+  /* === CORES PRINCIPAIS === */
+  --cor-azul-principal: #1d4ed8;
+  --cor-azul-claro: #3b82f6;
+  --cor-azul-escuro: #0044cc;
+  --cor-azul-botao: #0d42bd;
+  --cor-azul-linha: #0038a8;
+  --cor-azul-hover: #002a75;
+  --cor-azul-escuro-hover: #003f99;
+  --cor-azul-link-hover: #007bff;
+  --cor-azul-active: #9dd6ff;
+
+  /* === CORES DE FUNDO === */
+  --cor-branco: #ffffff;
+  --cor-fundo-claro: #f8fafc;
+  --cor-fundo-cinza: #f3f4f6;
+  --cor-fundo-claro-cinza: #f5f5f5;
+  --cor-fundo-azul-claro: #f6f7fb;
+  --cor-azul-fundo: #eff6ff;
+  --cor-hover-claro: #eeeeee;
+
+  /* === CORES DE TEXTO === */
+  --cor-texto-escuro: #1e293b;
+  --cor-texto-escuro-principal: #222;
+  --cor-texto-principal: #222222;
+  --cor-texto-branco: #ffffff;
+  --cor-texto-secundario: #777777;
+  --cor-texto-medio: #525252;
+  --cor-cinza-medio: #6b7280;
+  --cor-cinza-desabilitado: #94a3b8;
+  --cor-texto-claro: #f7f5ff;
+
+  /* === CORES DE ERRO === */
+  --cor-vermelho-erro: #dc2626;
+  --cor-vermelho-alerta: #ff4d4f;
+
+  /* === CORES DE BORDAS === */
+  --cor-borda-clara: #e2e8f0;
+  --cor-borda-clara-2: #ddd;
+  --cor-borda-cinza: #dddddd;
+  --cor-borda-input: #cccccc;
+  --cor-borda-textarea: #ccc;
+
+  /* === CORES DE BOTÕES ESPECIAIS === */
+  --cor-botao-desvincular-fundo: #ffa9aa;
+  --cor-botao-desvincular-texto: #ff1313;
+  --cor-botao-solicitacao-fundo: #ffefa9;
+  --cor-botao-solicitacao-texto: #665716;
+  --cor-botao-solicitacao-hover-fundo: #ffdf2a;
+  --cor-botao-solicitacao-hover-texto: #27270c;
+
+  /* === TAMANHOS DE FONTE === */
+  --fonte-extra-grande: 36px;
+  --fonte-titulo-secao: 32px;
+  --fonte-grande: 24px;
+  --fonte-media-grande: 1.8rem;
+  --fonte-mobile: 20px;
+  --fonte-label: 20px;
+  --fonte-input: 16px;
+  --fonte-nav-mobile: 14px;
+  --fonte-pequena: 12px;
+  --fonte-botao-pequena: 0.8rem;
+
+  /* === BORDER RADIUS === */
+  --border-radius-pequeno: 6px;
+  --border-radius-pequeno-linha: 5px;
+  --border-radius-medio: 8px;
+  --border-radius-medio-grande: 10px;
+  --border-radius-grande: 12px;
+
+  /* === SOMBRAS === */
+  --sombra-leve: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --sombra-nav-mobile: 2px 0 10px rgba(0, 0, 0, 0.3);
 }

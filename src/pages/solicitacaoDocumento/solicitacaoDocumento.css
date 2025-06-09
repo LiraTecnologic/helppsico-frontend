@@ -19,7 +19,7 @@
 }
 
 .div-h1 hr {
-    border: solid 1px #1A56DB;
+    border: solid 1px var(--cor-azul-principal);
 }
 
 .listagem-documentos {
@@ -43,9 +43,9 @@
 .button-solicitar {
     width: 8%;
     height: 2.5rem;
-    border-radius: 0.8rem;
-    background-color: #0D42BD;
-    color: white;
+    border-radius: var(--border-radius-pequeno-linha);
+    background-color: var(--cor-azul-botao);
+    color: var(--cor-texto-branco);
     font-size: 1rem;
 }
 
@@ -54,5 +54,5 @@
 }
 
 .button-solicitar:active {
-    background-color: #315bbb;
+    background-color: var(--cor-azul-escuro-hover);
 }

@@ -1,127 +1,127 @@
 .container-psicologo {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-    align-items: start;
-    margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 24px;
 }
 
 .tabela-horario-consulta {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    background: white;
-    display: flex;
-    gap: 20px;
-    padding: 10px;
-    width: 835px;
-    border-radius: 12px;
+  box-shadow: var(--sombra-leve);
+  background: var(--cor-branco);
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  width: 835px;
+  border-radius: var(--border-radius-grande);
 }
 
-
 .agenda-tabela-scroll {
-    overflow-y: auto;
-    max-height: 350px;
-    padding: 4px;
-    width: 100%;
+  overflow-y: auto;
+  max-height: 350px;
+  padding: 4px;
+  width: 100%;
 }
 
 .agenda-tabela {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: flex-start;
-    min-width: fit-content;
-    margin: 0 auto;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: fit-content;
+  margin: 0 auto;
 }
 
 .agenda-dia-coluna {
-    display: flex;
-    flex-direction: column;
-    width: 125px;
-    min-width: 125px;
+  display: flex;
+  flex-direction: column;
+  width: 125px;
+  min-width: 125px;
 }
 
 .agenda-dia-titulo {
-    color: #3b82f6;
-    margin-bottom: 8px;
-    text-align: center;
-    padding: 6px;
-    background-color: #eff6ff;
-    border-radius: 6px;
+  color: var(--cor-azul-claro);
+  margin-bottom: 8px;
+  text-align: center;
+  padding: 6px;
+  background-color: var(--cor-azul-fundo);
+  border-radius: var(--border-radius-pequeno);
 }
 
 .agenda-card {
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 8px;
-    text-align: center;
-    margin-bottom: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  background-color: var(--cor-fundo-claro);
+  border: 1px solid var(--cor-borda-clara);
+  border-radius: var(--border-radius-pequeno);
+  padding: 8px;
+  text-align: center;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .agenda-card-selecionado {
-    background: #1d4ed8;
-    border-color: #1d4ed8;
-    color: white;
+  background: var(--cor-azul-principal);
+  border-color: var(--cor-azul-principal);
+  color: var(--cor-texto-branco);
 }
 
 .agenda-status {
-    margin-bottom: 2px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .agenda-status-disponivel {
-    color: #3b82f6;
+  color: var(--cor-azul-claro);
 }
 
 .agenda-status-selecionado {
-    color: white;
+  color: var(--cor-texto-branco);
 }
 
 .agenda-horario {
-    color: #1e293b;
+  color: var(--cor-texto-escuro);
 }
 
 .agenda-card-selecionado .agenda-horario {
-    color: white;
+  color: var(--cor-texto-branco);
 }
 
 .container-botao-contulta {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 16px;
 }
 
 .botao-agendar-consulta {
-    background: #1d4ed8;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 36px;
-    color: white;
-    cursor: pointer;
+  background: var(--cor-azul-principal);
+  border: none;
+  border-radius: var(--border-radius-medio);
+  padding: 12px 36px;
+  color: var(--cor-texto-branco);
+  cursor: pointer;
+  transition: transform 0.15s ease;
 }
 
 .botao-agendar-consulta:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .botao-agendar-consulta:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .botao-agendar-consulta:disabled {
-    background: #94a3b8;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
+  background: var(--cor-cinza-desabilitado);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .campo-atendimento {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }

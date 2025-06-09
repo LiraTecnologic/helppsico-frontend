@@ -1,13 +1,13 @@
 .container-pacientes {
   padding: 40px;
-  background-color: #f6f7fb;
+  background-color: var(--cor-fundo-azul-claro);
   min-height: 100vh;
 }
   
 .container-pacientes h1 {
-  font-size: 32px;
+  font-size: var(--fonte-titulo-secao);
   margin-bottom: 24px;
-  color: #222;
+  color: var(--cor-texto-escuro-principal);
 }
   
 .grid-pacientes {

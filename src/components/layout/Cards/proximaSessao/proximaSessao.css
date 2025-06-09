@@ -13,14 +13,19 @@
   margin-bottom: 16px;
 }
 
-.botao-ver-mais {
+.botao-ver-mais,
+.botao-marcar {
+  background-color: #0044cc;
   color: white;
   border: none;
-  background-color: #0044cc;
-  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
   cursor: pointer;
-  padding: 5px 12px;
-  border-radius: 10px;
+  font-size: 12px;
+}
+
+.botao-marcar {
+  font-size: 14px;
 }
 
 .sessao-card {
@@ -34,7 +39,6 @@
 }
 
 .sessao-info {
-  background-color: white;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -47,8 +51,13 @@
   object-fit: cover;
 }
 
-.sessao-textos p {
+.sessao-textos p,
+.sessao-detalhes p,
+.sessao-pagamento p,
+.sessao-pagamento strong {
   background-color: white;
+  font-size: 14px;
+  margin: 0;
 }
 
 .sessao-nome {
@@ -56,24 +65,16 @@
   font-size: 16px;
 }
 
-.sessao-detalhes p {
-  background-color: white;
+.sessao-detalhes {
   text-align: left;
-  font-size: 14px;
 }
 
 .sessao-pagamento {
-  background-color: white;
   text-align: right;
-  font-size: 14px;
   min-width: 120px;
 }
 
-.sessao-pagamento p,
-strong {
-  background-color: white;
-}
-
+/* Status de pagamento */
 .sessao-status {
   display: inline-block;
   width: 100%;
@@ -117,14 +118,4 @@ strong {
   font-size: 14px;
   margin-bottom: 16px;
   color: #666;
-}
-
-.botao-marcar {
-  background-color: #0044cc;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
 }

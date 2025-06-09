@@ -289,8 +289,9 @@ export default function TabelaHorarios({
                 return (
                   <div
                     key={id}
-                    className={`th-card ${
-                      selecionado
+                    className={`th-card 
+                      ${status === "Reseservado" ? "th-card-reservado" : ""}
+                      ${selecionado
                         ? acao === "para_disponibilizar"
                           ? "th-card-disponibilizar"
                           : "th-card-remover"

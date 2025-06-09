@@ -20,14 +20,14 @@ export default function Login() {
     }
 
     try {
-      const resposta = await login(email, senha, "PACIENTE");
+      // const resposta = await login(email, senha, "PACIENTE");
 
-      if (resposta.dado) {
-        localStorage.setItem("id-paciente", resposta.dado.id || "id-fake-tmp");
+      // if (resposta.dado) {
+        localStorage.setItem("id-paciente", "ccbb3b2a-b75e-414d-9e05-8954c7585e9c"); //ID alterar
         navigate("/paciente/painel");
-      } else {
-        apresentarErro(resposta.erro || "Erro ao fazer login");
-      }
+      // } else {
+      //   apresentarErro(resposta.erro || "Erro ao fazer login");
+      // }
     } catch (err) {
       apresentarErro("Erro ao tentar logar");
     }
@@ -62,7 +62,7 @@ export default function Login() {
 
           <p className="novo-texto-sem-conta">
             Não tem conta?{" "}
-            <Link to="/cadastroPaciente" className="link-paciente">
+            <Link to="/paciente/cadastro" className="link-paciente">
               crie agora
             </Link>
           </p>

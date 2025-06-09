@@ -1,7 +1,7 @@
 .text-tittle {
     max-width: 80%;
     margin: 32px auto 0 auto;
-    font-size: 36px;
+    font-size: var(--fonte-extra-grande);
     text-align: left;
 }
 
@@ -11,7 +11,7 @@
     padding: 20px;
     text-align: center;
     font-size: 18px;
-    color: #666;
+    color: var(--cor-texto-secundario);
 }
 
 .erro {
@@ -20,8 +20,8 @@
     padding: 20px;
     text-align: center;
     font-size: 18px;
-    color: #e74c3c;
+    color: var(--cor-vermelho-erro);
     background-color: #fdeaea;
-    border-radius: 8px;
-    border-left: 4px solid #e74c3c;
+    border-radius: var(--border-radius-medio);
+    border-left: 4px solid var(--cor-vermelho-erro);
 }

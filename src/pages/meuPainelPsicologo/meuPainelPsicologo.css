@@ -1,29 +1,29 @@
 .imagensPacientes {
-    max-width: 80%;
-    margin: 0 auto;
-    padding: 0 2rem;
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .listagemProntuarios {
-    max-width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 2rem 2rem 24px;
-    margin: 0 auto;
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 24px 2rem 2rem 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .prontuarioTittle {
-    margin: 0;
-    font-size: 24px;
+  margin: 0;
+  font-size: var(--fonte-grande);
 }
 
 .botao-verMais {
-    color: white;
-    border: none;
-    background-color: #0044cc;
-    font-size: 12px;
-    cursor: pointer;
-    padding: 5px 12px;
-    border-radius: 10px;
+  padding: 5px 12px;
+  font-size: var(--fonte-pequena);
+  color: var(--cor-texto-branco);
+  background-color: var(--cor-azul-escuro);
+  border: none;
+  border-radius: var(--border-radius-medio-grande);
+  cursor: pointer;
 }

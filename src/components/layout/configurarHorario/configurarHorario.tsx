@@ -26,22 +26,11 @@ export default function ConfiguracaoHorario({
   inicio,
   fim,
 }: ConfiguracaoHorarioProps) {
-  const diasSemana: string[] = [
-    "SEG",
-    "TER",
-    "QUA",
-    "QUI",
-    "SEX",
-    "SAB",
-    "DOM",
-  ];
-  const [diasSelecionados, setDiasSelecionados] = useState<string[]>(
-    dias ?? []
-  );
-  const [tempoSessao, setTempoSessao] = useState<number>(tempo ?? 50);
-  const [intervaloSessao, setIntervaloSessao] = useState<number>(
-    intervalo ?? 10
-  );
+  const diasSemana: string[] = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
+
+  const [diasSelecionados, setDiasSelecionados] = useState<string[]>(dias ?? []);
+  const [tempoSessao, setTempoSessao] = useState<number | undefined>(tempo ?? 50);
+  const [intervaloSessao, setIntervaloSessao] = useState<number | undefined>(intervalo ?? 10);
   const [horaInicio, setHoraInicio] = useState<string>(inicio ?? "07:00");
   const [horaFim, setHoraFim] = useState<string>(fim ?? "18:00");
   const [erro, setErro] = useState<string>("");
@@ -58,12 +47,12 @@ export default function ConfiguracaoHorario({
       return;
     }
 
-    if (isNaN(tempoSessao) || tempoSessao < 30) {
+    if (tempoSessao === undefined || isNaN(tempoSessao) || tempoSessao < 30) {
       setErro("O tempo de sessão deve ser de no mínimo 30 minutos.");
       return;
     }
 
-    if (isNaN(intervaloSessao) || intervaloSessao < 0) {
+    if (intervaloSessao === undefined || isNaN(intervaloSessao) || intervaloSessao < 0) {
       setErro("O tempo de intervalo deve ser maior ou igual a 0.");
       return;
     }
@@ -84,9 +73,15 @@ export default function ConfiguracaoHorario({
       return;
     }
 
-    const body = JSON.stringify({diasSelecionados: diasSelecionados, tempoSessao: tempoSessao, intervaloSessao: intervaloSessao, horaInicio: horaInicio, horaFim: horaFim});
-    localStorage.setItem("infoConfigHorarios", body);
+    const body = JSON.stringify({
+      diasSelecionados,
+      tempoSessao,
+      intervaloSessao,
+      horaInicio,
+      horaFim,
+    });
 
+    localStorage.setItem("infoConfigHorarios", body);
     setErro("");
     onSave(diasSelecionados, tempoSessao, intervaloSessao, horaInicio, horaFim);
   };
@@ -117,8 +112,14 @@ export default function ConfiguracaoHorario({
           <label>Tempo de sessão (mínimo 30 minutos)</label>
           <input
             type="number"
-            value={tempoSessao}
-            onChange={(e) => setTempoSessao(Number(e.target.value))}
+            value={tempoSessao === undefined ? "" : tempoSessao}
+            onFocus={() => {
+              if (tempoSessao === 0) setTempoSessao(undefined);
+            }}
+            onChange={(e) => {
+              const value = e.target.value;
+              setTempoSessao(value === "" ? undefined : Number(value));
+            }}
             min={1}
           />
         </div>
@@ -127,8 +128,14 @@ export default function ConfiguracaoHorario({
           <label>Tempo de intervalo entre sessões (em minutos)</label>
           <input
             type="number"
-            value={intervaloSessao}
-            onChange={(e) => setIntervaloSessao(Number(e.target.value))}
+            value={intervaloSessao === undefined ? "" : intervaloSessao}
+            onFocus={() => {
+              if (intervaloSessao === 0) setIntervaloSessao(undefined);
+            }}
+            onChange={(e) => {
+              const value = e.target.value;
+              setIntervaloSessao(value === "" ? undefined : Number(value));
+            }}
             min={0}
           />
         </div>

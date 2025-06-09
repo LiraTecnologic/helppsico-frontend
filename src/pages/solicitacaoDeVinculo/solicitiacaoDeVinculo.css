@@ -5,9 +5,9 @@
 }
 
 .solicitacao-vinculo__titulo {
-  font-size: 2rem;
+  font-size: var(--fonte-titulo-secao);
   margin-bottom: 2rem;
-  color: #333;
+  color: var(--cor-texto-escuro-principal);
 }
 
 .solicitacao-vinculo__section {
@@ -15,9 +15,9 @@
 }
 
 .solicitacao-vinculo__subtitulo {
-  font-size: 1.5rem;
+  font-size: var(--fonte-grande);
   margin-bottom: 1rem;
-  color: #333;
+  color: var(--cor-texto-escuro-principal);
 }
 
 .solicitacao-vinculo__cards-grid {

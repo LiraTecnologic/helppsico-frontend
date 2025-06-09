@@ -3,17 +3,18 @@ import Header from "../../components/layout/header/header";
 import CardPsicologoConsulta from "../../components/layout/Cards/cardPsicologoConsulta/cardPsicologoConsulta";
 import DadosConsultaPsicologo from "../../components/layout/Cards/dadosConsulta/dadosConsulta";
 import TabelaHorarioConsulta from "../../components/layout/tabelaHorarioConsulta/tabelaHorarioConsulta";
+
 import { useEffect, useState } from "react";
-import PsicologoModel from "../../models/psicologo";
-import { consultarPsicologoPeloId, consultarVinculoPaciente } from './agendamentoConsulta.service';
+import { consultarPsicologoPeloId, consultarVinculoPaciente, cadastrarConsulta } from './agendamentoConsulta.service';
 import { listarHorariosPsicologo } from '../../services/horarios.service';
+
+import PsicologoModel from "../../models/psicologo";
 import { HorarioModel } from "../../models/horario";
-import { cadastrarConsulta } from './agendamentoConsulta.service';
 import VinculoModel from "../../models/vinculo";
 import PacienteModel from "../../models/paciente";
-import EnderecoModel from "../../models/endereco";
-import { apresentarErro, notificarErro } from "../../utils/notificacoes";
 import ConsultaModel from "../../models/consulta";
+
+import { apresentarErro, notificarErro, notificarSucesso } from "../../utils/notificacoes";
 
 export default function AgendamentoConsulta() {
   const [quantidadeSelecionada, setQuantidadeSelecionada] = useState(0);
@@ -22,61 +23,55 @@ export default function AgendamentoConsulta() {
   const [idsHorariosSelecionados, setIdsHorariosSelecionados] = useState<string[]>([]);
   const [vinculo, setVinculo] = useState<VinculoModel | null>(null);
 
-  const idPaciente = "3ad67cbb-7877-4152-9883-f68c2af2fa6e";
-
+  const idPaciente = localStorage.getItem("id-paciente");
 
   async function agendar() {
+    if (!idPaciente) {
+      apresentarErro("Paciente não identificado. Faça login novamente.");
+      return;
+    }
+
     if (idsHorariosSelecionados.length === 0) {
       apresentarErro("Selecione ao menos um horário para agendar!");
       return;
     }
 
+    if (!psicologo || !vinculo) return;
+
     try {
       for (const idHorario of idsHorariosSelecionados) {
+        const horarioSelecionado = horariosPsicologo.find(h => h.id === idHorario);
+        if (!horarioSelecionado) continue;
 
-        console.log(idHorario);
+        const paciente: PacienteModel = {
+          id: idPaciente,
+          nome: "",
+          cpf: "",
+          email: "",
+          telefone: "",
+          dataNascimento: "",
+          genero: "MASCULINO",
+          endereco: psicologo.enderecoAtendimento,
+          fotoUrl: ""
+        };
 
-        if (psicologo) {
+        const novaConsulta: ConsultaModel = {
+          id: "",
+          psicologo,
+          paciente,
+          valor: psicologo.valorSessao,
+          horario: horarioSelecionado,
+          data: new Date().toISOString().split("T")[0],
+          endereco: psicologo.enderecoAtendimento,
+          finalizada: false
+        };
 
-          const horario: HorarioModel = {
-            id: idHorario,
-            psicologo: {} as PsicologoModel,
-            diaSemana: 'DOMINGO',
-            inicio: '',
-            fim: '',
-            intervalo: 0,
-            duracao: 0,
-            disponivel: true
-          }
-
-          const paciente: PacienteModel = {
-            id: idPaciente,
-            nome: '',
-            cpf: '',
-            email: '',
-            telefone: '',
-            dataNascimento: '',
-            genero: 'MASCULINO',
-            endereco: psicologo.enderecoAtendimento,
-            fotoUrl: ''
-          }
-    
-          const novaConsulta: ConsultaModel = {
-            id: '',
-            psicologo: psicologo,
-            paciente: paciente,
-            valor: 0,
-            horario: horario,
-            data: '2025-06-08',
-            endereco: psicologo.enderecoAtendimento,
-            finalizada: false
-          }
-
-          await cadastrarConsulta(novaConsulta);
-        }
+        await cadastrarConsulta(novaConsulta);
       }
 
-      notificarErro("Consultas agendadas com sucesso!");
+      notificarSucesso("Consultas agendadas com sucesso!");
+      setIdsHorariosSelecionados([]);
+      setQuantidadeSelecionada(0);
 
     } catch (error) {
       console.error("Erro ao agendar:", error);
@@ -85,89 +80,89 @@ export default function AgendamentoConsulta() {
   }
 
   useEffect(() => {
-    async function carregarVinculo(idPaciente: string) {
-      const vinculoResponse = await consultarVinculoPaciente(idPaciente);
+    if (!idPaciente) return;
 
-      if (vinculoResponse.dado) {
-        setVinculo(vinculoResponse.dado.content[0]);
+    async function carregarVinculo() {
+      const resposta = await consultarVinculoPaciente(idPaciente);
+      if (resposta.dado?.content?.[0]) {
+        setVinculo(resposta.dado.content[0]);
       }
     }
 
-    if (idPaciente) {
-      carregarVinculo(idPaciente);
-    }
+    carregarVinculo();
   }, [idPaciente]);
 
   useEffect(() => {
-    async function carregarPsicologo(idPsicologo: string) {
-      const psicologoResponse = await consultarPsicologoPeloId(idPsicologo);
-      setPsicologo(psicologoResponse.dado);
+    async function carregarPsicologo(id: string) {
+      const resposta = await consultarPsicologoPeloId(id);
+      if (resposta.dado) {
+        setPsicologo(resposta.dado);
+      }
     }
 
-    if (vinculo && vinculo.psicologo?.id) {
-      const idPsicologo = vinculo.psicologo.id;
-      carregarPsicologo(idPsicologo);
+    if (vinculo?.psicologo?.id) {
+      carregarPsicologo(vinculo.psicologo.id);
     }
   }, [vinculo]);
 
   useEffect(() => {
-    async function carregarHorarios(idPsicologo: string) {
-      const horariosResponse = await listarHorariosPsicologo(idPsicologo);
-      console.log(horariosResponse);
-      if (horariosResponse.dado) {
-        setHorariosPsicologo(horariosResponse.dado);
+    async function carregarHorarios(id: string) {
+      const resposta = await listarHorariosPsicologo(id);
+      if (resposta.dado) {
+        setHorariosPsicologo(resposta.dado);
       }
     }
 
-    if (vinculo && vinculo.psicologo?.id) {
-      const idPsicologo = vinculo.psicologo.id;
-      carregarHorarios(idPsicologo);
+    if (vinculo?.psicologo?.id) {
+      carregarHorarios(vinculo.psicologo.id);
     }
   }, [vinculo]);
 
-
   return (
     <>
-      <Header fluxo="" headerPsicologo={false} />
+      <Header fluxo="horario" headerPsicologo={false} />
       <main>
         <h1>Consulta</h1>
+
         <div className="container-psicologo">
-          <div className="dados-psicologo-consulta">
-            {psicologo &&
-              <CardPsicologoConsulta
-                urlFoto={psicologo.fotoUrl}
-                nome={psicologo.nome}
-                biografia={psicologo.biografia}
-                tempoSessao={psicologo.tempoSessao}
-              />
-            }
-          </div>
-          <div>
-            {psicologo &&
+          {psicologo && (
+            <>
+              <div className="dados-psicologo-consulta">
+                <CardPsicologoConsulta
+                  urlFoto={psicologo.fotoUrl}
+                  nome={psicologo.nome}
+                  biografia={psicologo.biografia}
+                  tempoSessao={psicologo.tempoSessao}
+                />
+              </div>
+
               <DadosConsultaPsicologo
                 selecionado={quantidadeSelecionada}
                 valor={psicologo.valorSessao}
                 valorTotal={quantidadeSelecionada * psicologo.valorSessao}
               />
-            }
-          </div>
+            </>
+          )}
         </div>
+
         <div className="campo-atendimento">
           <h2>Dias de Atendimento</h2>
           <div className="tabela-horario-consulta">
-            {horariosPsicologo &&
+            {horariosPsicologo.length > 0 && (
               <TabelaHorarioConsulta
                 horarios={horariosPsicologo}
-                onSelecionado={(qtd) => setQuantidadeSelecionada(qtd)}
-                onSelecionadosChange={(ids) => setIdsHorariosSelecionados(ids)}
+                onSelecionado={setQuantidadeSelecionada}
+                onSelecionadosChange={setIdsHorariosSelecionados}
                 alterar={true}
               />
-            }
+            )}
           </div>
         </div>
 
         <div className="container-botao-contulta">
-          <button className="botao-agendar-consulta" onClick={agendar}>Agendar</button>
+          <button className="botao-agendar-consulta" onClick={agendar}>
+            Agendar
+          </button>
         </div>
       </main>
     </>

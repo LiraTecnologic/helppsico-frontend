@@ -86,7 +86,7 @@ export default function AtualizarPerfilPsicologo() {
         if (!psicologo) return;
 
         // const idPsicologo = getUserId();
-        const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+        const idPsicologo = localStorage.getItem('id-psicologo')
 
         if (!idPsicologo) {
             apresentarErro("Usuario não encontrado. Faça o login novamente")
@@ -96,7 +96,7 @@ export default function AtualizarPerfilPsicologo() {
         const valorConvertido = parseFloat(valorSessao.replace(/[R$\s.]/g, '').replace(',', '.')) || 0;
 
         const dadosAtualizados: PsicologoModel = {
-            id: '',
+            id: psicologo.id,
             nome: psicologo.nome,
             crp: psicologo.crp,
             cpf: psicologo.cpf,

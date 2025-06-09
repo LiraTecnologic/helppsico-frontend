@@ -1,7 +1,7 @@
 .mensagem-nenhum-psicologo {
-    font-size: 1.8rem;
-    color: #ff4d4f;
-    text-align: center;
-    margin-top: 20px;
-    font-weight: 500;
-} 
+  font-size: var(--fonte-media-grande);
+  color: var(--cor-vermelho-alerta);
+  text-align: center;
+  margin-top: 20px;
+  font-weight: 500;
+}

@@ -11,15 +11,15 @@
 
 .sem-config button {
     margin-top: 10px;
-    color: white;
+    color: var(--cor-texto-branco);
     border: none;
-    background-color: #0044cc;
-    font-size: 12px;
+    background-color: var(--cor-azul-escuro);
+    font-size: var(--fonte-pequena);
     cursor: pointer;
     padding: 5px 12px;
-    border-radius: 10px;
+    border-radius: var(--border-radius-medio-grande);
 }
 
 .sem-config button:hover {
-    background-color: #003f99;
+    background-color: var(--cor-azul-escuro-hover);
 }

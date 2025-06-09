@@ -30,6 +30,13 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
         <div className="nav-foto-container">
           <nav className="nav">
             <ul>
+
+              {headerPsicologo === false && (
+                <li className={fluxo === "horario" ? "active" : ""}>
+                  <Link to={`/paciente/agendamento`}>Agendar Horario</Link>
+                </li>
+              )}
+
               <li className={fluxo === "meuPainel" ? "active" : ""}>
                 <Link to={`/${usuario}/painel`}>Meu painel</Link>
               </li>
@@ -37,7 +44,9 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
               {headerPsicologo && (
                 <>
                   <li className={fluxo === "dadosPessoais" ? "active" : ""}>
-                    <Link to={`/${usuario}/atualizar-perfil`}>Dados Pessoais</Link>
+                    <Link to={`/${usuario}/atualizar-perfil`}>
+                      Dados Pessoais
+                    </Link>
                   </li>
 
                   <li className={fluxo === "meusPacientes" ? "active" : ""}>
@@ -62,7 +71,6 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
                     Solicitações de Vinculo
                   </Link>
                 </li>
-                
               )}
             </ul>
           </nav>
@@ -75,6 +83,13 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
 
       <nav className={`nav-mobile ${openMenu ? "open" : ""}`}>
         <ul>
+
+          {headerPsicologo === false && (
+            <li className={fluxo === "horario" ? "active" : ""}>
+              <Link to={`/paciente/agendamento`}>Agendar Horario</Link>
+            </li>
+          )}
+
           <li className={fluxo === "meuPainel" ? "active" : ""}>
             <Link to={`/${usuario}/painel`} onClick={closeMenu}>
               Meu painel
@@ -98,8 +113,7 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
           )}
 
           <li className={fluxo === "minhasSessoes" ? "active" : ""}>
-            <Link to={`/${usuario}/psicologo`} onClick={closeMenu}>
-              {/* ainda n feito */}
+            <Link to={`/${usuario}/sessao`} onClick={closeMenu}>
               Minhas sessões
             </Link>
           </li>
@@ -121,7 +135,6 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
               </Link>
             </li>
           )}
-
         </ul>
       </nav>
     </>

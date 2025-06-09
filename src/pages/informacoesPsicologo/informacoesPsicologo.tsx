@@ -27,12 +27,21 @@ export default function InformacoesPsicologo() {
   const [avaliacoes, setAvaliacoes] = useState<AvaliacaoModel[]>([]);
   const [mediaNotaAvaliacao, setMediaNotaAvaliacao] = useState<number | 0>(0);
   const [vinculos, setVinculos] = useState<VinculoModel[] | []>([]);
-  const [vinculoPaciente, setVinculoPacietne] = useState<VinculoModel | null>(null);
+  const [vinculoPaciente, setVinculoPacietne] = useState<VinculoModel | null>(
+    null
+  );
   const [horarios, setHorarios] = useState<HorarioModel[]>([]);
-  const [hasVinculo, setHasVinculo] = useState<EstadoVinculo>(EstadoVinculo.NAO_VINCULADO);
+  const [hasVinculo, setHasVinculo] = useState<EstadoVinculo>(
+    EstadoVinculo.NAO_VINCULADO
+  );
   const [hoverSolicitado, setHoverSolicitado] = useState(false);
 
-  function gerarHorarios(inicio: string, fim: string, duracao: number, intervalo: number): string[] {
+  function gerarHorarios(
+    inicio: string,
+    fim: string,
+    duracao: number,
+    intervalo: number
+  ): string[] {
     const horarios: string[] = [];
     let [h, m] = inicio.split(":").map(Number);
     const [endH, endM] = fim.split(":").map(Number);
@@ -213,10 +222,7 @@ export default function InformacoesPsicologo() {
                 nota={mediaNotaAvaliacao}
                 quantidadeAvaliacao={avaliacoes.length.toString()}
               />
-              {hasVinculo === EstadoVinculo.VINCULADO &&
-                headerPsicologo === false && (
-                  <BotaoAvaliarInfoPsicologo psicologo={psicologo} />
-                )}
+              <BotaoAvaliarInfoPsicologo psicologo={psicologo} origem={headerPsicologo} />
             </div>
             <div className="listagem-avaliacao">
               {avaliacoes.map((avaliacao, index) => (

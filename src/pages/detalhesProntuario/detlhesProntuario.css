@@ -16,11 +16,11 @@
 }
 
 .conteudo-box {
-  background-color: white;
+  background-color: var(--cor-branco);
   padding: 16px;
   height: 40%;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  border-radius: var(--border-radius-medio);
+  border: 1px solid var(--cor-borda-clara-2);
   line-height: 1.6;
   margin-bottom: 24px;
   white-space: pre-wrap;
@@ -38,7 +38,7 @@
 .dados-data p{
   cursor: default;
   flex-direction: column;
-  color: #777777;
+  color: var(--cor-texto-secundario);
 }
 
 .botoes-prontuario {
@@ -51,8 +51,8 @@
   min-height: 20rem;
   padding: 12px;
   font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  border-radius: var(--border-radius-medio);
+  border: 1px solid var(--cor-borda-textarea);
   resize: vertical;
   box-sizing: border-box;
 }

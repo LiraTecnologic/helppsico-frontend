@@ -1,15 +1,14 @@
 .card-avaliacao {
   display: flex;
   flex-direction: row;
-  width: 18%;
+  width: 200px;
   height: 8rem;
-  border: solid 2px #a1a1a1;
+  border: 2px solid #a1a1a1;
   border-radius: 1rem;
   justify-content: center;
   align-items: center;
   gap: 1rem;
 }
-
 .nota-card-avaliacao {
   font-size: 4rem;
 }
