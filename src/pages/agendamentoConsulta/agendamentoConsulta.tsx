@@ -50,14 +50,15 @@ export default function AgendamentoConsulta() {
               fotoUrl: ''
             }
           }
-
           const horario: HorarioModel = {
             id: idHorario,
-            diaSemana: '',
+            diaSemana: [], 
             inicio: '',
             fim: '',
             disponivel: true,
-            psicologo: psicologo
+            psicologo: psicologo,
+            intervalo: 0, 
+            duracao: 0    
           }
 
 

@@ -1,111 +1,78 @@
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+main h1 {
+    text-align: center;
+    margin-bottom: 32px;
+    color: #1e293b;
+    font-size: 2rem;
+}
+
+
 .container-psicologo {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 20px;
     align-items: start;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
 }
+
+
+.campo-atendimento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.campo-atendimento h2 {
+    color: #1e293b;
+    font-size: 1.5rem;
+    margin: 0;
+    text-align: center;
+}
+
 
 .tabela-horario-consulta {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     background: white;
-    display: flex;
-    gap: 20px;
-    padding: 10px;
-    width: 835px;
     border-radius: 12px;
-}
-
-
-.agenda-tabela-scroll {
-    overflow-y: auto;
-    max-height: 350px;
-    padding: 4px;
+    padding: 16px;
     width: 100%;
+    max-width: 900px;
+    overflow: hidden; 
 }
 
-.agenda-tabela {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: flex-start;
-    min-width: fit-content;
-    margin: 0 auto;
-}
-
-.agenda-dia-coluna {
-    display: flex;
-    flex-direction: column;
-    width: 125px;
-    min-width: 125px;
-}
-
-.agenda-dia-titulo {
-    color: #3b82f6;
-    margin-bottom: 8px;
-    text-align: center;
-    padding: 6px;
-    background-color: #eff6ff;
-    border-radius: 6px;
-}
-
-.agenda-card {
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 8px;
-    text-align: center;
-    margin-bottom: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.agenda-card-selecionado {
-    background: #1d4ed8;
-    border-color: #1d4ed8;
-    color: white;
-}
-
-.agenda-status {
-    margin-bottom: 2px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-}
-
-.agenda-status-disponivel {
-    color: #3b82f6;
-}
-
-.agenda-status-selecionado {
-    color: white;
-}
-
-.agenda-horario {
-    color: #1e293b;
-}
-
-.agenda-card-selecionado .agenda-horario {
-    color: white;
-}
 
 .container-botao-contulta {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 16px;
+    margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 .botao-agendar-consulta {
-    background: #1d4ed8;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
     border: none;
     border-radius: 8px;
-    padding: 12px 36px;
+    padding: 14px 32px;
     color: white;
     cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    min-height: 48px; 
 }
 
 .botao-agendar-consulta:hover {
     transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
 }
 
 .botao-agendar-consulta:active {
@@ -119,9 +86,181 @@
     box-shadow: none;
 }
 
-.campo-atendimento {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+
+.botao-agendar-consulta:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+
+@media (max-width: 1024px) {
+    main {
+        padding: 18px;
+        max-width: 100%;
+    }
+    
+    .container-psicologo {
+        gap: 18px;
+    }
+    
+    .tabela-horario-consulta {
+        max-width: 100%;
+    }
+}
+
+
+@media (max-width: 768px) {
+    main {
+        padding: 16px;
+    }
+    
+    main h1 {
+        font-size: 1.75rem;
+        margin-bottom: 24px;
+    }
+    
+    .container-psicologo {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+    
+    .campo-atendimento h2 {
+        font-size: 1.25rem;
+    }
+    
+    .tabela-horario-consulta {
+        padding: 12px;
+    }
+    
+    .botao-agendar-consulta {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+
+@media (max-width: 640px) {
+    main {
+        padding: 14px;
+    }
+    
+    main h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .campo-atendimento {
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+    
+    .tabela-horario-consulta {
+        padding: 10px;
+        border-radius: 8px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    main {
+        padding: 12px;
+    }
+    
+    main h1 {
+        font-size: 1.375rem;
+        margin-bottom: 18px;
+    }
+    
+    .container-psicologo {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .campo-atendimento {
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .campo-atendimento h2 {
+        font-size: 1.125rem;
+    }
+    
+    .tabela-horario-consulta {
+        padding: 8px;
+    }
+    
+    .container-botao-contulta {
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+    
+    .botao-agendar-consulta {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+
+@media (max-width: 360px) {
+    main {
+        padding: 8px;
+    }
+    
+    main h1 {
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+    }
+    
+    .tabela-horario-consulta {
+        padding: 6px;
+    }
+    
+    .botao-agendar-consulta {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+}
+
+
+@media (min-width: 1400px) {
+    main {
+        max-width: 1400px;
+        padding: 24px;
+    }
+    
+    .container-psicologo {
+        gap: 32px;
+    }
+    
+    .tabela-horario-consulta {
+        max-width: 1000px;
+        padding: 20px;
+    }
+}
+
+
+@media (hover: none) and (pointer: coarse) {
+    .botao-agendar-consulta {
+        min-height: 48px; 
+        padding: 14px 32px;
+    }
+}
+
+
+@media (max-width: 768px) and (orientation: landscape) {
+    main h1 {
+        font-size: 1.5rem;
+        margin-bottom: 16px;
+    }
+    
+    .container-psicologo {
+        margin-bottom: 20px;
+    }
+    
+    .campo-atendimento {
+        margin-bottom: 20px;
+    }
 }
