@@ -2,6 +2,14 @@ import { HorarioModel } from "../../../models/horario";
 import "./tabelaHorarios.css";
 import { useEffect, useState } from "react";
 
+interface PropsConfigHorario {
+  diasSelecionados: string[];
+  tempoSessao: number;
+  intervaloSessao: number;
+  horaInicio: string;
+  horaFim: string;
+}
+
 interface TabelaHorariosProps {
   dias: string[];
   inicio: string;
@@ -56,18 +64,21 @@ function gerarIntervalos(
 
 function converterDiaParaAbreviado(diaCompleto: string): string {
   const conversao: Record<string, string> = {
-    "SEGUNDA_FEIRA": "SEG",
-    "TERCA_FEIRA": "TER",
-    "QUARTA_FEIRA": "QUA",
-    "QUINTA_FEIRA": "QUI",
-    "SEXTA_FEIRA": "SEX",
-    "SABADO": "SAB",
-    "DOMINGO": "DOM",
+    SEGUNDA_FEIRA: "SEG",
+    TERCA_FEIRA: "TER",
+    QUARTA_FEIRA: "QUA",
+    QUINTA_FEIRA: "QUI",
+    SEXTA_FEIRA: "SEX",
+    SABADO: "SAB",
+    DOMINGO: "DOM",
   };
   return conversao[diaCompleto] || diaCompleto;
 }
 
-type StatusCard = "Disponibilizar Agendamento" | "Disponivel para Agendamento" | "Reseservado";
+type StatusCard =
+  | "Disponibilizar Agendamento"
+  | "Disponivel para Agendamento"
+  | "Reseservado";
 type AcaoSelecionada = "para_disponibilizar" | "para_remover";
 
 export default function TabelaHorarios({
@@ -79,31 +90,72 @@ export default function TabelaHorarios({
   onEditar,
   horarios,
   onSalvar,
-  onDeletar
+  onDeletar,
 }: TabelaHorariosProps) {
-  const intervalos = gerarIntervalos(inicio, fim, duracao, intervalo);
+  const [configHorarios, setConfigHorarios] = useState<PropsConfigHorario>({
+    diasSelecionados: [],
+    tempoSessao: 50,
+    intervaloSessao: 10,
+    horaInicio: "08:00",
+    horaFim: "18:00",
+  });
+
+  const intervalos = gerarIntervalos(
+    configHorarios.horaInicio, 
+    configHorarios.horaFim, 
+    configHorarios.tempoSessao, 
+    configHorarios.intervaloSessao
+  );
+
   const [idsMapping, setIdsMapping] = useState<Record<string, string>>({});
+  const [cards, setCards] = useState<Record<string, StatusCard>>({});
+  const [selecionados, setSelecionados] = useState<Map<string, AcaoSelecionada>>(new Map());
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("infoConfigHorarios");
+    if (storedData) {
+      try {
+        const parsedData: PropsConfigHorario = JSON.parse(storedData);
+        setConfigHorarios(parsedData);
+        console.log("Configurações carregadas do localStorage:", parsedData);
+      } catch (error) {
+        console.error("Erro ao carregar configurações do localStorage:", error);
+      }
+    }
+  }, []);
 
   const inicialCards = () => {
     const cards: Record<string, StatusCard> = {};
-    const mapping: Record<string, string> = {}; 
+    const mapping: Record<string, string> = {};
 
-    dias.forEach((dia) => {
-      intervalos.forEach((faixa) => {
+    const diasParaUsar = configHorarios.diasSelecionados.length > 0 
+      ? configHorarios.diasSelecionados 
+      : dias;
+
+    const intervalosGerados = gerarIntervalos(
+      configHorarios.horaInicio,
+      configHorarios.horaFim,
+      configHorarios.tempoSessao,
+      configHorarios.intervaloSessao
+    );
+
+    diasParaUsar.forEach((dia) => {
+      intervalosGerados.forEach((faixa) => {
         const id = `${dia}-${faixa}`;
-        const horarioEncontrado = horarios.find(
-          (h) => {
-            const diaAbreviado = converterDiaParaAbreviado(h.diaSemana);
-            const faixaHorario = `${formatarHora(h.inicio)} - ${formatarHora(h.fim)}`;
+        const horarioEncontrado = horarios.find((h) => {
+          const diaAbreviado = converterDiaParaAbreviado(h.diaSemana);
+          const faixaHorario = `${formatarHora(h.inicio)} - ${formatarHora(h.fim)}`;
 
-            console.log(`Comparando: ${diaAbreviado} === ${dia} && ${faixaHorario} === ${faixa}`);
+          console.log(
+            `Comparando: ${diaAbreviado} === ${dia} && ${faixaHorario} === ${faixa}`
+          );
 
-            return diaAbreviado === dia && faixaHorario === faixa;
-          }
-        );
+          return diaAbreviado === dia && faixaHorario === faixa;
+        });
 
         if (horarioEncontrado) {
-          mapping[id] = horarioEncontrado.id; 
+          mapping[id] = horarioEncontrado.id;
+
           if (horarioEncontrado.disponivel) {
             cards[id] = "Disponivel para Agendamento";
           } else {
@@ -118,18 +170,16 @@ export default function TabelaHorarios({
     return { cards, mapping };
   };
 
-  
-  const [cards, setCards] = useState<Record<string, StatusCard>>({});
-  const [selecionados, setSelecionados] = useState<Map<string, AcaoSelecionada>>(new Map());
-
   useEffect(() => {
-    const { cards: novosCards, mapping } = inicialCards();
-    setCards(novosCards);
-    setIdsMapping(mapping);
-    console.log("Horários carregados:", horarios);
-    console.log("Cards gerados:", novosCards);
-    console.log("Mapeamento de IDs:", mapping);
-  }, [dias, inicio, fim, duracao, intervalo, horarios]);
+    if (configHorarios.diasSelecionados.length > 0) {
+      const { cards: novosCards, mapping } = inicialCards();
+      setCards(novosCards);
+      setIdsMapping(mapping);
+      console.log("Cards recriados com configuração:", configHorarios);
+      console.log("Cards gerados:", novosCards);
+      console.log("Mapeamento de IDs:", mapping);
+    }
+  }, [configHorarios, horarios]);
 
   const toggleSelecionado = (id: string) => {
     const novoMap = new Map(selecionados);
@@ -151,7 +201,7 @@ export default function TabelaHorarios({
   const salvarSelecionados = () => {
     const novosCards = { ...cards };
     const horariosParaSalvar: string[] = [];
-    const horariosParaRemover: string[] = []; // IDs do banco de dados
+    const horariosParaRemover: string[] = [];
 
     selecionados.forEach((acao, id) => {
       if (acao === "para_disponibilizar") {
@@ -159,7 +209,6 @@ export default function TabelaHorarios({
         horariosParaSalvar.push(id);
       } else if (acao === "para_remover") {
         novosCards[id] = "Disponibilizar Agendamento";
-        // Usar o ID do banco de dados em vez do ID interno
         const idDoBanco = idsMapping[id];
         if (idDoBanco) {
           horariosParaRemover.push(idDoBanco);
@@ -184,6 +233,10 @@ export default function TabelaHorarios({
     }
   };
 
+  const diasParaRenderizar = configHorarios.diasSelecionados.length > 0 
+    ? configHorarios.diasSelecionados 
+    : dias;
+
   return (
     <div className="th-container">
       <div className="th-header">
@@ -195,7 +248,7 @@ export default function TabelaHorarios({
         <div className="th-config-item">
           <p>Dias de atendimento:</p>
           <div className="th-dias">
-            {dias.map((dia) => (
+            {diasParaRenderizar.map((dia) => (
               <span key={dia} className="th-dia">
                 {dia}
               </span>
@@ -204,23 +257,27 @@ export default function TabelaHorarios({
         </div>
         <div className="th-config-item">
           <p>Tempo de sessão:</p>
-          <div className="th-duracao">{duracao} m</div>
+          <div className="th-duracao">
+            {configHorarios.tempoSessao} min
+          </div>
         </div>
         <div className="th-config-item">
           <p>Intervalo entre sessões:</p>
-          <div className="th-duracao">{intervalo} m</div>
+          <div className="th-duracao">
+            {configHorarios.intervaloSessao} min
+          </div>
         </div>
         <div className="th-config-item">
           <p>Começo e fim do expediente:</p>
           <div className="th-expediente">
-            {inicio} h às {fim} h
+            {configHorarios.horaInicio} às {configHorarios.horaFim}
           </div>
         </div>
       </div>
 
       <div className="th-tabela-scroll">
         <div className="th-tabela">
-          {dias.map((dia) => (
+          {diasParaRenderizar.map((dia) => (
             <div key={dia} className="th-dia-coluna">
               <h3 className="th-dia-titulo">{nomesDias[dia]}</h3>
               {intervalos.map((faixa) => {
@@ -232,21 +289,23 @@ export default function TabelaHorarios({
                 return (
                   <div
                     key={id}
-                    className={`th-card ${selecionado
-                      ? acao === "para_disponibilizar"
-                        ? "th-card-disponibilizar"
-                        : "th-card-remover"
-                      : status === "Disponivel para Agendamento"
+                    className={`th-card ${
+                      selecionado
+                        ? acao === "para_disponibilizar"
+                          ? "th-card-disponibilizar"
+                          : "th-card-remover"
+                        : status === "Disponivel para Agendamento"
                         ? "th-card-disponivel"
                         : ""
-                      }`}
+                    }`}
                     onClick={() => toggleSelecionado(id)}
                   >
                     <div
-                      className={`th-status ${status === "Disponibilizar Agendamento"
-                        ? "th-status-livre"
-                        : "th-status-disponivel"
-                        }`}
+                      className={`th-status ${
+                        status === "Disponibilizar Agendamento"
+                          ? "th-status-livre"
+                          : "th-status-disponivel"
+                      }`}
                     >
                       {status}
                     </div>
