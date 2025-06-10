@@ -26,7 +26,7 @@ export default function Login() {
       // if (response.dado) {
         // const psicologo: PsicologoModel = response.dado;
 
-        localStorage.setItem('id-psicologo', '0873d229-fd10-488a-b7e9-f294aa10e5db');
+        localStorage.setItem('id-psicologo', 'c3029c0f-5000-40fd-9885-f54f64e99e41');
 
         navigate('/psicologo/painel');
       // } else {

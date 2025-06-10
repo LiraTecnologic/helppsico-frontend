@@ -29,7 +29,7 @@ export default function GerenciamentoDeHorarios() {
     horaFim: "18:00"
   });
 
-  const idPsicologo: string = "0873d229-fd10-488a-b7e9-f294aa10e5db";
+  const idPsicologo = localStorage.getItem('id-psicologo');
 
   const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
   

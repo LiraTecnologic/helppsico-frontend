@@ -42,9 +42,8 @@ export default function ModalAvaliacaoPsicologo({
       onSubmitAvaliacao(rating, comment);
     }
 
-    // const idPaciente = localStorage.getItem('id-paciente');
-    const idPaciente = '4a0dd9db-3b2a-4c08-8ab3-2af4f6854650';
-    const idPsicologo = '0873d229-fd10-488a-b7e9-f294aa10e5db';
+    const idPaciente = localStorage.getItem('id-paciente');
+  
 
     let novaAvaliacao: AvaliacaoModel = {} as AvaliacaoModel;
 
@@ -63,7 +62,7 @@ export default function ModalAvaliacaoPsicologo({
 
 
       const psicologoAvaliacao: PsicologoModel = {
-        id: idPsicologo,
+        id: psicologo.id,
         nome: '',
         cpf: '',
         email: '',

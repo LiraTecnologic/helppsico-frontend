@@ -22,10 +22,11 @@ import {
 import TabelaHorarioConsulta from "../../components/layout/tabelaHorarioConsulta/tabelaHorarioConsulta";
 
 import "./informacoesPsicologo.css";
-import VinculoModel from "../../models/vinculo";
+import VinculoModel, { StatusVinculo } from "../../models/vinculo";
 import { EstadoVinculo } from "../../models/enum.vinculo";
 import { Link, useLocation } from "react-router-dom";
 import { apresentarErro, notificarSucesso } from "../../utils/notificacoes";
+import PacienteModel from "../../models/paciente";
 
 export default function InformacoesPsicologo() {
   const location = useLocation();
@@ -45,29 +46,6 @@ export default function InformacoesPsicologo() {
   const [vinculoPaciente, setVinculoPaciente] = useState<VinculoModel | null>(
     null
   );
-
-  function gerarHorarios(
-    inicio: string,
-    fim: string,
-    duracao: number,
-    intervalo: number
-  ): string[] {
-    const horarios: string[] = [];
-    let [h, m] = inicio.split(":").map(Number);
-    const [endH, endM] = fim.split(":").map(Number);
-    const fimTotalMin = endH * 60 + endM;
-
-    while (h * 60 + m + duracao <= fimTotalMin) {
-      horarios.push(
-        `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`
-      );
-      m += duracao + intervalo;
-      h += Math.floor(m / 60);
-      m = m % 60;
-    }
-
-    return horarios;
-  }
 
 
   useEffect(() => {
@@ -136,10 +114,24 @@ export default function InformacoesPsicologo() {
     }
 
     try {
-      const novoVinculo = {
-        psicologo: { id: psicologo.id },
-        paciente: { id: idPaciente },
-        status: EstadoVinculo.PENDENTE,
+      const paciente: PacienteModel = {
+        id: idPaciente,
+        nome: "",
+        cpf: "",
+        email: "",
+        telefone: "",
+        dataNascimento: "",
+        genero: "MASCULINO",
+        endereco: psicologo.enderecoAtendimento,
+        fotoUrl: ""
+      };
+
+      const novoVinculo: VinculoModel = {
+        id: '',
+        paciente: paciente,
+        psicologo: psicologo,
+        status: StatusVinculo.PENDENTE,
+        temProntuario: false
       };
 
       const response = await criarVinculo(novoVinculo);
