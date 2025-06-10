@@ -1,3 +1,4 @@
+
 .calculo-consulta {
     background: white;
     border-radius: 12px;
@@ -5,14 +6,48 @@
     border: 1px solid #e2e8f0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     height: fit-content;
+    transition: box-shadow 0.2s ease;
+}
+
+.calculo-consulta:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.total-selecionado, 
+.valor-consulta,
+.valor-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
 }
 
 .total-selecionado, 
 .valor-consulta {
-    margin: 0 0 16px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+    color: #475569;
+}
+
+.total-selecionado span:first-child,
+.valor-consulta span:first-child {
+    font-weight: 500;
+}
+
+.total-selecionado span:last-child {
+    background-color: #f1f5f9;
+    color: #3b82f6;
+    padding: 4px 12px;
+    border-radius: 20px;
+    min-width: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.valor-consulta span:last-child {
+    font-weight: 600;
+    color: #1e293b;
 }
 
 .linha-divisoria {
@@ -22,20 +57,195 @@
 }
 
 .valor-total {
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.valor-total span:first-child {
+    color: #1e293b;
 }
 
 .valor-total span:last-child {
     color: #3b82f6;
     font-size: 1.25rem;
+    font-weight: 700;
 }
 
-.total-selecionado span:last-child {
-    color: black;
-    padding: 2px 8px;
-    min-width: 20px;
-    text-align: center;
+
+@media (max-width: 768px) {
+    .calculo-consulta {
+        padding: 20px;
+        margin-bottom: 16px; 
+    }
+    
+    .total-selecionado, 
+    .valor-consulta {
+        font-size: 0.9rem;
+        margin-bottom: 14px;
+    }
+    
+    .total-selecionado span:last-child {
+        padding: 3px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .valor-total {
+        font-size: 1rem;
+    }
+    
+    .valor-total span:last-child {
+        font-size: 1.15rem;
+    }
+    
+    .linha-divisoria {
+        margin: 16px 0;
+    }
+}
+
+
+@media (max-width: 640px) {
+    .calculo-consulta {
+        padding: 18px;
+        border-radius: 8px;
+    }
+    
+    .total-selecionado, 
+    .valor-consulta {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+    
+    .total-selecionado span:last-child {
+        padding: 3px 8px;
+        font-size: 0.8rem;
+        min-width: 25px;
+    }
+    
+    .valor-total {
+        font-size: 0.95rem;
+    }
+    
+    .valor-total span:last-child {
+        font-size: 1.1rem;
+    }
+    
+    .linha-divisoria {
+        margin: 14px 0;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .calculo-consulta {
+        padding: 16px;
+    }
+    
+    .total-selecionado, 
+    .valor-consulta,
+    .valor-total {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .total-selecionado, 
+    .valor-consulta {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+    
+    .total-selecionado span:last-child {
+        align-self: flex-end;
+        padding: 2px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .valor-consulta span:last-child {
+        align-self: flex-end;
+        font-size: 0.9rem;
+    }
+    
+    .valor-total {
+        font-size: 0.9rem;
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .valor-total span:last-child {
+        font-size: 1.05rem;
+    }
+    
+    .linha-divisoria {
+        margin: 12px 0;
+    }
+}
+
+
+@media (max-width: 360px) {
+    .calculo-consulta {
+        padding: 12px;
+    }
+    
+    .total-selecionado, 
+    .valor-consulta {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .total-selecionado span:last-child {
+        font-size: 0.75rem;
+        padding: 2px 6px;
+    }
+    
+    .valor-consulta span:last-child {
+        font-size: 0.85rem;
+    }
+    
+    .valor-total {
+        font-size: 0.85rem;
+    }
+    
+    .valor-total span:last-child {
+        font-size: 1rem;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .calculo-consulta {
+        padding: 28px;
+    }
+    
+    .total-selecionado, 
+    .valor-consulta {
+        font-size: 1rem;
+        margin-bottom: 18px;
+    }
+    
+    .total-selecionado span:last-child {
+        padding: 5px 14px;
+        font-size: 0.95rem;
+    }
+    
+    .valor-total {
+        font-size: 1.1rem;
+    }
+    
+    .valor-total span:last-child {
+        font-size: 1.35rem;
+    }
+    
+    .linha-divisoria {
+        margin: 24px 0;
+    }
+}
+
+
+.calculo-consulta[data-selected="0"] {
+    opacity: 0.7;
+}
+
+.calculo-consulta[data-selected="0"] .valor-total span:last-child {
+    color: #94a3b8;
 }

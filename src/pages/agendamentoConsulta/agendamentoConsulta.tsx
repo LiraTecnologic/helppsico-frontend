@@ -60,7 +60,7 @@ export default function AgendamentoConsulta() {
             endereco: psicologo.enderecoAtendimento,
             fotoUrl: ''
           }
-    
+
           const novaConsulta: ConsultaModel = {
             id: '',
             psicologo: psicologo,

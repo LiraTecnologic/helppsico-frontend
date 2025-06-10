@@ -1,6 +1,6 @@
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { HorarioModel } from "../../../models/horario";
 import "./tabelaHorarioConsulta.css";
-import { useEffect, useState } from "react";
 
 interface TabelaHorariosProps {
   horarios: HorarioModel[];
@@ -23,58 +23,54 @@ const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
 export default function TabelaHorarioConsulta({
   horarios,
   onSelecionado,
-  onSelecionadosChange
+  onSelecionadosChange,
 }: TabelaHorariosProps) {
   const [selecionados, setSelecionados] = useState<Set<string>>(new Set());
-  const horariosPorDia = horarios.reduce((acc, horario) => {
-    const dias = Array.isArray(horario.diaSemana) 
-      ? horario.diaSemana 
-      : [horario.diaSemana];
-    
-    for (const dia of dias) {
-      if (!acc[dia]) {
-        acc[dia] = [];
-      }
-      acc[dia].push(horario);
-    }
-    return acc;
-  }, {} as Record<string, HorarioModel[]>);
 
-  const horarioParaMinutos = (horario: string) => {
-    const [horas, minutos] = horario.split(':').map(num => parseInt(num));
+  const horarioParaMinutos = (horario: string): number => {
+    const [horas, minutos] = horario.split(":").map(Number);
     return horas * 60 + minutos;
   };
 
-  Object.keys(horariosPorDia).forEach(dia => {
-    horariosPorDia[dia].sort((a, b) => 
-      horarioParaMinutos(a.inicio) - horarioParaMinutos(b.inicio)
-    );
-  });
+  const horariosPorDia = useMemo(() => {
+    const agrupado: Record<string, HorarioModel[]> = {};
 
-  const diasOrdenados = Object.keys(horariosPorDia).sort((a, b) => {
-    const indexA = ordemDias.indexOf(a);
-    const indexB = ordemDias.indexOf(b);
-    return indexA - indexB;
-  });
+    for (const horario of horarios) {
+      const dias = Array.isArray(horario.diaSemana)
+        ? horario.diaSemana
+        : [horario.diaSemana];
 
-  const toggleSelecionado = (id: string) => {
-    const novoSet = new Set(selecionados);
-    if (novoSet.has(id)) {
-      novoSet.delete(id);
-    } else {
-      novoSet.add(id);
+      for (const dia of dias) {
+        if (!agrupado[dia]) agrupado[dia] = [];
+        agrupado[dia].push(horario);
+      }
     }
-    setSelecionados(novoSet);
-  };
+
+    for (const dia in agrupado) {
+      agrupado[dia].sort((a, b) => horarioParaMinutos(a.inicio) - horarioParaMinutos(b.inicio));
+    }
+
+    return agrupado;
+  }, [horarios]);
+
+  const diasOrdenados = useMemo(() => {
+    return Object.keys(horariosPorDia).sort(
+      (a, b) => ordemDias.indexOf(a) - ordemDias.indexOf(b)
+    );
+  }, [horariosPorDia]);
+
+  const toggleSelecionado = useCallback((id: string) => {
+    setSelecionados((prev) => {
+      const novoSet = new Set(prev);
+      novoSet.has(id) ? novoSet.delete(id) : novoSet.add(id);
+      return novoSet;
+    });
+  }, []);
 
   useEffect(() => {
-    if (onSelecionado) {
-      onSelecionado(selecionados.size);
-    }
-    if (onSelecionadosChange) {
-      onSelecionadosChange(Array.from(selecionados));
-    }
-  }, [selecionados]);
+    onSelecionado?.(selecionados.size);
+    onSelecionadosChange?.(Array.from(selecionados));
+  }, [selecionados, onSelecionado, onSelecionadosChange]);
 
   return (
     <div className="agenda-tabela">
@@ -83,20 +79,28 @@ export default function TabelaHorarioConsulta({
           <h3 className="agenda-dia-titulo">{nomesDias[dia] || dia}</h3>
           {horariosPorDia[dia].map((horario) => {
             const selecionado = selecionados.has(horario.id);
+            const isDisponivel = horario.disponivel;
 
             return (
               <div
                 key={horario.id}
-                className={`agenda-card ${selecionado ? "agenda-card-selecionado" : ""} ${!horario.disponivel ? "agenda-card-indisponivel" : ""}`}
+                className={`agenda-card 
+                  ${selecionado ? "agenda-card-selecionado" : ""} 
+                  ${!isDisponivel ? "agenda-card-indisponivel" : ""}`}
                 onClick={() => {
-                  if (!horario.disponivel) return;
+                  if (!isDisponivel) return;
                   toggleSelecionado(horario.id);
                 }}
               >
                 <div
-                  className={`agenda-status ${selecionado ? "agenda-status-selecionado" : "agenda-status-disponivel"}`}
+                  className={`agenda-status 
+                    ${selecionado ? "agenda-status-selecionado" : "agenda-status-disponivel"}`}
                 >
-                  {selecionado ? "Selecionado" : horario.disponivel ? "Disponível" : "Indisponível"}
+                  {selecionado
+                    ? "Selecionado"
+                    : isDisponivel
+                    ? "Disponível"
+                    : "Indisponível"}
                 </div>
                 <div className="agenda-horario">
                   {horario.inicio} - {horario.fim}
