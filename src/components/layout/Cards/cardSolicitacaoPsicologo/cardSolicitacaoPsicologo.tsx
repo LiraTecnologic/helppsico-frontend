@@ -1,6 +1,5 @@
 import React from 'react';
 import './cardSolicitacaoPsicologo.css';
-import foto from '../../../../assets/imagemPaciente.jpg';
 
 interface CardSolicitacaoPsicologoProps {
   nome: string;
@@ -9,12 +8,13 @@ interface CardSolicitacaoPsicologoProps {
   telefone: string;
   status: string;
   botao?: string;
+  foto: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   onSecondaryAction?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export default function CardSolicitacaoVinculo(props: CardSolicitacaoPsicologoProps) {
-  const { nome, idade, cpf, telefone, status, botao, onClick, onSecondaryAction } = props;
+  const { nome, idade, cpf, telefone, status, botao, foto, onClick, onSecondaryAction } = props;
 
   const getStatusClass = () => {
     if (status === 'Pendente') return 'card-solicitacao-psicologo__status card-solicitacao-psicologo__status--pendente';

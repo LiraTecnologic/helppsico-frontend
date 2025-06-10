@@ -17,8 +17,6 @@ export default function MeuPainelPaciente() {
   const [consultas, setConsultas] = useState<ConsultaModel[]>([]);
   const [documentos, setDocumentos] = useState<DocumentoModel[]>([]);
 
-  const navigate = useNavigate();
-
   const handleDocumentoClick = (id: string) => {
     console.log(`Documento com ID ${id} foi clicado`);
   };
@@ -86,10 +84,11 @@ export default function MeuPainelPaciente() {
         </button>
       </div>
       {documentos.length > 0 ? (
-        <ListagemDocumentos
+        <ListagemDocumentos 
           documentos={documentos}
           prontuarios={[]}
           onDocumentoClick={handleDocumentoClick}
+          paciente={true}
         />
       ) : (
         <div className="sem-documentos">

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { formatarData, formatarHora } from '../../../../utils/formataData';
-
 import ConsultaModel from '../../../../models/consulta';
 import calcular from '../../../../utils/calculoData';
-
+import { finalizarConsulta } from './proximaSessao.service';
 import './proximaSessao.css';
+import { notificarSucesso } from '../../../../utils/notificacoes';
 
 interface ProximaSessaoProps {
   consulta?: ConsultaModel | null;
@@ -22,24 +22,34 @@ export default function ProximasSessoes({
   const isPsicologo = fluxo === 'psicologo';
 
   useEffect(() => {
-
-    if (consulta) {
+    if (consulta?.psicologo?.dataNascimento) {
       setIdade(calcular(consulta.psicologo.dataNascimento));
     }
-  }, []);
+  }, [consulta]);
+
+  async function finalizar() {
+
+    if(consulta) {
+      finalizarConsulta(consulta.id)
+        .then(() => {
+          notificarSucesso("Consula finalizada com sucesso !");
+        })
+    }
+      
+
+  }
 
   return (
     <div className="proxima-sessao">
       <div className="proxima-sessao__cabecalho">
         <h1>Próxima sessão</h1>
-
-        {verMais ? (
+        {verMais && (
           <button className="botao-ver-mais">
             <Link to={isPsicologo ? '/psicologo/sessao' : '/paciente/sessao'}>
               Ver mais
             </Link>
           </button>
-        ):(<></>)}
+        )}
       </div>
 
       {consulta ? (
@@ -47,28 +57,34 @@ export default function ProximasSessoes({
           <div className="sessao-info">
             <img
               className="sessao-foto"
-              src={consulta.paciente.fotoUrl}
+              src={consulta.paciente?.fotoUrl || '/default-avatar.png'}
               alt={isPsicologo ? 'Foto do paciente' : 'Foto do psicólogo'}
+              onError={(e) => {
+                e.currentTarget.src = '/default-avatar.png';
+              }}
             />
-
             <div className="sessao-textos">
-              <p className="sessao-nome">{consulta.paciente.nome}</p>
-              <p>{idade} anos</p>
-              <p>{consulta.paciente.telefone}</p>
+              <p className="sessao-nome">{consulta.paciente?.nome || 'Nome não informado'}</p>
+              <p>{idade > 0 ? `${idade} anos` : 'Idade não informada'}</p>
+              <p>{consulta.paciente?.telefone || 'Telefone não informado'}</p>
             </div>
           </div>
-
           <div className="sessao-detalhes">
-            <p>Local: {consulta.paciente.endereco.rua}</p>
-            <p>Data: {formatarData(consulta.data)}</p>
-            <p>Horário: {formatarHora(consulta.horario.inicio)}</p>
+            <p>Local: {consulta.paciente?.endereco?.rua || 'Endereço não informado'}</p>
+            <p>Data: {consulta.data ? formatarData(consulta.data) : 'Data não informada'}</p>
+            <p>Horário: {consulta.horario?.inicio ? formatarHora(consulta.horario.inicio) : 'Horário não informado'}</p>
           </div>
-
           <div className="sessao-pagamento">
             <p>
-              <strong>Valor:</strong> {consulta.valor}
+              <strong>Valor:</strong> {consulta.valor || 'Valor não informado'}
             </p>
           </div>
+
+          {fluxo != 'paciente' ? (
+              <button className="botao-verMais" onClick={finalizar}>Finalizar</button>
+            ) : (<></>)
+          }
+
         </div>
       ) : fluxo === 'paciente' ? (
         <div className="sessao-nao-marcada">

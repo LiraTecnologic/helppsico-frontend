@@ -16,7 +16,7 @@ export default function CardPaciente(props: CardPacienteProps) {
   const navigate = useNavigate();
 
   function abrirProntuario() {
-    navigate(`/detalhesProntuario/${props.prontuarioId}`);
+    navigate(`/psicologo/detalhes-prontuario/${props.prontuarioId}`);
   }
   return (
     <div className="card-paciente">

@@ -3,7 +3,7 @@ import Header from '../../components/layout/header/header';
 import { useState, ChangeEvent, useEffect } from 'react';
 import PacienteModel from '../../models/paciente';
 import ConsultaModel from '../../models/consulta';
-import { formataIdentificacao } from '../../utils/formataIdentificacaoConsulta'
+import { formataIdentificacaoConsulta } from '../../utils/formataIdentificacaoConsulta'
 import ProntuarioModel from '../../models/prontuario';
 import { consultaVinculosPsicologo } from '../../services/vinculos.service';
 import { consultarSessoesAntigasPsicologo } from '../../services/consultas.service';
@@ -145,7 +145,7 @@ export default function CadastroProntuarios() {
                                 <option value="">Escolha sua consulta</option>
                                 {consultasFiltradas.map((c) => (
                                     <option key={c.id} value={c.id}>
-                                        {formataIdentificacao(c.id)}
+                                        {formataIdentificacaoConsulta(c.id)}
                                     </option>
                                 ))}
                             </select>

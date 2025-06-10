@@ -1,5 +1,4 @@
 import "./CardSolicitacao.css";
-import foto from "../../../../assets/imagemPaciente.jpg";
 
 interface CardSolicitacaoProps {
   nome: string;
@@ -8,6 +7,7 @@ interface CardSolicitacaoProps {
   avaliacao: number;
   status: string;
   botao: string;
+  foto: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
@@ -19,6 +19,7 @@ export default function CardSolicitacaoVinculo({
   status,
   onClick,
   botao,
+  foto,
 }: CardSolicitacaoProps) {
   const getStatusClass = () => {
     if (status === 'Pendente') return 'card-solicitacao-vinculo__status card-solicitacao-vinculo__status--pendente';

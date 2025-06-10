@@ -1,5 +1,4 @@
 import "./header.css";
-import imagemPaciente from "../../../assets/imagemPaciente.jpg";
 import logo from "../../../assets/logo.png";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import { useState } from "react";
@@ -74,10 +73,6 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
               )}
             </ul>
           </nav>
-
-          <div className="foto">
-            <img src={imagemPaciente} alt="Foto do usuário" />
-          </div>
         </div>
       </header>
 

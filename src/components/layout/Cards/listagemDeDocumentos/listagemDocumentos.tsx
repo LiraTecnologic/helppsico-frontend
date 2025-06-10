@@ -2,18 +2,21 @@ import "./listagemDocumentos.css";
 import Documento from "../../../../assets/Documento.svg";
 import DocumentoModel from "../../../../models/documento/documento";
 import ProntuarioModel from "../../../../models/prontuario";
+import { formataIdentificacaoDoc } from '../../../../utils/formataIdentificacaoConsulta';
 
 
 interface ListagemDocumentosProps {
   documentos: DocumentoModel[];
   prontuarios: ProntuarioModel[];
   onDocumentoClick?: (id: string) => void;
+  paciente: boolean;
 }
 
 export default function ListagemDocumentos({
   documentos,
   prontuarios,
   onDocumentoClick,
+  paciente,
 }: ListagemDocumentosProps) {
   return (
     <div className="documentosLayout">
@@ -22,15 +25,17 @@ export default function ListagemDocumentos({
           <div className="prontuarioCard">
             <div className="prontuarioCardHeader">
               <img className="prontuarioImage" src={Documento} alt="" />
-              <div className="prontuarioIcone" />
+              <strong className="prontuarioTitulo">{formataIdentificacaoDoc(documento.id)}</strong>
             </div>
 
-            <button
-              className="prontuarioBotaoAbrir"
-              onClick={() => onDocumentoClick && onDocumentoClick(documento.id)}
-            >
-              Abrir Prontuário
-            </button>
+            {!paciente &&
+              <button
+                className="prontuarioBotaoAbrir"
+                onClick={() => onDocumentoClick && onDocumentoClick(documento.id)}
+              >
+                Abrir Prontuário
+              </button>
+            }
           </div>
         </div>
       ))}
@@ -40,16 +45,17 @@ export default function ListagemDocumentos({
           <div className="prontuarioCard">
             <div className="prontuarioCardHeader">
               <img className="prontuarioImage" src={Documento} alt="" />
-              <div className="prontuarioIcone" />
               <strong className="prontuarioTitulo">{documento.titulo}</strong>
             </div>
 
-            <button
-              className="prontuarioBotaoAbrir"
-              onClick={() => onDocumentoClick && onDocumentoClick(documento.id)}
-            >
-              Abrir Prontuário
-            </button>
+            {paciente &&
+              <button
+                className="prontuarioBotaoAbrir"
+                onClick={() => onDocumentoClick && onDocumentoClick(documento.id)}
+              >
+                Abrir Prontuário
+              </button>
+            }
           </div>
         </div>
       ))}

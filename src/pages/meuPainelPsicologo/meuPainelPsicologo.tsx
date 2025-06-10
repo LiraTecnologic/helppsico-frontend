@@ -12,7 +12,7 @@ import { consultaVinculosPsicologo } from '../../services/vinculos.service';
 import { consultaSessoesFuturasPsicologo } from '../../services/consultas.service';
 import { listarHorariosPsicologo } from '../../services/horarios.service';
 import BlocoHorario from '../../components/layout/blocoHorario/blocoHorario';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HorarioModel } from '../../models/horario';
 
 export default function MeuPainelPsicologo() {
@@ -21,6 +21,8 @@ export default function MeuPainelPsicologo() {
     const [vinculos, setVinculos] = useState<VinculoModel[]>([]);
     const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
     const [horarios, setHorarios] = useState<HorarioModel[] | []>([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function carregarProntuarios(id: string) {
@@ -81,7 +83,7 @@ export default function MeuPainelPsicologo() {
     }, []);
 
     const handleDocumentoClick = (id: string) => {
-        console.log(`Documento com ID ${id} foi clicado`);
+        navigate(`/psicologo/detalhes-prontuario/${id}`);
     };
 
     return (
@@ -108,6 +110,7 @@ export default function MeuPainelPsicologo() {
                 documentos={[]}
                 prontuarios={prontuarios}
                 onDocumentoClick={handleDocumentoClick}
+                paciente={true}
             />
         </>
     )

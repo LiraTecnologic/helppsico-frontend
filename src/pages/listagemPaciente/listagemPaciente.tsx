@@ -7,6 +7,8 @@ import VinculoModel from '../../models/vinculo';
 import calcular from '../../utils/calculoData';
 import { consultaProntuariosPsicologo } from '../../services/prontuarios.service';
 import ProntuarioModel from '../../models/prontuario';
+import { Link } from 'react-router-dom';
+import BotaoPrimario from '../../components/commmon/botoes/botaoPrimario/botaoPrimario';
 
 export default function ListagemPacientes() {
 
@@ -19,7 +21,7 @@ export default function ListagemPacientes() {
     async function carregarVinculos(idPsicologo: string) {
       const vinculos = await consultaVinculosPsicologo(idPsicologo, 0);
 
-      if(vinculos.dado) {
+      if (vinculos.dado) {
         setPacientes(vinculos.dado.content);
       }
     }
@@ -27,7 +29,7 @@ export default function ListagemPacientes() {
     async function carregarProntuarios(idPsicologo: string) {
       const prontuarios = await consultaProntuariosPsicologo(idPsicologo, 0);
 
-      if(prontuarios.dado) {
+      if (prontuarios.dado) {
         setProntuarios(prontuarios.dado.content);
       }
     }
@@ -45,7 +47,7 @@ export default function ListagemPacientes() {
     );
 
     if (prontuariosDoPaciente.length === 0) {
-      return null; 
+      return null;
     }
 
     prontuariosDoPaciente.sort(
@@ -61,7 +63,13 @@ export default function ListagemPacientes() {
       <Header fluxo='meusPacientes' headerPsicologo={true} />
       <div className="container-pacientes">
 
-        <h1>Pacientes ({pacientes.length})</h1>
+        <div className='div-pacientes-header'>
+          <h1>Pacientes ({pacientes.length})</h1>
+          <Link to="/psicologo/solicitacao-vinculo">
+            <BotaoPrimario texto={`Solicitações de vinculo`} />
+          </Link>
+        </div>
+
 
         <div className="grid-pacientes">
           {pacientes.map((vinculo, index) => (

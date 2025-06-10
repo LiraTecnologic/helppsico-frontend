@@ -92,7 +92,7 @@ export default function CriarProntuario({ pacientes, consultas }: CriarProntuari
             id="conteudo"
             value={conteudo}
             onChange={(e) => setConteudo(e.target.value)}
-            rows = "10"
+            rows = {10}
           />
         </div>
 

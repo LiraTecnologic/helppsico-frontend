@@ -16,11 +16,10 @@ export default function SolicitacaoDeVinculoPsicologo() {
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
 
-  const idPsicologo = localStorage.getItem('idPsicologo');
+  const idPsicologo = localStorage.getItem('id-psicologo');
 
   const carregarVinculos = useCallback(async () => {
     if (!idPsicologo) {
-      setErro("ID do psicólogo não encontrado.");
       setCarregando(false);
       return;
     }
@@ -145,6 +144,7 @@ export default function SolicitacaoDeVinculoPsicologo() {
                   telefone={vinculo.paciente.telefone}
                   status="Pendente"
                   botao="Aceitar"
+                  foto={vinculo.paciente.fotoUrl}
                   onClick={() => handleAceitarSolicitacao(vinculo.id)}
                   onSecondaryAction={() => handleRecusarSolicitacao(vinculo.id)}
                 />
@@ -165,6 +165,7 @@ export default function SolicitacaoDeVinculoPsicologo() {
                   cpf={vinculo.paciente.cpf}
                   telefone={vinculo.paciente.telefone}
                   status="Recusado"
+                  foto={vinculo.paciente.id}
                 />
               ))}
             </div>

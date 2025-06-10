@@ -3,15 +3,30 @@
   background-color: var(--cor-fundo-azul-claro);
   min-height: 100vh;
 }
-  
+
 .container-pacientes h1 {
   font-size: var(--fonte-titulo-secao);
   margin-bottom: 24px;
   color: var(--cor-texto-escuro-principal);
 }
-  
+
 .grid-pacientes {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 26px;
+}
+
+.div-pacientes-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.div-pacientes-header h1 {
+    font-size: var(--fonte-grande);
+    font-weight: bold;
+    margin: 0;
 }

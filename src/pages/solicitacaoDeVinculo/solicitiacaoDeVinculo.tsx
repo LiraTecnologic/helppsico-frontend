@@ -160,6 +160,7 @@ export default function SolicitacaoDeVinculo() {
                   status="Pendente"
                   botao="Cancelar"
                   onClick={() => abrirPopupCancelamento(vinculo.id)}
+                  foto={vinculo.paciente.fotoUrl}
                 />
               ))}
             </div>
@@ -179,6 +180,7 @@ export default function SolicitacaoDeVinculo() {
                   avaliacao={
                     calcularMedia(filtrarAvaliacoesPorPsicologo(vinculo.psicologo.id))
                   }
+                  foto={vinculo.paciente.fotoUrl}
                   status="Recusado"
                   botao="Ver mais"
 

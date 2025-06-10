@@ -4,9 +4,8 @@ import Header from "../../components/layout/header/header";
 import InputLeitura from "../../components/commmon/Inputs/InputLeitura";
 import ProntuarioModel from "../../models/prontuario";
 import { consultarProntuarioPorId, editarProntuario } from "../../services/prontuarios.service";
-import { notificarErro } from "../../utils/notificacoes";
 import { formatarData } from "../../utils/formataData";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function DetalhesProntuario() {
     const { id } = useParams();
@@ -28,7 +27,6 @@ export default function DetalhesProntuario() {
     const handleEditar = () => {
         setProntuarioOriginal(prontuario);
         setIsEditing(true);
-        notificarErro("Prontuario alterado")
     };
 
     const handleCancelar = () => {
@@ -59,7 +57,7 @@ export default function DetalhesProntuario() {
             setProntuario(prontuario.dado);
         }
 
-        if(id) {
+        if (id) {
             carregarProntuario(id);
         } else {
             console.log('Id do prontuário null');
@@ -133,8 +131,12 @@ export default function DetalhesProntuario() {
                 {prontuario && (
                     <div className="dados-adicionais">
                         <div className="dados-data">
-                            <p>Criado em: {formatarData(prontuario.dataCriacao)}</p>
-                            <p>Editado em: {formatarData(prontuario.dataEdicao)}</p>
+                            {prontuario.dataCriacao &&
+                                <div>
+                                    <p>Criado em: {formatarData(prontuario.dataCriacao)}</p>
+                                    <p>Editado em: {formatarData(prontuario.dataEdicao)}</p>
+                                </div>
+                            }
                         </div>
 
                         <div className="botoes-prontuario">
@@ -146,7 +148,11 @@ export default function DetalhesProntuario() {
                             ) : (
                                 <>
                                     <button onClick={handleEditar} className="botao-editar">Editar</button>
-                                    <button onClick={() => console.log("Voltar clicado")} className="botao-voltar">Voltar</button>
+                                    <Link
+                                        to={'/psicologo/pacientes'}
+                                    >
+                                        <button onClick={() => console.log("Voltar clicado")} className="botao-voltar">Voltar</button>
+                                    </Link>
                                 </>
                             )}
                         </div>
