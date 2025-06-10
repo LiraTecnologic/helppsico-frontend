@@ -69,17 +69,6 @@ export default function InformacoesPsicologo() {
     return horarios;
   }
 
-  function agruparPorDia(
-    horarios: HorarioModel[]
-  ): Record<string, Set<string>> {
-    const mapa: Record<string, Set<string>> = {};
-    horarios.forEach((h) => {
-      const lista = gerarHorarios(h.inicio, h.fim, h.duracao, h.intervalo);
-      if (!mapa[h.diaSemana]) mapa[h.diaSemana] = new Set();
-      lista.forEach((hor) => mapa[h.diaSemana].add(hor));
-    });
-    return mapa;
-  }
 
   useEffect(() => {
     const idPaciente = localStorage.getItem("id-paciente");
