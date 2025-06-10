@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { formatarData, formatarHora } from '../../../../utils/formataData';
 
 import ConsultaModel from '../../../../models/consulta';
 import calcular from '../../../../utils/calculoData';
@@ -7,7 +8,7 @@ import calcular from '../../../../utils/calculoData';
 import './proximaSessao.css';
 
 interface ProximaSessaoProps {
-  consulta: ConsultaModel;
+  consulta?: ConsultaModel | null;
   verMais: boolean;
   fluxo: string;
 }
@@ -21,7 +22,10 @@ export default function ProximasSessoes({
   const isPsicologo = fluxo === 'psicologo';
 
   useEffect(() => {
-    setIdade(calcular(consulta.psicologo.dataNascimento));
+
+    if (consulta) {
+      setIdade(calcular(consulta.psicologo.dataNascimento));
+    }
   }, []);
 
   return (
@@ -29,13 +33,13 @@ export default function ProximasSessoes({
       <div className="proxima-sessao__cabecalho">
         <h1>Próxima sessão</h1>
 
-        {verMais && (
+        {verMais ? (
           <button className="botao-ver-mais">
-            <Link to={isPsicologo ? '/psicologo/sessoes' : '/paciente/sessao'}>
+            <Link to={isPsicologo ? '/psicologo/sessao' : '/paciente/sessao'}>
               Ver mais
             </Link>
           </button>
-        )}
+        ):(<></>)}
       </div>
 
       {consulta ? (
@@ -56,17 +60,14 @@ export default function ProximasSessoes({
 
           <div className="sessao-detalhes">
             <p>Local: {consulta.paciente.endereco.rua}</p>
-            {/* <p>Data: {dataFormatada.data}</p>
-                <p>Horário: {dataFormatada.hora}</p> */}
+            <p>Data: {formatarData(consulta.data)}</p>
+            <p>Horário: {formatarHora(consulta.horario.inicio)}</p>
           </div>
 
           <div className="sessao-pagamento">
             <p>
               <strong>Valor:</strong> {consulta.valor}
             </p>
-            {/* <span className={`sessao-status ${statusPagamento?.toLowerCase().replace(' ', '-')}`}>
-                {statusPagamento}
-            </span> */}
           </div>
         </div>
       ) : fluxo === 'paciente' ? (
@@ -77,9 +78,13 @@ export default function ProximasSessoes({
           <p className="subtitulo-nao-marcada">
             Clique no botão abaixo e marque agora mesmo!
           </p>
-          <button className="botao-marcar">
-            <Link to="/paciente/agendamento">Marcar consulta</Link>
-          </button>
+          <Link
+            to="/paciente/agendamento"
+            state={{ origem: 'paciente' }}
+            className="botao-marcar"
+          >
+            Marcar consulta
+          </Link>
         </div>
       ) : (
         <div className="sessao-nao-marcada">

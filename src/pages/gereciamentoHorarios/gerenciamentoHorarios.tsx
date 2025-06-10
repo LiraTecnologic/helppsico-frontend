@@ -234,7 +234,6 @@ export default function GerenciamentoDeHorarios() {
 
   async function deletarHorariosSelecionados(horariosParaDeletar: string[]) {
     if (horariosParaDeletar.length === 0) {
-      alert("Nenhum horário foi selecionado para deletar.");
       return;
     }
 
@@ -243,14 +242,11 @@ export default function GerenciamentoDeHorarios() {
         await deletarHorario(horarioId);
       }
       
-      alert(`${horariosParaDeletar.length} horário(s) deletado(s) com sucesso!`);
-      
       const data = await listarHorariosPsicologo(idPsicologo);
       if (data.dado) {
         setHorarios(data.dado);
       }
     } catch (error) {
-      alert("Erro ao deletar horários.");
       console.error(error);
     }
   }

@@ -10,16 +10,33 @@ interface TabelaHorariosProps {
 }
 
 const nomesDias: Record<string, string> = {
-  SEG: "Segunda-Feira",
-  TER: "Terça-Feira",
-  QUA: "Quarta-Feira",
-  QUI: "Quinta-Feira",
-  SEX: "Sexta-Feira",
+
+  SEG: "Segunda-feira",
+  TER: "Terça-feira", 
+  QUA: "Quarta-feira",
+  QUI: "Quinta-feira",
+  SEX: "Sexta-feira",
   SAB: "Sábado",
   DOM: "Domingo",
+  
+  SEGUNDA_FEIRA: "Segunda-feira",
+  TERCA_FEIRA: "Terça-feira",
+  QUARTA_FEIRA: "Quarta-feira", 
+  QUINTA_FEIRA: "Quinta-feira",
+  SEXTA_FEIRA: "Sexta-feira",
+  SABADO: "Sábado",
+  DOMINGO: "Domingo"
 };
 
-const ordemDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
+const ordemDias = [
+  "SEG", "SEGUNDA_FEIRA",
+  "TER", "TERCA_FEIRA", 
+  "QUA", "QUARTA_FEIRA",
+  "QUI", "QUINTA_FEIRA",
+  "SEX", "SEXTA_FEIRA",
+  "SAB", "SABADO",
+  "DOM", "DOMINGO"
+];
 
 export default function TabelaHorarioConsulta({
   horarios,
@@ -28,11 +45,12 @@ export default function TabelaHorarioConsulta({
   alterar,
 }: TabelaHorariosProps) {
   const [selecionados, setSelecionados] = useState<Set<string>>(new Set());
+
   const horariosPorDia = horarios.reduce((acc, horario) => {
     const dias = Array.isArray(horario.diaSemana)
       ? horario.diaSemana
       : [horario.diaSemana];
-
+    
     for (const dia of dias) {
       if (!acc[dia]) {
         acc[dia] = [];
@@ -56,6 +74,11 @@ export default function TabelaHorarioConsulta({
   const diasOrdenados = Object.keys(horariosPorDia).sort((a, b) => {
     const indexA = ordemDias.indexOf(a);
     const indexB = ordemDias.indexOf(b);
+    
+    if (indexA === -1 && indexB === -1) return 0;
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    
     return indexA - indexB;
   });
 
@@ -85,7 +108,6 @@ export default function TabelaHorarioConsulta({
           <h3 className="agenda-dia-titulo">{nomesDias[dia] || dia}</h3>
           {horariosPorDia[dia].map((horario) => {
             const selecionado = selecionados.has(horario.id);
-
             return (
               <div
                 key={horario.id}

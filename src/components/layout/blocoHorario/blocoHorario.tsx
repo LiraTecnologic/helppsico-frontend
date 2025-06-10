@@ -12,7 +12,7 @@ export default function BlocoHorario({ hasConfig }: BlocoHorarioProps) {
                 {hasConfig ? (
                     <>
                         <h1 className='tittle-cadHorario'>Configure agora seu horario para a proxima semana</h1>
-                        <button className='botao-horarioCad'>Configure</button>
+                        <Link to="/psicologo/horarios"><button className='botao-horarioCad'>Configure</button></Link>
                     </>
                 ) : (
                     <>

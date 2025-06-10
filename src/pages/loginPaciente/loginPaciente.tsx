@@ -23,7 +23,7 @@ export default function Login() {
       // const resposta = await login(email, senha, "PACIENTE");
 
       // if (resposta.dado) {
-        localStorage.setItem("id-paciente", "ccbb3b2a-b75e-414d-9e05-8954c7585e9c"); //ID alterar
+        localStorage.setItem("id-paciente", "4a0dd9db-3b2a-4c08-8ab3-2af4f6854650"); //ID alterar
         navigate("/paciente/painel");
       // } else {
       //   apresentarErro(resposta.erro || "Erro ao fazer login");

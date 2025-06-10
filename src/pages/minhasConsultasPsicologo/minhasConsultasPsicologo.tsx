@@ -76,7 +76,7 @@ export default function MinhasConsultasPsicologo() {
           {consultaFutura ? (
             <ProximasSessoes
               consulta={consultaFutura}
-              verMais={true}
+              verMais={false}
               fluxo='psicologo'
             />
           ) : (

@@ -27,9 +27,6 @@ export default function InformacoesPsicologo() {
   const [avaliacoes, setAvaliacoes] = useState<AvaliacaoModel[]>([]);
   const [mediaNotaAvaliacao, setMediaNotaAvaliacao] = useState<number | 0>(0);
   const [vinculos, setVinculos] = useState<VinculoModel[] | []>([]);
-  const [vinculoPaciente, setVinculoPacietne] = useState<VinculoModel | null>(
-    null
-  );
   const [horarios, setHorarios] = useState<HorarioModel[]>([]);
   const [hasVinculo, setHasVinculo] = useState<EstadoVinculo>(
     EstadoVinculo.NAO_VINCULADO
@@ -76,14 +73,8 @@ export default function InformacoesPsicologo() {
     return mapa;
   }
 
-  const mapaHorarios = agruparPorDia(horarios);
-  const dias = Object.keys(mapaHorarios);
-  const todosHorariosUnicos = Array.from(
-    new Set(dias.flatMap((dia) => Array.from(mapaHorarios[dia])))
-  ).sort();
-
   useEffect(() => {
-    const idPsicologo = "4f0332c8-7346-44cb-81d6-9a40c621afc9";
+    const idPsicologo = location.state()
 
     async function carregarPsicologo(idPsicologo: string) {
       const psicologo = await consultaPsicologo(idPsicologo);

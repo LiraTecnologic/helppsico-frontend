@@ -16,6 +16,7 @@ import ConsultaModel from "../../models/consulta";
 
 import { apresentarErro, notificarErro, notificarSucesso } from "../../utils/notificacoes";
 
+
 export default function AgendamentoConsulta() {
   const [quantidadeSelecionada, setQuantidadeSelecionada] = useState(0);
   const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
@@ -121,7 +122,7 @@ export default function AgendamentoConsulta() {
   return (
     <>
       <Header fluxo="horario" headerPsicologo={false} />
-      <main>
+      <main className="main-agendar-consulta">
         <h1>Consulta</h1>
 
         <div className="container-psicologo">
@@ -132,7 +133,6 @@ export default function AgendamentoConsulta() {
                   urlFoto={psicologo.fotoUrl}
                   nome={psicologo.nome}
                   biografia={psicologo.biografia}
-                  tempoSessao={psicologo.tempoSessao}
                 />
               </div>
 

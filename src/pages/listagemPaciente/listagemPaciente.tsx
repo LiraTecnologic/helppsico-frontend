@@ -11,7 +11,6 @@ import ProntuarioModel from '../../models/prontuario';
 export default function ListagemPacientes() {
 
   const [pacientes, setPacientes] = useState<VinculoModel[]>([]);
-  const [total, setTotal] = useState(0);
   const [prontuarios, setProntuarios] = useState<ProntuarioModel[]>([]);
 
   useEffect(() => {
@@ -62,7 +61,7 @@ export default function ListagemPacientes() {
       <Header fluxo='meusPacientes' headerPsicologo={true} />
       <div className="container-pacientes">
 
-        <h1>Pacientes ({total})</h1>
+        <h1>Pacientes ({pacientes.length})</h1>
 
         <div className="grid-pacientes">
           {pacientes.map((vinculo, index) => (

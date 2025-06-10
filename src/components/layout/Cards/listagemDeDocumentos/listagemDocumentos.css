@@ -6,6 +6,7 @@
   flex-wrap: wrap;
   gap: 16px;
   margin: 6px auto 0 auto;
+  margin-bottom: 2rem;
 }
 
 .prontuarioContainer {

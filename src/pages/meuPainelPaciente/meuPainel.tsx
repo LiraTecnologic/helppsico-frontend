@@ -1,25 +1,23 @@
 import './meuPainel.css';
-
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/layout/header/header';
 import VinculoPsicologo from '../../components/layout/Cards/vinculoPsicologo/vinculoPsicologo';
 import ProximasSessoes from '../../components/layout/Cards/proximaSessao/proximaSessao';
 import ListagemDocumentos from '../../components/layout/Cards/listagemDeDocumentos/listagemDocumentos';
-
 import VinculoModel from '../../models/vinculo';
 import ConsultaModel from '../../models/consulta';
 import DocumentoModel from '../../models/documento/documento';
-
 import { consultaSessoesFuturasPaciente } from '../../services/consultas.service';
 import { consultarVinculosPaciente } from '../../services/vinculos.service';
 import { consultarDocumentosPaciente } from '../../services/documentos.service';
 
 export default function MeuPainelPaciente() {
-  const [vinculo, setVinculo] = useState<VinculoModel | null>(null);
+  const [vinculo, setVinculo] = useState<VinculoModel | undefined>(undefined);
   const [consultas, setConsultas] = useState<ConsultaModel[]>([]);
   const [documentos, setDocumentos] = useState<DocumentoModel[]>([]);
+
+  const navigate = useNavigate();
 
   const handleDocumentoClick = (id: string) => {
     console.log(`Documento com ID ${id} foi clicado`);
@@ -69,39 +67,43 @@ export default function MeuPainelPaciente() {
   }, []);
 
   return (
-    <div className="fundo">
+    <div>
       <Header fluxo="meuPainel" headerPsicologo={false} />
-
-      {vinculo && (
-        <VinculoPsicologo
-          nome={vinculo.psicologo.nome}
-          email={vinculo.psicologo.email}
-          fotoUrl={vinculo.psicologo.fotoUrl}
-        />
-      )}
-
-      {consultas.length > 0 && (
-        <ProximasSessoes
-          consulta={consultas[0]}
-          verMais={true}
-          fluxo="paciente"
-        />
-      )}
-
+      <VinculoPsicologo
+        vinculo={vinculo}
+      />
+      <ProximasSessoes
+        consulta={consultas[0]}
+        verMais={true}
+        fluxo="paciente"
+      />
       <div className="listagemDocumentos">
-        <h1 className="documentoTittle">Prontuário</h1>
+        <h1 className="documentoTittle">Documentos</h1>
         <button className="botaoVerMais">
           <Link to="/paciente/solicitacao-documento" className="botao-link">
             Solicitar Documento
           </Link>
         </button>
       </div>
-
-      <ListagemDocumentos
-        documentos={documentos}
-        prontuarios={[]}
-        onDocumentoClick={handleDocumentoClick}
-      />
+      {documentos.length > 0 ? (
+        <ListagemDocumentos
+          documentos={documentos}
+          prontuarios={[]}
+          onDocumentoClick={handleDocumentoClick}
+        />
+      ) : (
+        <div className="sem-documentos">
+          <div className="sem-documentos__conteudo">
+            <div className="sem-documentos__icone">📄</div>
+            <p className="sem-documentos__mensagem">
+              Nenhum documento encontrado
+            </p>
+            <p className="sem-documentos__submensagem">
+              Você ainda não possui documentos. Solicite um novo documento clicando no botão acima.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

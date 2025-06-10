@@ -1,11 +1,7 @@
-export function formatarDataHora(dataAtendimento: string) {
-  const [data, hora] = dataAtendimento.split("T");
-  return {
-    data: data.split("-").reverse().join("/"),
-    hora: hora.slice(0, 5),
-  };
-}
-
 export function formatarData(dataAtendimento: string) {
   return dataAtendimento.split("-").reverse().join("/");
-} 
+}
+
+export function formatarHora(hora: string) {
+  return hora.split(":").slice(0, 2).join(":");
+}

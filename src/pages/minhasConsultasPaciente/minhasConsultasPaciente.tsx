@@ -15,16 +15,16 @@ export default function DetalhesSessao() {
     async function consultarConsultaFutura(idPaciente: string) {
       const consultasFuturas = await consultaSessoesFuturasPaciente(idPaciente, 0);
 
-      if(consultasFuturas.dado) {
+      if (consultasFuturas.dado) {
         setConsultaFutura(consultaMaisRecente(consultasFuturas.dado.content));
       }
-      
+
     }
 
     async function consultarConsultasAntigas(idPaciente: string) {
       const consultasAntigas = await consultarSessoesAntigasPaciente(idPaciente, 0);
 
-      if(consultasAntigas.dado) {
+      if (consultasAntigas.dado) {
         setConsultasAntigas(consultasAntigas.dado.content);
       }
     }
@@ -43,13 +43,13 @@ export default function DetalhesSessao() {
     <>
       <Header fluxo="minhasSessoes" headerPsicologo={false} />
       <h1 className="text-tittle">Minhas Consultas</h1>
-      {consultaFutura && (
-        <ProximasSessoes
-          consulta={consultaFutura}
-          verMais={true}
-          fluxo='paciente'
-        />
-      )}
+
+      <ProximasSessoes
+        consulta={consultaFutura}
+        fluxo='paciente'
+        verMais={false}
+      />
+
       <div style={{ marginTop: '48px' }}>
         <SessoesAntigas sessoesAntigas={consultasAntigas} />
       </div>

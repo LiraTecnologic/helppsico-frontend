@@ -61,9 +61,9 @@ export default function MeuPainelPsicologo() {
             }
         }
 
-        async function carregarHorarios(id:string) {
+        async function carregarHorarios(id: string) {
             const horarios = await listarHorariosPsicologo(id);
-            if(horarios.dado) {
+            if (horarios.dado) {
                 setHorarios(horarios.dado);
             }
         }
@@ -87,19 +87,19 @@ export default function MeuPainelPsicologo() {
     return (
         <>
             <Header fluxo='meuPainel' headerPsicologo={true} />
-            {consultas.length > 0 && (
-                <ProximasSessoes
-                    verMais={true}
-                    fluxo='psicologo'
-                    consulta={consultas[0]}
-                />
-            )}
+
+            <ProximasSessoes
+                verMais={true}
+                fluxo='psicologo'
+                consulta={consultas[0]}
+            />
+
             <div className="imagensPacientes">
                 <ListagemDePacientes vinculos={vinculos} verMais={true} />
             </div>
             <BlocoHorario hasConfig={horarios.length > 0} />
             <div className="listagemProntuarios">
-                <h1 className='prontuarioTittle'>Prontuário</h1>
+                <h1 className='prontuarioTittle'>Prontuários</h1>
                 <button className="botao-verMais">
                     <Link to="/psicologo/prontuarios" className="botao-link">Ver mais</Link>
                 </button>

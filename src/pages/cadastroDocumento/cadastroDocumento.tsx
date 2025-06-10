@@ -9,6 +9,7 @@ import { notificarErro, notificarSucesso } from '../../utils/notificacoes';
 import { useLocation } from 'react-router';
 import { consultarVinculosPaciente } from '../../services/vinculos.service';
 import PsicologoModel from '../../models/psicologo';
+import { consultarPsicologoPeloId } from './cadastroDocumento.service';
 
 export default function CadastroDocumento() {
     const [paciente, setPaciente] = useState<PacienteModel | null>(null);
@@ -35,7 +36,10 @@ export default function CadastroDocumento() {
 
     const handleSubmitDocumento = async (dados: DadosGeraisDocumentoModel) => {
         try {
-            if (idSolicitacao) {
+            const psicologo = await consultarPsicologoPeloId(dados.psicologo.id);
+
+            if (idSolicitacao && psicologo.dado) {
+                dados.local = psicologo.dado.enderecoAtendimento;
                 const response = await cadastrarDocumento(dados, idSolicitacao);
                 if (response.erro) {
                     notificarErro("Erro ao cadastrar documento.");
