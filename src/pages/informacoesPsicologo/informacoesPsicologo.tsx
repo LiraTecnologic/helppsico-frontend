@@ -14,15 +14,25 @@ import PsicologoModel from "../../models/psicologo";
 import { AvaliacaoModel } from "../../models/avaliacao";
 import { HorarioModel } from "../../models/horario";
 import calcularMedia from "../../utils/mediaAvaliacao";
-import { consultaVinculosPsicologo } from "../../services/vinculos.service";
+import {
+  consultaVinculosPsicologo,
+  deleteVinculo,
+  criarVinculo,
+} from "../../services/vinculos.service";
 import TabelaHorarioConsulta from "../../components/layout/tabelaHorarioConsulta/tabelaHorarioConsulta";
 
 import "./informacoesPsicologo.css";
 import VinculoModel from "../../models/vinculo";
 import { EstadoVinculo } from "../../models/enum.vinculo";
 import { Link, useLocation } from "react-router-dom";
+import { apresentarErro, notificarSucesso } from "../../utils/notificacoes";
 
 export default function InformacoesPsicologo() {
+  const location = useLocation();
+  const idPsicologo = (location.state && location.state.idPsicologo) ?? "";
+  const headerPsicologo =
+    (location.state && location.state.headerPsicologo) ?? false;
+
   const [psicologo, setPsicologo] = useState<PsicologoModel | null>(null);
   const [avaliacoes, setAvaliacoes] = useState<AvaliacaoModel[]>([]);
   const [mediaNotaAvaliacao, setMediaNotaAvaliacao] = useState<number | 0>(0);
@@ -32,6 +42,9 @@ export default function InformacoesPsicologo() {
     EstadoVinculo.NAO_VINCULADO
   );
   const [hoverSolicitado, setHoverSolicitado] = useState(false);
+  const [vinculoPaciente, setVinculoPaciente] = useState<VinculoModel | null>(
+    null
+  );
 
   function gerarHorarios(
     inicio: string,
@@ -42,7 +55,6 @@ export default function InformacoesPsicologo() {
     const horarios: string[] = [];
     let [h, m] = inicio.split(":").map(Number);
     const [endH, endM] = fim.split(":").map(Number);
-
     const fimTotalMin = endH * 60 + endM;
 
     while (h * 60 + m + duracao <= fimTotalMin) {
@@ -61,77 +73,99 @@ export default function InformacoesPsicologo() {
     horarios: HorarioModel[]
   ): Record<string, Set<string>> {
     const mapa: Record<string, Set<string>> = {};
-
     horarios.forEach((h) => {
       const lista = gerarHorarios(h.inicio, h.fim, h.duracao, h.intervalo);
-      if (!mapa[h.diaSemana]) {
-        mapa[h.diaSemana] = new Set();
-      }
+      if (!mapa[h.diaSemana]) mapa[h.diaSemana] = new Set();
       lista.forEach((hor) => mapa[h.diaSemana].add(hor));
     });
-
     return mapa;
   }
 
   useEffect(() => {
-    const idPsicologo = location.state()
+    const idPaciente = localStorage.getItem("id-paciente");
 
-    async function carregarPsicologo(idPsicologo: string) {
-      const psicologo = await consultaPsicologo(idPsicologo);
-
-      if (psicologo.dado) {
-        setPsicologo(psicologo.dado);
-      }
+    async function carregarPsicologo(id: string) {
+      const response = await consultaPsicologo(id);
+      if (response.dado) setPsicologo(response.dado);
     }
 
-    async function carregarAvaliacoes(idPsicologo: string) {
-      const avaliacoes = await consultaAvaliacoes(idPsicologo, 0);
-
-      if (avaliacoes.dado) {
+    async function carregarAvaliacoes(id: string) {
+      const response = await consultaAvaliacoes(id, 0);
+      if (response.dado) {
+        const avaliacoesData = response.dado.content;
+        setAvaliacoes(avaliacoesData);
         const media = calcularMedia(
-          avaliacoes.dado.content.map((avaliacao) => {
-            return {
-              nota: avaliacao.nota,
-            };
-          })
+          avaliacoesData.map((a) => ({ nota: a.nota }))
         );
-
         setMediaNotaAvaliacao(media);
-
-        setAvaliacoes(avaliacoes.dado.content);
       }
     }
 
-    async function carregarHorarios(idPsicologo: string) {
-      const horarios = await listarHorariosPsicologo(idPsicologo);
+    async function carregarHorarios(id: string) {
+      const response = await listarHorariosPsicologo(id);
+      if (response.dado) setHorarios(response.dado);
+    }
 
-      console.log(horarios.dado);
+    async function carregarVinculos(id: string) {
+      const response = await consultaVinculosPsicologo(id, 0);
+      if (response.dado) {
+        const todosVinculos = response.dado.content;
+        setVinculos(todosVinculos);
 
-      if (horarios.dado) {
-        setHorarios(horarios.dado);
+        if (idPaciente) {
+          const vinculo = todosVinculos.find(
+            (v) => v.paciente?.id === idPaciente
+          );
+          setVinculoPaciente(vinculo || null);
+
+          if (vinculo) {
+            if (vinculo.status === "ATIVO")
+              setHasVinculo(EstadoVinculo.VINCULADO);
+            else if (vinculo.status === "PENDENTE")
+              setHasVinculo(EstadoVinculo.PENDENTE);
+            else setHasVinculo(EstadoVinculo.NAO_VINCULADO);
+          } else {
+            setHasVinculo(EstadoVinculo.NAO_VINCULADO);
+          }
+        }
       }
     }
 
-    async function carregarVinculos(idPsicologo: string) {
-      const vinculos = await consultaVinculosPsicologo(idPsicologo, 0);
-
-      if (vinculos.dado) {
-        setVinculos(vinculos.dado.content);
-      }
-    }
     carregarPsicologo(idPsicologo);
     carregarAvaliacoes(idPsicologo);
     carregarHorarios(idPsicologo);
     carregarVinculos(idPsicologo);
-  }, []);
+  }, [idPsicologo]);
 
-  if (!psicologo) {
-    return <p>Carregando...</p>;
+  if (!psicologo) return <p>Carregando...</p>;
+
+  async function handleVincular() {
+    const idPaciente = localStorage.getItem("id-paciente");
+    if (!idPaciente || !psicologo?.id) {
+      apresentarErro("Paciente ou psicólogo não encontrado");
+      return;
+    }
+
+    try {
+      const novoVinculo = {
+        psicologo: { id: psicologo.id },
+        paciente: { id: idPaciente },
+        status: EstadoVinculo.PENDENTE,
+      };
+
+      const response = await criarVinculo(novoVinculo);
+      if (response) {
+        notificarSucesso("Solicitação enviada com sucesso");
+        setHasVinculo(EstadoVinculo.PENDENTE);
+        setVinculoPaciente(response);
+      } else {
+        apresentarErro("Erro ao solicitar vínculo. Tente novamente");
+      }
+    } catch (error) {
+      console.error("Erro ao criar vínculo:", error);
+      apresentarErro("Erro ao solicitar vínculo");
+    }
   }
-
-  const location = useLocation();
-  const headerPsicologo =
-    (location.state && location.state.headerPsicologo) ?? false;
 
   return (
     <>
@@ -146,13 +180,29 @@ export default function InformacoesPsicologo() {
             {psicologo.nome} ({mediaNotaAvaliacao}{" "}
             <img src={Estrela} alt="Icon estrela" />)
           </h1>
-          {hasVinculo === EstadoVinculo.VINCULADO &&
-            headerPsicologo === false && (
-              <button className="btn-desvinc">Desvincular</button>
-            )}
+
+          {hasVinculo === EstadoVinculo.VINCULADO && !headerPsicologo && (
+            <button
+              className="btn-desvinc"
+              onClick={async () => {
+                if (vinculoPaciente) {
+                  try {
+                    await deleteVinculo(vinculoPaciente.id);
+                    setHasVinculo(EstadoVinculo.NAO_VINCULADO);
+                    setVinculoPaciente(null);
+                    notificarSucesso("Desvinculado com sucesso");
+                  } catch (err) {
+                    apresentarErro("Erro ao desvincular. Tente novamente");
+                  }
+                }
+              }}
+            >
+              Desvincular
+            </button>
+          )}
 
           {hasVinculo === EstadoVinculo.PENDENTE &&
-            headerPsicologo === false &&
+            !headerPsicologo &&
             (hoverSolicitado ? (
               <Link
                 to="/paciente/solicitacao-vinculo"
@@ -170,8 +220,11 @@ export default function InformacoesPsicologo() {
               </button>
             ))}
 
-          {hasVinculo === EstadoVinculo.NAO_VINCULADO &&
-            headerPsicologo === false && <button>Vincular</button>}
+          {hasVinculo === EstadoVinculo.NAO_VINCULADO && !headerPsicologo && (
+            <button onClick={handleVincular} className="clicar">
+              Vincular
+            </button>
+          )}
 
           <div>
             <p>
@@ -202,7 +255,6 @@ export default function InformacoesPsicologo() {
 
           <section className="section-tabela">
             <h2>Horários de consulta:</h2>
-
             <TabelaHorarioConsulta horarios={horarios} alterar={false} />
           </section>
 
@@ -213,7 +265,11 @@ export default function InformacoesPsicologo() {
                 nota={mediaNotaAvaliacao}
                 quantidadeAvaliacao={avaliacoes.length.toString()}
               />
-              <BotaoAvaliarInfoPsicologo psicologo={psicologo} origem={headerPsicologo} />
+              <BotaoAvaliarInfoPsicologo
+                psicologo={psicologo}
+                origem={headerPsicologo}
+                estadoVinculo={hasVinculo}
+              />
             </div>
             <div className="listagem-avaliacao">
               {avaliacoes.map((avaliacao, index) => (

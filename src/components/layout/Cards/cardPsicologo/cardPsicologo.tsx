@@ -2,6 +2,7 @@ import "./cardPsicologo.css";
 import { Link } from "react-router-dom";
 
 interface CardPsicologoProps {
+  idPsicologo: string;
   urlFoto: string;
   nome: string;
   idade: number;
@@ -36,7 +37,7 @@ export default function CardPsicologo({ profissionais, headerPsicologo }: CardPs
               ({psicologo.quantidadeAvaliacoes} avaliações)
             </p>
             <p className="biografia">{psicologo.biografia}</p>
-            <Link to="/psicologos/perfil" className="botao-link btn-ver-mais" state={{ headerPsicologo }}>Ver mais</Link>
+            <Link to="/psicologos/perfil" className="botao-link btn-ver-mais" state={{ headerPsicologo, idPsicologo: psicologo.idPsicologo }}>Ver mais</Link>
           </div>
         </div>
       ))}

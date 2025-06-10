@@ -19,11 +19,6 @@ export default function AtestadoForm() {
             </div>
 
             <div className="atestado-grid-item">
-                <label className="subtext-atestado" htmlFor="Local">Local</label>
-                <input type="text" id="Local" className="atestado-input" />
-            </div>
-
-            <div className="atestado-grid-item">
                 <label className="subtext-atestado" htmlFor="Finalidade">Finalidade</label>
                 <input type="text" id="Finalidade" className="atestado-input" />
             </div>

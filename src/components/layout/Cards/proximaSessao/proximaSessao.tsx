@@ -45,7 +45,7 @@ export default function ProximasSessoes({
         <h1>Próxima sessão</h1>
         {verMais && (
           <button className="botao-ver-mais">
-            <Link to={isPsicologo ? '/psicologo/sessao' : '/paciente/sessao'}>
+            <Link to={isPsicologo ? '/psicologo/sessao' : '/paciente/sessao'} className='botao-link' >
               Ver mais
             </Link>
           </button>

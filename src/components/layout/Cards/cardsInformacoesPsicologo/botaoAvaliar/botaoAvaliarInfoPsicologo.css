@@ -1,14 +1,15 @@
 .botao-avaliar-card-avaliacao {
   display: flex;
   flex-direction: column;
-  width: 250px; /* em vez de 18%, use largura fixa */
-  height: 8rem;
+  width: 250px;
+  height: 9rem;
   border: solid 2px #a1a1a1;
   border-radius: 1rem;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   text-align: center;
+  cursor: pointer !important;
 }
 
 .link-sem-estilo {
@@ -18,7 +19,6 @@
 
 .text-avalia {
   color: #0d42bd;
-  margin: 1rem;
   font-size: 18px;
 }
 
