@@ -14,6 +14,7 @@ import calcularMedia from "../../utils/mediaAvaliacao";
 import qtdeAvaliacao from "../../utils/qtdeAvaliacao";
 
 type ProfissionalCard = {
+    idPsicologo: string;
     urlFoto: string;
     nome: string;
     idade: number;
@@ -48,6 +49,7 @@ export default function VerPsicologos() {
 
                 const profissionaisMapeados: ProfissionalCard[] = compilado.map(
                     (item) => ({
+                        idPsicologo: item.psicologo.id,
                         urlFoto: item.psicologo.fotoUrl,
                         nome: item.psicologo.nome,
                         idade: calcular(item.psicologo.dataNascimento),

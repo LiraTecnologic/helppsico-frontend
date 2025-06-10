@@ -30,7 +30,6 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
         <div className="nav-foto-container">
           <nav className="nav">
             <ul>
-
               {headerPsicologo === false && (
                 <li className={fluxo === "horario" ? "active" : ""}>
                   <Link to={`/paciente/agendamento`}>Agendar Horario</Link>
@@ -59,11 +58,13 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
                 <Link to={`/${usuario}/sessao`}>Minhas sessões</Link>
               </li>
 
-              <li className={fluxo === "verProfissionais" ? "active" : ""}>
-                <Link to={`/psicologos`} state={{ headerPsicologo }}>
-                  Ver profissionais
-                </Link>
-              </li>
+              {headerPsicologo === false && (
+                <li className={fluxo === "verProfissionais" ? "active" : ""}>
+                  <Link to={`/psicologos`} state={{ headerPsicologo }}>
+                    Ver profissionais
+                  </Link>
+                </li>
+              )}
 
               {usuario === "paciente" && (
                 <li className={fluxo === "solicitacoesVinculo" ? "active" : ""}>
@@ -83,7 +84,6 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
 
       <nav className={`nav-mobile ${openMenu ? "open" : ""}`}>
         <ul>
-
           {headerPsicologo === false && (
             <li className={fluxo === "horario" ? "active" : ""}>
               <Link to={`/paciente/agendamento`}>Agendar Horario</Link>
@@ -118,15 +118,17 @@ export default function Header({ fluxo, headerPsicologo }: HeaderProps) {
             </Link>
           </li>
 
-          <li className={fluxo === "verProfissionais" ? "active" : ""}>
-            <Link
-              to={`/psicologos`}
-              onClick={closeMenu}
-              state={{ headerPsicologo }}
-            >
-              Ver profissionais
-            </Link>
-          </li>
+          {headerPsicologo === false && (
+            <li className={fluxo === "verProfissionais" ? "active" : ""}>
+              <Link
+                to={`/psicologos`}
+                onClick={closeMenu}
+                state={{ headerPsicologo }}
+              >
+                Ver profissionais
+              </Link>
+            </li>
+          )}
 
           {usuario === "paciente" && (
             <li className={fluxo === "solicitacoesVinculo" ? "active" : ""}>

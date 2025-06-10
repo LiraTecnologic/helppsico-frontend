@@ -42,3 +42,23 @@ export function consultarVinculosPaciente(idPaciente: string, page: number): Pro
             };
         });
 }
+
+export function deleteVinculo(idVinculo: string): Promise<void> {
+    return axios.delete(`http://localhost:8080/vinculos/${idVinculo}`)
+        .then(() => {
+            console.log("Vínculo deletado com sucesso.");
+        })
+        .catch(err => {
+            console.error("Erro ao deletar vínculo:", err);
+            throw err;
+        });
+}
+
+export function criarVinculo(dados: { psicologo: { id: string }, paciente: { id: string }, status: string }): Promise<VinculoModel> {
+    return axios.post<VinculoModel>('http://localhost:8080/vinculos', dados)
+        .then(response => response.data)
+        .catch(err => {
+            console.error("Erro ao criar vínculo:", err);
+            throw err;
+        });
+}

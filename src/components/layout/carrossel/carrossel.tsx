@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "./carrossel.css";
 
 interface Psicologo {
+  idPsicologo: string;
   urlFoto: string;
   nome: string;
   idade: number;
@@ -58,7 +59,7 @@ export default function CarrosselPsicologos({
                   </span>
                 </div>
                 <div className="hp-card-button">
-                  <button><Link to="/psicologos/perfil" className="botao-link" state={{ headerPsicologo }}>Ver mais</Link></button>
+                  <button><Link to="/psicologos/perfil" className="botao-link" state={{ headerPsicologo, idPsicologo: psicologo.idPsicologo }}>Ver mais</Link></button>
                 </div>
               </div>
             )}

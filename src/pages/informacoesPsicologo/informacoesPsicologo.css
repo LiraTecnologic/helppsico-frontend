@@ -103,6 +103,7 @@ hr {
 .btn-desvinc {
   background-color: var(--cor-botao-desvincular-fundo) !important;
   color: var(--cor-botao-desvincular-texto) !important;
+  cursor: pointer;
 }
 
 .btn-solic {
@@ -123,4 +124,8 @@ hr {
   justify-content: center;
   font-family: inherit;
   font-size: var(--fonte-botao-pequena);
+}
+
+.clicar{
+  cursor: pointer;
 }

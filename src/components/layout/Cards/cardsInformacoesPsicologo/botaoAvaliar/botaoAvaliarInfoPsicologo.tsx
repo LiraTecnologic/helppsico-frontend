@@ -5,22 +5,27 @@ import ModalAvaliacaoPsicologo from "../../../modalAvaliacaoPsicologo/modalAvali
 
 import "./botaoAvaliarInfoPsicologo.css";
 import PsicologoModel from "../../../../../models/psicologo";
+import { EstadoVinculo } from "../../../../../models/enum.vinculo";
 
 interface BotaoAvaliarProps {
   psicologo: PsicologoModel;
   onAvaliacaoSubmit?: (rating: number, comment: string) => void;
   origem: boolean;
+  estadoVinculo: EstadoVinculo;
 }
 
 export default function BotaoAvaliarInfoPsicologo({
   psicologo,
   onAvaliacaoSubmit,
   origem,
+  estadoVinculo
 }: BotaoAvaliarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const abrirModal = () => {
-    if (origem) setIsModalOpen(true);
+    if (!origem && estadoVinculo === EstadoVinculo.VINCULADO){
+      setIsModalOpen(true);
+    } 
   };
   const fecharModal = () => setIsModalOpen(false);
 
@@ -38,7 +43,7 @@ export default function BotaoAvaliarInfoPsicologo({
         onClick={abrirModal}
         style={{ cursor: origem ? "pointer" : "default" }}
       >
-        {origem ? (
+        {!origem && estadoVinculo === EstadoVinculo.VINCULADO ? (
           <>
             <p className="titulo-botao">
               Quero avaliar <br /> meu psicólogo!
