@@ -1,0 +1,204 @@
+.th-container {
+  padding: 2rem;
+  width: 70%;
+}
+
+.th-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.th-header h1 {
+  font-size: 1.8rem;
+  border-bottom: 3px solid #0044d4;
+  padding-bottom: 0.2rem;
+}
+
+.th-header button {
+  background-color: #0044d4;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.th-config {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.th-config-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.th-config-item p {
+  font-size: 1.3rem;
+}
+
+.th-dias {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.th-dia {
+  background-color: #0044d4;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.25rem;
+}
+
+.th-duracao,
+.th-expediente {
+  background-color: #d1d1d1;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  width: fit-content;
+}
+
+/* SCROLL GERAL */
+.th-tabela-scroll {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.th-tabela {
+  display: flex;
+  gap: 1.0rem;
+  min-width: max-content;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+/* Coluna de cada dia */
+.th-dia-coluna {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.th-dia-titulo {
+  font-size: 1.2rem;
+  color: #0d42bd;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Card */
+.th-card {
+  background-color: #eaf1ff;
+  border-left: 4px solid #0d42bd;
+  border-radius: 0.5rem;
+  padding: 0.6rem;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5rem;
+}
+
+.th-status-livre {
+  font-size: 0.9rem;
+}
+
+.th-horario {
+  font-size: 1rem;
+  color: #111111;
+}
+
+.th-card {
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.th-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 6px rgba(0, 68, 212, 0.3);
+}
+
+.th-card-selecionado {
+  background-color: #7eb0fa;
+  border-left: 4px solid #0044d4;
+}
+
+.th-status {
+  font-size: 0.9rem;
+}
+
+.th-status-livre {
+  color: #0d42bd;
+}
+
+.th-status-disponivel {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Botão fixo */
+.th-salvar-container {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+}
+
+.th-salvar button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #0044d4;
+  color: white;
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin: 0 auto 0 auto;
+  font-size: 12px;
+}
+
+/* Quando o horário será disponibilizado */
+.th-card-disponibilizar {
+  background-color: #2564eb67;
+  border-left: 4px solid #2563eb;
+}
+
+/* Quando o horário será removido */
+.th-card-remover {
+  background-color: #fed7d7;
+  border-left: 4px solid #e53e3e;
+}
+
+.th-botao-area {
+  margin-top: 20px;
+}
+
+.th-card-disponivel {
+  background-color: #2563eb;
+  border-left: 4px solid #042b5f;
+}
+
+.th-card-disponivel .th-horario {
+  color: white;
+}
+
+.th-card-remover .th-status {
+  color: black !important;
+  font-weight: 500;
+}

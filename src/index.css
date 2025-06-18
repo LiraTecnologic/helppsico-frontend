@@ -1,0 +1,17 @@
+* {
+  font-family: "Mitr", sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: 500;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; 
+  width: 100%; 
+}

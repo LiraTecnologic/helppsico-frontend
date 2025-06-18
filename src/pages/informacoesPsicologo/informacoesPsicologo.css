@@ -1,0 +1,118 @@
+body {
+    background-color: #F3F4F6;
+}
+
+.main-info-psicologico {
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 6rem 4rem 6rem;
+    gap: 2rem;
+}
+
+.estrela-fundo-cinza {
+    background-color: #F3F4F6;
+}
+
+.section-psico-bio {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 4rem;
+
+}
+
+.section-psico-bio p {
+    color: #525252;
+}
+
+.div-psicologo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.div-psicologo img{
+    border-radius: 50%;
+}
+
+.div-psicologo button {
+    background-color: #0D42BD;
+    color: #F3F4F6;
+    width: 100%;
+    border-radius: 10px;
+    height: 2rem;
+}
+
+hr {
+    border: solid 1px #525252;
+}
+
+.div-bio-psico {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.section-tabela {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.section-avaliacao {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.cards-section-avaliacao {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.listagem-avaliacao {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.main-info-psicologico {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.div-direita {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.btn-desvinc{
+    background-color: #FFA9AA !important;
+    color: #FF1313 !important;
+}
+
+.btn-solic{
+    background-color: #ffefa9 !important;
+    color: #665716 !important;
+}
+
+.btn-solic-hover {
+    background-color: #ffdf2a !important; 
+    color: #27270c !important;
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 10px;
+    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-size: 0.8rem;
+}

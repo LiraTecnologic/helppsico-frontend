@@ -1,0 +1,29 @@
+.imagensPacientes {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.listagemProntuarios {
+    max-width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 2rem 2rem 24px;
+    margin: 0 auto;
+}
+
+.prontuarioTittle {
+    margin: 0;
+    font-size: 24px;
+}
+
+.botao-verMais {
+    color: white;
+    border: none;
+    background-color: #0044cc;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 10px;
+}

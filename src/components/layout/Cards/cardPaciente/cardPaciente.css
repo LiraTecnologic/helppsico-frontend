@@ -1,0 +1,241 @@
+
+.card-paciente {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 320px;
+  min-width: 280px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-paciente:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-topo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  gap: 14px;
+}
+
+.foto-paciente {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.info-paciente {
+  flex-grow: 1;
+  min-width: 0; /* Permite quebra de texto */
+}
+
+.nome {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+
+.idade,
+.email,
+.telefone {
+  font-size: 15px;
+  color: #666;
+  margin: 3px 0;
+  line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.btn-prontuario,
+.btn-sem-prontuario {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-prontuario {
+  background-color: #e8f0ff;
+  color: #1a73e8;
+}
+
+.btn-prontuario:hover {
+  background-color: #d0e2ff;
+  transform: translateY(-1px);
+}
+
+.btn-prontuario:active {
+  transform: translateY(0);
+}
+
+.btn-sem-prontuario {
+  background-color: #ffe6e6;
+  color: #d93025;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+  .card-paciente {
+    max-width: 100%;
+    min-width: 260px;
+    padding: 16px;
+    margin: 0 auto;
+  }
+
+  .card-topo {
+    margin-bottom: 16px;
+    gap: 12px;
+  }
+
+  .foto-paciente {
+    width: 60px;
+    height: 60px;
+  }
+
+  .nome {
+    font-size: 17px;
+  }
+
+  .idade,
+  .email,
+  .telefone {
+    font-size: 14px;
+  }
+
+  .btn-prontuario,
+  .btn-sem-prontuario {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card-paciente {
+    padding: 14px;
+    border-radius: 8px;
+    min-width: 240px;
+  }
+
+  .card-topo {
+    margin-bottom: 14px;
+    gap: 10px;
+  }
+
+  .foto-paciente {
+    width: 50px;
+    height: 50px;
+  }
+
+  .nome {
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+
+  .idade,
+  .email,
+  .telefone {
+    font-size: 13px;
+    margin: 2px 0;
+  }
+
+  .btn-prontuario,
+  .btn-sem-prontuario {
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+}
+
+
+@media screen and (max-width: 320px) {
+  .card-paciente {
+    padding: 12px;
+    min-width: 200px;
+  }
+
+  .card-topo {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .foto-paciente {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+  }
+
+  .info-paciente {
+    text-align: center;
+  }
+
+  .nome {
+    font-size: 15px;
+  }
+
+  .idade,
+  .email,
+  .telefone {
+    font-size: 12px;
+  }
+
+  .btn-prontuario,
+  .btn-sem-prontuario {
+    padding: 10px;
+    font-size: 12px;
+  }
+}
+
+
+@media screen and (min-width: 1200px) {
+  .card-paciente {
+    max-width: 350px;
+    padding: 24px;
+  }
+
+  .card-topo {
+    margin-bottom: 20px;
+  }
+
+  .foto-paciente {
+    width: 80px;
+    height: 80px;
+  }
+
+  .nome {
+    font-size: 19px;
+  }
+
+  .idade,
+  .email,
+  .telefone {
+    font-size: 16px;
+  }
+
+  .btn-prontuario,
+  .btn-sem-prontuario {
+    padding: 14px 18px;
+    font-size: 15px;
+  }
+}

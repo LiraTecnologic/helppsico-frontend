@@ -1,0 +1,101 @@
+.container-prontuario {
+    background-color: #f5f5f5;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.titulo-principal {
+  text-align: center;
+  font-size: 36px;
+  position: relative;
+}
+
+.linha-azul {
+  height: 5px;
+  background-color: #0038a8;
+  width: 30%;
+  margin: 4px auto 20px;
+  border-radius: 5px;
+}
+
+.form-prontuario {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.linha-campos {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.campo label {
+  margin-bottom: 6px;
+}
+
+.campo input,
+.campo select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.campo-textarea {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.campo-textarea label {
+  margin-bottom: 6px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-size: 16px;
+}
+
+.botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-cancelar,
+.btn-salvar {
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+}
+
+.btn-cancelar {
+  background: #fff;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.btn-salvar {
+  background: #0038a8;
+  color: white;
+}
+
+.tittle-label{
+    font-size: 30px;
+}
